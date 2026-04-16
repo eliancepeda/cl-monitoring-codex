@@ -1,0 +1,45 @@
+crawlab:
+  base_url_env: CRAWLAB_BASE_URL
+  token_env: CRAWLAB_TOKEN
+
+security:
+  allowed_methods:
+    - GET
+  allowed_paths:
+    - /api/tasks
+    - /api/tasks/*
+    - /api/spiders/*
+    - /api/schedules
+    - /api/schedules/*
+    - /api/results/*
+  allow_redirects: false
+
+collection:
+  task_page_size: 100
+  max_task_pages: 5
+  min_history_tasks: 3
+  log_page_size: 1000
+  max_log_pages: 4
+  max_examples_per_class: 2
+  results_row_limit: 10
+  collect_results_for_sampled_tasks_only: true
+  collect_raw: true
+  collect_redacted: true
+  generate_expected_skeletons: true
+  dry_run_first: true
+
+scope:
+  allowed_project_ids:
+    - "66a25c4d116add6c8f235756"
+  seed_spider_ids: []
+  seed_schedule_ids: []
+  discover_from_tasks: true
+  discover_from_schedules: false
+
+redaction:
+  preserve_zero_id: true
+  preserve_zero_time: true
+  preserve_real_timestamps: true
+  stable_placeholders: true
+  redact_hosts_in_logs: true
+  sensitive_strings: []

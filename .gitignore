@@ -12,3 +12,4 @@ dist/
 build/
 *.log
 DECISIONS.md
+fixtures*/

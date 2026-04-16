@@ -34,6 +34,10 @@ It must never perform write operations against Crawlab.
 - Keep one thread per coherent task.
 - Every new parser rule requires at least one anonymized fixture and one test.
 - Runtime classification must be deterministic; no LLM in production decision logic.
+- Record architecture decisions in DECISIONS.md:
+  - One entry = one decision; keep it short.
+  - Include: context, decision, why, consequences, related files.
+  - If obsolete — mark Status: Superseded, do not delete.
 
 ## Non-goals for v1
 
@@ -41,3 +45,44 @@ It must never perform write operations against Crawlab.
 - No multi-user auth.
 - No direct clone of Crawlab UI.
 - No nodes logic until task/schedule/parser logic is stable.
+
+## Fixture collector rules
+
+This repository includes a fixture collection workflow for a local read-only Crawlab companion app.
+
+### Safety
+- Never send non-GET requests to Crawlab.
+- All Crawlab access must go through ReadonlyCrawlabClient.
+- Never use login flows, cookies, browser automation, or raw curl against live Crawlab.
+- Never store live tokens, auth headers, or cookies in repo files.
+- Raw live responses must be written only to `fixtures_raw_local/`, which is gitignored.
+- Redacted fixtures must be written only to `fixtures/`.
+
+### Live Crawlab scope
+- Allowed endpoints:
+  - `/api/tasks`
+  - `/api/tasks/{id}/logs`
+  - `/api/spiders/{id}`
+  - `/api/schedules`
+  - `/api/schedules/{id}`
+  - `/api/results/{col_id}`
+- Path allowlist and GET-only policy are mandatory.
+
+### Domain specifics
+- Preserve zero ObjectId `000000000000000000000000`.
+- Preserve zero time `0001-01-01T00:00:00Z`.
+- Detect manual tasks by zero `schedule_id`.
+- Build `execution_key` from `spider_id + normalized cmd + normalized param`.
+- Keep `schedule_id` separate from `execution_key`.
+- Task data may come through `results/{col_id}` filtered by `_tid`.
+
+### Fixture pack output
+- Build both raw and redacted fixture sets.
+- Generate `fixtures/manifest.md`.
+- Generate draft `fixtures/expected/*.yaml` for log fixtures.
+- Sampling must prefer representative examples over volume.
+
+### Non-goals
+- No run/restart/cancel.
+- No nodes collection in v1 unless required by an already selected scenario.
+- No UI work before fixtures are collected.
