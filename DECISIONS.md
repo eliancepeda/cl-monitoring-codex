@@ -638,3 +638,40 @@ Related files:
 - fixtures/logs/ID_822.log
 - fixtures/expected/task_ID_821_log.yaml
 - fixtures/expected/task_ID_822_log.yaml
+
+---
+
+## 2026-04-19 — Local history uses normalized task snapshots and cursor-based log sync
+
+Status: Accepted
+
+Context:
+`T7` needs local persistence and a restart-safe poller after `T4` and `T5`
+froze the parser and schedule outputs. The app must keep UI reads local,
+must survive restart without normal full-log rereads, and must not create a
+second Crawlab client.
+
+Decision:
+Persist local state as normalized `spiders`, `schedules`, `task_snapshots`,
+`task_log_cursors`, `run_summaries`, `incidents`, and local-only
+`spider_profiles`. Use `task_log_cursors` to assemble logs incrementally and
+do one final sync after terminal state. Keep all live Crawlab access inside
+the single `ReadonlyCrawlabClient`; UI reads only SQLite.
+
+Why:
+This keeps the DB aligned with the frozen domain/runtime contract, makes the
+poller restart-safe, and preserves the project's read-only safety boundary.
+
+Consequences:
+- No `tasks_raw` table in v1.
+- No direct live access from UI.
+- No second client in `src/cl_monitoring/crawlab/client.py`.
+- Parser/status outputs remain the only runtime truth layer above SQLite.
+
+Related files:
+- docs/adr/0002-local-history-and-poller.md
+- src/cl_monitoring/db/engine.py
+- src/cl_monitoring/db/tables.py
+- src/cl_monitoring/db/repo.py
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/crawlab/client.py

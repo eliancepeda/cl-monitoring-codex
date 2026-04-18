@@ -1,9 +1,13 @@
-"""ReadonlyCrawlabClient — the single gateway to Crawlab API.
+"""Thin runtime re-export of the single readonly Crawlab client."""
 
-Safety invariants (AGENTS.md § Safety):
-- Only GET requests are allowed.
-- Any attempt to use POST/PUT/PATCH/DELETE MUST raise an error.
-- Authorization header must never be logged or stored in fixtures.
-"""
+from integrations.crawlab.readonly_client import (
+    PathNotAllowedError,
+    ReadonlyCrawlabClient,
+    ReadonlyViolationError,
+)
 
-# TODO: class ReadonlyCrawlabClient: ...
+__all__ = [
+    "PathNotAllowedError",
+    "ReadonlyCrawlabClient",
+    "ReadonlyViolationError",
+]

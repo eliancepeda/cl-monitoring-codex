@@ -480,6 +480,21 @@ contract из `T3`.
 
 - `T7` можно делать без повторного архитектурного обсуждения
 
+Текущий статус:
+
+- `T6` выполнен и gate закрыт.
+- Добавлен `docs/adr/0002-local-history-and-poller.md`.
+- Зафиксирован runtime flow `ReadonlyCrawlabClient -> normalizers -> SQLite -> parser/status -> incidents`.
+- Зафиксированы минимальные v1 таблицы: `spiders`, `schedules`,
+  `task_snapshots`, `task_log_cursors`, `run_summaries`, `incidents`,
+  `spider_profiles`.
+- Зафиксированы poll cadence, final log sync после terminal state и
+  restart-safe resume через persisted cursor state.
+- Отдельно запрещён второй Crawlab client в runtime package; допустим только
+  thin re-export / adapter над существующим `ReadonlyCrawlabClient`.
+- После `T6` реализацию `T7` можно делать без повторного архитектурного
+  обсуждения persistence/poller слоя.
+
 ### `T7` — Реализовать SQLite, repo и poller
 
 **Цель:** получить устойчивое локальное состояние, независимое от live UI polling.
@@ -502,6 +517,32 @@ contract из `T3`.
 
 - после перезапуска локальное состояние и incidents не теряются
 - UI сможет читать только из SQLite
+
+Текущий статус:
+
+- `T7` выполнен и gate закрыт.
+- Реализован `src/cl_monitoring/db/engine.py`: SQLite connection setup с
+  обязательным `PRAGMA journal_mode=WAL`, `foreign_keys=ON` и local
+  concurrency-safe настройками.
+- Реализован `src/cl_monitoring/db/tables.py`: полный DDL, индексы и schema
+  setup для `spiders`, `schedules`, `task_snapshots`, `task_log_cursors`,
+  `run_summaries`, `incidents`, `spider_profiles`.
+- Реализован `src/cl_monitoring/db/repo.py`: upsert/read методы для snapshots,
+  cursor state, derived summaries, incidents и local-only spider profiles.
+- Реализован `src/cl_monitoring/sync/poller.py`: task/schedule/spider sync,
+  incremental log sync, final sync после terminal state, reparsing в
+  `RunSummary` и derived incident projection.
+- Restart-safe инкрементальность идёт через persisted `task_log_cursors`:
+  poller продолжает с `next_page - 1`, делает one-page overlap merge и не
+  reread-ит весь лог после рестарта.
+- `src/cl_monitoring/crawlab/client.py` оставлен как thin re-export
+  существующего `ReadonlyCrawlabClient`, без второго независимого transport
+  layer.
+- Добавлены `tests/test_repo.py` и `tests/test_poller.py` с покрытием schema,
+  repo lifecycle, cursor resume/final sync и incident lifecycle.
+- Проверки пройдены:
+  `./.venv/bin/pytest -q tests/test_repo.py tests/test_poller.py` ->
+  `6 passed`; `./.venv/bin/pytest -q` -> `185 passed`.
 
 ### `T8` — ADR по minimal dashboard
 
