@@ -13,6 +13,7 @@ All tests use mock transport — NO network access.
 
 from __future__ import annotations
 
+import os
 import pytest
 import httpx
 
@@ -26,6 +27,7 @@ from integrations.crawlab.readonly_client import (
 
 
 # ── Mock transport ─────────────────────────────────────────────────────
+
 
 def _make_mock_transport(
     responses: dict[str, dict] | None = None,
@@ -51,9 +53,9 @@ def _make_client(
     allowed_paths: list[str] | None = None,
 ) -> ReadonlyCrawlabClient:
     """Create a client with mock transport for testing."""
+    os.environ["CRAWLAB_API_TOKEN"] = "test-token-never-real"
     client = ReadonlyCrawlabClient(
         base_url="http://localhost:8080",
-        token="test-token-never-real",
         allowed_paths=allowed_paths,
     )
     # Replace the internal httpx client with one using mock transport
@@ -75,9 +77,11 @@ class TestGetOnlyEnforcement:
 
     @pytest.mark.asyncio
     async def test_get_allowed_path_succeeds(self) -> None:
-        transport = _make_mock_transport({
-            "/api/tasks": {"data": [{"_id": "abc"}], "total": 1},
-        })
+        transport = _make_mock_transport(
+            {
+                "/api/tasks": {"data": [{"_id": "abc"}], "total": 1},
+            }
+        )
         client = _make_client(transport)
         try:
             resp = await client.get("/api/tasks")
@@ -129,18 +133,18 @@ class TestTokenSafety:
     """Verify auth tokens are never exposed."""
 
     def test_repr_does_not_contain_token(self) -> None:
+        os.environ["CRAWLAB_API_TOKEN"] = "super-secret-token-12345"
         client = ReadonlyCrawlabClient(
             base_url="http://localhost",
-            token="super-secret-token-12345",
         )
         repr_str = repr(client)
         assert "super-secret-token-12345" not in repr_str
         assert "****" in repr_str
 
     def test_str_does_not_contain_token(self) -> None:
+        os.environ["CRAWLAB_API_TOKEN"] = "another-secret-token"
         client = ReadonlyCrawlabClient(
             base_url="http://localhost",
-            token="another-secret-token",
         )
         str_str = str(client)
         assert "another-secret-token" not in str_str
@@ -171,19 +175,42 @@ class TestPathAllowlist:
         finally:
             await client.close()
 
+    @pytest.mark.asyncio
+    async def test_get_absolute_url_raises(self) -> None:
+        client = _make_client()
+        try:
+            with pytest.raises(
+                PathNotAllowedError, match="Absolute URLs are forbidden"
+            ):
+                await client.get("http://evil.com/api/tasks")
+        finally:
+            await client.close()
+
     def test_path_matches_exact(self) -> None:
         assert _path_matches_allowlist("/api/tasks", DEFAULT_ALLOWED_PATHS)
         assert _path_matches_allowlist("/api/schedules", DEFAULT_ALLOWED_PATHS)
 
     def test_path_matches_wildcard(self) -> None:
-        assert _path_matches_allowlist("/api/tasks/abc123", DEFAULT_ALLOWED_PATHS)
         assert _path_matches_allowlist("/api/spiders/def456", DEFAULT_ALLOWED_PATHS)
         assert _path_matches_allowlist("/api/schedules/xyz", DEFAULT_ALLOWED_PATHS)
         assert _path_matches_allowlist("/api/results/col_001", DEFAULT_ALLOWED_PATHS)
 
     def test_path_matches_nested_wildcard(self) -> None:
         assert _path_matches_allowlist(
-            "/api/tasks/abc123/logs", DEFAULT_ALLOWED_PATHS,
+            "/api/tasks/abc123/logs",
+            DEFAULT_ALLOWED_PATHS,
+        )
+
+    def test_task_detail_path_rejects_unlisted(self) -> None:
+        assert not _path_matches_allowlist(
+            "/api/tasks/abc123",
+            DEFAULT_ALLOWED_PATHS,
+        )
+
+    def test_nested_task_non_log_path_rejects_unlisted(self) -> None:
+        assert not _path_matches_allowlist(
+            "/api/tasks/abc123/restart",
+            DEFAULT_ALLOWED_PATHS,
         )
 
     def test_path_rejects_unlisted(self) -> None:
@@ -196,6 +223,15 @@ class TestPathAllowlist:
         assert _path_matches_allowlist("/api/tasks", custom)
         assert not _path_matches_allowlist("/api/spiders/abc", custom)
 
+    @pytest.mark.asyncio
+    async def test_get_task_detail_path_raises(self) -> None:
+        client = _make_client()
+        try:
+            with pytest.raises(PathNotAllowedError, match="not in the allowed"):
+                await client.get("/api/tasks/abc123")
+        finally:
+            await client.close()
+
 
 # ── Redirects ──────────────────────────────────────────────────────────
 
@@ -204,9 +240,9 @@ class TestRedirectsDisabled:
     """Verify that redirects are disabled."""
 
     def test_client_redirects_disabled(self) -> None:
+        os.environ["CRAWLAB_API_TOKEN"] = "test"
         client = ReadonlyCrawlabClient(
             base_url="http://localhost",
-            token="test",
         )
         assert client._client.follow_redirects is False
 
@@ -225,22 +261,30 @@ class TestPagination:
             page_counter["count"] += 1
             page = int(request.url.params.get("page", "1"))
             if page == 1:
-                return httpx.Response(200, json={
-                    "data": [{"_id": "t1"}, {"_id": "t2"}],
-                    "total": 4,
-                })
+                return httpx.Response(
+                    200,
+                    json={
+                        "data": [{"_id": "t1"}, {"_id": "t2"}],
+                        "total": 4,
+                    },
+                )
             elif page == 2:
-                return httpx.Response(200, json={
-                    "data": [{"_id": "t3"}, {"_id": "t4"}],
-                    "total": 4,
-                })
+                return httpx.Response(
+                    200,
+                    json={
+                        "data": [{"_id": "t3"}, {"_id": "t4"}],
+                        "total": 4,
+                    },
+                )
             return httpx.Response(200, json={"data": [], "total": 4})
 
         transport = httpx.MockTransport(handler)
         client = _make_client(transport)
         try:
             items, meta = await client.get_paginated(
-                "/api/tasks", page_size=2, max_pages=5,
+                "/api/tasks",
+                page_size=2,
+                max_pages=5,
             )
             assert len(items) == 4
             assert meta["api_reported_total"] == 4
@@ -251,16 +295,21 @@ class TestPagination:
     @pytest.mark.asyncio
     async def test_pagination_stops_at_max_pages(self) -> None:
         def handler(request: httpx.Request) -> httpx.Response:
-            return httpx.Response(200, json={
-                "data": [{"_id": "item"}],
-                "total": 1000,
-            })
+            return httpx.Response(
+                200,
+                json={
+                    "data": [{"_id": "item"}],
+                    "total": 1000,
+                },
+            )
 
         transport = httpx.MockTransport(handler)
         client = _make_client(transport)
         try:
             items, meta = await client.get_paginated(
-                "/api/tasks", page_size=1, max_pages=3,
+                "/api/tasks",
+                page_size=1,
+                max_pages=3,
             )
             assert len(items) == 3
             assert meta["pages_fetched"] == 3
@@ -272,17 +321,22 @@ class TestPagination:
         def handler(request: httpx.Request) -> httpx.Response:
             page = int(request.url.params.get("page", "1"))
             if page == 1:
-                return httpx.Response(200, json={
-                    "data": [{"_id": "only"}],
-                    "total": 1,
-                })
+                return httpx.Response(
+                    200,
+                    json={
+                        "data": [{"_id": "only"}],
+                        "total": 1,
+                    },
+                )
             return httpx.Response(200, json={"data": [], "total": 1})
 
         transport = httpx.MockTransport(handler)
         client = _make_client(transport)
         try:
             items, meta = await client.get_paginated(
-                "/api/tasks", page_size=10, max_pages=5,
+                "/api/tasks",
+                page_size=10,
+                max_pages=5,
             )
             assert len(items) == 1
             assert meta["records_fetched"] == 1
@@ -299,9 +353,9 @@ class TestContextManager:
     @pytest.mark.asyncio
     async def test_async_context_manager(self) -> None:
         transport = _make_mock_transport()
+        os.environ["CRAWLAB_API_TOKEN"] = "test"
         async with ReadonlyCrawlabClient(
             base_url="http://localhost",
-            token="test",
         ) as client:
             client._client = httpx.AsyncClient(
                 base_url="http://localhost",
@@ -309,3 +363,39 @@ class TestContextManager:
             )
             resp = await client.get("/api/tasks")
             assert resp.status_code == 200
+
+
+# ── Normalization ──────────────────────────────────────────────────────
+
+
+class TestNormalization:
+    """Verify JSON body normalization."""
+
+    @pytest.mark.asyncio
+    async def test_normalize_zero_time(self) -> None:
+        transport = _make_mock_transport(
+            {
+                "/api/tasks": {"data": [{"time": "0001-01-01T00:00:00Z"}], "total": 1},
+            }
+        )
+        client = _make_client(transport)
+        try:
+            data = await client.get_json("/api/tasks")
+            item = data.get("data", [])[0]
+            assert item["time"] is None
+        finally:
+            await client.close()
+
+    @pytest.mark.asyncio
+    async def test_normalize_results_data_null(self) -> None:
+        transport = _make_mock_transport(
+            {
+                "/api/results/123": {"data": None, "total": 0},
+            }
+        )
+        client = _make_client(transport)
+        try:
+            data = await client.get_json("/api/results/123")
+            assert data["data"] == []
+        finally:
+            await client.close()

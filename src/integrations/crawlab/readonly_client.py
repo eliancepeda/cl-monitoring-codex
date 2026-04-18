@@ -13,9 +13,10 @@ All Crawlab access in this project MUST go through this client.
 from __future__ import annotations
 
 import logging
-from fnmatch import fnmatch
+import os
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 import httpx
 import yaml
@@ -29,7 +30,7 @@ ZERO_TIME = "0001-01-01T00:00:00Z"
 # ── Default path allowlist (matches AGENTS.md § Fixture collector rules)
 DEFAULT_ALLOWED_PATHS: list[str] = [
     "/api/tasks",
-    "/api/tasks/*",
+    "/api/tasks/*/logs",
     "/api/spiders/*",
     "/api/schedules",
     "/api/schedules/*",
@@ -59,34 +60,55 @@ def _load_allowed_paths(config_path: Path | None = None) -> list[str]:
 def _path_matches_allowlist(path: str, allowed: list[str]) -> bool:
     """Check if path matches any pattern in the allowlist.
 
-    Uses fnmatch-style wildcards:
+    Uses segment-based wildcards:
       /api/tasks     — exact match
-      /api/tasks/*   — matches /api/tasks/abc123, /api/tasks/abc123/logs
+      /api/tasks/*/logs — matches /api/tasks/abc123/logs
     """
-    # Normalize: strip trailing slashes, ensure leading /
-    clean = "/" + path.lstrip("/").rstrip("/")
+    parsed = urlsplit(path)
+    clean = "/" + parsed.path.lstrip("/").rstrip("/")
+    clean_parts = clean.split("/")
+
     for pattern in allowed:
-        if fnmatch(clean, pattern):
+        pattern_clean = "/" + pattern.lstrip("/").rstrip("/")
+        pattern_parts = pattern_clean.split("/")
+
+        if len(clean_parts) != len(pattern_parts):
+            continue
+
+        if all(
+            pattern_part == "*" or clean_part == pattern_part
+            for clean_part, pattern_part in zip(clean_parts, pattern_parts)
+        ):
             return True
-        # Also check with trailing path segments for nested routes
-        # e.g., /api/tasks/*/logs should match /api/tasks/* pattern
-        parts = clean.split("/")
-        for i in range(len(parts), 1, -1):
-            prefix = "/".join(parts[:i])
-            if fnmatch(prefix, pattern):
-                return True
+
     return False
+
+
+def _normalize_data(data: Any) -> Any:
+    """Normalize '0001-01-01T00:00:00Z' to None, and results.data to empty list."""
+    if isinstance(data, dict):
+        result = {}
+        for k, v in data.items():
+            if k == "data" and v is None:
+                result[k] = []
+            else:
+                result[k] = _normalize_data(v)
+        return result
+    elif isinstance(data, list):
+        return [_normalize_data(item) for item in data]
+    elif data == ZERO_TIME:
+        return None
+    return data
 
 
 class ReadonlyCrawlabClient:
     """Read-only async HTTP client for Crawlab API.
 
     All requests are validated against a path allowlist and restricted
-    to GET method only.  Any mutation attempt raises ReadonlyViolationError.
+    to GET method only.    Any mutation attempt raises ReadonlyViolationError.
 
     Args:
         base_url: Base URL of the Crawlab instance.
-        token: API authentication token (from env, never stored).
         allowed_paths: Optional override for path allowlist.
         timeout: Request timeout in seconds.
     """
@@ -94,13 +116,15 @@ class ReadonlyCrawlabClient:
     def __init__(
         self,
         base_url: str,
-        token: str,
         *,
         allowed_paths: list[str] | None = None,
         timeout: float = 30.0,
     ) -> None:
         self._base_url = base_url.rstrip("/")
-        self._token = token  # never logged or persisted
+        # token только из env
+        self._token = os.environ.get("CRAWLAB_API_TOKEN", "")
+        if not self._token:
+            raise ValueError("CRAWLAB_API_TOKEN env var is required")
         self._allowed_paths = allowed_paths or list(DEFAULT_ALLOWED_PATHS)
         self._client = httpx.AsyncClient(
             base_url=self._base_url,
@@ -133,7 +157,7 @@ class ReadonlyCrawlabClient:
     async def get_json(self, path: str, **params: Any) -> Any:
         """GET and return parsed JSON body."""
         resp = await self.get(path, **params)
-        return resp.json()
+        return _normalize_data(resp.json())
 
     async def get_paginated(
         self,
@@ -178,9 +202,12 @@ class ReadonlyCrawlabClient:
 
             logger.debug(
                 "Page %d/%d fetched (%d items, total=%d)",
-                page_num, max_pages, len(items), reported_total,
+                page_num,
+                max_pages,
+                len(items),
+                reported_total,
             )
-            
+
         meta = {
             "api_reported_total": reported_total,
             "pages_fetched": pages_fetched,
@@ -217,7 +244,13 @@ class ReadonlyCrawlabClient:
     # ── Internal helpers ────────────────────────────────────────────────
 
     def _assert_path_allowed(self, path: str) -> None:
-        """Raise PathNotAllowedError if path is not in the allowlist."""
+        """Raise PathNotAllowedError if path is not in the allowlist or is absolute."""
+        parsed = urlsplit(path)
+        if parsed.scheme or parsed.netloc:
+            raise PathNotAllowedError(
+                f"Absolute URLs are forbidden to prevent host mismatch: {path}"
+            )
+
         if not _path_matches_allowlist(path, self._allowed_paths):
             raise PathNotAllowedError(
                 f"Path '{path}' is not in the allowed paths: {self._allowed_paths}"

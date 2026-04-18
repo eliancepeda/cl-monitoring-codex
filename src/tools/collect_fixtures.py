@@ -1339,7 +1339,6 @@ async def main(argv: list[str] | None = None) -> None:
 
     async with ReadonlyCrawlabClient(
         base_url=base_url,
-        token=token,
         allowed_paths=allowed_paths,
     ) as client:
         if args.dry_run:
