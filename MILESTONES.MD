@@ -362,6 +362,29 @@ contract из `T3`.
 
 - по одной schedule chain можно ответить: missed / queued / delayed / still normal / suspicious / recovered manually
 
+Текущий статус:
+
+- `T4` выполнен и gate закрыт.
+- Добавлены `src/cl_monitoring/status/models.py` и
+  `src/cl_monitoring/status/engine.py` без изменения shared runtime contract
+  files.
+- Добавлен `tests/test_schedule_engine.py` с покрытием всех v1 состояний:
+  `on_time`, `queued_start`, `delayed_start`, `running_as_expected`,
+  `running_long`, `missed_schedule`, `recovered_by_manual_rerun`.
+- Schedule engine опирается на observed scheduled `create_ts` history,
+  минутные окна и grace period; `description` и blind cron truth не
+  используются как источник истины.
+- Manual reruns учитываются только как recovery signal по тому же
+  `execution_key`; они не смешиваются с schedule chain.
+- Для `running_long` baseline берётся сначала из schedule-local history, а
+  при sparse history допускается explicit `execution_key` fallback через
+  полезные manual runs; это отражается в `evidence` и confidence.
+- Для running tasks engine использует уже нормализованный
+  `TaskSnapshot.runtime`, включая upstream rule `runtime_duration == 0 ->
+  now - start_ts`.
+- Проверки пройдены: `./.venv/bin/pytest -q tests/test_schedule_engine.py`
+  -> `9 passed`; `./.venv/bin/pytest -q` -> `176 passed`.
+
 ### `T5` — Реализовать runtime `crawllib` parser
 
 **Цель:** получать детерминированный `RunSummary` из логов.

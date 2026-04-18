@@ -561,3 +561,40 @@ Related files:
 - fixtures/logs/ID_820.log
 - fixtures/expected/task_ID_820_log.yaml
 - tests/test_fixture_classifier.py
+
+---
+
+## 2026-04-19 — Schedule engine uses observed minute buckets and explicit execution-key fallback
+
+Status: Accepted
+
+Context:
+`T4` needs deterministic schedule health without timezone self-deception,
+without using schedule description text, and without treating cron alone as
+truth. The engine also needs a stable way to reason about long-running
+tasks when schedule-local runtime history is thin.
+
+Decision:
+Infer expected fire windows from observed scheduled-task `create_ts`
+history, normalized to UTC minute buckets, and derive the baseline interval
+from observed gaps. Use manual runs only as recovery signals and as an
+explicit `execution_key` runtime-baseline fallback when schedule-local
+successful runtime samples are insufficient.
+
+Why:
+Observed task history is the closest reliable source for real fire timing.
+Minute buckets avoid fake precision, and `execution_key` fallback preserves
+runtime context without merging manual runs into the schedule chain.
+
+Consequences:
+- `missed_schedule` requires enough observed interval history; sparse
+  history stays low-confidence.
+- `running_long` evidence must say when `execution_key` fallback was used.
+- Manual reruns can recover missed or failed schedule health, but they do
+  not rewrite the original `schedule_id` chain.
+
+Related files:
+- src/cl_monitoring/status/models.py
+- src/cl_monitoring/status/engine.py
+- tests/test_schedule_engine.py
+- MILESTONES.MD
