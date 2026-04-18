@@ -1,0 +1,102 @@
+INFO:HOST_002:Arguments(source_id=None, source_name=None, source_tags=['default'], product_ids=[], auto_stop=80, delay_step=1.0, start_page=1, finish_page=0, nprice_d=30, user_agent_parameters=0, proxy_country=None, debug=False, start_product_id=0, test=False, custom_arg='')
+INFO:HOST_002:Is inside crawlab: True
+INFO:HOST_003:CrawlabClient started. Task pointer: 89688c7452f2495e962c1410bc76f86e
+INFO:HOST_003:Task is found
+INFO:HOST_002:Start profile (HOST_036) [/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py]
+INFO:HOST_004:get_products.php page: 1, per page: 500
+INFO:HOST_002:(Id: 174248, SourceUrlId: 23719986, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 184575, SourceUrlId: 45400067, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 184575, SourceUrlId: 45400068, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 201840, SourceUrlId: 22890957, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 201840, SourceUrlId: 27092538, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 214396, SourceUrlId: 23774186, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 214396, SourceUrlId: 23774202, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 228280, SourceUrlId: 44383545, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 228280, SourceUrlId: 44383550, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313130, SourceUrlId: 38665872, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313130, SourceUrlId: 38665873, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313321, SourceUrlId: 38856805, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313322, SourceUrlId: 38858139, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313324, SourceUrlId: 38856830, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313325, SourceUrlId: 38856840, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313327, SourceUrlId: 38858052, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313332, SourceUrlId: 38858158, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 313490, SourceUrlId: 38856648, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314423, SourceUrlId: 38666959, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314597, SourceUrlId: 38802780, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314635, SourceUrlId: 38693855, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314635, SourceUrlId: 38706834, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314641, SourceUrlId: 38706841, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314644, SourceUrlId: 38690354, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314644, SourceUrlId: 38706843, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314648, SourceUrlId: 38706824, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314652, SourceUrlId: 38706822, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 314655, SourceUrlId: 38706904, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 315068, SourceUrlId: 38667001, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 316157, SourceUrlId: 38667346, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 319932, SourceUrlId: 27092163, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322006, SourceUrlId: 26727792, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322007, SourceUrlId: 26727840, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322008, SourceUrlId: 26727713, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322010, SourceUrlId: 26727767, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322011, SourceUrlId: 26727857, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322013, SourceUrlId: 26727736, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322016, SourceUrlId: 26727947, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 322018, SourceUrlId: 26727983, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 342411, SourceUrlId: 25733241, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 342411, SourceUrlId: 25733242, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566086, SourceUrlId: 23774080, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566089, SourceUrlId: 32507572, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566089, SourceUrlId: 32507577, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566089, SourceUrlId: 32507585, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566092, SourceUrlId: 23660684, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566092, SourceUrlId: 23660690, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566096, SourceUrlId: 23771007, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566096, SourceUrlId: 23771010, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566098, SourceUrlId: 28316853, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566098, SourceUrlId: 28316854, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566113, SourceUrlId: 28327167, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566113, SourceUrlId: 28327168, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566118, SourceUrlId: 27236303, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566118, SourceUrlId: 27236308, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566118, SourceUrlId: 27236309, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566118, SourceUrlId: 27236314, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566124, SourceUrlId: 23429445, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566143, SourceUrlId: 23768796, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566145, SourceUrlId: 28199857, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566146, SourceUrlId: 23771042, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566146, SourceUrlId: 23771051, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566160, SourceUrlId: 28264811, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566160, SourceUrlId: 28264812, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566160, SourceUrlId: 28264813, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566174, SourceUrlId: 23768745, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566174, SourceUrlId: 23768746, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566184, SourceUrlId: 997946, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566185, SourceUrlId: 23696704, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566211, SourceUrlId: 28327278, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566211, SourceUrlId: 28327279, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566232, SourceUrlId: 23706492, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566232, SourceUrlId: 23706500, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566247, SourceUrlId: 23977092, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566247, SourceUrlId: 23977093, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566287, SourceUrlId: 23770784, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566287, SourceUrlId: 23770785, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566301, SourceUrlId: 28327320, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566301, SourceUrlId: 28327333, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 566328, SourceUrlId: 23674244, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+ERROR:HOST_002:Error on process 'HOST_036'
+Traceback (most recent call last):
+  File "/root/crawlab_workspace/66a25de9116add6c8f235762/69e1c300a2fc400a16fafc2b/superpharm.py", line 125, in <module>
+    loop.run_until_complete(main())
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return HOST_017()
+           ^^^^^^^^^^^^^^^
+  File "/root/crawlab_workspace/66a25de9116add6c8f235762/69e1c300a2fc400a16fafc2b/superpharm.py", line 121, in main
+    await HOST_018()
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 180, in process
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 177, in process
+    await self.__process_source(source)
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 432, in __process_source
+    raise self.stop_exception
+Exception: auto_stop (80) is reached

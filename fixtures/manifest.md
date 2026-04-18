@@ -1,10 +1,10 @@
 # Fixtures Manifest
 
-Generated: 2026-04-18T20:10:12Z
+Generated: 2026-04-18T21:11:37Z
 
 ## Summary
 
-- **Total sampled tasks**: 53
+- **Total sampled tasks**: 54
 - **Schedules collected**: 736
 - **Spiders collected**: 10
 
@@ -65,6 +65,7 @@ Generated: 2026-04-18T20:10:12Z
 | ID_817 | cancelled_candidate | cancelled | scheduled | - | - | `task`: api/task_ID_817.json, `results`: api/results_ID_817.json |
 | ID_818 | error_candidate | partial_success | manual | 124 | 9 | `task`: api/task_ID_818.json, `log`: logs/ID_818.log, `expected`: expected/task_ID_818_log.yaml, `results`: api/results_ID_818.json |
 | ID_819 | error_candidate | partial_success | manual | 670 | 11 | `task`: api/task_ID_819.json, `log`: logs/ID_819.log, `expected`: expected/task_ID_819_log.yaml, `results`: api/results_ID_819.json |
+| ID_820 | error_candidate | auto_stop | scheduled | 102 | 3 | `task`: api/task_ID_820.json, `log`: logs/ID_820.log, `expected`: expected/task_ID_820_log.yaml |
 
 ## Notes
 

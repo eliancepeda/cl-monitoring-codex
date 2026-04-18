@@ -524,3 +524,40 @@ Related files:
 - src/tools/collect_fixtures.py
 - fixtures/expected/*.yaml
 - tests/test_fixture_classifier.py
+
+---
+
+## 2026-04-18 — Explicit auto_stop log marker outranks generic error task status
+
+Status: Accepted
+
+Context:
+`T3a` added a real anonymized fixture (`ID_820`) where Crawlab reports
+task `status=error`, but the terminal log evidence is the explicit rule
+marker `Exception: auto_stop (80) is reached`. Treating that run as a
+generic failure would lose the real stop reason and drift from observed
+log truth.
+
+Decision:
+When a task log contains an explicit `auto_stop` marker and there is no
+stronger hard-failure pattern such as `429` together with
+`error_auto_stop`, classify the run as rule-stopped / `auto_stop` even if
+the raw task status is `error`.
+
+Why:
+Observed log truth is more specific than Crawlab's coarse terminal status.
+The project already treats explicit runtime evidence as authoritative for
+run outcome classification.
+
+Consequences:
+- Runtime classification must not collapse explicit `auto_stop` into
+  generic failure just because `task.status=error`.
+- The offline corpus now includes a real explicit `auto_stop` example.
+- Stronger hard-failure evidence still wins over `auto_stop`.
+
+Related files:
+- src/tools/classify_logs.py
+- fixtures/api/task_ID_820.json
+- fixtures/logs/ID_820.log
+- fixtures/expected/task_ID_820_log.yaml
+- tests/test_fixture_classifier.py

@@ -1,0 +1,48 @@
+{
+  "_id": "ID_820",
+  "spider_id": "SPIDER_ID_031",
+  "status": "error",
+  "node_id": "NODE_ID_007",
+  "cmd": "python superpharm.py",
+  "param": "-as 80",
+  "error": "exit status 1",
+  "pid": 347408,
+  "schedule_id": "SCHEDULE_ID_014",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "66fadd39116add6c8f0cdaaa"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_820",
+    "create_ts": "2026-04-17T05:20:00.005Z",
+    "start_ts": "2026-04-17T05:20:01.775Z",
+    "end_ts": "2026-04-17T05:20:50.184Z",
+    "wait_duration": 1770,
+    "runtime_duration": 48409,
+    "total_duration": 50179,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "spider": {
+    "_id": "ID_791",
+    "name": "superpharm.pl",
+    "type": "",
+    "col_id": "66a25de9116add6c8f235761",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "project_id": "PROJECT_ID_001",
+    "mode": "selected-nodes",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9"
+    ],
+    "cmd": "python superpharm.py",
+    "param": "-as 80",
+    "priority": 5,
+    "incremental_sync": false
+  },
+  "create_ts": "2026-04-17T05:20:00.002Z"
+}

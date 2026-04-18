@@ -23,24 +23,41 @@
 
 ## Что уже считаем сделанным
 
-Нижние первые 4 задания считаем **выполненными по реализации**, но **не закрытыми как milestone gates**, пока не пройдена отдельная верификация.
+Нижние первые 4 задания были **выполнены по реализации раньше**, а их
+verification gate теперь **закрыт по итогам `T0` + `T3a`**.
 
 | Шаг | Что считаем сделанным | Статус gate |
 | --- | --- | --- |
 | 1 | Зафиксированы границы readonly companion и ADR по архитектуре | Верифицировано в `T0` |
 | 2 | Есть `ReadonlyCrawlabClient` и тесты безопасности | Верифицировано в `T0` |
 | 3 | Есть normalizers, snapshots и `execution_key` | Верифицировано в `T0` |
-| 4 | Есть черновая реализация parser/classifier направления | Частично верифицировано в `T0`; gate остаётся открыт до фикса parser/classifier gaps |
+| 4 | Есть черновая реализация parser/classifier направления | Верифицировано в `T3a` |
 
-Практический смысл: **следующий шаг не “снова делать первые четыре задачи”, а закрыть по ним verification gate и только потом идти дальше.**
+Практический смысл: **foundation gates закрыты; следующий допустимый шаг
+после этой точки — запускать `T4` и `T5` параллельно только в отдельных
+worktree.**
 
 Результат `T0` на 2026-04-18:
 
 - `docs/adr/0001-readonly-companion.md`, `ReadonlyCrawlabClient` и domain normalizers приведены к правилам проекта.
 - Foundation tests проходят.
-- `T0` не закрыт полностью из-за 2 оставшихся расхождений в collector/parser направлении (`src/tools/classify_logs.py`):
+- `T0` нашёл 2 оставшихся расхождения в collector/parser направлении (`src/tools/classify_logs.py`):
 - `finished` + непустой лог без положительных сигналов всё ещё может повышаться до `success_probable`.
 - manual run detection всё ещё слишком широкая для empty/missing `schedule_id` и расходится с domain rule про zero `schedule_id`.
+
+Результат `T3a` на 2026-04-18:
+
+- Legacy tooling в `src/tools/classify_logs.py` доведён до frozen
+  project/domain contract без изменения shared runtime contract files.
+- `finished` + непустой лог без реальных positive signals больше не
+  повышается вслепую до `success_probable`.
+- Manual detection в legacy tooling подтверждена только по zero
+  `schedule_id`; empty/missing `schedule_id` не считаются manual run.
+- Через безопасный project workflow собран реальный anonymized fixture с
+  explicit `auto_stop` marker: `fixtures/api/task_ID_820.json`,
+  `fixtures/logs/ID_820.log`, `fixtures/expected/task_ID_820_log.yaml`.
+- После этого закрыты оставшиеся tails `T0` и `T2`, а foundation stage
+  действительно готов к распараллеливанию `T4`/`T5`.
 
 ## Что в ветке уже есть, но трогать пока рано
 
@@ -63,6 +80,7 @@
 | 1 | `T1` | Plan | OpenCode | Пишет `status-parser` contract | `T0` | Только последовательно |
 | 2 | `T2` | Build | Codex `gpt-5.4` | Доводит fixture pack и golden corpus | `T1` | Только последовательно |
 | 3 | `T3` | Build | Codex `gpt-5.4` | Фиксирует shared runtime contracts (`RunSummary`, reason/evidence shape) | `T2` | Только последовательно |
+| 3a | `T3a` | Build | OpenCode `gpt-5.4` | Закрывает remaining `T0`/`T2` cleanup tails без изменения shared contract | `T3` | Только последовательно |
 | 4 | `T4` | Build | Codex `gpt-5.4` | Реализует schedule engine | `T3` | Можно параллельно с `T5`, но только в отдельном worktree |
 | 5 | `T5` | Build | Codex `gpt-5.4` | Реализует runtime `crawllib` parser | `T3` | Можно параллельно с `T4`, но только в отдельном worktree |
 | 6 | `T6` | Plan | OpenCode | Пишет ADR по local history и poller | `T4` + `T5` | Только последовательно |
@@ -135,8 +153,12 @@
 
 Текущий статус:
 
-- для шагов 1-3 gate закрыт по результатам `T0`
-- шаг 4 остаётся открыт до отдельного минимального фикса в `src/tools/classify_logs.py`, без начала новых milestones
+- `T0` gate закрыт по итогам `T3a`.
+- Legacy tooling больше не расходится с frozen contract по двум найденным
+  foundation rules: no blind upgrade to `success_probable` и manual only
+  by zero `schedule_id`.
+- Возвращаться к milestones 1-4 больше не нужно, если не появится новый
+  отдельный bug report.
 
 ### `T1` — Зафиксировать `status-parser` contract
 
@@ -208,7 +230,7 @@
 
 Текущий статус:
 
-- `T2` выполнен по collector/fixture-pack части, но gate закрыт не до конца.
+- `T2` выполнен и gate закрыт.
 - Проверен существующий collector CLI: live `--dry-run` и live `--collect`
   запускались только через `python -m tools.collect_fixtures`, без ad hoc
   обходов.
@@ -222,13 +244,13 @@
   commit, raw live artifacts остаются только в `fixtures_raw_local/`.
 - Offline corpus теперь покрывает минимальные сценарии:
   `running`, `error`, `success without summary`, `success with put_to_parser`,
-  `partial_success`, `cancelled`, `429 ban`, `manual run`,
+  `partial_success`, `auto_stop`, `cancelled`, `429 ban`, `manual run`,
   `schedule history`, `results_by_tid_empty`.
-- Fixture-related tests и полный `pytest` проходят (`115 passed` в таргетном
-  наборе и `156 passed` по всему repo на момент завершения `T2`).
-- Оставшийся blocker для полного closure `T2`: в текущем live scope пока не
-  найден anonymized fixture с явным `auto_stop` marker, поэтому сценарий
-  `auto_stop` ещё не закрыт как corpus gate и требует отдельного capture.
+- В `T3a` добавлен реальный anonymized `auto_stop` fixture из live scope:
+  `ID_820` с явным marker `Exception: auto_stop (80) is reached`.
+- Fixture-related tests и полный `pytest` проходят в актуальном состоянии:
+  `./.venv/bin/pytest -q tests/test_fixture_classifier.py` -> `57 passed`,
+  `./.venv/bin/pytest -q` -> `167 passed`.
 
 ### `T3` — Зафиксировать shared runtime types
 
@@ -269,8 +291,50 @@
 - Проверки пройдены: `./.venv/bin/pytest -q tests/test_models.py
   tests/test_normalizers.py` -> `19 passed`; `./.venv/bin/pytest -q` ->
   `163 passed`.
-- После этого `T4` и `T5` можно запускать параллельно только в отдельных
-  worktree и без изменений в shared contract files.
+- Frozen shared contract из `T3` остался без изменений в `T3a`.
+- После `T3` и последующего `T3a` cleanup `T4` и `T5` можно запускать
+  параллельно только в отдельных worktree и без изменений в shared
+  contract files.
+
+### `T3a` — Закрыть remaining `T0`/`T2` tails перед параллельными `T4`/`T5`
+
+**Цель:** убрать последние foundation blockers без изменения frozen shared
+contract из `T3`.
+
+Что делает:
+
+- минимально правит `src/tools/classify_logs.py`
+- доводит legacy tooling до project/domain contract
+- закрывает blind `success_probable` upgrade в finished logs без positive signals
+- подтверждает manual detection только по zero `schedule_id`
+- добавляет реальный anonymized fixture для explicit `auto_stop`
+- добавляет `expected/*.yaml` и тест, который реально проверяет этот сценарий
+
+Что не делает:
+
+- не меняет `docs/domain/status-parser-contract.md`
+- не меняет `src/cl_monitoring/domain/models.py`
+- не реализует schedule engine
+- не реализует production runtime parser
+- не трогает DB / poller / UI
+
+Готово, когда:
+
+- закрыты оставшиеся tails из `T0` и `T2`
+- fixture corpus покрывает `auto_stop`
+- `T4` и `T5` можно запускать параллельно без shared cleanup thread
+
+Текущий статус:
+
+- `T3a` выполнен и gate закрыт.
+- Legacy classifier/tooling выровнен с frozen contract по правилам
+  `unknown_finished_without_positive_signal` и manual-by-zero-`schedule_id`.
+- Добавлен реальный `auto_stop` fixture `ID_820` и соответствующий
+  `fixtures/expected/task_ID_820_log.yaml`.
+- `tests/test_fixture_classifier.py` теперь проверяет реальный `auto_stop`
+  scenario из corpus, а не только synthetic sample.
+- Проверки пройдены: `./.venv/bin/pytest -q tests/test_fixture_classifier.py`
+  -> `57 passed`; `./.venv/bin/pytest -q` -> `167 passed`.
 
 ### `T4` — Реализовать schedule engine
 
@@ -496,7 +560,7 @@
 
 ## Короткая версия порядка
 
-**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout`**
+**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> T3a cleanup tails -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout`**
 
 Если хочется сократить до одного правила: **до завершения `T5` не трогать SQLite/poller/UI как самостоятельные milestones.**
 

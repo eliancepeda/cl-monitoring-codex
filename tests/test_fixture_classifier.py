@@ -290,17 +290,27 @@ class TestFinalLogClassification:
         task = {"status": "error", "error": ""}
         assert classify_final(task, BAN_429_LOG) == FinalLogClass.BAN_429
 
+    def test_error_task_with_explicit_auto_stop(self) -> None:
+        task = {"status": "error", "error": ""}
+        log = "Traceback (most recent call last):\nException: auto_stop (80) is reached\n"
+        assert classify_final(task, log) == FinalLogClass.AUTO_STOP
+
     def test_finished_strong_success(self) -> None:
         """Finished + stats with items in LOGS → strong success."""
         task = {"status": "finished"}
         log = SCRAPY_STATS_LOG  # has item_scraped_count: 120
         assert classify_final(task, log) == FinalLogClass.SUCCESS_STRONG
 
-    def test_finished_probable_success_no_items_in_log(self) -> None:
-        """Finished + stats but no items in log → probable success."""
+    def test_finished_stats_without_items_stays_unknown(self) -> None:
+        """Finished + stats without positive progress must stay unknown."""
         task = {"status": "finished"}
         log = "Dumping Scrapy stats:\n{'item_scraped_count': 0, 'finish_reason': 'finished'}"
-        assert classify_final(task, log) == FinalLogClass.SUCCESS_PROBABLE
+        assert classify_final(task, log) == FinalLogClass.UNKNOWN
+
+    def test_finished_non_empty_log_without_positive_signal_is_unknown(self) -> None:
+        task = {"status": "finished"}
+        log = "INFO: spider closed without explicit terminal marker\n"
+        assert classify_final(task, log) == FinalLogClass.UNKNOWN
 
     def test_finished_no_log_is_unknown(self) -> None:
         """Finished with no log → unknown (cannot infer success)."""
@@ -411,6 +421,14 @@ class TestExpectedYamlGeneration:
         assert expected["run_result"] == "unknown"
         assert expected["reason_code"] == "unknown_running_or_pending"
 
+    def test_finished_non_empty_log_without_positive_signal_stays_unknown(self) -> None:
+        expected = build_expected_log_fixture(
+            {"_id": "TASK_ID_006", "status": "finished"},
+            "Dumping Scrapy stats:\n{'item_scraped_count': 0, 'finish_reason': 'finished'}\n",
+        )
+        assert expected["run_result"] == "unknown"
+        assert expected["reason_code"] == "unknown_finished_without_positive_signal"
+
 
 # ── Manifest entry generation ─────────────────────────────────────────
 
@@ -500,7 +518,20 @@ class TestFixtureCorpus:
             assert set(parsed["counters"]) == EXPECTED_COUNTER_KEYS
             assert isinstance(parsed["evidence"], list)
 
-    def test_fixture_pack_covers_required_scenarios_except_known_auto_stop_gap(self) -> None:
+    def test_real_auto_stop_fixture_is_present_and_classified(self) -> None:
+        task = json.loads((FIXTURES_API_DIR / "task_ID_820.json").read_text(encoding="utf-8"))
+        log_text = (FIXTURES_LOG_DIR / "ID_820.log").read_text(encoding="utf-8")
+        expected = _load_expected_yaml(FIXTURES_EXPECTED_DIR / "task_ID_820_log.yaml")
+
+        assert task["status"] == "error"
+        assert classify_final(task, log_text) == FinalLogClass.AUTO_STOP
+        assert expected["run_result"] == "rule_stopped"
+        assert expected["reason_code"] == "rule_stopped_auto_stop"
+        assert expected["counters"]["auto_stop_markers"] == 1
+        assert expected["counters"]["error_auto_stop_markers"] == 0
+        assert expected["evidence"] == ["Exception: auto_stop (80) is reached"]
+
+    def test_fixture_pack_covers_required_scenarios(self) -> None:
         covered: set[str] = set()
         task_paths = {path.stem.removeprefix("task_"): path for path in FIXTURES_API_DIR.glob("task_*.json")}
 
@@ -563,4 +594,4 @@ class TestFixtureCorpus:
             "results_by_tid_empty",
         }
         missing = required - covered
-        assert missing <= {"auto_stop"}
+        assert missing == set()

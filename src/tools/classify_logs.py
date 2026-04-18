@@ -301,6 +301,8 @@ def classify_final(
     if status in ("error", "abnormal"):
         if log_text and _has_ban_pattern(log_text):
             return FinalLogClass.BAN_429
+        if log_text and _has_auto_stop_pattern(log_text):
+            return FinalLogClass.AUTO_STOP
         error_msg = task.get("error", "")
         if _has_ban_pattern(error_msg):
             return FinalLogClass.BAN_429
@@ -343,7 +345,7 @@ def _classify_finished_final(
             return FinalLogClass.FAILED_OTHER
         if _stats_have_items(log_text):
             return FinalLogClass.SUCCESS_STRONG
-        return FinalLogClass.SUCCESS_PROBABLE
+        return FinalLogClass.UNKNOWN
 
     has_positive_progress = _has_positive_progress(log_text)
     has_partial_errors = bool(
@@ -423,7 +425,7 @@ def build_expected_log_fixture(
     has_positive_progress = any(
         counters[key] > 0
         for key in ("item_events", "put_to_parser", "summary_events", "is_success_true")
-    ) or bool(SCRAPY_PROGRESS_RE.search(log_text))
+    ) or _stats_have_items(log_text)
     has_partial_errors = bool(
         classification.error_lines > 0
         or status in {"error", "abnormal"}
@@ -603,7 +605,7 @@ def _has_positive_progress(log_text: str) -> bool:
         or PUT_TO_PARSER_RE.search(log_text)
         or IS_SUCCESS_TRUE_RE.search(log_text)
         or ITEM_EVENT_RE.search(log_text)
-        or SCRAPY_PROGRESS_RE.search(log_text)
+        or _stats_have_items(log_text)
     )
 
 
