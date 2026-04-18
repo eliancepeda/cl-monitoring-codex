@@ -245,6 +245,33 @@
 - `T4` и `T5` могут работать независимо
 - shared models не нужно менять “на лету”
 
+Текущий статус:
+
+- `T3` выполнен и gate закрыт.
+- В `src/cl_monitoring/domain/models.py` зафиксирован runtime shape
+  `RunSummary`: `task_id`, `execution_key`, `run_result`, `confidence`,
+  `reason_code`, `evidence`, `counters`.
+- Добавлен shared runtime type `ScheduleHealth` с frozen shape:
+  `schedule_id`, `execution_key`, `health`, `confidence`, `reason_code`,
+  `evidence`, `counters`.
+- Добавлены минимальные shared enums и frozen catalogs для
+  `RunResult`, `Confidence`, `ScheduleHealthStatus`, parser reason codes,
+  schedule reason codes и counter keys v1.
+- Shared domain models переведены в strict shape mode через запрет лишних
+  полей, чтобы `T4` и `T5` не расширяли общий контракт параллельно.
+- `error_family` сохранён только как legacy derived detail для
+  совместимости с текущим кодом, но primary shared parser contract теперь
+  опирается на `reason_code`.
+- Экспорт shared runtime surface собран в
+  `src/cl_monitoring/domain/__init__.py`.
+- `tests/test_models.py` расширен contract-тестами на frozen fields,
+  reason-code catalogs, counter keys и защиту от shape drift.
+- Проверки пройдены: `./.venv/bin/pytest -q tests/test_models.py
+  tests/test_normalizers.py` -> `19 passed`; `./.venv/bin/pytest -q` ->
+  `163 passed`.
+- После этого `T4` и `T5` можно запускать параллельно только в отдельных
+  worktree и без изменений в shared contract files.
+
 ### `T4` — Реализовать schedule engine
 
 **Цель:** детерминированно определять состояние schedule chain.
