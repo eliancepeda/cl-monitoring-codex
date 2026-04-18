@@ -27,7 +27,6 @@ from tools.collect_fixtures import (
     find_long_running_schedule,
     sample_candidates,
 )
-from tools.classify_logs import is_manual_run
 
 
 # ── Test data ──────────────────────────────────────────────────────────

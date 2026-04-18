@@ -1,0 +1,30 @@
+{
+  "_id": "ID_760",
+  "name": "kickz.com/de",
+  "type": "",
+  "col_id": "697c8eade45d2ecbe8d627a9",
+  "col_name": "results_kickz.com/de",
+  "data_source_id": "000000000000000000000000",
+  "description": "",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "67515b15116add6c8fddced7"
+  ],
+  "stat": {
+    "_id": "ID_760",
+    "last_task_id": "69e1d23ca2fc400a16fafc5a",
+    "tasks": 102,
+    "results": 0,
+    "wait_duration": 1734593,
+    "runtime_duration": 387750,
+    "total_duration": 389477,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python kickz.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

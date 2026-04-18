@@ -1,0 +1,30 @@
+{
+  "_id": "ID_759",
+  "name": "stockx",
+  "type": "",
+  "col_id": "6981a405e45d2ecbe8d62cf1",
+  "col_name": "results_stockx",
+  "data_source_id": "000000000000000000000000",
+  "description": "",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "67515b15116add6c8fddced7"
+  ],
+  "stat": {
+    "_id": "ID_759",
+    "last_task_id": "69e1e178a2fc400a16fafc6f",
+    "tasks": 81,
+    "results": 0,
+    "wait_duration": 351242,
+    "runtime_duration": 62589,
+    "total_duration": 62945,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python stockx.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

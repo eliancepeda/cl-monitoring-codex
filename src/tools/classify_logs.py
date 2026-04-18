@@ -31,6 +31,26 @@ import yaml
 
 logger = logging.getLogger(__name__)
 
+ZERO_OBJECT_ID = "000000000000000000000000"
+
+SUMMARY_MARKER_RE = re.compile(r"\|\s*Резюме:\s*✅")
+PUT_TO_PARSER_RE = re.compile(r"\bput_to_parser\b", re.IGNORECASE)
+IS_SUCCESS_TRUE_RE = re.compile(r'"isSuccess"\s*:\s*true')
+ITEM_EVENT_RE = re.compile(r'(?:\{"price"\s*:|\bЦена\b)')
+SCRAPY_PROGRESS_RE = re.compile(r"(?:item_scraped_count|finish_reason|Dumping Scrapy stats)", re.IGNORECASE)
+SKU_NOT_FOUND_RE = re.compile(r"(?:sku_not_found|не наш[её]л SKU)", re.IGNORECASE)
+GONE_404_RE = re.compile(r"(?:\b404\b|\bgone\b)", re.IGNORECASE)
+CANCEL_MARKER_RE = re.compile(r"\bcancel(?:led)?\b", re.IGNORECASE)
+ERROR_AUTO_STOP_RE = re.compile(r"\berror_auto_stop\b", re.IGNORECASE)
+AUTO_STOP_MARKER_RE = re.compile(
+    r"(?:\bauto[_ -]?stop\b(?!\s*=)|max.?runtime.*exceeded|killed by scheduler)",
+    re.IGNORECASE,
+)
+BAN_429_RE = re.compile(
+    r"(?:\b429\b|Too Many Requests|ban status code\s*\(?429\)?|status code\s*429)",
+    re.IGNORECASE,
+)
+
 
 class LogClass(str, Enum):
     """Classification categories for Crawlab task log content."""
@@ -198,8 +218,7 @@ class CandidateClass(str, Enum):
 
 def is_manual_run(task: dict[str, Any]) -> bool:
     """Detect manual runs by zero schedule_id (AGENTS.md § Domain rules)."""
-    schedule_id = task.get("schedule_id", "")
-    return schedule_id == "000000000000000000000000" or not schedule_id
+    return task.get("schedule_id") == ZERO_OBJECT_ID
 
 
 def classify_candidate(task: dict[str, Any]) -> CandidateClass:
@@ -285,6 +304,8 @@ def classify_final(
         error_msg = task.get("error", "")
         if _has_ban_pattern(error_msg):
             return FinalLogClass.BAN_429
+        if log_text and _has_positive_progress(log_text):
+            return FinalLogClass.PARTIAL_SUCCESS
         return FinalLogClass.FAILED_OTHER
 
     if status == "finished":
@@ -302,65 +323,55 @@ def _classify_finished_final(
     Key rule: result_count in task.stat is NOT used as a success signal.
     Only log content (Scrapy stats block) determines success grade.
     """
-    # Check for auto_stop signal
-    if log_text and _has_auto_stop_pattern(log_text):
-        return FinalLogClass.AUTO_STOP
+    if not log_text:
+        return FinalLogClass.UNKNOWN
 
-    # Check for ban/429
-    if log_text and _has_ban_pattern(log_text):
+    if SUMMARY_MARKER_RE.search(log_text):
+        return FinalLogClass.SUCCESS_STRONG
+
+    if _has_ban_pattern(log_text):
         return FinalLogClass.BAN_429
 
-    if log_text:
-        classification = classify_log_text(log_text)
+    if _has_auto_stop_pattern(log_text):
+        return FinalLogClass.AUTO_STOP
 
-        # Has errors → partial success at best
+    classification = classify_log_text(log_text)
+    if classification.scrapy_stats_found:
         if classification.error_lines > 0:
-            if classification.scrapy_stats_found:
+            if _stats_have_items(log_text):
                 return FinalLogClass.PARTIAL_SUCCESS
             return FinalLogClass.FAILED_OTHER
-
-        # Has stats and no errors → check for item count IN LOGS
-        if classification.scrapy_stats_found:
-            if _stats_have_items(log_text):
-                return FinalLogClass.SUCCESS_STRONG
-            else:
-                return FinalLogClass.SUCCESS_PROBABLE
-
-        # No stats block → probable success (could be non-scrapy spider)
+        if _stats_have_items(log_text):
+            return FinalLogClass.SUCCESS_STRONG
         return FinalLogClass.SUCCESS_PROBABLE
 
-    # No log text available → unknown (we cannot infer success)
+    has_positive_progress = _has_positive_progress(log_text)
+    has_partial_errors = bool(
+        classification.error_lines > 0
+        or SKU_NOT_FOUND_RE.search(log_text)
+        or GONE_404_RE.search(log_text)
+    )
+
+    if has_positive_progress and has_partial_errors and not _looks_incomplete(log_text):
+        return FinalLogClass.PARTIAL_SUCCESS
+
+    if has_positive_progress and not _looks_incomplete(log_text):
+        return FinalLogClass.SUCCESS_PROBABLE
+
+    if classification.error_lines > 0:
+        return FinalLogClass.FAILED_OTHER
+
     return FinalLogClass.UNKNOWN
 
 
 def _has_ban_pattern(text: str) -> bool:
     """Check if text contains 429/ban indicators."""
-    ban_patterns = [
-        r"\b429\b",
-        r"Too Many Requests",
-        r"rate.?limit",
-        r"banned",
-        r"blocked",
-        r"captcha",
-    ]
-    for pattern in ban_patterns:
-        if re.search(pattern, text, re.IGNORECASE):
-            return True
-    return False
+    return bool(BAN_429_RE.search(text))
 
 
 def _has_auto_stop_pattern(text: str) -> bool:
     """Check if text contains auto-stop indicators."""
-    auto_stop_patterns = [
-        r"auto.?stop",
-        r"max.?runtime",
-        r"timeout.*exceeded",
-        r"killed by scheduler",
-    ]
-    for pattern in auto_stop_patterns:
-        if re.search(pattern, text, re.IGNORECASE):
-            return True
-    return False
+    return bool(AUTO_STOP_MARKER_RE.search(text))
 
 
 def _stats_have_items(log_text: str) -> bool:
@@ -373,49 +384,267 @@ def _stats_have_items(log_text: str) -> bool:
 
 # ── Draft expected YAML generation ──────────────────────────────────────
 
+def build_expected_log_fixture(
+    task: dict[str, Any],
+    log_text: str,
+    *,
+    page_size: int | None = None,
+    max_pages: int | None = None,
+) -> dict[str, Any]:
+    """Build collector-side expected data for a log fixture.
+
+    This helper exists only to prepare the offline golden corpus. It is not a
+    runtime parser API.
+    """
+    lines = log_text.splitlines()
+    lines_seen = len(lines)
+    classification = classify_log_text(log_text, task.get("_id", ""))
+    counters = {
+        "lines_seen": lines_seen,
+        "item_events": _count_matches(ITEM_EVENT_RE, lines),
+        "put_to_parser": _count_matches(PUT_TO_PARSER_RE, lines),
+        "summary_events": _count_matches(SUMMARY_MARKER_RE, lines),
+        "resume_success_markers": 0,
+        "is_success_true": _count_matches(IS_SUCCESS_TRUE_RE, lines),
+        "sku_not_found": _count_matches(SKU_NOT_FOUND_RE, lines),
+        "gone_404": _count_matches(GONE_404_RE, lines),
+        "cancel_markers": _count_matches(CANCEL_MARKER_RE, lines),
+        "auto_stop_markers": _count_matches(AUTO_STOP_MARKER_RE, lines),
+        "error_auto_stop_markers": _count_matches(ERROR_AUTO_STOP_RE, lines),
+        "ban_429_markers": _count_matches(BAN_429_RE, lines),
+    }
+    status = (task.get("status", "") or "").lower()
+    complete_log = _is_complete_log(
+        log_text,
+        status=status,
+        page_size=page_size,
+        max_pages=max_pages,
+    )
+    has_positive_progress = any(
+        counters[key] > 0
+        for key in ("item_events", "put_to_parser", "summary_events", "is_success_true")
+    ) or bool(SCRAPY_PROGRESS_RE.search(log_text))
+    has_partial_errors = bool(
+        classification.error_lines > 0
+        or status in {"error", "abnormal"}
+        or any(counters[key] > 0 for key in ("sku_not_found", "gone_404"))
+    )
+    errors_without_positive = bool(
+        (classification.error_lines > 0 or status in {"error", "abnormal"})
+        and not has_positive_progress
+    )
+    evidence: list[str] = []
+
+    if status == "cancelled":
+        evidence.append("task.status=cancelled")
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="cancelled",
+            confidence="high",
+            reason_code="cancelled_api_status",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if status in {"pending", "running"}:
+        evidence.append(f"task.status={status}")
+        if not complete_log:
+            evidence.append("log may be truncated at collector page limit")
+        if line := _first_matching_line(PUT_TO_PARSER_RE, lines):
+            evidence.append(line)
+        if line := _first_matching_line(IS_SUCCESS_TRUE_RE, lines):
+            evidence.append(line)
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="unknown",
+            confidence="low",
+            reason_code="unknown_running_or_pending",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if counters["ban_429_markers"] > 0 and counters["error_auto_stop_markers"] > 0:
+        evidence.extend(_evidence_lines(lines, BAN_429_RE, ERROR_AUTO_STOP_RE))
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="failed",
+            confidence="high",
+            reason_code="failed_ban_429_error_auto_stop",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if counters["summary_events"] > 0:
+        evidence.extend(_evidence_lines(lines, SUMMARY_MARKER_RE, PUT_TO_PARSER_RE))
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="success",
+            confidence="high",
+            reason_code="success_summary_marker",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if counters["auto_stop_markers"] > 0:
+        evidence.extend(_evidence_lines(lines, AUTO_STOP_MARKER_RE, PUT_TO_PARSER_RE))
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="rule_stopped",
+            confidence="high",
+            reason_code="rule_stopped_auto_stop",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if not complete_log:
+        evidence.append("log may be truncated at collector page limit")
+        if line := _first_matching_line(PUT_TO_PARSER_RE, lines):
+            evidence.append(line)
+        if line := _first_matching_line(IS_SUCCESS_TRUE_RE, lines):
+            evidence.append(line)
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="unknown",
+            confidence="low",
+            reason_code="unknown_incomplete_log",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if has_positive_progress and has_partial_errors:
+        evidence.extend(_evidence_lines(lines, IS_SUCCESS_TRUE_RE, SKU_NOT_FOUND_RE, GONE_404_RE, PUT_TO_PARSER_RE))
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="partial_success",
+            confidence="medium",
+            reason_code="partial_success_positive_progress_with_errors",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if has_positive_progress:
+        evidence.extend(_evidence_lines(lines, IS_SUCCESS_TRUE_RE, PUT_TO_PARSER_RE))
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="success_probable",
+            confidence="medium",
+            reason_code="success_probable_positive_progress_complete_log",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    if status in {"error", "abnormal"} or errors_without_positive:
+        if line := _first_matching_line(re.compile(r"(?:Exception:|Traceback)", re.IGNORECASE), lines):
+            evidence.append(line)
+        return _expected_payload(
+            task_id=task.get("_id", ""),
+            run_result="failed",
+            confidence="medium",
+            reason_code="failed_error_without_positive_signal",
+            counters=counters,
+            evidence=evidence,
+        )
+
+    return _expected_payload(
+        task_id=task.get("_id", ""),
+        run_result="unknown",
+        confidence="low",
+        reason_code="unknown_finished_without_positive_signal",
+        counters=counters,
+        evidence=evidence,
+    )
+
+
 def generate_expected_yaml(
-    classification: LogClassification,
+    expected_data: dict[str, Any],
     output_dir: Path,
 ) -> Path:
-    """Generate a draft expected/*.yaml skeleton for a log fixture.
-
-    Generated files have # TODO: verify markers for manual review.
-
-    Args:
-        classification: Result from classify_log_text.
-        output_dir: Directory to write YAML files to (fixtures/expected/).
-
-    Returns:
-        Path to the generated YAML file.
-    """
+    """Write expected/*.yaml for a redacted log fixture."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    safe_task_id = classification.task_id.replace("/", "_")
+    safe_task_id = str(expected_data["task_id"]).replace("/", "_")
     filename = f"task_{safe_task_id}_log.yaml"
     filepath = output_dir / filename
-
-    data = {
-        "task_id": classification.task_id,
-        "log_classes_found": classification.classes_found,
-        "stats": {
-            "total_lines": classification.total_lines,
-            "error_lines": classification.error_lines,
-            "warning_lines": classification.warning_lines,
-            "scrapy_stats_block_found": classification.scrapy_stats_found,
-            "has_traceback": classification.has_traceback,
-        },
-        "class_line_counts": classification.class_line_counts,
-    }
 
     # Write YAML with TODO markers
     lines = ["# Draft expected output — auto-generated by classify_logs.py"]
     lines.append("# TODO: verify all values after manual review of the log fixture")
     lines.append("")
-    lines.append(yaml.dump(data, default_flow_style=False, sort_keys=False))
+    lines.append(yaml.dump(expected_data, default_flow_style=False, sort_keys=False))
 
     filepath.write_text("\n".join(lines), encoding="utf-8")
     logger.info("Generated expected YAML: %s", filepath)
     return filepath
+
+
+def _count_matches(pattern: re.Pattern[str], lines: list[str]) -> int:
+    return sum(1 for line in lines if pattern.search(line))
+
+
+def _first_matching_line(pattern: re.Pattern[str], lines: list[str]) -> str | None:
+    for line in lines:
+        if pattern.search(line):
+            return line.strip()
+    return None
+
+
+def _evidence_lines(lines: list[str], *patterns: re.Pattern[str]) -> list[str]:
+    evidence: list[str] = []
+    for pattern in patterns:
+        line = _first_matching_line(pattern, lines)
+        if line and line not in evidence:
+            evidence.append(line)
+    return evidence
+
+
+def _has_positive_progress(log_text: str) -> bool:
+    return bool(
+        SUMMARY_MARKER_RE.search(log_text)
+        or PUT_TO_PARSER_RE.search(log_text)
+        or IS_SUCCESS_TRUE_RE.search(log_text)
+        or ITEM_EVENT_RE.search(log_text)
+        or SCRAPY_PROGRESS_RE.search(log_text)
+    )
+
+
+def _looks_incomplete(log_text: str) -> bool:
+    lines_seen = len(log_text.splitlines())
+    return lines_seen >= 4000 and not SUMMARY_MARKER_RE.search(log_text) and not IS_SUCCESS_TRUE_RE.search(log_text)
+
+
+def _is_complete_log(
+    log_text: str,
+    *,
+    status: str,
+    page_size: int | None,
+    max_pages: int | None,
+) -> bool:
+    if status == "cancelled":
+        return True
+    if page_size and max_pages:
+        limit = page_size * max_pages
+        if len(log_text.splitlines()) >= limit and not SUMMARY_MARKER_RE.search(log_text) and not IS_SUCCESS_TRUE_RE.search(log_text):
+            return False
+    return not _looks_incomplete(log_text)
+
+
+def _expected_payload(
+    *,
+    task_id: str,
+    run_result: str,
+    confidence: str,
+    reason_code: str,
+    counters: dict[str, int],
+    evidence: list[str],
+) -> dict[str, Any]:
+    return {
+        "task_id": task_id,
+        "run_result": run_result,
+        "confidence": confidence,
+        "reason_code": reason_code,
+        "counters": counters,
+        "evidence": evidence,
+    }
 
 
 def generate_manifest_entry(

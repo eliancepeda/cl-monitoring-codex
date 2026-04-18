@@ -1,0 +1,30 @@
+{
+  "_id": "ID_790",
+  "name": "balenciaga.com",
+  "type": "",
+  "col_id": "6978cca0e45d2ecbe8d62363",
+  "col_name": "results_balenciaga_it",
+  "data_source_id": "000000000000000000000000",
+  "description": "Паук для balenciaga.com/en-fr и balenciaga.com/en-it. Два расписания",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "6927302984c7b6645efdca48"
+  ],
+  "stat": {
+    "_id": "ID_790",
+    "last_task_id": "69e35dd6a2fc400a16fafec6",
+    "tasks": 366,
+    "results": 0,
+    "wait_duration": 406912,
+    "runtime_duration": 172389,
+    "total_duration": 172786,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python balenciaga_it.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

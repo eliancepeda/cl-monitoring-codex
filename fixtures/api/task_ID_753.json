@@ -1,0 +1,31 @@
+{
+  "_id": "ID_753",
+  "spider_id": "SPIDER_ID_201",
+  "status": "running",
+  "node_id": "NODE_ID_002",
+  "cmd": "python board_new.py",
+  "param": "",
+  "error": "",
+  "pid": 68526,
+  "schedule_id": "SCHEDULE_ID_005",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "6927302984c7b6645efdca48"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_753",
+    "create_ts": "2026-04-17T04:03:00.008Z",
+    "start_ts": "2026-04-17T04:03:00.13Z",
+    "end_ts": "0001-01-01T00:00:00Z",
+    "wait_duration": 122,
+    "runtime_duration": 0,
+    "total_duration": 0,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "create_ts": "2026-04-17T04:03:00.004Z"
+}

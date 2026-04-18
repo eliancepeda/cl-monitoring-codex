@@ -45,6 +45,7 @@ from integrations.crawlab.readonly_client import (
     ReadonlyCrawlabClient,
 )
 from tools.classify_logs import (
+    build_expected_log_fixture,
     CandidateClass,
     FinalLogClass,
     LogClassification,
@@ -1030,13 +1031,12 @@ async def run_collect(
             task_id = task.get("_id", "")
             spider_id = task.get("spider_id", "")
             spider = sampled_spiders.get(spider_id, {})
-            col_name = spider.get("col_name") or spider.get("col_id")
-            if col_name:
+            collection_id = spider.get("col_id") or spider.get("col_name")
+            if collection_id:
                 rows = await fetch_results(
-                    client, col_name, task_id, coll["results_row_limit"],
+                    client, collection_id, task_id, coll["results_row_limit"],
                 )
-                if rows:
-                    results_data[task_id] = rows
+                results_data[task_id] = rows
 
     # 10. Write fixtures
     print("\nWriting fixtures...")
@@ -1101,7 +1101,7 @@ async def run_collect(
         if task_id in results_data:
             if coll["collect_raw"]:
                 write_raw_fixture(
-                    results_data[task_id], raw_dir, "results",
+                    results_data[task_id], raw_dir, "api",
                     f"results_{task_id}.json",
                 )
             if coll["collect_redacted"]:
@@ -1109,25 +1109,22 @@ async def run_collect(
                     results_data[task_id], context="results",
                 )
                 results_path = write_redacted_fixture(
-                    redacted_results, out_dir, "results",
+                    redacted_results, out_dir, "api",
                     f"results_{redacted_task_id}.json",
                 )
                 fixture_paths["results"] = str(results_path.relative_to(out_dir))
 
         # Generate expected YAML
         if log_classification and coll["generate_expected_skeletons"]:
-            redacted_classification = LogClassification(
-                task_id=redacted_task_id if coll["collect_redacted"] else task_id,
-                total_lines=log_classification.total_lines,
-                classes_found=log_classification.classes_found,
-                class_line_counts=log_classification.class_line_counts,
-                error_lines=log_classification.error_lines,
-                warning_lines=log_classification.warning_lines,
-                scrapy_stats_found=log_classification.scrapy_stats_found,
-                has_traceback=log_classification.has_traceback,
+            expected_data = build_expected_log_fixture(
+                task,
+                log_text,
+                page_size=coll["log_page_size"],
+                max_pages=coll["max_log_pages"],
             )
+            expected_data["task_id"] = redacted_task_id if coll["collect_redacted"] else task_id
             expected_path = generate_expected_yaml(
-                redacted_classification, out_dir / "expected",
+                expected_data, out_dir / "expected",
             )
             fixture_paths["expected"] = str(expected_path.relative_to(out_dir))
 
@@ -1329,6 +1326,9 @@ async def main(argv: list[str] | None = None) -> None:
         print(f"Error: {token_env} environment variable is required", file=sys.stderr)
         sys.exit(1)
 
+    # The readonly client consumes a fixed token env name.
+    os.environ["CRAWLAB_API_TOKEN"] = token
+
     # Strip trailing /api to prevent double path (/api/api/tasks)
     base_url = base_url.rstrip("/")
     if base_url.endswith("/api"):
@@ -1336,6 +1336,8 @@ async def main(argv: list[str] | None = None) -> None:
 
     # Build client
     allowed_paths = cfg.get("security", {}).get("allowed_paths", None)
+    if allowed_paths and "/api/tasks/*/logs" not in allowed_paths:
+        allowed_paths = [*allowed_paths, "/api/tasks/*/logs"]
 
     async with ReadonlyCrawlabClient(
         base_url=base_url,

@@ -1,0 +1,31 @@
+{
+  "_id": "ID_796",
+  "spider_id": "SPIDER_ID_031",
+  "status": "finished",
+  "node_id": "NODE_ID_007",
+  "cmd": "python superpharm.py",
+  "param": "-as 80",
+  "error": "",
+  "pid": 127283,
+  "schedule_id": "SCHEDULE_ID_014",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "66fadd39116add6c8f0cdaaa"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_796",
+    "create_ts": "2026-03-21T05:20:00.007Z",
+    "start_ts": "2026-03-21T05:20:02.607Z",
+    "end_ts": "2026-03-21T06:33:37.032Z",
+    "wait_duration": 2600,
+    "runtime_duration": 4414425,
+    "total_duration": 4417025,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "create_ts": "2026-03-21T05:20:00.004Z"
+}

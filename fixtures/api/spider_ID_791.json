@@ -1,0 +1,30 @@
+{
+  "_id": "ID_791",
+  "name": "superpharm.pl",
+  "type": "",
+  "col_id": "66a25de9116add6c8f235761",
+  "col_name": "results_superpharm.pl",
+  "data_source_id": "000000000000000000000000",
+  "description": "",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "66ab652f116add6c8f4081f9"
+  ],
+  "stat": {
+    "_id": "ID_791",
+    "last_task_id": "69e31480a2fc400a16fafe43",
+    "tasks": 1278,
+    "results": 1845443,
+    "wait_duration": 31379030,
+    "runtime_duration": 12756518,
+    "total_duration": 12787806,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python superpharm.py",
+  "param": "-as 80",
+  "priority": 5,
+  "incremental_sync": false
+}

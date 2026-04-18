@@ -428,3 +428,99 @@ Related files:
 - docs/domain/status-parser-contract.md
 - src/cl_monitoring/domain/models.py
 - src/cl_monitoring/domain/normalizers.py
+
+---
+
+## 2026-04-18 — Commit redacted fixture pack, keep only raw live artifacts local
+
+Status: Accepted
+
+Context:
+`T2` needs an offline golden corpus in-repo, but the repository ignore rules
+still masked both `fixtures/` and `fixtures_raw_local/`. That blocked pushing
+the redacted fixture pack even though project rules require committed redacted
+fixtures and gitignored raw live payloads.
+
+Decision:
+Track `fixtures/` in git and keep only `fixtures_raw_local/` gitignored.
+
+Why:
+Offline parser/status work is only reproducible if anonymized fixtures and
+golden expectations travel with the repository. Raw live payloads still stay
+local because they may contain sensitive operational data.
+
+Consequences:
+- `fixtures/` becomes part of normal review and commit flow.
+- `fixtures_raw_local/` remains the only local-only fixture workspace.
+- Fixture pack changes are now pushable without force-adding ignored files.
+
+Related files:
+- .gitignore
+- fixtures/
+- fixtures_raw_local/
+
+---
+
+## 2026-04-18 — Results fixtures use `/api/results/{col_id}` and preserve empty `_tid` responses
+
+Status: Accepted
+
+Context:
+During `T2` live collection, using spider `col_name` for results fixtures was
+unsafe because names may contain slashes and do not match the approved
+readonly path surface reliably. The same pass also showed that `_tid` queries
+can legitimately return an empty result set, which is itself a required test
+scenario.
+
+Decision:
+Collect results fixtures via `/api/results/{col_id}` using spider `col_id`,
+and persist empty `_tid` responses as explicit `[]` fixtures under
+`fixtures/api/results_<task_id>.json`.
+
+Why:
+`col_id` matches the approved GET surface and is stable for allowlist-safe
+collection. Empty `_tid` responses are domain-relevant truth and must remain
+visible in the offline corpus instead of being silently skipped.
+
+Consequences:
+- Results fixtures live alongside other API fixtures in `fixtures/api/`.
+- `results_by_tid_empty` is testable offline from committed fixtures.
+- Collector no longer depends on collection-name path quirks.
+
+Related files:
+- src/tools/collect_fixtures.py
+- fixtures/api/results_*.json
+- fixtures/manifest.md
+
+---
+
+## 2026-04-18 — Golden expected log fixtures freeze the shared RunSummary subset
+
+Status: Accepted
+
+Context:
+Before `T2`, `fixtures/expected/*.yaml` were draft skeletons in an ad hoc log
+classification shape. `T1` had already frozen the shared parser contract
+around `run_result`, `confidence`, `reason_code`, `evidence`, and `counters`.
+
+Decision:
+Generate and maintain `fixtures/expected/*.yaml` in the shared RunSummary-like
+shape: `run_result`, `confidence`, `reason_code`, `counters`, `evidence`.
+Keep this generation in `src/tools/classify_logs.py` as collector-side corpus
+preparation, not as the runtime parser layer.
+
+Why:
+Offline parser work needs golden fixtures that already speak the same contract
+as later runtime code. Keeping this logic in tooling preserves the boundary
+between fixture preparation and production parser implementation.
+
+Consequences:
+- Every log fixture now has a nearby contract-shaped expected YAML.
+- Fixture tests can validate parser-facing golden data without live access.
+- `src/tools/*` remains tooling-only and does not become runtime parser code.
+
+Related files:
+- src/tools/classify_logs.py
+- src/tools/collect_fixtures.py
+- fixtures/expected/*.yaml
+- tests/test_fixture_classifier.py

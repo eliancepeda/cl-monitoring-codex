@@ -1,0 +1,30 @@
+{
+  "_id": "ID_740",
+  "name": "board-game.co.uk",
+  "type": "",
+  "col_id": "679cdacb99197fd1a1707d75",
+  "col_name": "results_board-game.co.uk",
+  "data_source_id": "000000000000000000000000",
+  "description": "",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "672b7043116add6c8fbf5549"
+  ],
+  "stat": {
+    "_id": "ID_740",
+    "last_task_id": "69e30274a2fc400a16fafe27",
+    "tasks": 988,
+    "results": 0,
+    "wait_duration": 3080330,
+    "runtime_duration": 16455368,
+    "total_duration": 16458410,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python board_new.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

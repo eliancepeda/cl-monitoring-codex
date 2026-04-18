@@ -160,6 +160,21 @@
 - у `T4` и `T5` есть один зафиксированный контракт
 - больше не нужно спорить о shape выходных структур
 
+Текущий статус:
+
+- `T1` выполнен и gate закрыт.
+- Создан `docs/domain/status-parser-contract.md`.
+- В `DECISIONS.md` добавлена decision entry про freeze shared
+  status/parser contract перед параллельными `T4` и `T5`.
+- Зафиксированы минимальные shapes `RunSummary` и `ScheduleHealth`.
+- Зафиксированы shared поля `run_result/health`, `confidence`,
+  `reason_code`, `evidence`, `counters`.
+- Отдельно зафиксированы invariants для manual runs по zero
+  `schedule_id`, live runtime для `running` задач и observed fire time
+  вместо blind cron truth.
+- До `T3` общий runtime type layer ещё не считается реализованным в коде,
+  но ambiguity для `T4`/`T5` на уровне contract снята.
+
 ### `T2` — Довести fixture pack и golden corpus
 
 **Цель:** сделать parser/status разработку полностью offline.
@@ -190,6 +205,30 @@
 
 - parser и status engine можно разрабатывать без live token
 - golden expectations лежат рядом с log fixtures
+
+Текущий статус:
+
+- `T2` выполнен по collector/fixture-pack части, но gate закрыт не до конца.
+- Проверен существующий collector CLI: live `--dry-run` и live `--collect`
+  запускались только через `python -m tools.collect_fixtures`, без ad hoc
+  обходов.
+- Collector-side tooling выровнен под правила проекта:
+  manual detection в tooling снова опирается только на zero
+  `schedule_id`, `expected/*.yaml` перешли на shared
+  `run_result/confidence/reason_code/counters/evidence`, а results fixtures
+  сохраняются как API fixtures по `/api/results/{col_id}`.
+- Собран и выровнен offline corpus в `fixtures/api`, `fixtures/logs`,
+  `fixtures/expected`, `fixtures/manifest.md`; redacted fixtures готовы для
+  commit, raw live artifacts остаются только в `fixtures_raw_local/`.
+- Offline corpus теперь покрывает минимальные сценарии:
+  `running`, `error`, `success without summary`, `success with put_to_parser`,
+  `partial_success`, `cancelled`, `429 ban`, `manual run`,
+  `schedule history`, `results_by_tid_empty`.
+- Fixture-related tests и полный `pytest` проходят (`115 passed` в таргетном
+  наборе и `156 passed` по всему repo на момент завершения `T2`).
+- Оставшийся blocker для полного closure `T2`: в текущем live scope пока не
+  найден anonymized fixture с явным `auto_stop` marker, поэтому сценарий
+  `auto_stop` ещё не закрыт как corpus gate и требует отдельного capture.
 
 ### `T3` — Зафиксировать shared runtime types
 

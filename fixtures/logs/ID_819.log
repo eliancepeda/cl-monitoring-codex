@@ -1,0 +1,670 @@
+INFO:HOST_002:Arguments(source_id=None, source_name=None, source_tags=['default'], product_ids=[], auto_stop=200, delay_step=1.0, start_page=2, finish_page=0, nprice_d=30, user_agent_parameters=0, proxy_country='us', debug=False, start_product_id=0, test=False, custom_arg='')
+INFO:HOST_002:Is inside crawlab: True
+INFO:HOST_003:CrawlabClient started. Task pointer: 20d08adb97be47368bdbf73cdb7b920a
+INFO:HOST_003:Task is found
+INFO:HOST_002:Start profile (HOST_026) [/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py]
+INFO:HOST_004:get_products.php page: 2, per page: 500
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 9961734, Url: https://HOST_025/de/p/nike-socken-u-nk-everyday-cush-crew-3pr-black-white/HOST_029)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 9961734, SourceUrlId: 11545756, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 9961735, Url: https://HOST_025/de/p/nike-socken-everyday-lightweight-training-crew-socks-3-pairs-white-black/HOST_030)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 9961735, SourceUrlId: 11545757, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+INFO:HOST_002:(Id: 9961776, SourceUrlId: 11545798, Page: 2): {"price": 110.95, "old_price": 0, "variations": [{"variation": "S", "price": 110.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961787, SourceUrlId: 11545811, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9961792, SourceUrlId: 11545816, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961822, SourceUrlId: 11545846, Page: 2): {"price": 87.95, "old_price": 0, "variations": [{"variation": "L", "price": 87.95, "old_price": 0}, {"variation": "XL", "price": 87.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961829, SourceUrlId: 11545853, Page: 2): {"price": 55.95, "old_price": 0, "variations": [{"variation": "S", "price": 55.95, "old_price": 0}, {"variation": "M", "price": 55.95, "old_price": 0}, {"variation": "L", "price": 55.95, "old_price": 0}, {"variation": "2XL", "price": 55.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961830, SourceUrlId: 11545854, Page: 2): {"price": 133.95, "old_price": 0, "variations": [{"variation": "XS", "price": 133.95, "old_price": 0}, {"variation": "S", "price": 133.95, "old_price": 0}, {"variation": "M", "price": 133.95, "old_price": 0}, {"variation": "L", "price": 133.95, "old_price": 0}, {"variation": "XL", "price": 133.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961839, SourceUrlId: 11545863, Page: 2): {"price": 55.95, "old_price": 0, "variations": [{"variation": "S", "price": 55.95, "old_price": 0}, {"variation": "M", "price": 55.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961854, SourceUrlId: 11545878, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "S", "price": 41.95, "old_price": 0}, {"variation": "M", "price": 41.95, "old_price": 0}, {"variation": "L", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961871, SourceUrlId: 11545895, Page: 2): {"price": 65.95, "old_price": 0, "variations": [{"variation": "S", "price": 65.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961872, SourceUrlId: 11545896, Page: 2): {"price": 48.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 48.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961885, SourceUrlId: 11545909, Page: 2): {"price": 42.95, "old_price": 0, "variations": [{"variation": "M", "price": 42.95, "old_price": 0}, {"variation": "L", "price": 42.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961887, SourceUrlId: 11545911, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961900, SourceUrlId: 11545924, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "S", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961947, SourceUrlId: 11545971, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "XL", "price": 74.95, "old_price": 0}, {"variation": "2XL", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961948, SourceUrlId: 11545972, Page: 2): {"price": 87.95, "old_price": 0, "variations": [{"variation": "XL", "price": 87.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9961973, SourceUrlId: 11545998, Page: 2): {"price": 64.95, "old_price": 0, "variations": [{"variation": "XS", "price": 64.95, "old_price": 0}, {"variation": "XL", "price": 64.95, "old_price": 0}, {"variation": "2XL", "price": 64.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962012, SourceUrlId: 11546042, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962070, SourceUrlId: 11546100, Page: 2): {"price": 62.95, "old_price": 0, "variations": [{"variation": "XL", "price": 62.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962085, SourceUrlId: 11546115, Page: 2): {"price": 84.95, "old_price": 0, "variations": [{"variation": "48", "price": 84.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962120, SourceUrlId: 11546150, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "L", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962124, SourceUrlId: 11546154, Page: 2): {"price": 30.95, "old_price": 0, "variations": [{"variation": "S", "price": 30.95, "old_price": 0}, {"variation": "M", "price": 30.95, "old_price": 0}, {"variation": "2XL", "price": 30.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962168, SourceUrlId: 11546198, Page: 2): {"price": 90.95, "old_price": 0, "variations": [{"variation": "36", "price": 90.95, "old_price": 0}, {"variation": "37", "price": 90.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962170, SourceUrlId: 11546200, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962175, SourceUrlId: 11546205, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "S", "price": 31.95, "old_price": 0}, {"variation": "M", "price": 31.95, "old_price": 0}, {"variation": "L", "price": 31.95, "old_price": 0}, {"variation": "XL", "price": 31.95, "old_price": 0}, {"variation": "2XL", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962177, SourceUrlId: 11546207, Page: 2): {"price": 71.95, "old_price": 0, "variations": [{"variation": "44", "price": 71.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962182, SourceUrlId: 11546212, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962199, SourceUrlId: 11546229, Page: 2): {"price": 70.95, "old_price": 0, "variations": [{"variation": "51", "price": 70.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962216, SourceUrlId: 11546247, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "S", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962217, SourceUrlId: 11546248, Page: 2): {"price": 47.95, "old_price": 0, "variations": [{"variation": "S", "price": 47.95, "old_price": 0}, {"variation": "M", "price": 47.95, "old_price": 0}, {"variation": "L", "price": 47.95, "old_price": 0}, {"variation": "XL", "price": 47.95, "old_price": 0}, {"variation": "2XL", "price": 47.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962277, SourceUrlId: 11546325, Page: 2): {"price": 61.95, "old_price": 0, "variations": [{"variation": "37,5", "price": 61.95, "old_price": 0}, {"variation": "40.5", "price": 61.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962305, SourceUrlId: 11546356, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962314, SourceUrlId: 11546365, Page: 2): {"price": 65.95, "old_price": 0, "variations": [{"variation": "37", "price": 65.95, "old_price": 0}, {"variation": "39", "price": 65.95, "old_price": 0}, {"variation": "40", "price": 65.95, "old_price": 0}, {"variation": "40.5", "price": 65.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962320, SourceUrlId: 11546372, Page: 2): {"price": 9.95, "old_price": 0, "variations": [{"variation": "47-49", "price": 9.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962322, SourceUrlId: 11546374, Page: 2): {"price": 9.95, "old_price": 0, "variations": [{"variation": "35-38", "price": 9.95, "old_price": 0}, {"variation": "39-42", "price": 9.95, "old_price": 0}, {"variation": "43-46", "price": 9.95, "old_price": 0}, {"variation": "47-49", "price": 9.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962335, SourceUrlId: 11546387, Page: 2): {"price": 51.95, "old_price": 0, "variations": [{"variation": "S", "price": 51.95, "old_price": 0}, {"variation": "M", "price": 51.95, "old_price": 0}, {"variation": "L", "price": 51.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962340, SourceUrlId: 11546392, Page: 2): {"price": 68.95, "old_price": 0, "variations": [{"variation": "S", "price": 68.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962364, SourceUrlId: 11546415, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "S", "price": 38.96, "old_price": 0}, {"variation": "L", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962393, SourceUrlId: 11546444, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962424, SourceUrlId: 11546475, Page: 2): {"price": 62.95, "old_price": 0, "variations": [{"variation": "36", "price": 62.95, "old_price": 0}, {"variation": "36.5", "price": 62.95, "old_price": 0}, {"variation": "37.5", "price": 62.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962465, SourceUrlId: 11546516, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "S", "price": 59.95, "old_price": 0}, {"variation": "M", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962475, SourceUrlId: 11546526, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "XL", "price": 22.95, "old_price": 0}, {"variation": "2XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962476, SourceUrlId: 11546527, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "2XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962478, SourceUrlId: 11546529, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "L", "price": 19.95, "old_price": 0}, {"variation": "XL", "price": 19.95, "old_price": 0}, {"variation": "2XL", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962480, SourceUrlId: 11546531, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "M", "price": 19.95, "old_price": 0}, {"variation": "L", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962481, SourceUrlId: 11546532, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962482, SourceUrlId: 11546533, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962483, SourceUrlId: 11546534, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962488, SourceUrlId: 11546539, Page: 2): {"price": 49.95, "old_price": 0, "variations": [{"variation": "S", "price": 49.95, "old_price": 0}, {"variation": "M", "price": 49.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962527, SourceUrlId: 11546579, Page: 2): {"price": 11.95, "old_price": 0, "variations": [{"variation": "M", "price": 11.95, "old_price": 0}, {"variation": "L", "price": 11.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962551, SourceUrlId: 11546603, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962580, SourceUrlId: 11546633, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "32", "price": 59.95, "old_price": 0}, {"variation": "34", "price": 59.95, "old_price": 0}, {"variation": "36", "price": 59.95, "old_price": 0}, {"variation": "38", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962590, SourceUrlId: 11546643, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "39", "price": 27.95, "old_price": 0}, {"variation": "40.5", "price": 27.95, "old_price": 0}, {"variation": "42", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962611, SourceUrlId: 11546664, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962628, SourceUrlId: 11546683, Page: 2): {"price": 159.95, "old_price": 0, "variations": [{"variation": "M", "price": 159.95, "old_price": 0}, {"variation": "XL", "price": 159.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962635, SourceUrlId: 11546690, Page: 2): {"price": 209.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 209.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962639, SourceUrlId: 11546694, Page: 2): {"price": 88.95, "old_price": 0, "variations": [{"variation": "S", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962640, SourceUrlId: 11546695, Page: 2): {"price": 159.95, "old_price": 0, "variations": [{"variation": "S", "price": 159.95, "old_price": 0}, {"variation": "2XL", "price": 159.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962642, SourceUrlId: 11546697, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962643, SourceUrlId: 11546698, Page: 2): {"price": 122.95, "old_price": 0, "variations": [{"variation": "XL", "price": 122.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962660, SourceUrlId: 11546715, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962675, SourceUrlId: 11546732, Page: 2): {"price": 107.95, "old_price": 0, "variations": [{"variation": "40", "price": 107.95, "old_price": 0}, {"variation": "41.5", "price": 107.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962676, SourceUrlId: 11546733, Page: 2): {"price": 107.95, "old_price": 0, "variations": [{"variation": "7.5", "price": 107.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962677, SourceUrlId: 11546734, Page: 2): {"price": 117.95, "old_price": 0, "variations": [{"variation": "40", "price": 117.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962679, SourceUrlId: 11546736, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "10", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962683, SourceUrlId: 11546740, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "40", "price": 89.95, "old_price": 0}, {"variation": "41", "price": 89.95, "old_price": 0}, {"variation": "41.5", "price": 89.95, "old_price": 0}, {"variation": "42", "price": 89.95, "old_price": 0}, {"variation": "43", "price": 89.95, "old_price": 0}, {"variation": "44", "price": 89.95, "old_price": 0}, {"variation": "44.5", "price": 89.95, "old_price": 0}, {"variation": "45", "price": 89.95, "old_price": 0}, {"variation": "45.5", "price": 89.95, "old_price": 0}, {"variation": "46", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962690, SourceUrlId: 11546747, Page: 2): {"price": 92.95, "old_price": 0, "variations": [{"variation": "48", "price": 92.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962691, SourceUrlId: 11546748, Page: 2): {"price": 107.95, "old_price": 0, "variations": [{"variation": "42.5", "price": 107.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962692, SourceUrlId: 11546749, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "47.5", "price": 95.95, "old_price": 0}, {"variation": "49.5", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962696, SourceUrlId: 11546753, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "48", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962699, SourceUrlId: 11546756, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "41", "price": 89.95, "old_price": 0}, {"variation": "42,5", "price": 89.95, "old_price": 0}, {"variation": "44,5", "price": 89.95, "old_price": 0}, {"variation": "47", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962700, SourceUrlId: 11546757, Page: 2): {"price": 75.95, "old_price": 0, "variations": [{"variation": "38", "price": 75.95, "old_price": 0}, {"variation": "42", "price": 75.95, "old_price": 0}, {"variation": "42.5", "price": 75.95, "old_price": 0}, {"variation": "43", "price": 75.95, "old_price": 0}, {"variation": "44", "price": 75.95, "old_price": 0}, {"variation": "44.5", "price": 75.95, "old_price": 0}, {"variation": "45", "price": 75.95, "old_price": 0}, {"variation": "45.5", "price": 75.95, "old_price": 0}, {"variation": "46", "price": 75.95, "old_price": 0}, {"variation": "47", "price": 75.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962702, SourceUrlId: 11546759, Page: 2): {"price": 106.95, "old_price": 0, "variations": [{"variation": "45.5", "price": 106.95, "old_price": 0}, {"variation": "46", "price": 106.95, "old_price": 0}, {"variation": "47", "price": 106.95, "old_price": 0}, {"variation": "47.5", "price": 106.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962703, SourceUrlId: 11546760, Page: 2): {"price": 100.95, "old_price": 0, "variations": [{"variation": "42", "price": 100.95, "old_price": 0}, {"variation": "42.5", "price": 100.95, "old_price": 0}, {"variation": "44", "price": 100.95, "old_price": 0}, {"variation": "44.5", "price": 100.95, "old_price": 0}, {"variation": "45.5", "price": 100.95, "old_price": 0}, {"variation": "47", "price": 100.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962705, SourceUrlId: 11546762, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962723, SourceUrlId: 11546782, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "M", "price": 74.95, "old_price": 0}, {"variation": "XL", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962724, SourceUrlId: 11546783, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962725, SourceUrlId: 11546784, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}, {"variation": "XL", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962726, SourceUrlId: 11546785, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "S", "price": 41.95, "old_price": 0}, {"variation": "M", "price": 41.95, "old_price": 0}, {"variation": "XL", "price": 41.95, "old_price": 0}, {"variation": "2XL", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962727, SourceUrlId: 11546786, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962728, SourceUrlId: 11546787, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}, {"variation": "XL", "price": 35.96, "old_price": 0}, {"variation": "2XL", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962731, SourceUrlId: 11546790, Page: 2): {"price": 76.95, "old_price": 0, "variations": [{"variation": "S", "price": 76.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962733, SourceUrlId: 11546792, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}, {"variation": "XL", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962736, SourceUrlId: 11546795, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "S", "price": 38.96, "old_price": 0}, {"variation": "M", "price": 38.96, "old_price": 0}, {"variation": "XL", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962737, SourceUrlId: 11546796, Page: 2): {"price": 51.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 51.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962738, SourceUrlId: 11546797, Page: 2): {"price": 50.95, "old_price": 0, "variations": [{"variation": "S", "price": 50.95, "old_price": 0}, {"variation": "M", "price": 50.95, "old_price": 0}, {"variation": "L", "price": 50.95, "old_price": 0}, {"variation": "XL", "price": 50.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962739, SourceUrlId: 11546798, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "S", "price": 41.95, "old_price": 0}, {"variation": "XL", "price": 41.95, "old_price": 0}, {"variation": "2XL", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962741, SourceUrlId: 11546800, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962744, SourceUrlId: 11546803, Page: 2): {"price": 21.95, "old_price": 0, "variations": [{"variation": "S", "price": 21.95, "old_price": 0}, {"variation": "M", "price": 21.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962748, SourceUrlId: 11546807, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "S", "price": 41.95, "old_price": 0}, {"variation": "M", "price": 41.95, "old_price": 0}, {"variation": "L", "price": 41.95, "old_price": 0}, {"variation": "XL", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962750, SourceUrlId: 11546815, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "S", "price": 38.96, "old_price": 0}, {"variation": "L", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962754, SourceUrlId: 11546819, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "S", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962761, SourceUrlId: 11546826, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962766, SourceUrlId: 11546831, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962773, SourceUrlId: 11546840, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "S", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962774, SourceUrlId: 11546841, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}, {"variation": "2XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962775, SourceUrlId: 11546842, Page: 2): {"price": 20.95, "old_price": 0, "variations": [{"variation": "S", "price": 20.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962777, SourceUrlId: 11546844, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "S", "price": 19.95, "old_price": 0}, {"variation": "M", "price": 19.95, "old_price": 0}, {"variation": "L", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962778, SourceUrlId: 11546845, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "2XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962779, SourceUrlId: 11546846, Page: 2): {"price": 20.95, "old_price": 0, "variations": [{"variation": "S", "price": 20.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962780, SourceUrlId: 11546847, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962786, SourceUrlId: 11546853, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962801, SourceUrlId: 11546868, Page: 2): {"price": 57.95, "old_price": 0, "variations": [{"variation": "S", "price": 57.95, "old_price": 0}, {"variation": "M", "price": 57.95, "old_price": 0}, {"variation": "L", "price": 57.95, "old_price": 0}, {"variation": "XL", "price": 57.95, "old_price": 0}, {"variation": "2XL", "price": 57.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962802, SourceUrlId: 11546869, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}, {"variation": "XL", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}, {"variation": "3XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962803, SourceUrlId: 11546870, Page: 2): {"price": 52.95, "old_price": 0, "variations": [{"variation": "S", "price": 52.95, "old_price": 0}, {"variation": "M", "price": 52.95, "old_price": 0}, {"variation": "L", "price": 52.95, "old_price": 0}, {"variation": "XL", "price": 52.95, "old_price": 0}, {"variation": "2XL", "price": 52.95, "old_price": 0}, {"variation": "3XL", "price": 52.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962806, SourceUrlId: 11546873, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}, {"variation": "XL", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962813, SourceUrlId: 11546880, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962814, SourceUrlId: 11546881, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "S", "price": 35.96, "old_price": 0}, {"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962815, SourceUrlId: 11546882, Page: 2): {"price": 54.95, "old_price": 0, "variations": [{"variation": "L", "price": 54.95, "old_price": 0}, {"variation": "2XL", "price": 54.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962821, SourceUrlId: 11546888, Page: 2): {"price": 10.95, "old_price": 0, "variations": [{"variation": "XS", "price": 10.95, "old_price": 0}, {"variation": "S", "price": 10.95, "old_price": 0}, {"variation": "M", "price": 10.95, "old_price": 0}, {"variation": "L", "price": 10.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962825, SourceUrlId: 11546894, Page: 2): {"price": 7.95, "old_price": 0, "variations": [{"variation": "S", "price": 7.95, "old_price": 0}, {"variation": "M", "price": 7.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962827, SourceUrlId: 11546896, Page: 2): {"price": 7.95, "old_price": 0, "variations": [{"variation": "S", "price": 7.95, "old_price": 0}, {"variation": "M", "price": 7.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962830, SourceUrlId: 11546899, Page: 2): {"price": 53.95, "old_price": 0, "variations": [{"variation": "40", "price": 53.95, "old_price": 0}, {"variation": "41", "price": 53.95, "old_price": 0}, {"variation": "42", "price": 53.95, "old_price": 0}, {"variation": "43", "price": 53.95, "old_price": 0}, {"variation": "45", "price": 53.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962833, SourceUrlId: 11546902, Page: 2): {"price": 45.95, "old_price": 0, "variations": [{"variation": "36", "price": 45.95, "old_price": 0}, {"variation": "38", "price": 45.95, "old_price": 0}, {"variation": "38.5", "price": 45.95, "old_price": 0}, {"variation": "39", "price": 45.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962834, SourceUrlId: 11546903, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962839, SourceUrlId: 11546908, Page: 2): {"price": 56.95, "old_price": 0, "variations": [{"variation": "40.5", "price": 56.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962841, SourceUrlId: 11546910, Page: 2): {"price": 57.95, "old_price": 0, "variations": [{"variation": "41", "price": 57.95, "old_price": 0}, {"variation": "42", "price": 57.95, "old_price": 0}, {"variation": "43", "price": 57.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962843, SourceUrlId: 11546912, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962847, SourceUrlId: 11546916, Page: 2): {"price": 47.95, "old_price": 0, "variations": [{"variation": "38", "price": 47.95, "old_price": 0}, {"variation": "38.5", "price": 47.95, "old_price": 0}, {"variation": "39", "price": 47.95, "old_price": 0}, {"variation": "40", "price": 47.95, "old_price": 0}, {"variation": "40.5", "price": 47.95, "old_price": 0}, {"variation": "41", "price": 47.95, "old_price": 0}, {"variation": "42.5", "price": 47.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962854, SourceUrlId: 11546923, Page: 2): {"price": 51.95, "old_price": 0, "variations": [{"variation": "40", "price": 51.95, "old_price": 0}, {"variation": "40.5", "price": 51.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962867, SourceUrlId: 11546940, Page: 2): {"price": 52.95, "old_price": 0, "variations": [{"variation": "38.5", "price": 52.95, "old_price": 0}, {"variation": "39", "price": 52.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962869, SourceUrlId: 11546942, Page: 2): {"price": 54.95, "old_price": 0, "variations": [{"variation": "36", "price": 54.95, "old_price": 0}, {"variation": "37", "price": 54.95, "old_price": 0}, {"variation": "38", "price": 54.95, "old_price": 0}, {"variation": "38.5", "price": 54.95, "old_price": 0}, {"variation": "39", "price": 54.95, "old_price": 0}, {"variation": "40", "price": 54.95, "old_price": 0}, {"variation": "40.5", "price": 54.95, "old_price": 0}, {"variation": "41", "price": 54.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962876, SourceUrlId: 11546949, Page: 2): {"price": 57.95, "old_price": 0, "variations": [{"variation": "38", "price": 57.95, "old_price": 0}, {"variation": "38.5", "price": 57.95, "old_price": 0}, {"variation": "39", "price": 57.95, "old_price": 0}, {"variation": "40", "price": 57.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962879, SourceUrlId: 11546955, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 9962915, SourceUrlId: 11546991, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "43.5", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962917, SourceUrlId: 11546993, Page: 2): {"price": 109.95, "old_price": 0, "variations": [{"variation": "10", "price": 109.95, "old_price": 0}, {"variation": "8", "price": 109.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 9962924, SourceUrlId: 11547000, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552000, SourceUrlId: 21928580, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "70AB", "price": 29.95, "old_price": 0}, {"variation": "70C", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552003, SourceUrlId: 21928583, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "S", "price": 39.96, "old_price": 0}, {"variation": "M", "price": 39.96, "old_price": 0}, {"variation": "L", "price": 39.96, "old_price": 0}, {"variation": "XL", "price": 39.96, "old_price": 0}, {"variation": "2XL", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552006, SourceUrlId: 21928592, Page: 2): {"price": 33.96, "old_price": 0, "variations": [{"variation": "2XS", "price": 33.96, "old_price": 0}, {"variation": "XS", "price": 33.96, "old_price": 0}, {"variation": "S", "price": 33.96, "old_price": 0}, {"variation": "M", "price": 33.96, "old_price": 0}, {"variation": "L", "price": 33.96, "old_price": 0}, {"variation": "XL", "price": 33.96, "old_price": 0}, {"variation": "2XL", "price": 33.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552012, SourceUrlId: 21928598, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "S", "price": 39.96, "old_price": 0}, {"variation": "M", "price": 39.96, "old_price": 0}, {"variation": "L", "price": 39.96, "old_price": 0}, {"variation": "XL", "price": 39.96, "old_price": 0}, {"variation": "2XL", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552015, SourceUrlId: 21928602, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552016, SourceUrlId: 21928603, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "XS", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552017, SourceUrlId: 21928604, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "XL", "price": 39.96, "old_price": 0}, {"variation": "2XL", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552026, SourceUrlId: 21928613, Page: 2): {"price": 44.95, "old_price": 0, "variations": [{"variation": "XS", "price": 44.95, "old_price": 0}, {"variation": "L", "price": 44.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552029, SourceUrlId: 21928616, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552031, SourceUrlId: 21928618, Page: 2): {"price": 63.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 63.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552035, SourceUrlId: 21928622, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "XS", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552039, SourceUrlId: 21928626, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "S", "price": 25.95, "old_price": 0}, {"variation": "2XL", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552040, SourceUrlId: 21928627, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552045, SourceUrlId: 21928632, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552047, SourceUrlId: 21928634, Page: 2): {"price": 75.95, "old_price": 0, "variations": [{"variation": "34", "price": 75.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552051, SourceUrlId: 21928638, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "XL", "price": 22.95, "old_price": 0}, {"variation": "2XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552061, SourceUrlId: 21928648, Page: 2): {"price": 62.95, "old_price": 0, "variations": [{"variation": "30", "price": 62.95, "old_price": 0}, {"variation": "31", "price": 62.95, "old_price": 0}, {"variation": "32", "price": 62.95, "old_price": 0}, {"variation": "33", "price": 62.95, "old_price": 0}, {"variation": "34", "price": 62.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552067, SourceUrlId: 21928654, Page: 2): {"price": 30.95, "old_price": 0, "variations": [{"variation": "S", "price": 30.95, "old_price": 0}, {"variation": "M", "price": 30.95, "old_price": 0}, {"variation": "L", "price": 30.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552072, SourceUrlId: 21928660, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "30", "price": 38.96, "old_price": 0}, {"variation": "31", "price": 38.96, "old_price": 0}, {"variation": "32", "price": 38.96, "old_price": 0}, {"variation": "33", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552073, SourceUrlId: 21928661, Page: 2): {"price": 21.95, "old_price": 0, "variations": [{"variation": "XS", "price": 21.95, "old_price": 0}, {"variation": "M", "price": 21.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552077, SourceUrlId: 21928665, Page: 2): {"price": 9.95, "old_price": 0, "variations": [{"variation": "S", "price": 9.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552078, SourceUrlId: 21928666, Page: 2): {"price": 87.95, "old_price": 0, "variations": [{"variation": "S", "price": 87.95, "old_price": 0}, {"variation": "M", "price": 87.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552082, SourceUrlId: 21928670, Page: 2): {"price": 45.95, "old_price": 0, "variations": [{"variation": "S", "price": 45.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552085, SourceUrlId: 21928673, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "S", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552086, SourceUrlId: 21928674, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "XL", "price": 31.95, "old_price": 0}, {"variation": "2XL", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552091, SourceUrlId: 21928679, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}, {"variation": "2XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552096, SourceUrlId: 21928684, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552101, SourceUrlId: 21928689, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "S", "price": 32.96, "old_price": 0}, {"variation": "2XL", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552102, SourceUrlId: 21928690, Page: 2): {"price": 128.95, "old_price": 0, "variations": [{"variation": "S", "price": 128.95, "old_price": 0}, {"variation": "M", "price": 128.95, "old_price": 0}, {"variation": "L", "price": 128.95, "old_price": 0}, {"variation": "XL", "price": 128.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552103, SourceUrlId: 21928691, Page: 2): {"price": 52.95, "old_price": 0, "variations": [{"variation": "M", "price": 52.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552110, SourceUrlId: 21928698, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "S", "price": 74.95, "old_price": 0}, {"variation": "M", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552112, SourceUrlId: 21928700, Page: 2): {"price": 83.95, "old_price": 0, "variations": [{"variation": "S", "price": 83.95, "old_price": 0}, {"variation": "M", "price": 83.95, "old_price": 0}, {"variation": "L", "price": 83.95, "old_price": 0}, {"variation": "XL", "price": 83.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552120, SourceUrlId: 21928708, Page: 2): {"price": 83.95, "old_price": 0, "variations": [{"variation": "S", "price": 83.95, "old_price": 0}, {"variation": "L", "price": 83.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552121, SourceUrlId: 21928709, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "XL", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552122, SourceUrlId: 21928710, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "S", "price": 19.95, "old_price": 0}, {"variation": "M", "price": 19.95, "old_price": 0}, {"variation": "XL", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552124, SourceUrlId: 21928712, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552125, SourceUrlId: 21928713, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "44", "price": 41.95, "old_price": 0}, {"variation": "48", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552128, SourceUrlId: 21928716, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552130, SourceUrlId: 21928718, Page: 2): {"price": 66.95, "old_price": 0, "variations": [{"variation": "S", "price": 66.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552133, SourceUrlId: 21928721, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552134, SourceUrlId: 21928722, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "XL", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552135, SourceUrlId: 21928723, Page: 2): {"price": 21.95, "old_price": 0, "variations": [{"variation": "XS", "price": 21.95, "old_price": 0}, {"variation": "S", "price": 21.95, "old_price": 0}, {"variation": "M", "price": 21.95, "old_price": 0}, {"variation": "L", "price": 21.95, "old_price": 0}, {"variation": "XL", "price": 21.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552140, SourceUrlId: 21928724, Page: 2): {"price": 10.95, "old_price": 0, "variations": [{"variation": "XL", "price": 10.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552144, SourceUrlId: 21928727, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "XL", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552148, SourceUrlId: 21928731, Page: 2): {"price": 10.95, "old_price": 0, "variations": [{"variation": "XL", "price": 10.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552157, SourceUrlId: 21928737, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552162, SourceUrlId: 21928742, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552164, SourceUrlId: 21928743, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "S", "price": 12.95, "old_price": 0}, {"variation": "XL", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552166, SourceUrlId: 21928745, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "XS", "price": 22.95, "old_price": 0}, {"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552167, SourceUrlId: 21928746, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552168, SourceUrlId: 21928747, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "S", "price": 12.95, "old_price": 0}, {"variation": "M", "price": 12.95, "old_price": 0}, {"variation": "L", "price": 12.95, "old_price": 0}, {"variation": "XL", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552180, SourceUrlId: 21928754, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552185, SourceUrlId: 21928756, Page: 2): {"price": 9.95, "old_price": 0, "variations": [{"variation": "47-49", "price": 9.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552197, SourceUrlId: 21928765, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "S", "price": 12.95, "old_price": 0}, {"variation": "M", "price": 12.95, "old_price": 0}, {"variation": "L", "price": 12.95, "old_price": 0}, {"variation": "XL", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552201, SourceUrlId: 21928768, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552211, SourceUrlId: 21928776, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552212, SourceUrlId: 21928777, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "XS", "price": 22.95, "old_price": 0}, {"variation": "S", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552222, SourceUrlId: 21928787, Page: 2): {"price": 10.95, "old_price": 0, "variations": [{"variation": "XL", "price": 10.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552249, SourceUrlId: 21928803, Page: 2): {"price": 15.95, "old_price": 0, "variations": [{"variation": "OSFM", "price": 15.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552277, SourceUrlId: 21928818, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552297, SourceUrlId: 21928833, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "OSFM", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552303, SourceUrlId: 21928836, Page: 2): {"price": 48.9, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 48.9, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552330, SourceUrlId: 21928850, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552337, SourceUrlId: 21928857, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "XL", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552340, SourceUrlId: 21928860, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "S", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552344, SourceUrlId: 21928864, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "M", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552346, SourceUrlId: 21928866, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}, {"variation": "XL", "price": 14.95, "old_price": 0}, {"variation": "2XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552347, SourceUrlId: 21928867, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "S", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552350, SourceUrlId: 21928870, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "S", "price": 24.95, "old_price": 0}, {"variation": "M", "price": 24.95, "old_price": 0}, {"variation": "L", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552355, SourceUrlId: 21928875, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "XL", "price": 23.95, "old_price": 0}, {"variation": "2XL", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552368, SourceUrlId: 21928888, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}, {"variation": "2XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552369, SourceUrlId: 21928889, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "XS", "price": 32.96, "old_price": 0}, {"variation": "S", "price": 32.96, "old_price": 0}, {"variation": "M", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552370, SourceUrlId: 21928890, Page: 2): {"price": 42.95, "old_price": 0, "variations": [{"variation": "S", "price": 42.95, "old_price": 0}, {"variation": "M", "price": 42.95, "old_price": 0}, {"variation": "L", "price": 42.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552375, SourceUrlId: 21928895, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}, {"variation": "2XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552380, SourceUrlId: 21928900, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "M", "price": 25.95, "old_price": 0}, {"variation": "XL", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552392, SourceUrlId: 21928912, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552404, SourceUrlId: 21928924, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}, {"variation": "XL", "price": 23.95, "old_price": 0}, {"variation": "2XL", "price": 23.95, "old_price": 0}, {"variation": "3XL", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552418, SourceUrlId: 21928938, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552419, SourceUrlId: 21928939, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}, {"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552421, SourceUrlId: 21928941, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}, {"variation": "XL", "price": 29.95, "old_price": 0}, {"variation": "2XL", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552432, SourceUrlId: 21928952, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552434, SourceUrlId: 21928954, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "M", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552439, SourceUrlId: 21928959, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}, {"variation": "XL", "price": 29.95, "old_price": 0}, {"variation": "2XL", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552444, SourceUrlId: 21928964, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "S", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552445, SourceUrlId: 21928965, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "S", "price": 27.95, "old_price": 0}, {"variation": "M", "price": 27.95, "old_price": 0}, {"variation": "2XL", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552448, SourceUrlId: 21928968, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "M", "price": 22.95, "old_price": 0}, {"variation": "L", "price": 22.95, "old_price": 0}, {"variation": "XL", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552451, SourceUrlId: 21928971, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552452, SourceUrlId: 21928972, Page: 2): {"price": 18.95, "old_price": 0, "variations": [{"variation": "S", "price": 18.95, "old_price": 0}, {"variation": "M", "price": 18.95, "old_price": 0}, {"variation": "L", "price": 18.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552458, SourceUrlId: 21928978, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "S", "price": 27.95, "old_price": 0}, {"variation": "L", "price": 27.95, "old_price": 0}, {"variation": "XL", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552460, SourceUrlId: 21928980, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552461, SourceUrlId: 21928981, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552468, SourceUrlId: 21928988, Page: 2): {"price": 30.95, "old_price": 0, "variations": [{"variation": "XS", "price": 30.95, "old_price": 0}, {"variation": "S", "price": 30.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552471, SourceUrlId: 21928991, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "S", "price": 38.96, "old_price": 0}, {"variation": "M", "price": 38.96, "old_price": 0}, {"variation": "L", "price": 38.96, "old_price": 0}, {"variation": "XL", "price": 38.96, "old_price": 0}, {"variation": "2XL", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552473, SourceUrlId: 21928993, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "S", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552482, SourceUrlId: 21929002, Page: 2): {"price": 19.9, "old_price": 0, "variations": [{"variation": "S", "price": 19.9, "old_price": 0}, {"variation": "M", "price": 19.9, "old_price": 0}, {"variation": "L", "price": 19.9, "old_price": 0}, {"variation": "XL", "price": 19.9, "old_price": 0}, {"variation": "2XL", "price": 19.9, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552493, SourceUrlId: 21929013, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552496, SourceUrlId: 21929016, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}, {"variation": "XL", "price": 14.95, "old_price": 0}, {"variation": "2XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552503, SourceUrlId: 21929023, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}, {"variation": "XL", "price": 29.95, "old_price": 0}, {"variation": "2XL", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552510, SourceUrlId: 21929030, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "M", "price": 24.95, "old_price": 0}, {"variation": "L", "price": 24.95, "old_price": 0}, {"variation": "XL", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552521, SourceUrlId: 21929042, Page: 2): {"price": 66.95, "old_price": 0, "variations": [{"variation": "S", "price": 66.95, "old_price": 0}, {"variation": "M", "price": 66.95, "old_price": 0}, {"variation": "L", "price": 66.95, "old_price": 0}, {"variation": "XL", "price": 66.95, "old_price": 0}, {"variation": "2XL", "price": 66.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552526, SourceUrlId: 21929047, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552532, SourceUrlId: 21929053, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "S", "price": 31.95, "old_price": 0}, {"variation": "L", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552535, SourceUrlId: 21929056, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "S", "price": 25.95, "old_price": 0}, {"variation": "M", "price": 25.95, "old_price": 0}, {"variation": "L", "price": 25.95, "old_price": 0}, {"variation": "XL", "price": 25.95, "old_price": 0}, {"variation": "2XL", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552542, SourceUrlId: 21929063, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552543, SourceUrlId: 21929064, Page: 2): {"price": 20.95, "old_price": 0, "variations": [{"variation": "S", "price": 20.95, "old_price": 0}, {"variation": "M", "price": 20.95, "old_price": 0}, {"variation": "L", "price": 20.95, "old_price": 0}, {"variation": "2XL", "price": 20.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552549, SourceUrlId: 21929070, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}, {"variation": "XL", "price": 14.95, "old_price": 0}, {"variation": "2XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552552, SourceUrlId: 21929073, Page: 2): {"price": 30.95, "old_price": 0, "variations": [{"variation": "S", "price": 30.95, "old_price": 0}, {"variation": "M", "price": 30.95, "old_price": 0}, {"variation": "L", "price": 30.95, "old_price": 0}, {"variation": "XL", "price": 30.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552557, SourceUrlId: 21929078, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "S", "price": 27.95, "old_price": 0}, {"variation": "M", "price": 27.95, "old_price": 0}, {"variation": "L", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552561, SourceUrlId: 21929082, Page: 2): {"price": 15.95, "old_price": 0, "variations": [{"variation": "S", "price": 15.95, "old_price": 0}, {"variation": "M", "price": 15.95, "old_price": 0}, {"variation": "L", "price": 15.95, "old_price": 0}, {"variation": "XL", "price": 15.95, "old_price": 0}, {"variation": "2XL", "price": 15.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552562, SourceUrlId: 21929083, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552566, SourceUrlId: 21929087, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552574, SourceUrlId: 21929095, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552578, SourceUrlId: 21929099, Page: 2): {"price": 72.95, "old_price": 0, "variations": [{"variation": "S", "price": 72.95, "old_price": 0}, {"variation": "M", "price": 72.95, "old_price": 0}, {"variation": "L", "price": 72.95, "old_price": 0}, {"variation": "XL", "price": 72.95, "old_price": 0}, {"variation": "2XL", "price": 72.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552583, SourceUrlId: 21929104, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "S", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552595, SourceUrlId: 21929116, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}, {"variation": "XL", "price": 23.95, "old_price": 0}, {"variation": "2XL", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552597, SourceUrlId: 21929118, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552605, SourceUrlId: 21929126, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552611, SourceUrlId: 21929132, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552615, SourceUrlId: 21929136, Page: 2): {"price": 10.95, "old_price": 0, "variations": [{"variation": "S", "price": 10.95, "old_price": 0}, {"variation": "M", "price": 10.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552619, SourceUrlId: 21929140, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "S", "price": 31.95, "old_price": 0}, {"variation": "M", "price": 31.95, "old_price": 0}, {"variation": "L", "price": 31.95, "old_price": 0}, {"variation": "XL", "price": 31.95, "old_price": 0}, {"variation": "2XL", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552623, SourceUrlId: 21929144, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}, {"variation": "XL", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552626, SourceUrlId: 21929147, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "M", "price": 38.96, "old_price": 0}, {"variation": "L", "price": 38.96, "old_price": 0}, {"variation": "XL", "price": 38.96, "old_price": 0}, {"variation": "2XL", "price": 38.96, "old_price": 0}]}
+INFO:HOST_004:put_to_parser (250 prices)
+INFO:HOST_002:(Id: 19552640, SourceUrlId: 21929161, Page: 2): {"price": 30.95, "old_price": 0, "variations": [{"variation": "S", "price": 30.95, "old_price": 0}, {"variation": "M", "price": 30.95, "old_price": 0}, {"variation": "L", "price": 30.95, "old_price": 0}, {"variation": "XL", "price": 30.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552641, SourceUrlId: 21929162, Page: 2): {"price": 13.95, "old_price": 0, "variations": [{"variation": "XS", "price": 13.95, "old_price": 0}, {"variation": "S", "price": 13.95, "old_price": 0}, {"variation": "M", "price": 13.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552643, SourceUrlId: 21929164, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}, {"variation": "3XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552644, SourceUrlId: 21929165, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "S", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552646, SourceUrlId: 21929167, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}, {"variation": "XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552652, SourceUrlId: 21929173, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552665, SourceUrlId: 21929186, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552685, SourceUrlId: 21929207, Page: 2): {"price": 79.95, "old_price": 0, "variations": [{"variation": "37.5", "price": 79.95, "old_price": 0}, {"variation": "38", "price": 79.95, "old_price": 0}, {"variation": "38.5", "price": 79.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552688, SourceUrlId: 21929210, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "38.5", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552691, SourceUrlId: 21929213, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552709, SourceUrlId: 21929231, Page: 2): {"price": 97.95, "old_price": 0, "variations": [{"variation": "38", "price": 97.95, "old_price": 0}, {"variation": "38.5", "price": 97.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552717, SourceUrlId: 21929239, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552741, SourceUrlId: 21929253, Page: 2): {"price": 16.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 16.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552758, SourceUrlId: 21929260, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552772, SourceUrlId: 21929268, Page: 2): {"price": 36.96, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 36.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552780, SourceUrlId: 21929274, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552787, SourceUrlId: 21929279, Page: 2): {"price": 40.96, "old_price": 0, "variations": [{"variation": "S", "price": 40.96, "old_price": 0}, {"variation": "2XL", "price": 40.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552789, SourceUrlId: 21929281, Page: 2): {"price": 16.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 16.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552799, SourceUrlId: 21929287, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "XS", "price": 46.95, "old_price": 0}, {"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}, {"variation": "XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552800, SourceUrlId: 21929288, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552803, SourceUrlId: 21929291, Page: 2): {"price": 63.95, "old_price": 0, "variations": [{"variation": "XS", "price": 63.95, "old_price": 0}, {"variation": "M", "price": 63.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552813, SourceUrlId: 21929297, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "M", "price": 39.96, "old_price": 0}, {"variation": "L", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552814, SourceUrlId: 21929298, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "L", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552821, SourceUrlId: 21929303, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552836, SourceUrlId: 21929313, Page: 2): {"price": 63.95, "old_price": 0, "variations": [{"variation": "XL", "price": 63.95, "old_price": 0}, {"variation": "2XL", "price": 63.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552842, SourceUrlId: 21929320, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "L", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552855, SourceUrlId: 21929331, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "S", "price": 74.95, "old_price": 0}, {"variation": "M", "price": 74.95, "old_price": 0}, {"variation": "L", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552858, SourceUrlId: 21929334, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552863, SourceUrlId: 21929338, Page: 2): {"price": 61.95, "old_price": 0, "variations": [{"variation": "XL", "price": 61.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552869, SourceUrlId: 21929342, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "S", "price": 23.95, "old_price": 0}, {"variation": "M", "price": 23.95, "old_price": 0}, {"variation": "XL", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552874, SourceUrlId: 21929346, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552885, SourceUrlId: 21929351, Page: 2): {"price": 71.95, "old_price": 0, "variations": [{"variation": "43 2/3", "price": 71.95, "old_price": 0}, {"variation": "44 1/3", "price": 71.95, "old_price": 0}, {"variation": "45", "price": 71.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552886, SourceUrlId: 21929352, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552888, SourceUrlId: 21929354, Page: 2): {"price": 77.95, "old_price": 0, "variations": [{"variation": "43 2/3", "price": 77.95, "old_price": 0}, {"variation": "44 1/3", "price": 77.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552893, SourceUrlId: 21929359, Page: 2): {"price": 84.95, "old_price": 0, "variations": [{"variation": "44", "price": 84.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552896, SourceUrlId: 21929362, Page: 2): {"price": 71.95, "old_price": 0, "variations": [{"variation": "40.5", "price": 71.95, "old_price": 0}, {"variation": "45", "price": 71.95, "old_price": 0}, {"variation": "45.5", "price": 71.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552900, SourceUrlId: 21929366, Page: 2): {"price": 98.95, "old_price": 0, "variations": [{"variation": "41 2/3", "price": 98.95, "old_price": 0}, {"variation": "43 2/3", "price": 98.95, "old_price": 0}, {"variation": "44 1/3", "price": 98.95, "old_price": 0}, {"variation": "45", "price": 98.95, "old_price": 0}, {"variation": "46 1/3", "price": 98.95, "old_price": 0}, {"variation": "47 2/3", "price": 98.95, "old_price": 0}, {"variation": "49", "price": 98.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552904, SourceUrlId: 21929370, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552916, SourceUrlId: 21929382, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552930, SourceUrlId: 21929396, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552934, SourceUrlId: 21929400, Page: 2): {"price": 83.95, "old_price": 0, "variations": [{"variation": "47", "price": 83.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552942, SourceUrlId: 21929408, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552944, SourceUrlId: 21929410, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "44.5", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552947, SourceUrlId: 21929413, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552950, SourceUrlId: 21929416, Page: 2): {"price": 77.95, "old_price": 0, "variations": [{"variation": "40.5", "price": 77.95, "old_price": 0}, {"variation": "42", "price": 77.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552960, SourceUrlId: 21929426, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552961, SourceUrlId: 21929427, Page: 2): {"price": 103.95, "old_price": 0, "variations": [{"variation": "10", "price": 103.95, "old_price": 0}, {"variation": "10.5", "price": 103.95, "old_price": 0}, {"variation": "11", "price": 103.95, "old_price": 0}, {"variation": "9", "price": 103.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552962, SourceUrlId: 21929428, Page: 2): {"price": 88.95, "old_price": 0, "variations": [{"variation": "40 2/3", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552970, SourceUrlId: 21929437, Page: 2): {"price": 123.95, "old_price": 0, "variations": [{"variation": "44", "price": 123.95, "old_price": 0}, {"variation": "44.5", "price": 123.95, "old_price": 0}, {"variation": "45", "price": 123.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552972, SourceUrlId: 21929439, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "51.5", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552979, SourceUrlId: 21929446, Page: 2): {"price": 121.95, "old_price": 0, "variations": [{"variation": "42", "price": 121.95, "old_price": 0}, {"variation": "42.5", "price": 121.95, "old_price": 0}, {"variation": "44", "price": 121.95, "old_price": 0}, {"variation": "44.5", "price": 121.95, "old_price": 0}, {"variation": "47.5", "price": 121.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552982, SourceUrlId: 21929449, Page: 2): {"price": 101.95, "old_price": 0, "variations": [{"variation": "42", "price": 101.95, "old_price": 0}, {"variation": "44", "price": 101.95, "old_price": 0}, {"variation": "47", "price": 101.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552984, SourceUrlId: 21929451, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552987, SourceUrlId: 21929454, Page: 2): {"price": 115.95, "old_price": 0, "variations": [{"variation": "40", "price": 115.95, "old_price": 0}, {"variation": "42", "price": 115.95, "old_price": 0}, {"variation": "42.5", "price": 115.95, "old_price": 0}, {"variation": "43", "price": 115.95, "old_price": 0}, {"variation": "44", "price": 115.95, "old_price": 0}, {"variation": "44.5", "price": 115.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552988, SourceUrlId: 21929455, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552989, SourceUrlId: 21929456, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19552991, SourceUrlId: 21929458, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "47", "price": 89.95, "old_price": 0}, {"variation": "47.5", "price": 89.95, "old_price": 0}, {"variation": "48", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552994, SourceUrlId: 21929461, Page: 2): {"price": 114.95, "old_price": 0, "variations": [{"variation": "43", "price": 114.95, "old_price": 0}, {"variation": "44", "price": 114.95, "old_price": 0}, {"variation": "44,5", "price": 114.95, "old_price": 0}, {"variation": "45", "price": 114.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19552997, SourceUrlId: 21929464, Page: 2): {"price": 77.95, "old_price": 0, "variations": [{"variation": "51", "price": 77.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553000, SourceUrlId: 21929467, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553004, SourceUrlId: 21929471, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553005, SourceUrlId: 21929472, Page: 2): {"price": 103.95, "old_price": 0, "variations": [{"variation": "40", "price": 103.95, "old_price": 0}, {"variation": "42", "price": 103.95, "old_price": 0}, {"variation": "42.5", "price": 103.95, "old_price": 0}, {"variation": "43", "price": 103.95, "old_price": 0}, {"variation": "44", "price": 103.95, "old_price": 0}, {"variation": "44.5", "price": 103.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553010, SourceUrlId: 21929477, Page: 2): {"price": 93.95, "old_price": 0, "variations": [{"variation": "43 2/3", "price": 93.95, "old_price": 0}, {"variation": "44 1/3", "price": 93.95, "old_price": 0}, {"variation": "45", "price": 93.95, "old_price": 0}, {"variation": "46 1/3", "price": 93.95, "old_price": 0}, {"variation": "47 2/3", "price": 93.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553015, SourceUrlId: 21929482, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "41 1/3", "price": 95.95, "old_price": 0}, {"variation": "44 2/3", "price": 95.95, "old_price": 0}, {"variation": "45 1/3", "price": 95.95, "old_price": 0}, {"variation": "46", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553016, SourceUrlId: 21929483, Page: 2): {"price": 110.95, "old_price": 0, "variations": [{"variation": "44", "price": 110.95, "old_price": 0}, {"variation": "44.5", "price": 110.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553024, SourceUrlId: 21929491, Page: 2): {"price": 82.95, "old_price": 0, "variations": [{"variation": "41 2/3", "price": 82.95, "old_price": 0}, {"variation": "42 1/3", "price": 82.95, "old_price": 0}, {"variation": "43", "price": 82.95, "old_price": 0}, {"variation": "43 2/3", "price": 82.95, "old_price": 0}, {"variation": "44 1/3", "price": 82.95, "old_price": 0}, {"variation": "45", "price": 82.95, "old_price": 0}, {"variation": "46 1/3", "price": 82.95, "old_price": 0}, {"variation": "47 2/3", "price": 82.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553028, SourceUrlId: 21929495, Page: 2): {"price": 103.95, "old_price": 0, "variations": [{"variation": "51.5", "price": 103.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553029, SourceUrlId: 21929496, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553033, SourceUrlId: 21929500, Page: 2): {"price": 67.95, "old_price": 0, "variations": [{"variation": "42.5", "price": 67.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553034, SourceUrlId: 21929501, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553035, SourceUrlId: 21929502, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "40,5", "price": 95.95, "old_price": 0}, {"variation": "42", "price": 95.95, "old_price": 0}, {"variation": "42,5", "price": 95.95, "old_price": 0}, {"variation": "43", "price": 95.95, "old_price": 0}, {"variation": "44", "price": 95.95, "old_price": 0}, {"variation": "44,5", "price": 95.95, "old_price": 0}, {"variation": "45", "price": 95.95, "old_price": 0}, {"variation": "45,5", "price": 95.95, "old_price": 0}, {"variation": "47", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553041, SourceUrlId: 21929508, Page: 2): {"price": 85.95, "old_price": 0, "variations": [{"variation": "41", "price": 85.95, "old_price": 0}, {"variation": "42", "price": 85.95, "old_price": 0}, {"variation": "42.5", "price": 85.95, "old_price": 0}, {"variation": "43", "price": 85.95, "old_price": 0}, {"variation": "44", "price": 85.95, "old_price": 0}, {"variation": "44.5", "price": 85.95, "old_price": 0}, {"variation": "45", "price": 85.95, "old_price": 0}, {"variation": "46", "price": 85.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553056, SourceUrlId: 21929523, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "43 2/3", "price": 74.95, "old_price": 0}, {"variation": "45", "price": 74.95, "old_price": 0}, {"variation": "46 1/3", "price": 74.95, "old_price": 0}, {"variation": "47 2/3", "price": 74.95, "old_price": 0}, {"variation": "50 1/3", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553063, SourceUrlId: 21929530, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553064, SourceUrlId: 21929531, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553065, SourceUrlId: 21929532, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553072, SourceUrlId: 21929539, Page: 2): {"price": 80.95, "old_price": 0, "variations": [{"variation": "41.5", "price": 80.95, "old_price": 0}, {"variation": "42.5", "price": 80.95, "old_price": 0}, {"variation": "43", "price": 80.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553079, SourceUrlId: 21929546, Page: 2): {"price": 71.95, "old_price": 0, "variations": [{"variation": "42", "price": 71.95, "old_price": 0}, {"variation": "44", "price": 71.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553085, SourceUrlId: 21929552, Page: 2): {"price": 82.95, "old_price": 0, "variations": [{"variation": "44", "price": 82.95, "old_price": 0}, {"variation": "46 2/3", "price": 82.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553087, SourceUrlId: 21929554, Page: 2): {"price": 69.95, "old_price": 0, "variations": [{"variation": "10", "price": 69.95, "old_price": 0}, {"variation": "9", "price": 69.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553091, SourceUrlId: 21929558, Page: 2): {"price": 113.95, "old_price": 0, "variations": [{"variation": "40", "price": 113.95, "old_price": 0}, {"variation": "41", "price": 113.95, "old_price": 0}, {"variation": "42", "price": 113.95, "old_price": 0}, {"variation": "42.5", "price": 113.95, "old_price": 0}, {"variation": "43", "price": 113.95, "old_price": 0}, {"variation": "44", "price": 113.95, "old_price": 0}, {"variation": "44.5", "price": 113.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553093, SourceUrlId: 21929560, Page: 2): {"price": 85.95, "old_price": 0, "variations": [{"variation": "43", "price": 85.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553103, SourceUrlId: 21929570, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553116, SourceUrlId: 21929584, Page: 2): {"price": 81.95, "old_price": 0, "variations": [{"variation": "10", "price": 81.95, "old_price": 0}, {"variation": "13", "price": 81.95, "old_price": 0}, {"variation": "7.5", "price": 81.95, "old_price": 0}, {"variation": "8", "price": 81.95, "old_price": 0}, {"variation": "9", "price": 81.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553117, SourceUrlId: 21929585, Page: 2): {"price": 33.96, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 33.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553129, SourceUrlId: 21929592, Page: 2): {"price": 62.95, "old_price": 0, "variations": [{"variation": "37", "price": 62.95, "old_price": 0}, {"variation": "38", "price": 62.95, "old_price": 0}, {"variation": "39", "price": 62.95, "old_price": 0}, {"variation": "43", "price": 62.95, "old_price": 0}, {"variation": "44", "price": 62.95, "old_price": 0}, {"variation": "45", "price": 62.95, "old_price": 0}, {"variation": "46", "price": 62.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553146, SourceUrlId: 21929609, Page: 2): {"price": 75.95, "old_price": 0, "variations": [{"variation": "36", "price": 75.95, "old_price": 0}, {"variation": "38", "price": 75.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553148, SourceUrlId: 21929611, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "39", "price": 27.95, "old_price": 0}, {"variation": "40.5", "price": 27.95, "old_price": 0}, {"variation": "42", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553157, SourceUrlId: 21929620, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "35", "price": 29.95, "old_price": 0}, {"variation": "41", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553164, SourceUrlId: 21929627, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "51.5", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553170, SourceUrlId: 21929633, Page: 2): {"price": 39.96, "old_price": 0, "variations": [{"variation": "36/37", "price": 39.96, "old_price": 0}, {"variation": "37-38", "price": 39.96, "old_price": 0}, {"variation": "42-43", "price": 39.96, "old_price": 0}, {"variation": "43/44", "price": 39.96, "old_price": 0}, {"variation": "45/46", "price": 39.96, "old_price": 0}, {"variation": "46,47", "price": 39.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553171, SourceUrlId: 21929634, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "37", "price": 19.95, "old_price": 0}, {"variation": "38", "price": 19.95, "old_price": 0}, {"variation": "39", "price": 19.95, "old_price": 0}, {"variation": "40.5", "price": 19.95, "old_price": 0}, {"variation": "42", "price": 19.95, "old_price": 0}, {"variation": "43", "price": 19.95, "old_price": 0}, {"variation": "44.5", "price": 19.95, "old_price": 0}, {"variation": "46", "price": 19.95, "old_price": 0}, {"variation": "47", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553185, SourceUrlId: 21929648, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "43 1/3", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553188, SourceUrlId: 21929651, Page: 2): {"price": 18.95, "old_price": 0, "variations": [{"variation": "43", "price": 18.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553197, SourceUrlId: 21929660, Page: 2): {"price": 19.95, "old_price": 0, "variations": [{"variation": "38", "price": 19.95, "old_price": 0}, {"variation": "39", "price": 19.95, "old_price": 0}, {"variation": "40.5", "price": 19.95, "old_price": 0}, {"variation": "42", "price": 19.95, "old_price": 0}, {"variation": "43", "price": 19.95, "old_price": 0}, {"variation": "44.5", "price": 19.95, "old_price": 0}, {"variation": "46", "price": 19.95, "old_price": 0}, {"variation": "47", "price": 19.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553199, SourceUrlId: 21929662, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553209, SourceUrlId: 21929672, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553212, SourceUrlId: 21929675, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "36 2/3", "price": 22.95, "old_price": 0}, {"variation": "38", "price": 22.95, "old_price": 0}, {"variation": "39 1/3", "price": 22.95, "old_price": 0}, {"variation": "40 2/3", "price": 22.95, "old_price": 0}, {"variation": "42", "price": 22.95, "old_price": 0}, {"variation": "43 1/3", "price": 22.95, "old_price": 0}, {"variation": "44 2/3", "price": 22.95, "old_price": 0}, {"variation": "46", "price": 22.95, "old_price": 0}, {"variation": "47 1/3", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553216, SourceUrlId: 21929679, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553222, SourceUrlId: 21929685, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "S", "price": 35.96, "old_price": 0}, {"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553225, SourceUrlId: 21929688, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "S", "price": 35.96, "old_price": 0}, {"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}, {"variation": "XL", "price": 35.96, "old_price": 0}, {"variation": "2XL", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553227, SourceUrlId: 21929690, Page: 2): {"price": 18.95, "old_price": 0, "variations": [{"variation": "XS", "price": 18.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553230, SourceUrlId: 21929693, Page: 2): {"price": 48.95, "old_price": 0, "variations": [{"variation": "S", "price": 48.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553232, SourceUrlId: 21929695, Page: 2): {"price": 58.95, "old_price": 0, "variations": [{"variation": "S", "price": 58.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553239, SourceUrlId: 21929702, Page: 2): {"price": 101.95, "old_price": 0, "variations": [{"variation": "S", "price": 101.95, "old_price": 0}, {"variation": "M", "price": 101.95, "old_price": 0}, {"variation": "L", "price": 101.95, "old_price": 0}, {"variation": "XL", "price": 101.95, "old_price": 0}, {"variation": "2XL", "price": 101.95, "old_price": 0}, {"variation": "3XL", "price": 101.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553246, SourceUrlId: 21929709, Page: 2): {"price": 209.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 209.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553262, SourceUrlId: 21929725, Page: 2): {"price": 51.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 51.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553263, SourceUrlId: 21929726, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}, {"variation": "L", "price": 35.96, "old_price": 0}, {"variation": "XL", "price": 35.96, "old_price": 0}, {"variation": "2XL", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553265, SourceUrlId: 21929728, Page: 2): {"price": 104.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 104.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553266, SourceUrlId: 21929729, Page: 2): {"price": 57.95, "old_price": 0, "variations": [{"variation": "S", "price": 57.95, "old_price": 0}, {"variation": "M", "price": 57.95, "old_price": 0}, {"variation": "L", "price": 57.95, "old_price": 0}, {"variation": "XL", "price": 57.95, "old_price": 0}, {"variation": "2XL", "price": 57.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553273, SourceUrlId: 21929736, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "S", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553274, SourceUrlId: 21929737, Page: 2): {"price": 35.96, "old_price": 0, "variations": [{"variation": "M", "price": 35.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553276, SourceUrlId: 21929739, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "S", "price": 95.95, "old_price": 0}, {"variation": "M", "price": 95.95, "old_price": 0}, {"variation": "L", "price": 95.95, "old_price": 0}, {"variation": "XL", "price": 95.95, "old_price": 0}, {"variation": "2XL", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553277, SourceUrlId: 21929740, Page: 2): {"price": 117.95, "old_price": 0, "variations": [{"variation": "S", "price": 117.95, "old_price": 0}, {"variation": "M", "price": 117.95, "old_price": 0}, {"variation": "XL", "price": 117.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553278, SourceUrlId: 21929741, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553282, SourceUrlId: 21929745, Page: 2): {"price": 50.95, "old_price": 0, "variations": [{"variation": "XL", "price": 50.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553288, SourceUrlId: 21929751, Page: 2): {"price": 91.95, "old_price": 0, "variations": [{"variation": "S", "price": 91.95, "old_price": 0}, {"variation": "M", "price": 91.95, "old_price": 0}, {"variation": "L", "price": 91.95, "old_price": 0}, {"variation": "XL", "price": 91.95, "old_price": 0}, {"variation": "2XL", "price": 91.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553292, SourceUrlId: 21929755, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553299, SourceUrlId: 21929762, Page: 2): {"price": 109.95, "old_price": 0, "variations": [{"variation": "S", "price": 109.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553302, SourceUrlId: 21929765, Page: 2): {"price": 209.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 209.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553303, SourceUrlId: 21929766, Page: 2): {"price": 177.95, "old_price": 0, "variations": [{"variation": "M", "price": 177.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553305, SourceUrlId: 21929768, Page: 2): {"price": 89.95, "old_price": 0, "variations": [{"variation": "S", "price": 89.95, "old_price": 0}, {"variation": "M", "price": 89.95, "old_price": 0}, {"variation": "L", "price": 89.95, "old_price": 0}, {"variation": "XL", "price": 89.95, "old_price": 0}, {"variation": "2XL", "price": 89.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553307, SourceUrlId: 21929770, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553309, SourceUrlId: 21929772, Page: 2): {"price": 52.95, "old_price": 0, "variations": [{"variation": "S", "price": 52.95, "old_price": 0}, {"variation": "M", "price": 52.95, "old_price": 0}, {"variation": "L", "price": 52.95, "old_price": 0}, {"variation": "XL", "price": 52.95, "old_price": 0}, {"variation": "2XL", "price": 52.95, "old_price": 0}, {"variation": "3XL", "price": 52.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553311, SourceUrlId: 21929775, Page: 2): {"price": 80.95, "old_price": 0, "variations": [{"variation": "S", "price": 80.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553312, SourceUrlId: 21929776, Page: 2): {"price": 78.95, "old_price": 0, "variations": [{"variation": "L", "price": 78.95, "old_price": 0}, {"variation": "XL", "price": 78.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553315, SourceUrlId: 21929779, Page: 2): {"price": 94.95, "old_price": 0, "variations": [{"variation": "S", "price": 94.95, "old_price": 0}, {"variation": "M", "price": 94.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553318, SourceUrlId: 21929782, Page: 2): {"price": 49.95, "old_price": 0, "variations": [{"variation": "S", "price": 49.95, "old_price": 0}, {"variation": "M", "price": 49.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553319, SourceUrlId: 21929783, Page: 2): {"price": 95.95, "old_price": 0, "variations": [{"variation": "M", "price": 95.95, "old_price": 0}, {"variation": "L", "price": 95.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553325, SourceUrlId: 21929789, Page: 2): {"price": 67.95, "old_price": 0, "variations": [{"variation": "S", "price": 67.95, "old_price": 0}, {"variation": "M", "price": 67.95, "old_price": 0}, {"variation": "L", "price": 67.95, "old_price": 0}, {"variation": "XL", "price": 67.95, "old_price": 0}, {"variation": "2XL", "price": 67.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553326, SourceUrlId: 21929790, Page: 2): {"price": 119.95, "old_price": 0, "variations": [{"variation": "M", "price": 119.95, "old_price": 0}, {"variation": "XL", "price": 119.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553327, SourceUrlId: 21929791, Page: 2): {"price": 73.95, "old_price": 0, "variations": [{"variation": "S", "price": 73.95, "old_price": 0}, {"variation": "M", "price": 73.95, "old_price": 0}, {"variation": "L", "price": 73.95, "old_price": 0}, {"variation": "XL", "price": 73.95, "old_price": 0}, {"variation": "2XL", "price": 73.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553328, SourceUrlId: 21929792, Page: 2): {"price": 111.95, "old_price": 0, "variations": [{"variation": "S", "price": 111.95, "old_price": 0}, {"variation": "M", "price": 111.95, "old_price": 0}, {"variation": "L", "price": 111.95, "old_price": 0}, {"variation": "XL", "price": 111.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553334, SourceUrlId: 21929798, Page: 2): {"price": 55.95, "old_price": 0, "variations": [{"variation": "XL", "price": 55.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553336, SourceUrlId: 21929800, Page: 2): {"price": 159.95, "old_price": 0, "variations": [{"variation": "M", "price": 159.95, "old_price": 0}, {"variation": "XL", "price": 159.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553339, SourceUrlId: 21929803, Page: 2): {"price": 98.95, "old_price": 0, "variations": [{"variation": "S", "price": 98.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553341, SourceUrlId: 21929805, Page: 2): {"price": 73.95, "old_price": 0, "variations": [{"variation": "S", "price": 73.95, "old_price": 0}, {"variation": "M", "price": 73.95, "old_price": 0}, {"variation": "L", "price": 73.95, "old_price": 0}, {"variation": "XL", "price": 73.95, "old_price": 0}, {"variation": "2XL", "price": 73.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553343, SourceUrlId: 21929807, Page: 2): {"price": 88.95, "old_price": 0, "variations": [{"variation": "S", "price": 88.95, "old_price": 0}, {"variation": "M", "price": 88.95, "old_price": 0}, {"variation": "L", "price": 88.95, "old_price": 0}, {"variation": "XL", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553344, SourceUrlId: 21929808, Page: 2): {"price": 62.95, "old_price": 0, "variations": [{"variation": "S", "price": 62.95, "old_price": 0}, {"variation": "M", "price": 62.95, "old_price": 0}, {"variation": "L", "price": 62.95, "old_price": 0}, {"variation": "XL", "price": 62.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553353, SourceUrlId: 21929817, Page: 2): {"price": 111.95, "old_price": 0, "variations": [{"variation": "M", "price": 111.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553354, SourceUrlId: 21929818, Page: 2): {"price": 65.95, "old_price": 0, "variations": [{"variation": "S", "price": 65.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553361, SourceUrlId: 21929825, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "M", "price": 74.95, "old_price": 0}, {"variation": "XL", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553362, SourceUrlId: 21929826, Page: 2): {"price": 94.95, "old_price": 0, "variations": [{"variation": "S", "price": 94.95, "old_price": 0}, {"variation": "XL", "price": 94.95, "old_price": 0}, {"variation": "2XL", "price": 94.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553364, SourceUrlId: 21929828, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553365, SourceUrlId: 21929829, Page: 2): {"price": 144.95, "old_price": 0, "variations": [{"variation": "S", "price": 144.95, "old_price": 0}, {"variation": "M", "price": 144.95, "old_price": 0}, {"variation": "L", "price": 144.95, "old_price": 0}, {"variation": "XL", "price": 144.95, "old_price": 0}, {"variation": "2XL", "price": 144.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553366, SourceUrlId: 21929830, Page: 2): {"price": 249.95, "old_price": 0, "variations": [{"variation": "M", "price": 249.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553369, SourceUrlId: 21929833, Page: 2): {"price": 87.95, "old_price": 0, "variations": [{"variation": "L", "price": 87.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553373, SourceUrlId: 21929837, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553377, SourceUrlId: 21929841, Page: 2): {"price": 179.95, "old_price": 0, "variations": [{"variation": "XL", "price": 179.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553382, SourceUrlId: 21929846, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "34", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553387, SourceUrlId: 21929851, Page: 2): {"price": 140.95, "old_price": 0, "variations": [{"variation": "S", "price": 140.95, "old_price": 0}, {"variation": "M", "price": 140.95, "old_price": 0}, {"variation": "L", "price": 140.95, "old_price": 0}, {"variation": "XL", "price": 140.95, "old_price": 0}, {"variation": "2XL", "price": 140.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553395, SourceUrlId: 21929859, Page: 2): {"price": 94.95, "old_price": 0, "variations": [{"variation": "S", "price": 94.95, "old_price": 0}, {"variation": "L", "price": 94.95, "old_price": 0}, {"variation": "XL", "price": 94.95, "old_price": 0}, {"variation": "2XL", "price": 94.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553399, SourceUrlId: 21929863, Page: 2): {"price": 182.95, "old_price": 0, "variations": [{"variation": "XS", "price": 182.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553401, SourceUrlId: 21929865, Page: 2): {"price": 113.95, "old_price": 0, "variations": [{"variation": "S", "price": 113.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553404, SourceUrlId: 21929868, Page: 2): {"price": 349.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 349.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553408, SourceUrlId: 21929872, Page: 2): {"price": 51.95, "old_price": 0, "variations": [{"variation": "32", "price": 51.95, "old_price": 0}, {"variation": "34", "price": 51.95, "old_price": 0}, {"variation": "36", "price": 51.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553409, SourceUrlId: 21929873, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553414, SourceUrlId: 21929878, Page: 2): {"price": 91.95, "old_price": 0, "variations": [{"variation": "S", "price": 91.95, "old_price": 0}, {"variation": "M", "price": 91.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553418, SourceUrlId: 21929882, Page: 2): {"price": 137.95, "old_price": 0, "variations": [{"variation": "S", "price": 137.95, "old_price": 0}, {"variation": "XL", "price": 137.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553426, SourceUrlId: 21929890, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}, {"variation": "XL", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553433, SourceUrlId: 21929897, Page: 2): {"price": 100.95, "old_price": 0, "variations": [{"variation": "S", "price": 100.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553436, SourceUrlId: 21929900, Page: 2): {"price": 50.95, "old_price": 0, "variations": [{"variation": "S", "price": 50.95, "old_price": 0}, {"variation": "M", "price": 50.95, "old_price": 0}, {"variation": "L", "price": 50.95, "old_price": 0}, {"variation": "XL", "price": 50.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553439, SourceUrlId: 21929903, Page: 2): {"price": 88.95, "old_price": 0, "variations": [{"variation": "S", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553442, SourceUrlId: 21929906, Page: 2): {"price": 73.95, "old_price": 0, "variations": [{"variation": "S", "price": 73.95, "old_price": 0}, {"variation": "M", "price": 73.95, "old_price": 0}, {"variation": "L", "price": 73.95, "old_price": 0}, {"variation": "XL", "price": 73.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553443, SourceUrlId: 21929907, Page: 2): {"price": 109.95, "old_price": 0, "variations": [{"variation": "M", "price": 109.95, "old_price": 0}, {"variation": "L", "price": 109.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553448, SourceUrlId: 21929912, Page: 2): {"price": 113.95, "old_price": 0, "variations": [{"variation": "M", "price": 113.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553450, SourceUrlId: 21929914, Page: 2): {"price": 47.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 47.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553457, SourceUrlId: 21929919, Page: 2): {"price": 178.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 178.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553468, SourceUrlId: 21929928, Page: 2): {"price": 4.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 4.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553470, SourceUrlId: 21929929, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553503, SourceUrlId: 21929955, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553514, SourceUrlId: 21929963, Page: 2): {"price": 28.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 28.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553538, SourceUrlId: 21929980, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "L/XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553590, SourceUrlId: 21930010, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553604, SourceUrlId: 21930020, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "7", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553633, SourceUrlId: 21930037, Page: 2): {"price": 15.95, "old_price": 0, "variations": [{"variation": "L/XL", "price": 15.95, "old_price": 0}, {"variation": "S/M", "price": 15.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553794, SourceUrlId: 21930143, Page: 2): {"price": 38.96, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 38.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553848, SourceUrlId: 21930182, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553871, SourceUrlId: 21930193, Page: 2): {"price": 8.95, "old_price": 0, "variations": [{"variation": "L/XL", "price": 8.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553873, SourceUrlId: 21930195, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "OSFM", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553876, SourceUrlId: 21930198, Page: 2): {"price": 16.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 16.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553880, SourceUrlId: 21930202, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "OSFM", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553885, SourceUrlId: 21930206, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553915, SourceUrlId: 21930221, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "OSFM", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553949, SourceUrlId: 21930245, Page: 2): {"price": 27.95, "old_price": 0, "variations": [{"variation": "1SIZE", "price": 27.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553966, SourceUrlId: 21930253, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "S", "price": 14.95, "old_price": 0}, {"variation": "M", "price": 14.95, "old_price": 0}, {"variation": "L", "price": 14.95, "old_price": 0}, {"variation": "XL", "price": 14.95, "old_price": 0}, {"variation": "2XL", "price": 14.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553969, SourceUrlId: 21930256, Page: 2): {"price": 26.95, "old_price": 0, "variations": [{"variation": "S", "price": 26.95, "old_price": 0}, {"variation": "M", "price": 26.95, "old_price": 0}, {"variation": "L", "price": 26.95, "old_price": 0}, {"variation": "XL", "price": 26.95, "old_price": 0}, {"variation": "2XL", "price": 26.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553970, SourceUrlId: 21930257, Page: 2): {"price": 17.95, "old_price": 0, "variations": [{"variation": "S", "price": 17.95, "old_price": 0}, {"variation": "M", "price": 17.95, "old_price": 0}, {"variation": "L", "price": 17.95, "old_price": 0}, {"variation": "XL", "price": 17.95, "old_price": 0}, {"variation": "2XL", "price": 17.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553971, SourceUrlId: 21930258, Page: 2): {"price": 16.95, "old_price": 0, "variations": [{"variation": "M", "price": 16.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553972, SourceUrlId: 21930259, Page: 2): {"price": 31.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 31.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553973, SourceUrlId: 21930260, Page: 2): {"price": 21.95, "old_price": 0, "variations": [{"variation": "S", "price": 21.95, "old_price": 0}, {"variation": "M", "price": 21.95, "old_price": 0}, {"variation": "L", "price": 21.95, "old_price": 0}, {"variation": "XL", "price": 21.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553974, SourceUrlId: 21930261, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "S", "price": 24.95, "old_price": 0}, {"variation": "M", "price": 24.95, "old_price": 0}, {"variation": "L", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553977, SourceUrlId: 21930264, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "M", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19553985, SourceUrlId: 21930272, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19553993, SourceUrlId: 21930280, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554007, SourceUrlId: 21930294, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "XL", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554008, SourceUrlId: 21930295, Page: 2): {"price": 36.96, "old_price": 0, "variations": [{"variation": "M", "price": 36.96, "old_price": 0}, {"variation": "L", "price": 36.96, "old_price": 0}, {"variation": "XL", "price": 36.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554014, SourceUrlId: 21930301, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "XS", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554024, SourceUrlId: 21930311, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "L", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554031, SourceUrlId: 21930318, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554036, SourceUrlId: 21930323, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "S", "price": 32.96, "old_price": 0}, {"variation": "M", "price": 32.96, "old_price": 0}, {"variation": "L", "price": 32.96, "old_price": 0}, {"variation": "XL", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554049, SourceUrlId: 21930336, Page: 2): {"price": 71.95, "old_price": 0, "variations": [{"variation": "M", "price": 71.95, "old_price": 0}, {"variation": "L", "price": 71.95, "old_price": 0}, {"variation": "XL", "price": 71.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554051, SourceUrlId: 21930338, Page: 2): {"price": 65.95, "old_price": 0, "variations": [{"variation": "S", "price": 65.95, "old_price": 0}, {"variation": "M", "price": 65.95, "old_price": 0}, {"variation": "XL", "price": 65.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554055, SourceUrlId: 21930342, Page: 2): {"price": 65.95, "old_price": 0, "variations": [{"variation": "XL", "price": 65.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554064, SourceUrlId: 21930351, Page: 2): {"price": 61.95, "old_price": 0, "variations": [{"variation": "XS", "price": 61.95, "old_price": 0}, {"variation": "S", "price": 61.95, "old_price": 0}, {"variation": "M", "price": 61.95, "old_price": 0}, {"variation": "2XL", "price": 61.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554065, SourceUrlId: 21930352, Page: 2): {"price": 54.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 54.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554068, SourceUrlId: 21930355, Page: 2): {"price": 74.95, "old_price": 0, "variations": [{"variation": "L", "price": 74.95, "old_price": 0}, {"variation": "XL", "price": 74.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554070, SourceUrlId: 21930357, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "S", "price": 29.95, "old_price": 0}, {"variation": "M", "price": 29.95, "old_price": 0}, {"variation": "L", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554071, SourceUrlId: 21930358, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "XS", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554072, SourceUrlId: 21930359, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "36", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554074, SourceUrlId: 21930361, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554078, SourceUrlId: 21930365, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "L", "price": 59.95, "old_price": 0}, {"variation": "XL", "price": 59.95, "old_price": 0}, {"variation": "2XL", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554085, SourceUrlId: 21930372, Page: 2): {"price": 47.95, "old_price": 0, "variations": [{"variation": "2XL", "price": 47.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554088, SourceUrlId: 21930375, Page: 2): {"price": 59.95, "old_price": 0, "variations": [{"variation": "S", "price": 59.95, "old_price": 0}, {"variation": "M", "price": 59.95, "old_price": 0}, {"variation": "L", "price": 59.95, "old_price": 0}, {"variation": "XL", "price": 59.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554095, SourceUrlId: 21930382, Page: 2): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}, {"variation": "L", "price": 46.95, "old_price": 0}, {"variation": "XL", "price": 46.95, "old_price": 0}, {"variation": "2XL", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554099, SourceUrlId: 21930386, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554101, SourceUrlId: 21930388, Page: 2): {"price": 45.95, "old_price": 0, "variations": [{"variation": "XL", "price": 45.95, "old_price": 0}, {"variation": "2XL", "price": 45.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554111, SourceUrlId: 21930398, Page: 2): {"price": 34.96, "old_price": 0, "variations": [{"variation": "M", "price": 34.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554130, SourceUrlId: 21930418, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "S", "price": 32.96, "old_price": 0}, {"variation": "M", "price": 32.96, "old_price": 0}, {"variation": "2XL", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554152, SourceUrlId: 21930436, Page: 2): {"price": 12.95, "old_price": 0, "variations": [{"variation": "3", "price": 12.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554156, SourceUrlId: 21930438, Page: 2): {"price": 14.95, "old_price": 0, "variations": [{"variation": "7", "price": 14.95, "old_price": 0}]}
+WARNING:HOST_002:Got gone status code 404
+INFO:HOST_002:(Id: 19554157, SourceUrlId: 21930439, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554165, SourceUrlId: 21930444, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "7", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554173, SourceUrlId: 21930450, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "7", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554175, SourceUrlId: 21930451, Page: 2): {"price": 7.95, "old_price": 0, "variations": [{"variation": "7", "price": 7.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554187, SourceUrlId: 21930457, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "7", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554195, SourceUrlId: 21930463, Page: 2): {"price": 29.95, "old_price": 0, "variations": [{"variation": "7", "price": 29.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554200, SourceUrlId: 21930467, Page: 2): {"price": 24.95, "old_price": 0, "variations": [{"variation": "7", "price": 24.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554201, SourceUrlId: 21930468, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554207, SourceUrlId: 21930473, Page: 2): {"price": 33.96, "old_price": 0, "variations": [{"variation": "7", "price": 33.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554208, SourceUrlId: 21930474, Page: 2): {"price": 25.95, "old_price": 0, "variations": [{"variation": "7", "price": 25.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554211, SourceUrlId: 21930477, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "6", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554219, SourceUrlId: 21930482, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "6", "price": 22.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554226, SourceUrlId: 21930488, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "7", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554229, SourceUrlId: 21930491, Page: 2): {"price": 15.95, "old_price": 0, "variations": [{"variation": "6", "price": 15.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554241, SourceUrlId: 21930497, Page: 2): {"price": 44.95, "old_price": 0, "variations": [{"variation": "7", "price": 44.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554242, SourceUrlId: 21930498, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554251, SourceUrlId: 21930504, Page: 2): {"price": 23.95, "old_price": 0, "variations": [{"variation": "7", "price": 23.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554255, SourceUrlId: 21930508, Page: 2): {"price": 32.96, "old_price": 0, "variations": [{"variation": "7", "price": 32.96, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554268, SourceUrlId: 21930516, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got gone status code 404
+INFO:HOST_002:(Id: 19554270, SourceUrlId: 21930517, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554276, SourceUrlId: 21930521, Page: 2): {"price": 22.95, "old_price": 0, "variations": [{"variation": "6", "price": 22.95, "old_price": 0}]}
+WARNING:HOST_002:Got gone status code 404
+INFO:HOST_002:(Id: 19554279, SourceUrlId: 21930524, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554282, SourceUrlId: 21930527, Page: 2): {"price": 41.95, "old_price": 0, "variations": [{"variation": "32/32", "price": 41.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554285, SourceUrlId: 21930530, Page: 2): {"price": 104.95, "old_price": 0, "variations": [{"variation": "S", "price": 104.95, "old_price": 0}, {"variation": "L", "price": 104.95, "old_price": 0}, {"variation": "XL", "price": 104.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554286, SourceUrlId: 21930531, Page: 2): {"price": 88.95, "old_price": 0, "variations": [{"variation": "S", "price": 88.95, "old_price": 0}, {"variation": "L", "price": 88.95, "old_price": 0}, {"variation": "XL", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554289, SourceUrlId: 21930534, Page: 2): {"price": 98.95, "old_price": 0, "variations": [{"variation": "30", "price": 98.95, "old_price": 0}, {"variation": "31", "price": 98.95, "old_price": 0}, {"variation": "33", "price": 98.95, "old_price": 0}, {"variation": "36", "price": 98.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554290, SourceUrlId: 21930535, Page: 2): {"price": 64.95, "old_price": 0, "variations": [{"variation": "32", "price": 64.95, "old_price": 0}, {"variation": "34", "price": 64.95, "old_price": 0}, {"variation": "36", "price": 64.95, "old_price": 0}, {"variation": "38", "price": 64.95, "old_price": 0}]}
+INFO:HOST_004:get_products.php page: 3, per page: 500
+INFO:HOST_002:(Id: 19554295, SourceUrlId: 21930540, Page: 3): {"price": 50.95, "old_price": 0, "variations": [{"variation": "32", "price": 50.95, "old_price": 0}, {"variation": "33", "price": 50.95, "old_price": 0}, {"variation": "36", "price": 50.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554299, SourceUrlId: 21930544, Page: 3): {"price": 128.9, "old_price": 0, "variations": [{"variation": "31", "price": 128.9, "old_price": 0}, {"variation": "32", "price": 128.9, "old_price": 0}, {"variation": "33", "price": 128.9, "old_price": 0}, {"variation": "34", "price": 128.9, "old_price": 0}]}
+INFO:HOST_004:put_to_parser (250 prices)
+INFO:HOST_002:(Id: 19554309, SourceUrlId: 21930554, Page: 3): {"price": 73.95, "old_price": 0, "variations": [{"variation": "W30/L32", "price": 73.95, "old_price": 0}, {"variation": "W31/L32", "price": 73.95, "old_price": 0}, {"variation": "W32/L32", "price": 73.95, "old_price": 0}, {"variation": "W33/L32", "price": 73.95, "old_price": 0}, {"variation": "W34/L32", "price": 73.95, "old_price": 0}, {"variation": "W36/L32", "price": 73.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554311, SourceUrlId: 21930556, Page: 3): {"price": 88.95, "old_price": 0, "variations": [{"variation": "30", "price": 88.95, "old_price": 0}, {"variation": "31", "price": 88.95, "old_price": 0}, {"variation": "32", "price": 88.95, "old_price": 0}, {"variation": "33", "price": 88.95, "old_price": 0}, {"variation": "34", "price": 88.95, "old_price": 0}, {"variation": "36", "price": 88.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554314, SourceUrlId: 21930559, Page: 3): {"price": 114.95, "old_price": 0, "variations": [{"variation": "31", "price": 114.95, "old_price": 0}, {"variation": "32", "price": 114.95, "old_price": 0}, {"variation": "33", "price": 114.95, "old_price": 0}, {"variation": "36", "price": 114.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554333, SourceUrlId: 21930578, Page: 3): {"price": 46.95, "old_price": 0, "variations": [{"variation": "S", "price": 46.95, "old_price": 0}, {"variation": "M", "price": 46.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554347, SourceUrlId: 21930592, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 19554353, SourceUrlId: 21930598, Page: 3): {"price": 70.95, "old_price": 0, "variations": [{"variation": "S", "price": 70.95, "old_price": 0}, {"variation": "XL", "price": 70.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554372, SourceUrlId: 21930617, Page: 3): {"price": 20.95, "old_price": 0, "variations": [{"variation": "S", "price": 20.95, "old_price": 0}, {"variation": "M", "price": 20.95, "old_price": 0}, {"variation": "L", "price": 20.95, "old_price": 0}, {"variation": "XL", "price": 20.95, "old_price": 0}, {"variation": "2XL", "price": 20.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554379, SourceUrlId: 21930624, Page: 3): {"price": 55.95, "old_price": 0, "variations": [{"variation": "S", "price": 55.95, "old_price": 0}, {"variation": "M", "price": 55.95, "old_price": 0}, {"variation": "L", "price": 55.95, "old_price": 0}, {"variation": "2XL", "price": 55.95, "old_price": 0}]}
+INFO:HOST_002:(Id: 19554383, SourceUrlId: 21930628, Page: 3): {"price": 104.95, "old_price": 0, "variations": [{"variation": "XS", "price": 104.95, "old_price": 0}, {"variation": "S", "price": 104.95, "old_price": 0}, {"variation": "M", "price": 104.95, "old_price": 0}]}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554387, Url: https://HOST_025/de/p/urban-classics-hoodies-blank-hoody-black/HOST_037)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554387, SourceUrlId: 21930632, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554405, Url: https://HOST_025/de/p/nike-hoodies-france-basketball-practice-fleece-hoody-dk-grey-heather-old-royal/HOST_038)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554405, SourceUrlId: 21930651, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554415, Url: https://HOST_025/de/p/puma-hoodies-puma-basketball-austria-hoody-rot/HOST_039)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554415, SourceUrlId: 21930661, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554436, Url: https://HOST_025/de/p/bucketz-hoodies-all-time-hoody-black-white/HOST_040)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554436, SourceUrlId: 21930682, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554442, Url: https://HOST_025/de/p/3x3-hoodies-foundation-hoody-schwarz/HOST_041)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554442, SourceUrlId: 21930688, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:Got ban status code 403, reinit client...
+WARNING:HOST_002:get_price exception (Id: 19554451, Url: https://HOST_025/de/p/puma-hoodies-puma-basketball-austria-hoody-schwarz/HOST_042)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 302, in __get_price
+    response = await self._request(client, HOST_013(*next_request_data.url_params), settings, next_request_data, ban_retry_count=ban_retry_count, ban_counter=ban_counter)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 245, in _request
+    raise HTTPError(f'Ban status code ({response.status_code})')
+HOST_014: Ban status code (403)
+INFO:HOST_002:(Id: 19554451, SourceUrlId: 21930697, Page: 3): {"price": 0.0, "old_price": 0.0, "variations": null}
+ERROR:HOST_002:Error on process 'HOST_026'
+Traceback (most recent call last):
+  File "/root/crawlab_workspace/697c8eade45d2ecbe8d627aa/69c24129a2fc400a16fad22a/kickz.py", line 128, in <module>
+    HOST_015(main())
+  File "/usr/lib/python3.11/asyncio/runners.py", line 190, in run
+    return HOST_016(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return HOST_017()
+           ^^^^^^^^^^^^^^^
+  File "/root/crawlab_workspace/697c8eade45d2ecbe8d627aa/69c24129a2fc400a16fad22a/kickz.py", line 124, in main
+    await HOST_024()
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 180, in process
+    raise e
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 177, in process
+    await self.__process_source(source)
+  File "/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py", line 432, in __process_source
+    raise self.stop_exception
+Exception: error_auto_stop (6) is reached

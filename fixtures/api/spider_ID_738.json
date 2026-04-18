@@ -1,0 +1,30 @@
+{
+  "_id": "ID_738",
+  "name": "kickscrew.com",
+  "type": "",
+  "col_id": "67ee445ce944d42ba023b248",
+  "col_name": "results_kickscrew2.com",
+  "data_source_id": "000000000000000000000000",
+  "description": "Только для кроулаб, принимает пагинацию в аргументах",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "67515b15116add6c8fddced7"
+  ],
+  "stat": {
+    "_id": "ID_738",
+    "last_task_id": "69e37a36a2fc400a16fafef1",
+    "tasks": 813,
+    "results": 0,
+    "wait_duration": 2386955,
+    "runtime_duration": 27338684,
+    "total_duration": 27340837,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python kickscrew.com.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

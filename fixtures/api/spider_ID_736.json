@@ -1,0 +1,30 @@
+{
+  "_id": "ID_736",
+  "name": "rei.com",
+  "type": "",
+  "col_id": "66aca75d116add6c8f4e45fc",
+  "col_name": "results_rei.com",
+  "data_source_id": "000000000000000000000000",
+  "description": "",
+  "project_id": "PROJECT_ID_001",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "66ab652f116add6c8f4081f9"
+  ],
+  "stat": {
+    "_id": "ID_736",
+    "last_task_id": "69e2df4ca2fc400a16fafdf2",
+    "tasks": 175,
+    "results": 0,
+    "wait_duration": 460359,
+    "runtime_duration": 1681546,
+    "total_duration": 1682017,
+    "average_wait_duration": 0,
+    "average_runtime_duration": 0,
+    "average_total_duration": 0
+  },
+  "cmd": "python rei_com.py",
+  "param": "",
+  "priority": 5,
+  "incremental_sync": false
+}

@@ -1,0 +1,31 @@
+{
+  "_id": "ID_794",
+  "spider_id": "SPIDER_ID_267",
+  "status": "finished",
+  "node_id": "NODE_ID_002",
+  "cmd": "python balenciaga_it.py",
+  "param": "",
+  "error": "",
+  "pid": 12067,
+  "schedule_id": "SCHEDULE_ID_012",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "6927302984c7b6645efdca48"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_794",
+    "create_ts": "2026-03-21T06:15:00.007Z",
+    "start_ts": "2026-03-21T06:15:00.613Z",
+    "end_ts": "2026-03-21T06:15:10.925Z",
+    "wait_duration": 606,
+    "runtime_duration": 10312,
+    "total_duration": 10918,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "create_ts": "2026-03-21T06:15:00.003Z"
+}

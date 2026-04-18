@@ -1,0 +1,31 @@
+{
+  "_id": "ID_756",
+  "spider_id": "SPIDER_ID_215",
+  "status": "finished",
+  "node_id": "NODE_ID_003",
+  "cmd": "python gts-shop.eu.py",
+  "param": "",
+  "error": "",
+  "pid": 5008,
+  "schedule_id": "SCHEDULE_ID_008",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "6927395d84c7b6645efdca7a"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_756",
+    "create_ts": "2026-03-19T17:00:00.011Z",
+    "start_ts": "2026-03-19T17:00:00.205Z",
+    "end_ts": "2026-03-19T17:07:08.496Z",
+    "wait_duration": 194,
+    "runtime_duration": 428291,
+    "total_duration": 428485,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "create_ts": "2026-03-19T17:00:00.003Z"
+}

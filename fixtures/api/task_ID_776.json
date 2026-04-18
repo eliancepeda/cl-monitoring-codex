@@ -1,0 +1,31 @@
+{
+  "_id": "ID_776",
+  "spider_id": "SPIDER_ID_233",
+  "status": "finished",
+  "node_id": "NODE_ID_005",
+  "cmd": "python kickscrew.com.py",
+  "param": "--auto_stop 250",
+  "error": "",
+  "pid": 1942983,
+  "schedule_id": "SCHEDULE_ID_006",
+  "type": "",
+  "mode": "selected-nodes",
+  "node_ids": [
+    "67515b15116add6c8fddced7"
+  ],
+  "parent_id": "000000000000000000000000",
+  "priority": 5,
+  "stat": {
+    "_id": "ID_776",
+    "create_ts": "2026-03-19T22:22:00.007Z",
+    "start_ts": "2026-03-19T22:22:00.994Z",
+    "end_ts": "2026-03-20T10:19:39.057Z",
+    "wait_duration": 987,
+    "runtime_duration": 43058063,
+    "total_duration": 43059050,
+    "result_count": 0,
+    "error_log_count": 0
+  },
+  "has_sub": false,
+  "create_ts": "2026-03-19T22:22:00.003Z"
+}

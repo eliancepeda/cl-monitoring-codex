@@ -1,0 +1,812 @@
+INFO:HOST_002:Arguments(source_id=None, source_name=None, source_tags=['default'], product_ids=[], auto_stop=200, delay_step=1.0, start_page=1, finish_page=0, nprice_d=0, user_agent_parameters=0, proxy_country='us', debug=False, start_product_id=0, test=False, custom_arg='')
+INFO:HOST_002:Is inside crawlab: True
+INFO:HOST_003:CrawlabClient started. Task pointer: 17cd4f4c11d149858d7f131f86846f8c
+INFO:HOST_003:Task is found
+INFO:HOST_002:Start profile (HOST_021) [/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py]
+INFO:HOST_004:get_products.php page: 1, per page: 500
+INFO:HOST_002:(Id: 2576719, SourceUrlId: 3289322, Page: 1): {"price": 1329.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1329.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 464214, SourceUrlId: 38167415, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576721, SourceUrlId: 3289323, Page: 1): {"price": 5747.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 5747.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576743, SourceUrlId: 3289326, Page: 1): {"price": 3000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576751, SourceUrlId: 3289324, Page: 1): {"price": 998.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 998.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576792, SourceUrlId: 3289335, Page: 1): {"price": 365.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 365.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576795, SourceUrlId: 3289336, Page: 1): {"price": 329.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 329.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576798, SourceUrlId: 3289337, Page: 1): {"price": 319.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 319.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576814, SourceUrlId: 3289338, Page: 1): {"price": 350.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 350.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576816, SourceUrlId: 3289340, Page: 1): {"price": 325.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 325.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576821, SourceUrlId: 3289341, Page: 1): {"price": 350.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 350.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576842, SourceUrlId: 3289328, Page: 1): {"price": 4475.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4475.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576860, SourceUrlId: 3289357, Page: 1): {"price": 3000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576867, SourceUrlId: 3289364, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576873, SourceUrlId: 3289372, Page: 1): {"price": 120.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 120.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576886, SourceUrlId: 3289390, Page: 1): {"price": 100.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 100.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576892, SourceUrlId: 3289395, Page: 1): {"price": 2399.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2399.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576894, SourceUrlId: 3289399, Page: 1): {"price": 191.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 191.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576900, SourceUrlId: 3289405, Page: 1): {"price": 2085.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2085.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576901, SourceUrlId: 3289406, Page: 1): {"price": 199.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 199.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576905, SourceUrlId: 3289415, Page: 1): {"price": 6273.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 6273.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576906, SourceUrlId: 3289416, Page: 1): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576912, SourceUrlId: 3289424, Page: 1): {"price": 175.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 175.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576917, SourceUrlId: 3289432, Page: 1): {"price": 458.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 458.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576927, SourceUrlId: 3289443, Page: 1): {"price": 215.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 215.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576928, SourceUrlId: 3289444, Page: 1): {"price": 1050.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1050.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576938, SourceUrlId: 3289457, Page: 1): {"price": 188.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 188.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576947, SourceUrlId: 3289470, Page: 1): {"price": 125.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 125.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576949, SourceUrlId: 3289474, Page: 1): {"price": 1408.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1408.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576955, SourceUrlId: 3289484, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576963, SourceUrlId: 3289494, Page: 1): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576969, SourceUrlId: 3289499, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576971, SourceUrlId: 3289508, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576982, SourceUrlId: 3289526, Page: 1): {"price": 3200.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3200.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576983, SourceUrlId: 3289527, Page: 1): {"price": 188.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 188.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2576988, SourceUrlId: 3289534, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576994, SourceUrlId: 3289543, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2576997, SourceUrlId: 3289548, Page: 1): {"price": 6657.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 6657.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577002, SourceUrlId: 3289553, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577007, SourceUrlId: 3289561, Page: 1): {"price": 262.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 262.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577022, SourceUrlId: 3289586, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577030, SourceUrlId: 3289596, Page: 1): {"price": 7645.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 7645.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577034, SourceUrlId: 3289608, Page: 1): {"price": 1086.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1086.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577040, SourceUrlId: 3289623, Page: 1): {"price": 485.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 485.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577043, SourceUrlId: 3289627, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577045, SourceUrlId: 3289629, Page: 1): {"price": 140.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 140.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577047, SourceUrlId: 3289631, Page: 1): {"price": 325.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 325.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577049, SourceUrlId: 3289635, Page: 1): {"price": 125.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 125.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577053, SourceUrlId: 3289640, Page: 1): {"price": 380.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 380.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577054, SourceUrlId: 3289641, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577056, SourceUrlId: 3289643, Page: 1): {"price": 570.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 570.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577058, SourceUrlId: 3289645, Page: 1): {"price": 191.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 191.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577060, SourceUrlId: 3289649, Page: 1): {"price": 478.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 478.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577064, SourceUrlId: 3289653, Page: 1): {"price": 111.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 111.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577065, SourceUrlId: 3289654, Page: 1): {"price": 370.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 370.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577066, SourceUrlId: 3289655, Page: 1): {"price": 284.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 284.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577067, SourceUrlId: 3289656, Page: 1): {"price": 209.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 209.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577069, SourceUrlId: 3289658, Page: 1): {"price": 419.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 419.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577071, SourceUrlId: 3289659, Page: 1): {"price": 528.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 528.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577072, SourceUrlId: 3289660, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577074, SourceUrlId: 3289664, Page: 1): {"price": 336.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 336.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577075, SourceUrlId: 3289665, Page: 1): {"price": 482.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 482.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577076, SourceUrlId: 3289666, Page: 1): {"price": 448.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 448.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577078, SourceUrlId: 3289667, Page: 1): {"price": 580.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 580.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577079, SourceUrlId: 3289668, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577080, SourceUrlId: 3289669, Page: 1): {"price": 550.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 550.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577081, SourceUrlId: 3289670, Page: 1): {"price": 450.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 450.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577082, SourceUrlId: 3289671, Page: 1): {"price": 168.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 168.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577083, SourceUrlId: 3289672, Page: 1): {"price": 407.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 407.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577084, SourceUrlId: 3289673, Page: 1): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577085, SourceUrlId: 3289674, Page: 1): {"price": 430.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 430.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577086, SourceUrlId: 3289675, Page: 1): {"price": 258.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 258.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577087, SourceUrlId: 3289676, Page: 1): {"price": 460.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 460.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577089, SourceUrlId: 3289678, Page: 1): {"price": 398.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 398.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577090, SourceUrlId: 3289679, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577091, SourceUrlId: 3289680, Page: 1): {"price": 495.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 495.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577092, SourceUrlId: 3289682, Page: 1): {"price": 597.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 597.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577093, SourceUrlId: 3289684, Page: 1): {"price": 793.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 793.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577094, SourceUrlId: 3289685, Page: 1): {"price": 252.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 252.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577095, SourceUrlId: 3289686, Page: 1): {"price": 64.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 64.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577098, SourceUrlId: 3289689, Page: 1): {"price": 423.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 423.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577099, SourceUrlId: 3289690, Page: 1): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577100, SourceUrlId: 3289691, Page: 1): {"price": 415.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 415.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577102, SourceUrlId: 3289694, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577105, SourceUrlId: 3289701, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577107, SourceUrlId: 3289706, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577109, SourceUrlId: 3289713, Page: 1): {"price": 4400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577113, SourceUrlId: 3289723, Page: 1): {"price": 375.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 375.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577114, SourceUrlId: 3289726, Page: 1): {"price": 3080.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3080.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577117, SourceUrlId: 3289731, Page: 1): {"price": 255.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 255.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577119, SourceUrlId: 3289738, Page: 1): {"price": 229.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 229.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577121, SourceUrlId: 3289745, Page: 1): {"price": 230.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 230.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577122, SourceUrlId: 3289747, Page: 1): {"price": 3075.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3075.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577125, SourceUrlId: 3289753, Page: 1): {"price": 237.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 237.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577129, SourceUrlId: 3289762, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577138, SourceUrlId: 3289781, Page: 1): {"price": 2500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577139, SourceUrlId: 3289782, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577140, SourceUrlId: 3289800, Page: 1): {"price": 4914.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4914.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577147, SourceUrlId: 3289805, Page: 1): {"price": 280.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 280.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577150, SourceUrlId: 3289808, Page: 1): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577153, SourceUrlId: 3289811, Page: 1): {"price": 220.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 220.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577157, SourceUrlId: 3289815, Page: 1): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577158, SourceUrlId: 3289816, Page: 1): {"price": 280.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 280.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577159, SourceUrlId: 3289818, Page: 1): {"price": 2680.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2680.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577160, SourceUrlId: 3289819, Page: 1): {"price": 240.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 240.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577161, SourceUrlId: 3289820, Page: 1): {"price": 289.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 289.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577162, SourceUrlId: 3289821, Page: 1): {"price": 1421.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1421.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577163, SourceUrlId: 3289822, Page: 1): {"price": 699.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 699.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577164, SourceUrlId: 3289824, Page: 1): {"price": 287.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 287.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577167, SourceUrlId: 3289827, Page: 1): {"price": 273.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 273.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577168, SourceUrlId: 3289828, Page: 1): {"price": 3333.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3333.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577170, SourceUrlId: 3289830, Page: 1): {"price": 140.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 140.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577172, SourceUrlId: 3289832, Page: 1): {"price": 130.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 130.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577173, SourceUrlId: 3289833, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577175, SourceUrlId: 3289834, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577176, SourceUrlId: 3289835, Page: 1): {"price": 89.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 89.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577177, SourceUrlId: 3289836, Page: 1): {"price": 888.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 888.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577180, SourceUrlId: 3289839, Page: 1): {"price": 160.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 160.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577183, SourceUrlId: 3289842, Page: 1): {"price": 175.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 175.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577219, SourceUrlId: 3289934, Page: 1): {"price": 65.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 65.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577223, SourceUrlId: 3289940, Page: 1): {"price": 86.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 86.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577228, SourceUrlId: 3289946, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577231, SourceUrlId: 3289949, Page: 1): {"price": 172.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 172.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577232, SourceUrlId: 3289950, Page: 1): {"price": 145.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 145.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577260, SourceUrlId: 3289996, Page: 1): {"price": 380.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 380.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577261, SourceUrlId: 3289997, Page: 1): {"price": 325.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 325.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577265, SourceUrlId: 3290005, Page: 1): {"price": 420.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 420.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577266, SourceUrlId: 3290006, Page: 1): {"price": 270.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 270.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577269, SourceUrlId: 3290009, Page: 1): {"price": 380.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 380.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577280, SourceUrlId: 3290034, Page: 1): {"price": 273.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 273.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577283, SourceUrlId: 28928708, Page: 1): {"price": 397.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 397.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577284, SourceUrlId: 28928707, Page: 1): {"price": 315.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 315.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577285, SourceUrlId: 3290041, Page: 1): {"price": 113.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 113.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577288, SourceUrlId: 3290044, Page: 1): {"price": 267.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 267.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577290, SourceUrlId: 3290046, Page: 1): {"price": 448.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 448.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577302, SourceUrlId: 3290055, Page: 1): {"price": 2799.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2799.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577318, SourceUrlId: 3290070, Page: 1): {"price": 1147.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1147.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577326, SourceUrlId: 3290078, Page: 1): {"price": 2500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577339, SourceUrlId: 3290097, Page: 1): {"price": 153.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 153.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577345, SourceUrlId: 3290104, Page: 1): {"price": 3204.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3204.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577355, SourceUrlId: 3290113, Page: 1): {"price": 224.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 224.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577368, SourceUrlId: 3290128, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577380, SourceUrlId: 3290145, Page: 1): {"price": 605.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 605.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577390, SourceUrlId: 3290162, Page: 1): {"price": 2500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577391, SourceUrlId: 3290165, Page: 1): {"price": 790.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 790.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577398, SourceUrlId: 3290186, Page: 1): {"price": 1500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577401, SourceUrlId: 3290190, Page: 1): {"price": 1000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577404, SourceUrlId: 3290195, Page: 1): {"price": 748.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 748.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577408, SourceUrlId: 3290208, Page: 1): {"price": 1640.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1640.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577411, SourceUrlId: 3290215, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577412, SourceUrlId: 3290216, Page: 1): {"price": 1245.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1245.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577416, SourceUrlId: 3290221, Page: 1): {"price": 689.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 689.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577423, SourceUrlId: 3290232, Page: 1): {"price": 1888.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1888.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577427, SourceUrlId: 3290236, Page: 1): {"price": 430.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 430.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577439, SourceUrlId: 3290248, Page: 1): {"price": 699.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 699.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577441, SourceUrlId: 3290252, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577443, SourceUrlId: 3290255, Page: 1): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577446, SourceUrlId: 3290259, Page: 1): {"price": 1023.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1023.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577451, SourceUrlId: 3290271, Page: 1): {"price": 12.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 12.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577459, SourceUrlId: 3290284, Page: 1): {"price": 114.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 114.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577470, SourceUrlId: 3290295, Page: 1): {"price": 1025.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1025.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577471, SourceUrlId: 3290296, Page: 1): {"price": 2400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577482, SourceUrlId: 3290306, Page: 1): {"price": 650.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 650.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577485, SourceUrlId: 3290315, Page: 1): {"price": 790.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 790.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577487, SourceUrlId: 3290320, Page: 1): {"price": 809.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 809.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577489, SourceUrlId: 3290329, Page: 1): {"price": 1810.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1810.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577499, SourceUrlId: 3290340, Page: 1): {"price": 1124.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1124.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577507, SourceUrlId: 3290350, Page: 1): {"price": 974.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 974.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577510, SourceUrlId: 3290362, Page: 1): {"price": 940.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 940.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577513, SourceUrlId: 3290368, Page: 1): {"price": 321.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 321.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577517, SourceUrlId: 3290376, Page: 1): {"price": 949.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 949.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577518, SourceUrlId: 3290380, Page: 1): {"price": 2878.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2878.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577521, SourceUrlId: 3290394, Page: 1): {"price": 950.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 950.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577522, SourceUrlId: 3290395, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577524, SourceUrlId: 3290413, Page: 1): {"price": 750.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 750.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577526, SourceUrlId: 3290421, Page: 1): {"price": 486.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 486.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577527, SourceUrlId: 3290422, Page: 1): {"price": 999.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 999.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577528, SourceUrlId: 3290429, Page: 1): {"price": 1180.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1180.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577529, SourceUrlId: 3290433, Page: 1): {"price": 106.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 106.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577530, SourceUrlId: 3290440, Page: 1): {"price": 2250.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2250.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577532, SourceUrlId: 3290447, Page: 1): {"price": 900.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 900.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577533, SourceUrlId: 3290448, Page: 1): {"price": 351.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 351.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577534, SourceUrlId: 3290449, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577537, SourceUrlId: 3290457, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577539, SourceUrlId: 3290458, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577541, SourceUrlId: 3290464, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577543, SourceUrlId: 3290466, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577547, SourceUrlId: 3290476, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577549, SourceUrlId: 3290477, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577551, SourceUrlId: 3290479, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577552, SourceUrlId: 3290480, Page: 1): {"price": 4137.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4137.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577560, SourceUrlId: 3290501, Page: 1): {"price": 297.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 297.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577561, SourceUrlId: 3290502, Page: 1): {"price": 1916.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1916.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577565, SourceUrlId: 3290507, Page: 1): {"price": 899.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 899.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577567, SourceUrlId: 3290509, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577568, SourceUrlId: 3290510, Page: 1): {"price": 565.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 565.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577569, SourceUrlId: 3290511, Page: 1): {"price": 615.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 615.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577571, SourceUrlId: 3290513, Page: 1): {"price": 668.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 668.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577574, SourceUrlId: 3290515, Page: 1): {"price": 199.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 199.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577575, SourceUrlId: 3290516, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577576, SourceUrlId: 3290518, Page: 1): {"price": 3000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577579, SourceUrlId: 3290520, Page: 1): {"price": 748.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 748.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577582, SourceUrlId: 3290523, Page: 1): {"price": 1819.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1819.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577586, SourceUrlId: 3290527, Page: 1): {"price": 800.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 800.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577587, SourceUrlId: 3290528, Page: 1): {"price": 872.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 872.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577590, SourceUrlId: 3290530, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577592, SourceUrlId: 3290531, Page: 1): {"price": 1223.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1223.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577596, SourceUrlId: 3290534, Page: 1): {"price": 1999.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1999.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577597, SourceUrlId: 3290536, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577598, SourceUrlId: 3290537, Page: 1): {"price": 698.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 698.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577599, SourceUrlId: 3290538, Page: 1): {"price": 1875.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1875.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577605, SourceUrlId: 3290548, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577606, SourceUrlId: 3290549, Page: 1): {"price": 2500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577610, SourceUrlId: 3290556, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577615, SourceUrlId: 3290564, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577616, SourceUrlId: 3290565, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577620, SourceUrlId: 3290572, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577625, SourceUrlId: 3290586, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577626, SourceUrlId: 3290587, Page: 1): {"price": 1450.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1450.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577627, SourceUrlId: 3290588, Page: 1): {"price": 780.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 780.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577628, SourceUrlId: 3290589, Page: 1): {"price": 750.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 750.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577629, SourceUrlId: 3290595, Page: 1): {"price": 199.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 199.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577630, SourceUrlId: 3290590, Page: 1): {"price": 677.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 677.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577633, SourceUrlId: 3290600, Page: 1): {"price": 2300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577637, SourceUrlId: 3290613, Page: 1): {"price": 323.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 323.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577639, SourceUrlId: 3290618, Page: 1): {"price": 351.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 351.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577640, SourceUrlId: 3290620, Page: 1): {"price": 280.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 280.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577641, SourceUrlId: 3290619, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577642, SourceUrlId: 3290621, Page: 1): {"price": 605.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 605.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577644, SourceUrlId: 3290622, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577646, SourceUrlId: 3290624, Page: 1): {"price": 210.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 210.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577649, SourceUrlId: 3290632, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577650, SourceUrlId: 3290633, Page: 1): {"price": 89.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 89.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577652, SourceUrlId: 3290637, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577655, SourceUrlId: 3290642, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577657, SourceUrlId: 3290644, Page: 1): {"price": 130.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 130.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577660, SourceUrlId: 3290652, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577661, SourceUrlId: 3290653, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577663, SourceUrlId: 3290657, Page: 1): {"price": 139.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 139.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577667, SourceUrlId: 3290668, Page: 1): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577668, SourceUrlId: 3290669, Page: 1): {"price": 2000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577673, SourceUrlId: 3290682, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577675, SourceUrlId: 3290686, Page: 1): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577678, SourceUrlId: 3290694, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577683, SourceUrlId: 3290707, Page: 1): {"price": 477.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 477.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577685, SourceUrlId: 3290711, Page: 1): {"price": 589.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 589.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577694, SourceUrlId: 3290735, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577695, SourceUrlId: 3290736, Page: 1): {"price": 280.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 280.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577696, SourceUrlId: 3290737, Page: 1): {"price": 123.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 123.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577706, SourceUrlId: 3290755, Page: 1): {"price": 380.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 380.0, "old_price": 0}]}
+INFO:HOST_004:put_to_parser (250 prices)
+INFO:HOST_002:(Id: 2577720, SourceUrlId: 3290782, Page: 1): {"price": 474.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 474.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577728, SourceUrlId: 3290792, Page: 1): {"price": 1234.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1234.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577731, SourceUrlId: 3290796, Page: 1): {"price": 67.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 67.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577735, SourceUrlId: 3290803, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577738, SourceUrlId: 3290808, Page: 1): {"price": 446.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 446.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577741, SourceUrlId: 3290815, Page: 1): {"price": 209.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 209.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577742, SourceUrlId: 3290816, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577743, SourceUrlId: 3290819, Page: 1): {"price": 1202.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1202.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577744, SourceUrlId: 3290820, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577745, SourceUrlId: 3290821, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577747, SourceUrlId: 3290823, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577749, SourceUrlId: 3290825, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577750, SourceUrlId: 3290826, Page: 1): {"price": 249.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 249.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577751, SourceUrlId: 3290827, Page: 1): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577753, SourceUrlId: 3290831, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577755, SourceUrlId: 3290835, Page: 1): {"price": 49.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 49.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577756, SourceUrlId: 3290836, Page: 1): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577757, SourceUrlId: 3290837, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577759, SourceUrlId: 3290841, Page: 1): {"price": 380.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 380.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577775, SourceUrlId: 3290875, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577776, SourceUrlId: 3290876, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577777, SourceUrlId: 3290877, Page: 1): {"price": 29.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 29.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577778, SourceUrlId: 3290878, Page: 1): {"price": 149.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 149.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577779, SourceUrlId: 3290879, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577781, SourceUrlId: 3290881, Page: 1): {"price": 475.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 475.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577800, SourceUrlId: 3290907, Page: 1): {"price": 189.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 189.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577804, SourceUrlId: 3290911, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577807, SourceUrlId: 3290917, Page: 1): {"price": 807.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 807.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577809, SourceUrlId: 3290918, Page: 1): {"price": 225.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 225.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577811, SourceUrlId: 3290922, Page: 1): {"price": 368.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 368.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577817, SourceUrlId: 3290926, Page: 1): {"price": 90.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 90.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577822, SourceUrlId: 3290933, Page: 1): {"price": 535.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 535.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577825, SourceUrlId: 3290936, Page: 1): {"price": 6353.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 6353.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577827, SourceUrlId: 3290938, Page: 1): {"price": 1112.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1112.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577830, SourceUrlId: 3290941, Page: 1): {"price": 119.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 119.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577831, SourceUrlId: 3290942, Page: 1): {"price": 192.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 192.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577834, SourceUrlId: 3290945, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577837, SourceUrlId: 3290951, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577838, SourceUrlId: 3290952, Page: 1): {"price": 57.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 57.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577839, SourceUrlId: 3290953, Page: 1): {"price": 906.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 906.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577843, SourceUrlId: 3290961, Page: 1): {"price": 548.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 548.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577844, SourceUrlId: 3290962, Page: 1): {"price": 1093.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1093.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577845, SourceUrlId: 3290963, Page: 1): {"price": 665.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 665.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577849, SourceUrlId: 3290970, Page: 1): {"price": 293.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 293.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577851, SourceUrlId: 3290972, Page: 1): {"price": 49.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 49.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577856, SourceUrlId: 3290981, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577858, SourceUrlId: 3290986, Page: 1): {"price": 1299.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1299.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577861, SourceUrlId: 3290989, Page: 1): {"price": 1800.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1800.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577862, SourceUrlId: 3290990, Page: 1): {"price": 5000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 5000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577863, SourceUrlId: 3290991, Page: 1): {"price": 4917.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4917.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577866, SourceUrlId: 3290994, Page: 1): {"price": 173.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 173.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577867, SourceUrlId: 3290995, Page: 1): {"price": 4758.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 4758.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577869, SourceUrlId: 3290999, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577870, SourceUrlId: 3291000, Page: 1): {"price": 5785.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 5785.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577872, SourceUrlId: 3291001, Page: 1): {"price": 2500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577873, SourceUrlId: 3291002, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577875, SourceUrlId: 3291004, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577876, SourceUrlId: 3291005, Page: 1): {"price": 2088.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2088.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577877, SourceUrlId: 3291006, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577878, SourceUrlId: 3291007, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577879, SourceUrlId: 3291008, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577880, SourceUrlId: 3291010, Page: 1): {"price": 850.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 850.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577881, SourceUrlId: 3291012, Page: 1): {"price": 800.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 800.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577882, SourceUrlId: 3291013, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577883, SourceUrlId: 3291014, Page: 1): {"price": 1459.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1459.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577884, SourceUrlId: 3291015, Page: 1): {"price": 2194.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2194.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577886, SourceUrlId: 3291017, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577887, SourceUrlId: 3291018, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577890, SourceUrlId: 3291022, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577891, SourceUrlId: 3291023, Page: 1): {"price": 999.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 999.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577892, SourceUrlId: 3291024, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577893, SourceUrlId: 3291025, Page: 1): {"price": 3119.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3119.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577895, SourceUrlId: 3291028, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577896, SourceUrlId: 3291027, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577897, SourceUrlId: 3291029, Page: 1): {"price": 415.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 415.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577899, SourceUrlId: 3291031, Page: 1): {"price": 905.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 905.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577900, SourceUrlId: 3291032, Page: 1): {"price": 1288.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1288.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577902, SourceUrlId: 3291034, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577904, SourceUrlId: 3291035, Page: 1): {"price": 1438.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1438.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577905, SourceUrlId: 3291036, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577908, SourceUrlId: 3291039, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577909, SourceUrlId: 3291041, Page: 1): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577910, SourceUrlId: 3291042, Page: 1): {"price": 1599.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1599.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577912, SourceUrlId: 3291044, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577913, SourceUrlId: 3291045, Page: 1): {"price": 123.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 123.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577914, SourceUrlId: 3291046, Page: 1): {"price": 2221.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2221.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577916, SourceUrlId: 3291047, Page: 1): {"price": 205.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 205.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577920, SourceUrlId: 3291050, Page: 1): {"price": 3171.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3171.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577921, SourceUrlId: 3291051, Page: 1): {"price": 299.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 299.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577922, SourceUrlId: 3291052, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577923, SourceUrlId: 3291053, Page: 1): {"price": 1529.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1529.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577925, SourceUrlId: 3291055, Page: 1): {"price": 1180.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1180.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577927, SourceUrlId: 3291057, Page: 1): {"price": 3100.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3100.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577928, SourceUrlId: 3291058, Page: 1): {"price": 177.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 177.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577929, SourceUrlId: 3291059, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577931, SourceUrlId: 3291060, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577932, SourceUrlId: 3291061, Page: 1): {"price": 145.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 145.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577933, SourceUrlId: 3291062, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577935, SourceUrlId: 3291064, Page: 1): {"price": 1150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577936, SourceUrlId: 3291065, Page: 1): {"price": 701.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 701.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577937, SourceUrlId: 3291066, Page: 1): {"price": 903.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 903.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577939, SourceUrlId: 3291069, Page: 1): {"price": 245.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 245.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577940, SourceUrlId: 3291070, Page: 1): {"price": 1000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577941, SourceUrlId: 3291071, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577942, SourceUrlId: 3291072, Page: 1): {"price": 1999.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1999.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577943, SourceUrlId: 3291073, Page: 1): {"price": 107.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 107.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577944, SourceUrlId: 3291074, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577946, SourceUrlId: 3291076, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577947, SourceUrlId: 3291077, Page: 1): {"price": 278.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 278.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577948, SourceUrlId: 3291078, Page: 1): {"price": 478.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 478.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577951, SourceUrlId: 3291081, Page: 1): {"price": 214.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 214.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577954, SourceUrlId: 3291084, Page: 1): {"price": 111.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 111.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577959, SourceUrlId: 5053602, Page: 1): {"price": 540.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 540.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577960, SourceUrlId: 3291089, Page: 1): {"price": 155.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 155.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577961, SourceUrlId: 3291090, Page: 1): {"price": 172.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 172.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577964, SourceUrlId: 3291093, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577966, SourceUrlId: 3291095, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577967, SourceUrlId: 3291096, Page: 1): {"price": 1269.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1269.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577969, SourceUrlId: 3291098, Page: 1): {"price": 509.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 509.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577970, SourceUrlId: 3291099, Page: 1): {"price": 1093.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1093.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577973, SourceUrlId: 3291102, Page: 1): {"price": 281.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 281.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577974, SourceUrlId: 3291103, Page: 1): {"price": 403.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 403.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577975, SourceUrlId: 3291104, Page: 1): {"price": 322.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 322.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577976, SourceUrlId: 3291105, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577977, SourceUrlId: 3291106, Page: 1): {"price": 349.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 349.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577978, SourceUrlId: 3291107, Page: 1): {"price": 1399.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1399.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577979, SourceUrlId: 3291108, Page: 1): {"price": 251.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 251.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577981, SourceUrlId: 3291110, Page: 1): {"price": 1589.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1589.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577982, SourceUrlId: 3291111, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577985, SourceUrlId: 3291114, Page: 1): {"price": 128.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 128.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577986, SourceUrlId: 3291115, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577989, SourceUrlId: 3291119, Page: 1): {"price": 157.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 157.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577990, SourceUrlId: 3291120, Page: 1): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577991, SourceUrlId: 3291121, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577993, SourceUrlId: 3291123, Page: 1): {"price": 650.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 650.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577994, SourceUrlId: 3291124, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577995, SourceUrlId: 3291125, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2577997, SourceUrlId: 3291127, Page: 1): {"price": 305.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 305.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2577998, SourceUrlId: 3291128, Page: 1): {"price": 271.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 271.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578001, SourceUrlId: 3291131, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578002, SourceUrlId: 3291132, Page: 1): {"price": 106.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 106.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578003, SourceUrlId: 3291133, Page: 1): {"price": 2950.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2950.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578004, SourceUrlId: 3291134, Page: 1): {"price": 302.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 302.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578005, SourceUrlId: 3291135, Page: 1): {"price": 1349.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1349.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578010, SourceUrlId: 3291140, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578011, SourceUrlId: 3291141, Page: 1): {"price": 2445.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2445.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578012, SourceUrlId: 3291142, Page: 1): {"price": 229.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 229.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578015, SourceUrlId: 3291145, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578017, SourceUrlId: 3291149, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578020, SourceUrlId: 3291154, Page: 1): {"price": 350.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 350.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578021, SourceUrlId: 3291155, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578022, SourceUrlId: 3291156, Page: 1): {"price": 351.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 351.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578023, SourceUrlId: 3291157, Page: 1): {"price": 636.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 636.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578024, SourceUrlId: 3291161, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578025, SourceUrlId: 3291158, Page: 1): {"price": 484.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 484.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578029, SourceUrlId: 3291162, Page: 1): {"price": 292.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 292.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578030, SourceUrlId: 3291163, Page: 1): {"price": 1500.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1500.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578033, SourceUrlId: 3291166, Page: 1): {"price": 2431.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2431.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578036, SourceUrlId: 3291169, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578037, SourceUrlId: 3291170, Page: 1): {"price": 2000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578038, SourceUrlId: 3291171, Page: 1): {"price": 120.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 120.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578040, SourceUrlId: 3291176, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578043, SourceUrlId: 3291181, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578046, SourceUrlId: 3291184, Page: 1): {"price": 764.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 764.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578047, SourceUrlId: 3291185, Page: 1): {"price": 341.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 341.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578048, SourceUrlId: 3291186, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578053, SourceUrlId: 3291193, Page: 1): {"price": 152.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 152.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578055, SourceUrlId: 3291197, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578056, SourceUrlId: 3291199, Page: 1): {"price": 668.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 668.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578058, SourceUrlId: 3291201, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578059, SourceUrlId: 3291202, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578060, SourceUrlId: 3291203, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578063, SourceUrlId: 3291207, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578066, SourceUrlId: 3291210, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578067, SourceUrlId: 3291211, Page: 1): {"price": 215.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 215.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578069, SourceUrlId: 3291213, Page: 1): {"price": 768.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 768.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578071, SourceUrlId: 3291215, Page: 1): {"price": 55.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 55.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578072, SourceUrlId: 3291216, Page: 1): {"price": 984.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 984.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578073, SourceUrlId: 3291217, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578075, SourceUrlId: 3291220, Page: 1): {"price": 557.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 557.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578077, SourceUrlId: 3291222, Page: 1): {"price": 346.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 346.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578081, SourceUrlId: 3291227, Page: 1): {"price": 275.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 275.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578082, SourceUrlId: 3291228, Page: 1): {"price": 381.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 381.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578084, SourceUrlId: 3291229, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578085, SourceUrlId: 3291230, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578087, SourceUrlId: 3291232, Page: 1): {"price": 1034.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1034.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578089, SourceUrlId: 3291234, Page: 1): {"price": 287.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 287.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578090, SourceUrlId: 3291235, Page: 1): {"price": 89.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 89.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578092, SourceUrlId: 3291238, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578093, SourceUrlId: 3291239, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578096, SourceUrlId: 3291241, Page: 1): {"price": 554.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 554.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578103, SourceUrlId: 3291246, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578106, SourceUrlId: 3291249, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578107, SourceUrlId: 3291250, Page: 1): {"price": 1231.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1231.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578108, SourceUrlId: 3291251, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578112, SourceUrlId: 3291257, Page: 1): {"price": 19801.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 19801.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578118, SourceUrlId: 3291267, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578124, SourceUrlId: 3291275, Page: 1): {"price": 444.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 444.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578128, SourceUrlId: 3291284, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578132, SourceUrlId: 3291289, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578134, SourceUrlId: 3291293, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578140, SourceUrlId: 3291304, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578144, SourceUrlId: 3291308, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578147, SourceUrlId: 3291310, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578148, SourceUrlId: 3291311, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578150, SourceUrlId: 3291313, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578151, SourceUrlId: 3291315, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578154, SourceUrlId: 3291321, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578156, SourceUrlId: 3291323, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578157, SourceUrlId: 3291324, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578160, SourceUrlId: 3291327, Page: 1): {"price": 6000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 6000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578161, SourceUrlId: 3291329, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578162, SourceUrlId: 3291332, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578164, SourceUrlId: 3291333, Page: 1): {"price": 284.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 284.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578166, SourceUrlId: 3291334, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578168, SourceUrlId: 3291336, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578178, SourceUrlId: 3291347, Page: 1): {"price": 270.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 270.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578200, SourceUrlId: 3291374, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578215, SourceUrlId: 3291390, Page: 1): {"price": 159.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 159.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578229, SourceUrlId: 3291406, Page: 1): {"price": 184.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 184.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578231, SourceUrlId: 3291408, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578241, SourceUrlId: 3291420, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578242, SourceUrlId: 3291421, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578248, SourceUrlId: 3291431, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578253, SourceUrlId: 3291436, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578254, SourceUrlId: 3291437, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578257, SourceUrlId: 3291443, Page: 1): {"price": 73.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 73.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578263, SourceUrlId: 3291452, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578270, SourceUrlId: 3291468, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578283, SourceUrlId: 3291486, Page: 1): {"price": 508.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 508.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578284, SourceUrlId: 3291487, Page: 1): {"price": 79.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 79.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578285, SourceUrlId: 3291488, Page: 1): {"price": 635.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 635.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578286, SourceUrlId: 3291489, Page: 1): {"price": 1064.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1064.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578287, SourceUrlId: 3291490, Page: 1): {"price": 71.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 71.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578290, SourceUrlId: 3291493, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578291, SourceUrlId: 3291494, Page: 1): {"price": 231.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 231.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578292, SourceUrlId: 3291496, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578294, SourceUrlId: 3291499, Page: 1): {"price": 181.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 181.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578295, SourceUrlId: 3291498, Page: 1): {"price": 245.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 245.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578296, SourceUrlId: 3291500, Page: 1): {"price": 233.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 233.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578297, SourceUrlId: 3291501, Page: 1): {"price": 50.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 50.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578298, SourceUrlId: 3291502, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578299, SourceUrlId: 3291503, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578300, SourceUrlId: 3291504, Page: 1): {"price": 540.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 540.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578302, SourceUrlId: 3291506, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578303, SourceUrlId: 3291507, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578304, SourceUrlId: 3291508, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578306, SourceUrlId: 3291510, Page: 1): {"price": 367.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 367.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578307, SourceUrlId: 3291511, Page: 1): {"price": 549.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 549.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578312, SourceUrlId: 3291522, Page: 1): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_004:put_to_parser (250 prices)
+INFO:HOST_004:get_products.php page: 2, per page: 500
+INFO:HOST_002:(Id: 2578314, SourceUrlId: 3291526, Page: 2): {"price": 599.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 599.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578316, SourceUrlId: 3291530, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578318, SourceUrlId: 3291534, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578321, SourceUrlId: 3291541, Page: 2): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578325, SourceUrlId: 3291548, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578330, SourceUrlId: 3291553, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578332, SourceUrlId: 3291557, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578335, SourceUrlId: 3291560, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578351, SourceUrlId: 3291594, Page: 2): {"price": 164.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 164.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578352, SourceUrlId: 3291595, Page: 2): {"price": 256.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 256.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578360, SourceUrlId: 3291605, Page: 2): {"price": 1270.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1270.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578361, SourceUrlId: 3291606, Page: 2): {"price": 950.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 950.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578362, SourceUrlId: 3291607, Page: 2): {"price": 497.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 497.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578363, SourceUrlId: 3291608, Page: 2): {"price": 698.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 698.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578367, SourceUrlId: 3291613, Page: 2): {"price": 314.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 314.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578368, SourceUrlId: 3291614, Page: 2): {"price": 267.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 267.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578371, SourceUrlId: 3291617, Page: 2): {"price": 478.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 478.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578372, SourceUrlId: 3291618, Page: 2): {"price": 10813.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 10813.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578375, SourceUrlId: 3291623, Page: 2): {"price": 287.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 287.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578376, SourceUrlId: 3291624, Page: 2): {"price": 349.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 349.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578381, SourceUrlId: 3291633, Page: 2): {"price": 1000.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1000.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578382, SourceUrlId: 3291634, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578383, SourceUrlId: 3291635, Page: 2): {"price": 874.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 874.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578392, SourceUrlId: 3291652, Page: 2): {"price": 635.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 635.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578399, SourceUrlId: 3291663, Page: 2): {"price": 1297.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1297.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578400, SourceUrlId: 3291664, Page: 2): {"price": 845.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 845.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578402, SourceUrlId: 3291666, Page: 2): {"price": 1481.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1481.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578403, SourceUrlId: 3291667, Page: 2): {"price": 352.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 352.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578404, SourceUrlId: 3291668, Page: 2): {"price": 871.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 871.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578406, SourceUrlId: 3291670, Page: 2): {"price": 5582.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 5582.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578412, SourceUrlId: 3291676, Page: 2): {"price": 585.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 585.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578413, SourceUrlId: 3291677, Page: 2): {"price": 569.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 569.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578418, SourceUrlId: 3291682, Page: 2): {"price": 824.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 824.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578423, SourceUrlId: 3291687, Page: 2): {"price": 1055.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1055.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578424, SourceUrlId: 3291688, Page: 2): {"price": 325.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 325.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578426, SourceUrlId: 3291690, Page: 2): {"price": 554.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 554.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578429, SourceUrlId: 3291693, Page: 2): {"price": 397.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 397.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578431, SourceUrlId: 3291695, Page: 2): {"price": 1936.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1936.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578433, SourceUrlId: 3291697, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578434, SourceUrlId: 3291698, Page: 2): {"price": 1587.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1587.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578435, SourceUrlId: 3291700, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578438, SourceUrlId: 3291703, Page: 2): {"price": 5102.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 5102.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578439, SourceUrlId: 3291704, Page: 2): {"price": 2193.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2193.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578440, SourceUrlId: 3291705, Page: 2): {"price": 1600.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1600.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578445, SourceUrlId: 3291709, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578446, SourceUrlId: 3291710, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578447, SourceUrlId: 3291711, Page: 2): {"price": 327.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 327.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578449, SourceUrlId: 3291713, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578450, SourceUrlId: 3291714, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578451, SourceUrlId: 3291715, Page: 2): {"price": 6863.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 6863.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578453, SourceUrlId: 3291717, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578454, SourceUrlId: 3291718, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578455, SourceUrlId: 3291719, Page: 2): {"price": 504.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 504.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578457, SourceUrlId: 3291723, Page: 2): {"price": 1720.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1720.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578458, SourceUrlId: 3291724, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578459, SourceUrlId: 3291725, Page: 2): {"price": 3487.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3487.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578461, SourceUrlId: 3291729, Page: 2): {"price": 3585.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3585.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578462, SourceUrlId: 3291730, Page: 2): {"price": 299.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 299.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578464, SourceUrlId: 3291732, Page: 2): {"price": 1747.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1747.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578467, SourceUrlId: 3291738, Page: 2): {"price": 1587.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1587.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578468, SourceUrlId: 3291740, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578469, SourceUrlId: 3291741, Page: 2): {"price": 411.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 411.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578472, SourceUrlId: 3291746, Page: 2): {"price": 540.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 540.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578473, SourceUrlId: 3291747, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578477, SourceUrlId: 3291759, Page: 2): {"price": 219.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 219.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578478, SourceUrlId: 3291760, Page: 2): {"price": 541.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 541.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578480, SourceUrlId: 3291765, Page: 2): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578482, SourceUrlId: 3291769, Page: 2): {"price": 498.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 498.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578485, SourceUrlId: 3291772, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578486, SourceUrlId: 3291773, Page: 2): {"price": 254.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 254.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578487, SourceUrlId: 3291774, Page: 2): {"price": 146.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 146.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578491, SourceUrlId: 3291780, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578492, SourceUrlId: 3291781, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578496, SourceUrlId: 3291788, Page: 2): {"price": 174.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 174.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578498, SourceUrlId: 3291792, Page: 2): {"price": 495.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 495.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578499, SourceUrlId: 3291793, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578500, SourceUrlId: 3291794, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578504, SourceUrlId: 3291805, Page: 2): {"price": 715.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 715.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578506, SourceUrlId: 3291807, Page: 2): {"price": 427.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 427.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578512, SourceUrlId: 3291818, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578513, SourceUrlId: 3291819, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578522, SourceUrlId: 3291831, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578524, SourceUrlId: 3291836, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578526, SourceUrlId: 3291838, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578528, SourceUrlId: 3291841, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578531, SourceUrlId: 3291844, Page: 2): {"price": 2697.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2697.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578537, SourceUrlId: 3291850, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578538, SourceUrlId: 3291851, Page: 2): {"price": 188.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 188.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578541, SourceUrlId: 3291855, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578542, SourceUrlId: 3291856, Page: 2): {"price": 221.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 221.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578545, SourceUrlId: 3291863, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578549, SourceUrlId: 3291869, Page: 2): {"price": 193.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 193.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578550, SourceUrlId: 3291870, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578551, SourceUrlId: 3291871, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578552, SourceUrlId: 3291872, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578554, SourceUrlId: 3291875, Page: 2): {"price": 3779.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3779.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578556, SourceUrlId: 3291877, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578557, SourceUrlId: 3291879, Page: 2): {"price": 90.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 90.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578558, SourceUrlId: 3291880, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578562, SourceUrlId: 3291887, Page: 2): {"price": 1705.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1705.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578565, SourceUrlId: 3291889, Page: 2): {"price": 1531.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1531.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578568, SourceUrlId: 3291894, Page: 2): {"price": 192.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 192.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578569, SourceUrlId: 3291895, Page: 2): {"price": 368.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 368.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578572, SourceUrlId: 3291899, Page: 2): {"price": 79301.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 79301.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578575, SourceUrlId: 3291903, Page: 2): {"price": 187.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 187.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578576, SourceUrlId: 3291904, Page: 2): {"price": 1277.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1277.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578578, SourceUrlId: 3291906, Page: 2): {"price": 450.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 450.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578579, SourceUrlId: 3291907, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578582, SourceUrlId: 3291910, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578585, SourceUrlId: 3291913, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578586, SourceUrlId: 3291915, Page: 2): {"price": 550.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 550.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578587, SourceUrlId: 3291917, Page: 2): {"price": 111.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 111.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578595, SourceUrlId: 3291925, Page: 2): {"price": 599.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 599.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578596, SourceUrlId: 3291926, Page: 2): {"price": 371.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 371.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578597, SourceUrlId: 3291927, Page: 2): {"price": 861.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 861.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578598, SourceUrlId: 3291928, Page: 2): {"price": 96.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 96.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578599, SourceUrlId: 3291929, Page: 2): {"price": 882.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 882.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578600, SourceUrlId: 3291930, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578601, SourceUrlId: 3291931, Page: 2): {"price": 1844.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1844.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578602, SourceUrlId: 3291932, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578605, SourceUrlId: 3291947, Page: 2): {"price": 586.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 586.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578608, SourceUrlId: 3291936, Page: 2): {"price": 708.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 708.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578609, SourceUrlId: 3291937, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578611, SourceUrlId: 3291940, Page: 2): {"price": 208.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 208.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578613, SourceUrlId: 3291942, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578614, SourceUrlId: 3291943, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578615, SourceUrlId: 3291944, Page: 2): {"price": 114.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 114.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578616, SourceUrlId: 3291946, Page: 2): {"price": 2278.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2278.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578618, SourceUrlId: 3291948, Page: 2): {"price": 351.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 351.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578620, SourceUrlId: 3291950, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578622, SourceUrlId: 3291952, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578627, SourceUrlId: 3291967, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578629, SourceUrlId: 3291975, Page: 2): {"price": 319.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 319.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578631, SourceUrlId: 3291979, Page: 2): {"price": 3520.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3520.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578632, SourceUrlId: 3291980, Page: 2): {"price": 200.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 200.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578635, SourceUrlId: 3291986, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578643, SourceUrlId: 3292002, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578644, SourceUrlId: 3292003, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578646, SourceUrlId: 3292015, Page: 2): {"price": 399.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 399.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578649, SourceUrlId: 3292021, Page: 2): {"price": 324.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 324.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578651, SourceUrlId: 3292023, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578657, SourceUrlId: 3292029, Page: 2): {"price": 89.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 89.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578658, SourceUrlId: 3292030, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578659, SourceUrlId: 3292031, Page: 2): {"price": 384.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 384.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578660, SourceUrlId: 3292032, Page: 2): {"price": 715.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 715.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578662, SourceUrlId: 3292037, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578663, SourceUrlId: 3292038, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578664, SourceUrlId: 3292039, Page: 2): {"price": 156.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 156.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578665, SourceUrlId: 3292040, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578667, SourceUrlId: 3292043, Page: 2): {"price": 113.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 113.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578668, SourceUrlId: 3292044, Page: 2): {"price": 1417.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1417.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578669, SourceUrlId: 3292045, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578670, SourceUrlId: 3292051, Page: 2): {"price": 192.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 192.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578671, SourceUrlId: 3292052, Page: 2): {"price": 98.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 98.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578672, SourceUrlId: 3292053, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578673, SourceUrlId: 3292054, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578675, SourceUrlId: 3292056, Page: 2): {"price": 459.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 459.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578676, SourceUrlId: 3292057, Page: 2): {"price": 208.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 208.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578677, SourceUrlId: 3292061, Page: 2): {"price": 566.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 566.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578678, SourceUrlId: 3292062, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578679, SourceUrlId: 3292063, Page: 2): {"price": 75.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 75.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578680, SourceUrlId: 3292064, Page: 2): {"price": 252.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 252.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578681, SourceUrlId: 3292065, Page: 2): {"price": 195.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 195.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578682, SourceUrlId: 3292068, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578683, SourceUrlId: 3292069, Page: 2): {"price": 181.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 181.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578685, SourceUrlId: 3292071, Page: 2): {"price": 354.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 354.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578686, SourceUrlId: 3292073, Page: 2): {"price": 588.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 588.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578688, SourceUrlId: 3292075, Page: 2): {"price": 203.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 203.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578689, SourceUrlId: 3292076, Page: 2): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578690, SourceUrlId: 3292078, Page: 2): {"price": 428.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 428.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578691, SourceUrlId: 3292079, Page: 2): {"price": 321.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 321.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578692, SourceUrlId: 3292082, Page: 2): {"price": 430.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 430.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578694, SourceUrlId: 3292084, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578702, SourceUrlId: 3292093, Page: 2): {"price": 325.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 325.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578705, SourceUrlId: 3292096, Page: 2): {"price": 499.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 499.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578706, SourceUrlId: 3292097, Page: 2): {"price": 203.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 203.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578707, SourceUrlId: 3292100, Page: 2): {"price": 219.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 219.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578708, SourceUrlId: 3292105, Page: 2): {"price": 1250.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1250.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578709, SourceUrlId: 3292106, Page: 2): {"price": 35.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 35.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578711, SourceUrlId: 3292108, Page: 2): {"price": 292.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 292.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578712, SourceUrlId: 3292109, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578713, SourceUrlId: 3292110, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578714, SourceUrlId: 3292111, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578719, SourceUrlId: 3292118, Page: 2): {"price": 289.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 289.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578722, SourceUrlId: 3292122, Page: 2): {"price": 237.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 237.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578723, SourceUrlId: 3292123, Page: 2): {"price": 557.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 557.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578724, SourceUrlId: 3292124, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578725, SourceUrlId: 3292126, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578728, SourceUrlId: 3292132, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2578729, SourceUrlId: 3292133, Page: 2): {"price": 413.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 413.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578743, SourceUrlId: 3292147, Page: 2): {"price": 350.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 350.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2578748, SourceUrlId: 3292154, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2579312, SourceUrlId: 3292720, Page: 2): {"price": 176.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 176.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2579318, SourceUrlId: 3292726, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2579506, SourceUrlId: 3292919, Page: 2): {"price": 189.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 189.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2579516, SourceUrlId: 3292929, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2579539, SourceUrlId: 3292952, Page: 2): {"price": 250.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 250.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2579728, SourceUrlId: 3293147, Page: 2): {"price": 240.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 240.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2580543, SourceUrlId: 3293968, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2580546, SourceUrlId: 3293971, Page: 2): {"price": 160.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 160.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2580819, SourceUrlId: 3294245, Page: 2): {"price": 2889.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2889.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2580839, SourceUrlId: 3294265, Page: 2): {"price": 251.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 251.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581015, SourceUrlId: 3294441, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581036, SourceUrlId: 3294462, Page: 2): {"price": 906.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 906.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581044, SourceUrlId: 3294470, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581045, SourceUrlId: 3294471, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581079, SourceUrlId: 3294554, Page: 2): {"price": 268.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 268.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581080, SourceUrlId: 3294555, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581091, SourceUrlId: 3294578, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581092, SourceUrlId: 3294584, Page: 2): {"price": 240.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 240.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581111, SourceUrlId: 3294639, Page: 2): {"price": 430.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 430.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581121, SourceUrlId: 3294648, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581132, SourceUrlId: 3294659, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581166, SourceUrlId: 3294736, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581167, SourceUrlId: 3294737, Page: 2): {"price": 764.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 764.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581294, SourceUrlId: 3294854, Page: 2): {"price": 745.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 745.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581301, SourceUrlId: 3294861, Page: 2): {"price": 3847.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 3847.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581304, SourceUrlId: 3294864, Page: 2): {"price": 330.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 330.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581314, SourceUrlId: 3294874, Page: 2): {"price": 669.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 669.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581318, SourceUrlId: 3294878, Page: 2): {"price": 642.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 642.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581374, SourceUrlId: 3294933, Page: 2): {"price": 143.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 143.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581386, SourceUrlId: 3294943, Page: 2): {"price": 600.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 600.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581391, SourceUrlId: 3294948, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581394, SourceUrlId: 3294951, Page: 2): {"price": 49.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 49.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581419, SourceUrlId: 3294974, Page: 2): {"price": 124.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 124.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581453, SourceUrlId: 3295008, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581981, SourceUrlId: 3295536, Page: 2): {"price": 985.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 985.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581982, SourceUrlId: 3295537, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581983, SourceUrlId: 3295538, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581984, SourceUrlId: 3295539, Page: 2): {"price": 661.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 661.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581985, SourceUrlId: 3295540, Page: 2): {"price": 129.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 129.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581987, SourceUrlId: 3295542, Page: 2): {"price": 51.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 51.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581988, SourceUrlId: 3295543, Page: 2): {"price": 100.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 100.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581989, SourceUrlId: 3295544, Page: 2): {"price": 49.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 49.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581990, SourceUrlId: 3295546, Page: 2): {"price": 1826.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 1826.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581992, SourceUrlId: 3295548, Page: 2): {"price": 730.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 730.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2581993, SourceUrlId: 3295549, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581995, SourceUrlId: 3295554, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2581997, SourceUrlId: 3295555, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582037, SourceUrlId: 3295610, Page: 2): {"price": 142.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 142.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2582042, SourceUrlId: 3295617, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582049, SourceUrlId: 3295636, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582051, SourceUrlId: 3295638, Page: 2): {"price": 49.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 49.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2582061, SourceUrlId: 3295655, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582103, SourceUrlId: 3295738, Page: 2): {"price": 110.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 110.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2582143, SourceUrlId: 3295807, Page: 2): {"price": 230.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 230.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2582174, SourceUrlId: 3295906, Page: 2): {"price": 235.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 235.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2582200, SourceUrlId: 3295946, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582202, SourceUrlId: 3295947, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2582205, SourceUrlId: 3295950, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_004:put_to_parser (250 prices)
+INFO:HOST_002:(Id: 2582775, SourceUrlId: 3296535, Page: 2): {"price": 450.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 450.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2584661, SourceUrlId: 3298431, Page: 2): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2584696, SourceUrlId: 3298497, Page: 2): {"price": 140.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 140.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2584706, SourceUrlId: 3298512, Page: 2): {"price": 74.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 74.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 2584718, SourceUrlId: 3298530, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 2584783, SourceUrlId: 3298621, Page: 2): {"price": 329.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 329.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 9193453, SourceUrlId: 10524583, Page: 2): {"price": 139.0, "old_price": 0, "variations": [{"variation": "4", "price": 139.0, "old_price": 0}, {"variation": "5", "price": 233.0, "old_price": 0}, {"variation": "6", "price": 268.0, "old_price": 0}, {"variation": "7", "price": 418.0, "old_price": 0}, {"variation": "9", "price": 447.0, "old_price": 0}, {"variation": "10", "price": 416.0, "old_price": 0}, {"variation": "11", "price": 1804.0, "old_price": 0}, {"variation": "12", "price": 450.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 12273781, SourceUrlId: 38167342, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_002:(Id: 13118582, SourceUrlId: 14817500, Page: 2): {"price": 2331.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 2331.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118593, SourceUrlId: 14817516, Page: 2): {"price": 937.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 937.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118641, SourceUrlId: 28926681, Page: 2): {"price": 449.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 449.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118642, SourceUrlId: 28926680, Page: 2): {"price": 375.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 375.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118698, SourceUrlId: 14817650, Page: 2): {"price": 160.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 160.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118866, SourceUrlId: 14817925, Page: 2): {"price": 123.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 123.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118869, SourceUrlId: 14817932, Page: 2): {"price": 114.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 114.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118870, SourceUrlId: 14817935, Page: 2): {"price": 187.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 187.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118959, SourceUrlId: 28928258, Page: 2): {"price": 395.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 395.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118961, SourceUrlId: 28928246, Page: 2): {"price": 400.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 400.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118962, SourceUrlId: 28928269, Page: 2): {"price": 398.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 398.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118973, SourceUrlId: 28928705, Page: 2): {"price": 343.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 343.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 13118977, SourceUrlId: 14818119, Page: 2): {"price": 739.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 739.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 15846001, SourceUrlId: 38167354, Page: 2): {"price": 30.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 30.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933250, SourceUrlId: 23678026, Page: 2): {"price": 127.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 127.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933251, SourceUrlId: 23678027, Page: 2): {"price": 99.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 99.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933259, SourceUrlId: 23678101, Page: 2): {"price": 59.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 59.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933260, SourceUrlId: 23678102, Page: 2): {"price": 74.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 74.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933261, SourceUrlId: 23678105, Page: 2): {"price": 563.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 563.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933262, SourceUrlId: 23678115, Page: 2): {"price": 39.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 39.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933263, SourceUrlId: 23678117, Page: 2): {"price": 57.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 57.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933271, SourceUrlId: 23678135, Page: 2): {"price": 314.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 314.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933272, SourceUrlId: 23678136, Page: 2): {"price": 279.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 279.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933277, SourceUrlId: 23678161, Page: 2): {"price": 198.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 198.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933278, SourceUrlId: 23678162, Page: 2): {"price": 180.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 180.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933286, SourceUrlId: 23678259, Page: 2): {"price": 75.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 75.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933289, SourceUrlId: 23678265, Page: 2): {"price": 98.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 98.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933293, SourceUrlId: 23678273, Page: 2): {"price": 150.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 150.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933308, SourceUrlId: 23678382, Page: 2): {"price": 105.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 105.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933312, SourceUrlId: 23678421, Page: 2): {"price": 69.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 69.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933315, SourceUrlId: 23678425, Page: 2): {"price": 140.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 140.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933319, SourceUrlId: 23678457, Page: 2): {"price": 105.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 105.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933320, SourceUrlId: 23678478, Page: 2): {"price": 436.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 436.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933321, SourceUrlId: 23678479, Page: 2): {"price": 259.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 259.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933325, SourceUrlId: 23678483, Page: 2): {"price": 279.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 279.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933392, SourceUrlId: 23678554, Page: 2): {"price": 93.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 93.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 20933458, SourceUrlId: 23678620, Page: 2): {"price": 75.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 75.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 21420423, SourceUrlId: 24205140, Page: 2): {"price": 117.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 117.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 21420443, SourceUrlId: 24205400, Page: 2): {"price": 300.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 300.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 21420449, SourceUrlId: 24205404, Page: 2): {"price": 70.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 70.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 21420455, SourceUrlId: 24205423, Page: 2): {"price": 28.0, "old_price": 0, "variations": [{"variation": "One Size", "price": 28.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 24487135, SourceUrlId: 38167443, Page: 2): {"price": 1539.0, "old_price": 0, "variations": [{"variation": "10", "price": 1539.0, "old_price": 0}]}
+INFO:HOST_002:(Id: 24747432, SourceUrlId: 28927840, Page: 2): {"price": 0.0, "old_price": 0.0, "variations": null}
+INFO:HOST_004:put_to_parser (51 prices)

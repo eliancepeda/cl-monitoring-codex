@@ -1,0 +1,22 @@
+ error status: ERROR LOADING: 503 Server Error: Service Unavailable for url: https://HOST_022/api/products?pagination%5Bpage%5D=395&pagination%5Blimit%5D=1000
+1. Начинаем загрузку актуальных товаров из источника...
+   ❌ Ошибка при загрузке страницы #0 из источника.
+------------ОШИБКА! ДАННЫЕ НЕ ЗАГРУЖЕНЫ---------
+Traceback (most recent call last):
+  File "/root/crawlab_workspace/67ae022b99197fd1a1bf0136/69d09ad0a2fc400a16fae35e/HOST_023", line 272, in get_products_from_source
+    response.raise_for_status()
+  File "/usr/local/lib/python3.11/dist-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+HOST_007: 503 Server Error: Service Unavailable for url: https://HOST_022/api/products?pagination%5Bpage%5D=395&pagination%5Blimit%5D=1000
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/root/crawlab_workspace/67ae022b99197fd1a1bf0136/69d09ad0a2fc400a16fae35e/HOST_023", line 454, in <module>
+    main()
+  File "/root/crawlab_workspace/67ae022b99197fd1a1bf0136/69d09ad0a2fc400a16fae35e/HOST_023", line 354, in main
+    products_in_source = get_products_from_source()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/crawlab_workspace/67ae022b99197fd1a1bf0136/69d09ad0a2fc400a16fae35e/HOST_023", line 280, in get_products_from_source
+    raise Exception(f'ERROR LOADING: {e}')
+Exception: ERROR LOADING: 503 Server Error: Service Unavailable for url: https://HOST_022/api/products?pagination%5Bpage%5D=395&pagination%5Blimit%5D=1000
