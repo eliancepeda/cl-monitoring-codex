@@ -675,3 +675,40 @@ Related files:
 - src/cl_monitoring/db/repo.py
 - src/cl_monitoring/sync/poller.py
 - src/cl_monitoring/crawlab/client.py
+
+---
+
+## 2026-04-19 — Minimal v1 dashboard is three evidence-first local screens
+
+Status: Accepted
+
+Context:
+`T7` already fixed the local SQLite truth path. `T8` needs a minimal UI scope
+that answers what is running, broken, overdue, and recently recovered without
+reopening runtime logic or imitating Crawlab.
+
+Decision:
+Limit v1 UI to three server-rendered screens: project board, spider detail,
+and incidents. All browser-visible data comes from repository-backed SQLite
+reads only.
+
+Why:
+This is the smallest dashboard that surfaces parser/schedule truth safely while
+keeping the browser outside Crawlab and avoiding UI scope creep.
+
+Consequences:
+- No action buttons.
+- No direct Crawlab calls from the browser.
+- No graphs-only widgets, dense filters, or UI settings.
+- `T9` should touch repo read methods, routes, templates, and app wiring only.
+
+Related files:
+- docs/adr/0003-minimal-dashboard.md
+- src/cl_monitoring/db/repo.py
+- src/cl_monitoring/static/style.css
+- src/cl_monitoring/web/routes.py
+- src/cl_monitoring/web/templates/base.html
+- src/cl_monitoring/web/templates/project_board.html
+- src/cl_monitoring/web/templates/spider_detail.html
+- src/cl_monitoring/web/templates/incidents.html
+- src/cl_monitoring/app.py

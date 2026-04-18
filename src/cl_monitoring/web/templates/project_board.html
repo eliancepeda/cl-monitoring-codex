@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} | CL Monitoring{% endblock %}
+
+{% block content %}
+<section class="hero panel">
+    <p class="eyebrow">Minimal dashboard</p>
+    <h1>{{ page_title }}</h1>
+    <p class="lede">One local landing page for what is running, warning, critical, stale or missed, and what recovered recently.</p>
+</section>
+
+{% if groups %}
+    {% for group in groups %}
+    <section class="panel stack-lg">
+        <header class="panel-header split-row">
+            <div>
+                <p class="eyebrow">Project</p>
+                <h2>{{ group.project_id }}</h2>
+            </div>
+            <div class="summary-strip">
+                <span>{{ group.active_spider_count }} running</span>
+                <span>{{ group.open_issue_count }} open issues</span>
+                <span>{{ group.recent_recovery_count }} recent recoveries</span>
+            </div>
+        </header>
+
+        <div class="stack-lg">
+            {% for row in group.rows %}
+            <article class="panel panel-muted spider-card">
+                <div class="split-row card-head">
+                    <div>
+                        <h3><a href="{{ url_for('spider_detail', spider_id=row.spider_id) }}">{{ row.spider_name }}</a></h3>
+                        <p class="meta">{{ row.spider_id }}</p>
+                    </div>
+                    <div class="badge-list">
+                        {% for badge in row.badges %}
+                        <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <dl class="metric-grid">
+                    <div>
+                        <dt>Running</dt>
+                        <dd>{{ row.active_task_count }}</dd>
+                    </div>
+                    <div>
+                        <dt>Warning / critical</dt>
+                        <dd>{{ row.open_task_issues + row.open_schedule_issues }}</dd>
+                    </div>
+                    <div>
+                        <dt>Stale / missed</dt>
+                        <dd>{{ row.open_schedule_issues }}</dd>
+                    </div>
+                    <div>
+                        <dt>Recovered manually</dt>
+                        <dd>{% if row.recovered_manually %}yes{% elif row.recent_recovery_count > 0 %}recently{% else %}no{% endif %}</dd>
+                    </div>
+                    <div>
+                        <dt>Parsed summary</dt>
+                        <dd>{{ row.latest_terminal_run_result or 'n/a' }}</dd>
+                    </div>
+                    <div>
+                        <dt>Baseline runtime</dt>
+                        <dd>
+                            {% if row.baseline %}
+                            {{ format_duration_ms(row.baseline.runtime_ms) }} from {{ row.baseline.sample_count }} local runs
+                            {% else %}
+                            n/a
+                            {% endif %}
+                        </dd>
+                    </div>
+                </dl>
+
+                <div class="meta-row">
+                    <span>Latest terminal: {{ format_datetime(row.latest_terminal_at) }}</span>
+                    <span>Oldest active: {{ format_datetime(row.oldest_active_at) }}</span>
+                    <span>Latest recovery: {{ format_datetime(row.latest_recovery_at) }}</span>
+                </div>
+
+                <div class="evidence-grid">
+                    <section class="evidence-block">
+                        <h4>Open issue evidence</h4>
+                        <p class="meta">{{ row.open_issue_reason_code or 'No open incident' }}</p>
+                        {% if row.open_issue_evidence %}
+                        <ul class="evidence-list">
+                            {% for item in row.open_issue_evidence %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="empty-state">No open evidence.</p>
+                        {% endif %}
+                    </section>
+
+                    <section class="evidence-block">
+                        <h4>Parsed summary</h4>
+                        <p class="meta">{{ row.latest_terminal_reason_code or 'No parsed summary yet' }}</p>
+                        {% if row.latest_run_evidence %}
+                        <ul class="evidence-list">
+                            {% for item in row.latest_run_evidence %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="empty-state">No summary evidence.</p>
+                        {% endif %}
+                    </section>
+
+                    <section class="evidence-block">
+                        <h4>Recovery evidence</h4>
+                        <p class="meta">{{ row.recent_recovery_reason_code or 'No recent recovery' }}</p>
+                        {% if row.recent_recovery_evidence %}
+                        <ul class="evidence-list">
+                            {% for item in row.recent_recovery_evidence %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p class="empty-state">No recovery evidence.</p>
+                        {% endif %}
+                        {% if row.recovery_support_evidence %}
+                        <p class="meta">Recovered manually support</p>
+                        <ul class="evidence-list">
+                            {% for item in row.recovery_support_evidence %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </section>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+{% else %}
+<section class="panel empty-panel">
+    <h2>No local data yet</h2>
+    <p>Project board will appear after the poller writes spiders, tasks, summaries, and incidents into SQLite.</p>
+</section>
+{% endif %}
+{% endblock %}

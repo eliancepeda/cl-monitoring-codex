@@ -566,6 +566,16 @@ contract из `T3`.
 
 - `T9` может строить UI без догадок о данных
 
+Текущий статус:
+
+- `T8` выполнен и gate закрыт.
+- Создан `docs/adr/0003-minimal-dashboard.md` со scope для трёх экранов:
+  `Project board`, `Spider detail`, `Incidents`.
+- ADR фиксирует evidence-first UI поверх локальной truth layer и запрещает
+  browser-side Crawlab calls, action buttons, dense filters и UI settings.
+- Для `T9` заранее зафиксированы SQLite-backed read patterns, обязательные поля,
+  evidence blocks и non-goals, так что реализация UI идёт без догадок о данных.
+
 ### `T9` — Реализовать минимальный server-rendered UI
 
 **Цель:** дать рабочий локальный dashboard, а не копию Crawlab.
@@ -600,6 +610,28 @@ contract из `T3`.
 Готово, когда:
 
 - один экран отвечает на вопросы: что крутится, что сломано, что просрочено, что восстановилось
+
+Текущий статус:
+
+- `T9` выполнен и gate закрыт.
+- Реализованы server-rendered routes в `src/cl_monitoring/web/routes.py`:
+  `GET /`, `GET /spiders/{spider_id}`, `GET /incidents`.
+- Реализованы шаблоны `project_board.html`, `spider_detail.html`,
+  `incidents.html` и обновлён общий `base.html`.
+- Реализован минимальный local-only UI в `src/cl_monitoring/static/style.css`
+  без action buttons, без browser-side Crawlab calls и без clone-подхода к
+  Crawlab UI.
+- Реализован `create_app()` в `src/cl_monitoring/app.py`; app по умолчанию
+  монтирует static files и запускается только на `127.0.0.1`.
+- Все browser-visible данные читаются только из локальной SQLite через
+  repository-backed reads над `spiders`, `schedules`, `task_snapshots`,
+  `run_summaries`, `incidents`.
+- Dashboard показывает `running`, `warning`, `critical`, `stale/missed`,
+  `recovered manually`, `parsed summary`, `baseline runtime`, `evidence`.
+- Добавлен `tests/test_web_routes.py` с проверкой трёх экранов и 404 case.
+- Проверки пройдены:
+  `./.venv/bin/pytest -q tests/test_web_routes.py` -> `4 passed`;
+  `./.venv/bin/pytest -q` -> `189 passed`.
 
 ### `T10` — Спланировать structured spider markers и rollout contract
 

@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} | CL Monitoring{% endblock %}
+
+{% block content %}
+<section class="hero panel">
+    <p class="eyebrow">Incident feed</p>
+    <h1>{{ page_title }}</h1>
+    <p class="lede">Open incidents first, then closed incidents from the last 7 days. No acknowledge or resolve actions in v1.</p>
+</section>
+
+<section class="panel stack-lg">
+    <header class="panel-header">
+        <h2>Open incidents</h2>
+        <p class="meta">What is broken now from local incidents only.</p>
+    </header>
+    {% if page.open_incidents %}
+        <div class="stack-lg">
+            {% for incident in page.open_incidents %}
+            <article class="panel panel-muted">
+                <div class="split-row card-head">
+                    <div>
+                        <h3>
+                            {% if incident.spider_id %}
+                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or incident.spider_id }}</a>
+                            {% else %}
+                            {{ incident.entity_id }}
+                            {% endif %}
+                        </h3>
+                        <p class="meta">{{ incident.reason_code }}</p>
+                    </div>
+                    <div class="badge-list">
+                        {% for badge in incident.badges %}
+                        <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <dl class="metric-grid">
+                    <div>
+                        <dt>Opened</dt>
+                        <dd>{{ format_datetime(incident.opened_at) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Last seen</dt>
+                        <dd>{{ format_datetime(incident.last_seen_at) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Entity</dt>
+                        <dd>{{ incident.entity_type }} · {{ incident.entity_id }}</dd>
+                    </div>
+                    <div>
+                        <dt>Execution key</dt>
+                        <dd>{{ incident.execution_key }}</dd>
+                    </div>
+                </dl>
+
+                <section class="evidence-block">
+                    <h4>Evidence</h4>
+                    {% if incident.evidence %}
+                    <ul class="evidence-list">
+                        {% for item in incident.evidence %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="empty-state">No incident evidence.</p>
+                    {% endif %}
+                </section>
+
+                {% if incident.task_context_evidence %}
+                <section class="evidence-block">
+                    <h4>Parsed summary context</h4>
+                    <ul class="evidence-list">
+                        {% for item in incident.task_context_evidence %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% elif incident.schedule_last_scheduled_ts %}
+                <section class="evidence-block">
+                    <h4>Schedule context</h4>
+                    <p class="meta">{{ incident.schedule_name or incident.entity_id }}</p>
+                    <p>Latest scheduled run: {{ format_datetime(incident.schedule_last_scheduled_ts) }}</p>
+                </section>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+    <p class="empty-state">No open incidents.</p>
+    {% endif %}
+</section>
+
+<section class="panel stack-lg">
+    <header class="panel-header">
+        <h2>Recovered in last 7 days</h2>
+        <p class="meta">Closed since {{ format_datetime(page.closed_since) }}.</p>
+    </header>
+    {% if page.recent_closed_incidents %}
+        <div class="stack-lg">
+            {% for incident in page.recent_closed_incidents %}
+            <article class="panel panel-muted">
+                <div class="split-row card-head">
+                    <div>
+                        <h3>
+                            {% if incident.spider_id %}
+                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or incident.spider_id }}</a>
+                            {% else %}
+                            {{ incident.entity_id }}
+                            {% endif %}
+                        </h3>
+                        <p class="meta">{{ incident.reason_code }}</p>
+                    </div>
+                    <div class="badge-list">
+                        {% for badge in incident.badges %}
+                        <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <dl class="metric-grid">
+                    <div>
+                        <dt>Opened</dt>
+                        <dd>{{ format_datetime(incident.opened_at) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Closed</dt>
+                        <dd>{{ format_datetime(incident.closed_at) }}</dd>
+                    </div>
+                    <div>
+                        <dt>Recovered manually</dt>
+                        <dd>{{ 'yes' if incident.recovered_manually else 'not proven' }}</dd>
+                    </div>
+                    <div>
+                        <dt>Entity</dt>
+                        <dd>{{ incident.entity_type }} · {{ incident.entity_id }}</dd>
+                    </div>
+                </dl>
+
+                <section class="evidence-block">
+                    <h4>Evidence</h4>
+                    {% if incident.evidence %}
+                    <ul class="evidence-list">
+                        {% for item in incident.evidence %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="empty-state">No closed incident evidence.</p>
+                    {% endif %}
+                </section>
+
+                {% if incident.recovery_support_evidence %}
+                <section class="evidence-block">
+                    <h4>Recovered manually support</h4>
+                    <ul class="evidence-list">
+                        {% for item in incident.recovery_support_evidence %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% elif incident.task_context_evidence %}
+                <section class="evidence-block">
+                    <h4>Parsed summary context</h4>
+                    <ul class="evidence-list">
+                        {% for item in incident.task_context_evidence %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    {% else %}
+    <p class="empty-state">No closed incidents in the last 7 days.</p>
+    {% endif %}
+</section>
+{% endblock %}
