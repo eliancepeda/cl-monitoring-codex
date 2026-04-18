@@ -424,6 +424,36 @@ contract из `T3`.
 - одинаковый log input всегда даёт одинаковый `RunSummary`
 - golden tests читают только из fixtures
 
+Текущий статус:
+
+- `T5` выполнен и gate закрыт.
+- Добавлен production runtime parser
+  `src/cl_monitoring/parsers/crawllib_default.py` без изменения shared
+  runtime contract files и без импорта runtime logic из
+  `src/tools/classify_logs.py`.
+- Parser принимает ordered log input вместе с явным сигналом полноты и
+  поддерживает cumulative/paginated/incremental сценарии; он не
+  предполагает, что один fixed fetch вроде `page=1,size=1000` всегда
+  достаточен.
+- Реализовано детерминированное распознавание `item_event`,
+  `put_to_parser`, `summary_event`, `isSuccess=true`, summary success
+  marker, `sku_not_found`, `404 gone`, cancel marker, `auto_stop`,
+  `429 ban + error_auto_stop`.
+- Добавлены `tests/test_crawllib_parser.py` и golden-проверка всего corpus
+  из `fixtures/logs` + `fixtures/expected`, включая отдельную проверку
+  incremental input.
+- Добавлены anonymized fixtures для отсутствовавших rule paths:
+  `ID_821` (`cancelled_marker_with_terminal_context`) и `ID_822`
+  (`unknown_finished_without_positive_signal`).
+- Existing expected fixtures выровнены под runtime truth source: отдельно
+  считается `resume_success_markers`, а legacy false positives по
+  `gone_404` / `ban_429_markers` и один drift по `item_events` убраны из
+  golden corpus.
+- Проверки пройдены: `./.venv/bin/pytest -q tests/test_crawllib_parser.py`
+  -> `3 passed`; `./.venv/bin/pytest -q` -> `179 passed`.
+- После закрытия `T4` и `T5` sequential dependency для `T6` снята:
+  status/parser truth layer стабилизирован для следующего planning thread.
+
 ### `T6` — ADR по local history и poller
 
 **Цель:** спроектировать persistence после того, как status/parser уже стабилизированы.

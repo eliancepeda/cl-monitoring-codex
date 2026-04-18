@@ -13,7 +13,7 @@ counters:
   resume_success_markers: 0
   is_success_true: 0
   sku_not_found: 0
-  gone_404: 1
+  gone_404: 0
   cancel_markers: 0
   auto_stop_markers: 0
   error_auto_stop_markers: 0

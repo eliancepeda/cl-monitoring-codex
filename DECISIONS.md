@@ -598,3 +598,43 @@ Related files:
 - src/cl_monitoring/status/engine.py
 - tests/test_schedule_engine.py
 - MILESTONES.MD
+
+---
+
+## 2026-04-19 — Production crawllib parser stays separate from collector tooling and requires explicit log completeness
+
+Status: Accepted
+
+Context:
+`T5` implements the production runtime parser after `T3` froze the shared
+`RunSummary` contract. The repository already had collector-side fixture
+classification logic in `src/tools/classify_logs.py`, but project rules say
+runtime parser logic must stay deterministic, must support paginated and
+incremental log input, and must not assume a fixed fetch size is complete.
+
+Decision:
+Keep the production crawllib parser in `src/cl_monitoring/parsers/` as a
+pure function over normalized task input, ordered log lines, and an explicit
+`is_complete` signal. Do not import runtime logic from
+`src/tools/classify_logs.py`; keep tooling-only corpus generation separate
+from the production parser layer.
+
+Why:
+This preserves a clean boundary between offline fixture preparation and
+runtime decision logic. An explicit completeness flag avoids hidden
+page-size heuristics and lets the parser stay conservative for incremental
+or truncated logs.
+
+Consequences:
+- Runtime parsing can be called repeatedly on cumulative log snapshots.
+- Incomplete logs stay `unknown` unless a stronger terminal marker is already present.
+- `src/tools/*` remains collector/tooling code, not shared runtime logic.
+
+Related files:
+- src/cl_monitoring/parsers/crawllib_default.py
+- src/cl_monitoring/parsers/__init__.py
+- tests/test_crawllib_parser.py
+- fixtures/logs/ID_821.log
+- fixtures/logs/ID_822.log
+- fixtures/expected/task_ID_821_log.yaml
+- fixtures/expected/task_ID_822_log.yaml

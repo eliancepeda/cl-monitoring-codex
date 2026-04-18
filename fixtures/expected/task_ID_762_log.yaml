@@ -10,7 +10,7 @@ counters:
   item_events: 0
   put_to_parser: 0
   summary_events: 1
-  resume_success_markers: 0
+  resume_success_markers: 1
   is_success_true: 0
   sku_not_found: 0
   gone_404: 0

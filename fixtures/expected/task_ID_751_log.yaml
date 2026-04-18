@@ -13,11 +13,11 @@ counters:
   resume_success_markers: 0
   is_success_true: 0
   sku_not_found: 0
-  gone_404: 4
+  gone_404: 0
   cancel_markers: 0
   auto_stop_markers: 0
   error_auto_stop_markers: 0
-  ban_429_markers: 3
+  ban_429_markers: 0
 evidence:
 - log may be truncated at collector page limit
 - INFO:HOST_004:put_to_parser (250 prices)
