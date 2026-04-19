@@ -822,3 +822,42 @@ Related files:
 - fixtures/logs/ID_823.log
 - fixtures/expected/task_ID_823_log.yaml
 - MILESTONES.MD
+
+---
+
+## 2026-04-19 — Marker rollout stays blocked until producer-side raw emission exists
+
+Status: Accepted
+
+Context:
+After `T11b` fixed the confirmed wrapped `CancelledError` parser bug, frozen
+pilot replay matched blind manual review on all `15/15` runs. `T11c-research`
+then rechecked the same frozen set and found zero exact marker lines and zero
+marker-like near-miss envelopes across all available raw `full.log` and
+`logs_page_*.json` artifacts.
+
+Decision:
+Treat producer-side raw marker emission as the prerequisite for the next `T11`
+step. Do not open a new in-repo build thread or expand rollout coverage until
+fresh terminal runs on the same pilot `execution_key` values contain exact v1
+marker lines in Crawlab logs.
+
+Why:
+There are currently no marker lines for the repo to consume. Consumer-side
+changes inside this repository cannot validate a missing upstream signal, and
+existing parser/manual agreement without markers still does not satisfy the
+shadow rollout pass criteria.
+
+Consequences:
+- The next real action item for `T11` lives outside this repository in the
+  spider/runtime/wrapper path that writes task logs.
+- Fresh pilot evidence must show exact `kind=clm_spider_marker`, `v=1`, and
+  `RUN_START` / `HEARTBEAT` / `RUN_END` lines in raw Crawlab logs before this
+  repo reruns marker-aware `T11` replay.
+- In-repo parser or extractor follow-up stays deferred until producer-side raw
+  emission is visible on the frozen pilot keys.
+
+Related files:
+- docs/domain/structured-markers.md
+- docs/rollout/shadow-mode.md
+- MILESTONES.MD

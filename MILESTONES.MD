@@ -714,6 +714,20 @@ contract из `T3`.
 - Coverage не расширялся и rollout gate автоматически не открылся: marker
   lines по-прежнему отсутствуют, поэтому pass criteria `docs/rollout/shadow-mode.md`
   всё ещё не выполнены.
+- В `T11c-research` raw evidence по тому же frozen 15-run set подтверждён
+  следующий blocker: во всём доступном `full.log` и raw `logs_page_*.json`
+  нет exact marker lines `kind=clm_spider_marker`, `RUN_START`, `HEARTBEAT`,
+  `RUN_END` и нет marker-like near-miss envelope.
+- `T11c-research` также подтвердил, что blocker уже не в parser semantics и не
+  в текущем in-repo log assembly path: для всех `15/15` runs assembled
+  `full.log` line count совпадает с Crawlab `total`, а raw logs сохраняют
+  другой structured content вроде inline JSON и terminal traceback.
+- После этого подготовлен внешний producer-side handoff: минимальный следующий
+  шаг для `T11` находится outside repo и состоит в exact v1 marker emission по
+  тем же 3 pilot `execution_key` внутри raw Crawlab logs.
+- Новый build thread в этом repo до этого шага не открывать: сначала нужен
+  внешний producer/runtime change, затем новые terminal runs с raw marker lines
+  и только после этого повторный `T11` replay на том же pilot scope.
 
 ## Чего не делать раньше времени
 
