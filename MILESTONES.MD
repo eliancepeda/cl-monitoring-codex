@@ -655,6 +655,21 @@ contract из `T3`.
 
 - rollout можно делать без самообмана и без массового переписывания всех пауков
 
+Текущий статус:
+
+- `T10` выполнен и gate закрыт.
+- Добавлены `docs/domain/structured-markers.md` и
+  `docs/rollout/shadow-mode.md`.
+- Зафиксирован минимальный additive marker contract: single-line JSON marker
+  с envelope `kind=clm_spider_marker`, `v=1`, UTC `ts`, marker types
+  `RUN_START` / `HEARTBEAT` / `RUN_END`, optional `profile` / `counters` и
+  terminal `outcome` + `reason_code` только для `RUN_END`.
+- Rollout contract привязан к pilot-first расширению по `execution_key`, а не
+  к глобальному включению по `spider_id`.
+- Зафиксированы три pilot bucket-а (`stable short`, `long-running`,
+  `problematic anti-bot`), blind manual-vs-shadow comparison procedure,
+  mismatch taxonomy и pass criteria перед любым расширением coverage.
+
 ### `T11` — Shadow rollout
 
 **Цель:** не расширять покрытие, пока инструмент не доказал, что не врёт.
@@ -670,6 +685,25 @@ contract из `T3`.
 
 - серия пилотных запусков совпадает с ручной оценкой
 - только после этого можно расширять покрытие
+
+Текущий статус:
+
+- `T11` pilot support выполнен, но rollout gate пока не закрыт.
+- Для пилота выбраны 3 `execution_key` по bucket-правилам `T10`:
+  `684c7259e944d42ba023f686:python stockfirmati.it.py:`,
+  `698f03bdf186d32df354edc8:python massimodutti_de_it.py:-tags de,it -as 550`,
+  `680a20d1e944d42ba023c49f:python zara.com.py:-tags de,es,hu,it,lt,pl`.
+- В shadow discipline сравнено `15` terminal runs (`5` на каждый pilot key)
+  с blind manual review до просмотра tool outcome.
+- Во всех `15/15` сравнениях marker lines отсутствовали
+  (`RUN_START = 0`, `HEARTBEAT = 0`, `RUN_END = 0`), поэтому pilot уже не
+  проходит pass criteria из `docs/rollout/shadow-mode.md`.
+- Найдены `2` mismatch-а категории `parser bug`: `69c63900a2fc400a16fad74c`
+  и `69c62af0a2fc400a16fad73e`, где manual outcome = `partial_success`, а
+  текущий parser дал `cancelled` из-за слишком широкой трактовки
+  `CancelledError`.
+- Coverage расширять нельзя; следующий шаг — отдельный bugfix thread на
+  `CancelledError` semantics и replay тех же `15` runs без widening rollout.
 
 ## Чего не делать раньше времени
 

@@ -712,3 +712,76 @@ Related files:
 - src/cl_monitoring/web/templates/spider_detail.html
 - src/cl_monitoring/web/templates/incidents.html
 - src/cl_monitoring/app.py
+
+---
+
+## 2026-04-19 — Structured spider lifecycle markers are additive single-line UTC JSON
+
+Status: Accepted
+
+Context:
+After `T9`, the local parser/status truth layer exists, but spider logs still
+require guesswork and spider source code may live outside this repository.
+`T10` needs a marker contract small enough for external spider repos or launch
+wrappers without requiring runtime app changes.
+
+Decision:
+Define structured spider lifecycle markers as additive single-line JSON log
+entries with one shared envelope: exact `kind=clm_spider_marker`, `v=1`, and
+RFC3339 UTC `ts`. Support exactly three v1 marker types: `RUN_START`,
+`HEARTBEAT`, `RUN_END`. Only `RUN_END` carries producer terminal
+`outcome` and `reason_code`; `profile` and monotonic integer `counters` remain
+optional shared fields.
+
+Why:
+This keeps the contract explicit enough for deterministic parsing while staying
+small enough to add outside the runtime repo and without replacing existing
+human-readable logs.
+
+Consequences:
+- Marker emission happens inside normal stdout/stderr logs, not via a separate
+  transport.
+- Missing `RUN_END` remains allowed on crashes or truncation, so consumers must
+  stay conservative and fall back to existing task/log evidence.
+- Unknown extra keys are ignored until a later contract revision adopts them.
+
+Related files:
+- docs/domain/structured-markers.md
+- docs/rollout/shadow-mode.md
+- MILESTONES.MD
+
+---
+
+## 2026-04-19 — Marker rollout expands only after per-execution-key shadow agreement
+
+Status: Accepted
+
+Context:
+Marker adoption starts pilot-first and may happen outside this repository. A
+global enablement rule would risk self-deception if producer markers, parser
+logic, and operator review disagree on the same spider behavior.
+
+Decision:
+Run marker rollout in shadow mode per `execution_key`. A pilot key passes only
+after at least 5 terminal runs with marker lines, blind manual-vs-automated
+agreement on `run_result`, and no open `parser bug` or `timezone ambiguity`.
+Any `bad threshold` or `missing profile rule` mismatch must be fixed and
+replayed against the already collected runs before coverage expands.
+
+Why:
+`execution_key` is the stable behavioral unit for runtime comparison. Blind
+comparison blocks hindsight bias, and per-key gating prevents one easy bucket
+from authorizing a broader rollout.
+
+Consequences:
+- Shadow decisions do not replace current operator truth, incidents, or UI
+  state until the pilot gate passes.
+- Missing marker lines block pilot pass even if current parser/manual outcomes
+  happen to match.
+- Coverage expands only to closely related keys with the same behavior profile,
+  not globally after one successful pilot.
+
+Related files:
+- docs/rollout/shadow-mode.md
+- docs/domain/structured-markers.md
+- MILESTONES.MD
