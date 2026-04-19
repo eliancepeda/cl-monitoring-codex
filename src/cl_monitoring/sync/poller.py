@@ -7,7 +7,7 @@ import json
 import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
-from typing import Any
+from typing import Any, Protocol
 
 import httpx
 
@@ -31,11 +31,22 @@ from cl_monitoring.domain.normalizers import (
 )
 from cl_monitoring.parsers import parse_crawllib_default
 from cl_monitoring.status.engine import ScheduleEngine
-from integrations.crawlab.readonly_client import ReadonlyCrawlabClient
-
 
 TASK_STATUS_QUERIES = ("running", "pending", "finished", "error", "cancelled")
 logger = logging.getLogger(__name__)
+
+
+class _ReadonlyClientLike(Protocol):
+    async def get_json(self, path: str, **params: Any) -> Any: ...
+
+    async def get_paginated(
+        self,
+        path: str,
+        *,
+        page_size: int = 100,
+        max_pages: int = 5,
+        **extra_params: Any,
+    ) -> tuple[list[dict[str, Any]], dict[str, Any]]: ...
 
 
 @dataclass(frozen=True)
@@ -60,7 +71,12 @@ class PollerConfig:
         ):
             if getattr(self, name) <= timedelta(0):
                 raise ValueError(f"{name} must be positive")
-        for name in ("task_page_size", "task_max_pages", "log_page_size", "log_max_pages_per_sync"):
+        for name in (
+            "task_page_size",
+            "task_max_pages",
+            "log_page_size",
+            "log_max_pages_per_sync",
+        ):
             if getattr(self, name) < 1:
                 raise ValueError(f"{name} must be at least 1")
 
@@ -78,7 +94,7 @@ class Poller:
 
     def __init__(
         self,
-        client: ReadonlyCrawlabClient,
+        client: _ReadonlyClientLike,
         repo: LocalRepository,
         *,
         config: PollerConfig | None = None,
@@ -109,7 +125,9 @@ class Poller:
             except TimeoutError:
                 continue
 
-    async def sync_once(self, *, now: datetime | None = None, force: bool = False) -> None:
+    async def sync_once(
+        self, *, now: datetime | None = None, force: bool = False
+    ) -> None:
         current_time = _coerce_utc(now)
         seen_task_spider_ids: set[str] = set()
         seen_schedule_spider_ids: set[str] = set()
@@ -207,7 +225,9 @@ class Poller:
                 "/api/tasks",
                 page_size=self._config.task_page_size,
                 max_pages=self._config.task_max_pages,
-                conditions=_build_conditions({"key": "status", "op": "eq", "value": status}),
+                conditions=_build_conditions(
+                    {"key": "status", "op": "eq", "value": status}
+                ),
                 stats="true",
             )
             for raw_task in tasks:
@@ -290,11 +310,14 @@ class Poller:
             task_id=snapshot.id,
             page_size=cursor.page_size,
             next_page=max(cursor.next_page, fetched.next_page),
-            api_total_lines=max(cursor.api_total_lines, fetched.api_total_lines, len(merged_lines)),
+            api_total_lines=max(
+                cursor.api_total_lines, fetched.api_total_lines, len(merged_lines)
+            ),
             assembled_line_count=max(cursor.assembled_line_count, len(merged_lines)),
             assembled_log_text="\n".join(merged_lines),
             is_complete=cursor.is_complete or fetched.is_complete,
-            final_sync_done=cursor.final_sync_done or _is_terminal_status(snapshot.status),
+            final_sync_done=cursor.final_sync_done
+            or _is_terminal_status(snapshot.status),
             last_log_sync_at=now,
             terminal_seen_at=cursor.terminal_seen_at or stored_task.terminal_seen_at,
         )
@@ -307,7 +330,9 @@ class Poller:
         )
         self._repo.upsert_run_summary(summary, parsed_at=now)
 
-    async def _fetch_log_window(self, task_id: str, *, start_page: int) -> LogFetchResult:
+    async def _fetch_log_window(
+        self, task_id: str, *, start_page: int
+    ) -> LogFetchResult:
         all_lines: list[str] = []
         last_page = start_page - 1
         api_total_lines = 0
@@ -328,17 +353,17 @@ class Poller:
             all_lines.extend(page_lines)
             last_page = page
 
-            if api_total_lines > 0 and page * self._config.log_page_size >= api_total_lines:
+            if (
+                api_total_lines > 0
+                and page * self._config.log_page_size >= api_total_lines
+            ):
                 complete = True
                 break
             if api_total_lines == 0 and len(page_lines) < self._config.log_page_size:
                 complete = True
                 break
 
-        if last_page < start_page:
-            next_page = start_page
-        else:
-            next_page = last_page + 1
+        next_page = start_page if last_page < start_page else last_page + 1
 
         return LogFetchResult(
             lines=all_lines,

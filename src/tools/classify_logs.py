@@ -23,7 +23,7 @@ from __future__ import annotations
 import logging
 import re
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 from typing import Any
 
@@ -37,7 +37,9 @@ SUMMARY_MARKER_RE = re.compile(r"\|\s*Резюме:\s*✅")
 PUT_TO_PARSER_RE = re.compile(r"\bput_to_parser\b", re.IGNORECASE)
 IS_SUCCESS_TRUE_RE = re.compile(r'"isSuccess"\s*:\s*true')
 ITEM_EVENT_RE = re.compile(r'(?:\{"price"\s*:|\bЦена\b)')
-SCRAPY_PROGRESS_RE = re.compile(r"(?:item_scraped_count|finish_reason|Dumping Scrapy stats)", re.IGNORECASE)
+SCRAPY_PROGRESS_RE = re.compile(
+    r"(?:item_scraped_count|finish_reason|Dumping Scrapy stats)", re.IGNORECASE
+)
 SKU_NOT_FOUND_RE = re.compile(r"(?:sku_not_found|не наш[её]л SKU)", re.IGNORECASE)
 GONE_404_RE = re.compile(r"(?:\b404\b|\bgone\b)", re.IGNORECASE)
 CANCEL_MARKER_RE = re.compile(r"\bcancel(?:led)?\b", re.IGNORECASE)
@@ -52,7 +54,7 @@ BAN_429_RE = re.compile(
 )
 
 
-class LogClass(str, Enum):
+class LogClass(StrEnum):
     """Classification categories for Crawlab task log content."""
 
     SCRAPY_START = "scrapy_start"
@@ -165,9 +167,7 @@ def classify_log_text(text: str, task_id: str = "") -> LogClassification:
         matched = False
         for log_class, pattern in LOG_PATTERNS:
             if pattern.search(stripped):
-                class_counts[log_class.value] = (
-                    class_counts.get(log_class.value, 0) + 1
-                )
+                class_counts[log_class.value] = class_counts.get(log_class.value, 0) + 1
                 matched = True
 
                 if log_class == LogClass.SCRAPY_ERROR:
@@ -201,7 +201,7 @@ def classify_log_text(text: str, task_id: str = "") -> LogClassification:
 # ── Phase 1: Candidate classification (metadata only) ──────────────────
 
 
-class CandidateClass(str, Enum):
+class CandidateClass(StrEnum):
     """Phase-1 candidate classes assigned from task metadata only.
 
     No log inspection.  Used for targeted discovery and sampling.
@@ -254,7 +254,7 @@ def classify_candidate(task: dict[str, Any]) -> CandidateClass:
 # ── Phase 2: Final log classification (after fetching logs) ────────────
 
 
-class FinalLogClass(str, Enum):
+class FinalLogClass(StrEnum):
     """Phase-2 final classes assigned after inspecting log content.
 
     Determines actual outcome for fixture labeling and sampling.
@@ -386,6 +386,7 @@ def _stats_have_items(log_text: str) -> bool:
 
 # ── Draft expected YAML generation ──────────────────────────────────────
 
+
 def build_expected_log_fixture(
     task: dict[str, Any],
     log_text: str,
@@ -514,7 +515,15 @@ def build_expected_log_fixture(
         )
 
     if has_positive_progress and has_partial_errors:
-        evidence.extend(_evidence_lines(lines, IS_SUCCESS_TRUE_RE, SKU_NOT_FOUND_RE, GONE_404_RE, PUT_TO_PARSER_RE))
+        evidence.extend(
+            _evidence_lines(
+                lines,
+                IS_SUCCESS_TRUE_RE,
+                SKU_NOT_FOUND_RE,
+                GONE_404_RE,
+                PUT_TO_PARSER_RE,
+            )
+        )
         return _expected_payload(
             task_id=task.get("_id", ""),
             run_result="partial_success",
@@ -536,7 +545,9 @@ def build_expected_log_fixture(
         )
 
     if status in {"error", "abnormal"} or errors_without_positive:
-        if line := _first_matching_line(re.compile(r"(?:Exception:|Traceback)", re.IGNORECASE), lines):
+        if line := _first_matching_line(
+            re.compile(r"(?:Exception:|Traceback)", re.IGNORECASE), lines
+        ):
             evidence.append(line)
         return _expected_payload(
             task_id=task.get("_id", ""),
@@ -611,7 +622,11 @@ def _has_positive_progress(log_text: str) -> bool:
 
 def _looks_incomplete(log_text: str) -> bool:
     lines_seen = len(log_text.splitlines())
-    return lines_seen >= 4000 and not SUMMARY_MARKER_RE.search(log_text) and not IS_SUCCESS_TRUE_RE.search(log_text)
+    return (
+        lines_seen >= 4000
+        and not SUMMARY_MARKER_RE.search(log_text)
+        and not IS_SUCCESS_TRUE_RE.search(log_text)
+    )
 
 
 def _is_complete_log(
@@ -625,7 +640,11 @@ def _is_complete_log(
         return True
     if page_size and max_pages:
         limit = page_size * max_pages
-        if len(log_text.splitlines()) >= limit and not SUMMARY_MARKER_RE.search(log_text) and not IS_SUCCESS_TRUE_RE.search(log_text):
+        if (
+            len(log_text.splitlines()) >= limit
+            and not SUMMARY_MARKER_RE.search(log_text)
+            and not IS_SUCCESS_TRUE_RE.search(log_text)
+        ):
             return False
     return not _looks_incomplete(log_text)
 

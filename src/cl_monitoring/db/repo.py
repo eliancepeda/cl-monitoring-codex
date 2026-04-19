@@ -9,6 +9,9 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from cl_monitoring.domain import (
+    Confidence,
+    ErrorFamily,
+    RunResult,
     RunSummary,
     ScheduleSnapshot,
     SpiderSnapshot,
@@ -305,7 +308,9 @@ class LocalRepository:
 
     def list_task_snapshots(self) -> list[TaskSnapshot]:
         rows = self._connection.execute(
-            "SELECT * FROM task_snapshots ORDER BY COALESCE(create_ts, start_ts, end_ts, last_seen_at), task_id"
+            "SELECT * FROM task_snapshots "
+            "ORDER BY COALESCE(create_ts, start_ts, end_ts, last_seen_at), "
+            "task_id"
         ).fetchall()
         return [_task_from_row(row) for row in rows]
 
@@ -321,7 +326,9 @@ class LocalRepository:
         ).fetchall()
         return [_task_from_row(row) for row in rows]
 
-    def list_manual_tasks_for_execution_key(self, execution_key: str) -> list[TaskSnapshot]:
+    def list_manual_tasks_for_execution_key(
+        self, execution_key: str
+    ) -> list[TaskSnapshot]:
         rows = self._connection.execute(
             """
             SELECT *
@@ -347,7 +354,13 @@ class LocalRepository:
             LEFT JOIN task_log_cursors AS c ON c.task_id = t.task_id
             WHERE t.status IN ('pending', 'running')
                OR COALESCE(c.final_sync_done, 0) = 0
-            ORDER BY COALESCE(t.create_ts, t.start_ts, t.end_ts, t.last_seen_at), t.task_id
+            ORDER BY COALESCE(
+                t.create_ts,
+                t.start_ts,
+                t.end_ts,
+                t.last_seen_at
+            ),
+                     t.task_id
             """
         ).fetchall()
         return [_stored_task_from_row(row) for row in rows]
@@ -390,22 +403,26 @@ class LocalRepository:
                         ELSE task_log_cursors.api_total_lines
                     END,
                     assembled_line_count = CASE
-                        WHEN excluded.assembled_line_count >= task_log_cursors.assembled_line_count
+                        WHEN excluded.assembled_line_count
+                            >= task_log_cursors.assembled_line_count
                             THEN excluded.assembled_line_count
                         ELSE task_log_cursors.assembled_line_count
                     END,
                     assembled_log_text = CASE
-                        WHEN excluded.assembled_line_count >= task_log_cursors.assembled_line_count
+                        WHEN excluded.assembled_line_count
+                            >= task_log_cursors.assembled_line_count
                             THEN excluded.assembled_log_text
                         ELSE task_log_cursors.assembled_log_text
                     END,
                     is_complete = CASE
-                        WHEN task_log_cursors.is_complete = 1 OR excluded.is_complete = 1
+                        WHEN task_log_cursors.is_complete = 1
+                            OR excluded.is_complete = 1
                             THEN 1
                         ELSE 0
                     END,
                     final_sync_done = CASE
-                        WHEN task_log_cursors.final_sync_done = 1 OR excluded.final_sync_done = 1
+                        WHEN task_log_cursors.final_sync_done = 1
+                            OR excluded.final_sync_done = 1
                             THEN 1
                         ELSE 0
                     END,
@@ -414,7 +431,8 @@ class LocalRepository:
                             THEN excluded.last_log_sync_at
                         WHEN excluded.last_log_sync_at IS NULL
                             THEN task_log_cursors.last_log_sync_at
-                        WHEN excluded.last_log_sync_at > task_log_cursors.last_log_sync_at
+                        WHEN excluded.last_log_sync_at
+                            > task_log_cursors.last_log_sync_at
                             THEN excluded.last_log_sync_at
                         ELSE task_log_cursors.last_log_sync_at
                     END,
@@ -499,7 +517,10 @@ class LocalRepository:
         query += " ORDER BY task_id"
 
         rows = self._connection.execute(query, params).fetchall()
-        return {summary.task_id: summary for summary in (_summary_from_row(row) for row in rows)}
+        return {
+            summary.task_id: summary
+            for summary in (_summary_from_row(row) for row in rows)
+        }
 
     def record_incident(
         self,
@@ -718,15 +739,16 @@ def _cursor_from_row(row: sqlite3.Row) -> TaskLogCursor:
 
 
 def _summary_from_row(row: sqlite3.Row) -> RunSummary:
+    error_family = _nullable_text(row["error_family"])
     return RunSummary(
         task_id=str(row["task_id"]),
         execution_key=str(row["execution_key"]),
-        run_result=str(row["run_result"]),
-        confidence=str(row["confidence"]),
+        run_result=RunResult(str(row["run_result"])),
+        confidence=Confidence(str(row["confidence"])),
         reason_code=str(row["reason_code"]),
         evidence=_json_loads(row["evidence_json"]),
         counters=_json_loads(row["counters_json"]),
-        error_family=_nullable_text(row["error_family"]),
+        error_family=ErrorFamily(error_family) if error_family is not None else None,
     )
 
 

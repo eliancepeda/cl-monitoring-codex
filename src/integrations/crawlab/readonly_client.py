@@ -19,7 +19,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 import httpx
-import yaml  # type: ignore[import-untyped]
+import yaml
 
 logger = logging.getLogger(__name__)
 
@@ -50,7 +50,8 @@ def _load_allowed_paths(config_path: Path | None = None) -> list[str]:
     """Load allowed paths from user_scope.yml or use defaults."""
     if config_path and config_path.exists():
         with open(config_path) as f:
-            cfg = yaml.safe_load(f)
+            loaded = yaml.safe_load(f) or {}
+        cfg = loaded if isinstance(loaded, dict) else {}
         paths = cfg.get("security", {}).get("allowed_paths", [])
         if paths:
             return [str(p) for p in paths]
@@ -126,9 +127,13 @@ class ReadonlyCrawlabClient:
         timeout: float = 30.0,
     ) -> None:
         self._base_url = base_url.rstrip("/")
-        self._token = token or os.environ.get("CRAWLAB_TOKEN", "") or os.environ.get(
-            "CRAWLAB_API_TOKEN",
-            "",
+        self._token = (
+            token
+            or os.environ.get("CRAWLAB_TOKEN", "")
+            or os.environ.get(
+                "CRAWLAB_API_TOKEN",
+                "",
+            )
         )
         if not self._token:
             raise ValueError(

@@ -18,16 +18,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any, cast
 
-import pytest
 import yaml
 
 from tools.classify_logs import (
-    build_expected_log_fixture,
     CandidateClass,
     FinalLogClass,
     LogClass,
     LogClassification,
+    build_expected_log_fixture,
     classify_candidate,
     classify_final,
     classify_log_text,
@@ -55,6 +55,7 @@ EXPECTED_COUNTER_KEYS = {
     "error_auto_stop_markers",
     "ban_429_markers",
 }
+TaskPayload = dict[str, Any]
 
 
 # ── Sample log texts ───────────────────────────────────────────────────
@@ -118,12 +119,16 @@ AUTO_STOP_LOG = """\
 """
 
 
-def _load_expected_yaml(path: Path) -> dict:
+def _load_expected_yaml(path: Path) -> dict[str, Any]:
     content = "\n".join(
-        line for line in path.read_text(encoding="utf-8").splitlines()
+        line
+        for line in path.read_text(encoding="utf-8").splitlines()
         if not line.startswith("#")
     )
-    return yaml.safe_load(content)
+    parsed = yaml.safe_load(content)
+    if not isinstance(parsed, dict):
+        raise TypeError(f"Expected YAML mapping in {path}")
+    return cast(dict[str, Any], parsed)
 
 
 # ── Log classification tests ──────────────────────────────────────────
@@ -254,7 +259,7 @@ class TestCandidateClassification:
         assert classify_candidate(task) == CandidateClass.ERROR_CANDIDATE
 
     def test_missing_status(self) -> None:
-        task = {}
+        task: TaskPayload = {}
         assert classify_candidate(task) == CandidateClass.ERROR_CANDIDATE
 
     def test_candidate_classes_never_contain_final_values(self) -> None:
@@ -292,7 +297,9 @@ class TestFinalLogClassification:
 
     def test_error_task_with_explicit_auto_stop(self) -> None:
         task = {"status": "error", "error": ""}
-        log = "Traceback (most recent call last):\nException: auto_stop (80) is reached\n"
+        log = (
+            "Traceback (most recent call last):\nException: auto_stop (80) is reached\n"
+        )
         assert classify_final(task, log) == FinalLogClass.AUTO_STOP
 
     def test_finished_strong_success(self) -> None:
@@ -304,7 +311,10 @@ class TestFinalLogClassification:
     def test_finished_stats_without_items_stays_unknown(self) -> None:
         """Finished + stats without positive progress must stay unknown."""
         task = {"status": "finished"}
-        log = "Dumping Scrapy stats:\n{'item_scraped_count': 0, 'finish_reason': 'finished'}"
+        log = (
+            "Dumping Scrapy stats:\n"
+            "{'item_scraped_count': 0, 'finish_reason': 'finished'}"
+        )
         assert classify_final(task, log) == FinalLogClass.UNKNOWN
 
     def test_finished_non_empty_log_without_positive_signal_is_unknown(self) -> None:
@@ -361,7 +371,7 @@ class TestManualRunDetection:
         assert is_manual_run(task) is False
 
     def test_missing_schedule_id_is_not_manual(self) -> None:
-        task = {}
+        task: TaskPayload = {}
         assert is_manual_run(task) is False
 
     def test_real_schedule_id_is_not_manual(self) -> None:
@@ -396,7 +406,10 @@ class TestExpectedYamlGeneration:
     def test_yaml_is_parseable(self, tmp_path: Path) -> None:
         expected = build_expected_log_fixture(
             {"_id": "TASK_ID_003", "status": "error"},
-            "WARNING: Got ban status code 429\nException: error_auto_stop (6) is reached\n",
+            (
+                "WARNING: Got ban status code 429\n"
+                "Exception: error_auto_stop (6) is reached\n"
+            ),
         )
         filepath = generate_expected_yaml(expected, tmp_path)
         parsed = _load_expected_yaml(filepath)
@@ -416,7 +429,10 @@ class TestExpectedYamlGeneration:
     def test_running_task_stays_unknown_even_with_progress(self) -> None:
         expected = build_expected_log_fixture(
             {"_id": "TASK_ID_005", "status": "running"},
-            'INFO: put_to_parser (250 prices)\n{"error":null,"date":"17.04 08:30","isSuccess":true}\n',
+            (
+                'INFO: put_to_parser (250 prices)\n'
+                '{"error":null,"date":"17.04 08:30","isSuccess":true}\n'
+            ),
         )
         assert expected["run_result"] == "unknown"
         assert expected["reason_code"] == "unknown_running_or_pending"
@@ -424,7 +440,10 @@ class TestExpectedYamlGeneration:
     def test_finished_non_empty_log_without_positive_signal_stays_unknown(self) -> None:
         expected = build_expected_log_fixture(
             {"_id": "TASK_ID_006", "status": "finished"},
-            "Dumping Scrapy stats:\n{'item_scraped_count': 0, 'finish_reason': 'finished'}\n",
+            (
+                "Dumping Scrapy stats:\n"
+                "{'item_scraped_count': 0, 'finish_reason': 'finished'}\n"
+            ),
         )
         assert expected["run_result"] == "unknown"
         assert expected["reason_code"] == "unknown_finished_without_positive_signal"
@@ -519,7 +538,9 @@ class TestFixtureCorpus:
             assert isinstance(parsed["evidence"], list)
 
     def test_real_auto_stop_fixture_is_present_and_classified(self) -> None:
-        task = json.loads((FIXTURES_API_DIR / "task_ID_820.json").read_text(encoding="utf-8"))
+        task = json.loads(
+            (FIXTURES_API_DIR / "task_ID_820.json").read_text(encoding="utf-8")
+        )
         log_text = (FIXTURES_LOG_DIR / "ID_820.log").read_text(encoding="utf-8")
         expected = _load_expected_yaml(FIXTURES_EXPECTED_DIR / "task_ID_820_log.yaml")
 
@@ -533,9 +554,12 @@ class TestFixtureCorpus:
 
     def test_fixture_pack_covers_required_scenarios(self) -> None:
         covered: set[str] = set()
-        task_paths = {path.stem.removeprefix("task_"): path for path in FIXTURES_API_DIR.glob("task_*.json")}
+        task_paths = {
+            path.stem.removeprefix("task_"): path
+            for path in FIXTURES_API_DIR.glob("task_*.json")
+        }
 
-        for task_id, task_path in task_paths.items():
+        for _task_id, task_path in task_paths.items():
             task = json.loads(task_path.read_text(encoding="utf-8"))
             status = (task.get("status", "") or "").lower()
             schedule_id = task.get("schedule_id")
@@ -552,9 +576,16 @@ class TestFixtureCorpus:
         for path in FIXTURES_EXPECTED_DIR.glob("task_*_log.yaml"):
             parsed = _load_expected_yaml(path)
             counters = parsed["counters"]
-            if parsed["reason_code"] == "success_probable_positive_progress_complete_log":
+            if (
+                parsed["reason_code"]
+                == "success_probable_positive_progress_complete_log"
+            ):
                 covered.add("success_without_summary")
-            if counters["put_to_parser"] > 0 and parsed["run_result"] in {"success", "success_probable", "partial_success"}:
+            if counters["put_to_parser"] > 0 and parsed["run_result"] in {
+                "success",
+                "success_probable",
+                "partial_success",
+            }:
                 covered.add("success_with_put_to_parser")
             if parsed["run_result"] == "partial_success":
                 covered.add("partial_success")
@@ -572,12 +603,17 @@ class TestFixtureCorpus:
         schedule_history_ids = {
             schedule_id
             for schedule_id in non_zero_schedule_ids
-            if schedule_id and schedule_id != ZERO_OID and non_zero_schedule_ids.count(schedule_id) >= 2
+            if schedule_id
+            and schedule_id != ZERO_OID
+            and non_zero_schedule_ids.count(schedule_id) >= 2
         }
         if schedule_history_ids:
             covered.add("schedule_history")
 
-        if any(json.loads(path.read_text(encoding="utf-8")) == [] for path in FIXTURES_API_DIR.glob("results_*.json")):
+        if any(
+            json.loads(path.read_text(encoding="utf-8")) == []
+            for path in FIXTURES_API_DIR.glob("results_*.json")
+        ):
             covered.add("results_by_tid_empty")
 
         required = {

@@ -597,7 +597,7 @@ Related files:
 - src/cl_monitoring/status/models.py
 - src/cl_monitoring/status/engine.py
 - tests/test_schedule_engine.py
-- MILESTONES.MD
+- MILESTONES.md
 
 ---
 
@@ -748,7 +748,7 @@ Consequences:
 Related files:
 - docs/domain/structured-markers.md
 - docs/rollout/shadow-mode.md
-- MILESTONES.MD
+- MILESTONES.md
 
 ---
 
@@ -784,7 +784,7 @@ Consequences:
 Related files:
 - docs/rollout/shadow-mode.md
 - docs/domain/structured-markers.md
-- MILESTONES.MD
+- MILESTONES.md
 
 ---
 
@@ -821,7 +821,7 @@ Related files:
 - fixtures/api/task_ID_823.json
 - fixtures/logs/ID_823.log
 - fixtures/expected/task_ID_823_log.yaml
-- MILESTONES.MD
+- MILESTONES.md
 
 ---
 
@@ -860,7 +860,7 @@ Consequences:
 Related files:
 - docs/domain/structured-markers.md
 - docs/rollout/shadow-mode.md
-- MILESTONES.MD
+- MILESTONES.md
 
 ---
 
@@ -979,4 +979,4 @@ Related files:
 - src/cl_monitoring/web/templates/incidents.html
 - tests/test_poller.py
 - tests/test_web_routes.py
-- MILESTONES.MD
+- MILESTONES.md

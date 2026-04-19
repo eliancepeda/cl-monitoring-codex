@@ -4,35 +4,39 @@ Each test must use an anonymized fixture (AGENTS.md § Workflow).
 """
 
 import json
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from datetime import datetime, timezone, timedelta
+from typing import Any, cast
 
 from cl_monitoring.domain.normalizers import (
-    normalize_task,
-    normalize_spider,
-    normalize_schedule,
-    normalize_id,
-    normalize_time,
     build_execution_key,
     compute_live_runtime,
     is_manual_run,
+    normalize_id,
+    normalize_schedule,
+    normalize_spider,
+    normalize_task,
+    normalize_time,
 )
 
 FIXTURES_DIR = Path(__file__).parent.parent / "fixtures" / "api"
 
 
-def load_fixture(name: str):
-    with open(FIXTURES_DIR / name, "r") as f:
-        return json.load(f)
+def load_fixture(name: str) -> dict[str, Any]:
+    with open(FIXTURES_DIR / name) as f:
+        data = json.load(f)
+    if not isinstance(data, dict):
+        raise TypeError(f"Expected JSON object fixture for {name}")
+    return cast(dict[str, Any], data)
 
 
-def test_normalize_id():
+def test_normalize_id() -> None:
     assert normalize_id("000000000000000000000000") is None
     assert normalize_id("") == ""
     assert normalize_id("some_id") == "some_id"
 
 
-def test_normalize_time():
+def test_normalize_time() -> None:
     assert normalize_time("0001-01-01T00:00:00Z") is None
     assert normalize_time("") is None
 
@@ -45,10 +49,10 @@ def test_normalize_time():
     assert dt.minute == 53
     assert dt.second == 11
     assert dt.microsecond == 508000
-    assert dt.tzinfo == timezone.utc
+    assert dt.tzinfo == UTC
 
 
-def test_build_execution_key():
+def test_build_execution_key() -> None:
     assert (
         build_execution_key("spider_1", "python main.py", "")
         == "spider_1:python main.py:"
@@ -59,27 +63,27 @@ def test_build_execution_key():
     )
 
 
-def test_compute_live_runtime():
+def test_compute_live_runtime() -> None:
     # Ended with duration
-    assert compute_live_runtime(datetime.now(timezone.utc), 5203832) == timedelta(
+    assert compute_live_runtime(datetime.now(UTC), 5203832) == timedelta(
         milliseconds=5203832
     )
 
     # Running without duration
-    start_ts = datetime(2026, 4, 18, 12, 0, 0, tzinfo=timezone.utc)
-    now = datetime(2026, 4, 18, 12, 5, 0, tzinfo=timezone.utc)
+    start_ts = datetime(2026, 4, 18, 12, 0, 0, tzinfo=UTC)
+    now = datetime(2026, 4, 18, 12, 5, 0, tzinfo=UTC)
     assert compute_live_runtime(start_ts, 0, now=now) == timedelta(minutes=5)
 
     # Not started
     assert compute_live_runtime(None, 0) == timedelta(0)
 
 
-def test_is_manual_run():
+def test_is_manual_run() -> None:
     assert is_manual_run(None) is True
     assert is_manual_run("123") is False
 
 
-def test_normalize_task_manual():
+def test_normalize_task_manual() -> None:
     raw_task = load_fixture("task_ID_748.json")
     task = normalize_task(raw_task)
 
@@ -96,9 +100,9 @@ def test_normalize_task_manual():
     assert task.end_ts is not None
 
 
-def test_normalize_task_scheduled():
+def test_normalize_task_scheduled() -> None:
     raw_task = load_fixture("task_ID_753.json")
-    now = datetime(2026, 4, 17, 4, 10, 0, tzinfo=timezone.utc)
+    now = datetime(2026, 4, 17, 4, 10, 0, tzinfo=UTC)
     task = normalize_task(raw_task, now=now)
 
     assert task.id == "ID_753"
@@ -110,7 +114,7 @@ def test_normalize_task_scheduled():
     assert task.end_ts is None
 
 
-def test_normalize_task_zero_create_ts_to_none():
+def test_normalize_task_zero_create_ts_to_none() -> None:
     raw_task = load_fixture("task_ID_748.json")
     raw_task["create_ts"] = "0001-01-01T00:00:00Z"
 
@@ -119,18 +123,18 @@ def test_normalize_task_zero_create_ts_to_none():
     assert task.create_ts is None
 
 
-def test_finished_task_zero_runtime_does_not_keep_growing():
+def test_finished_task_zero_runtime_does_not_keep_growing() -> None:
     raw_task = load_fixture("task_ID_748.json")
     raw_task["status"] = "finished"
     raw_task["stat"]["runtime_duration"] = 0
-    now = datetime(2026, 4, 18, 12, 0, 0, tzinfo=timezone.utc)
+    now = datetime(2026, 4, 18, 12, 0, 0, tzinfo=UTC)
 
     task = normalize_task(raw_task, now=now)
 
     assert task.runtime == timedelta(0)
 
 
-def test_missing_schedule_id_is_not_treated_as_manual_run():
+def test_missing_schedule_id_is_not_treated_as_manual_run() -> None:
     raw_task = load_fixture("task_ID_748.json")
     raw_task.pop("schedule_id", None)
 
@@ -140,7 +144,7 @@ def test_missing_schedule_id_is_not_treated_as_manual_run():
     assert task.is_manual is False
 
 
-def test_normalize_spider():
+def test_normalize_spider() -> None:
     raw_spider = load_fixture("spider_ID_736.json")
     spider = normalize_spider(raw_spider)
 
@@ -152,8 +156,8 @@ def test_normalize_spider():
     assert spider.param == ""
 
 
-def test_normalize_schedule():
-    with open(FIXTURES_DIR / "schedules.json", "r") as f:
+def test_normalize_schedule() -> None:
+    with open(FIXTURES_DIR / "schedules.json") as f:
         schedules = json.load(f)
     raw_schedule = schedules[0]
 

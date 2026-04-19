@@ -8,23 +8,22 @@ Rules (AGENTS.md § Domain rules):
 - Live runtime: now() - start_at  when runtime_duration == 0
 """
 
-from datetime import datetime, timezone, timedelta
-from typing import Any, Dict, Optional
+from datetime import UTC, datetime, timedelta
+from typing import Any
 
-from .models import TaskSnapshot, SpiderSnapshot, ScheduleSnapshot
-
+from .models import ScheduleSnapshot, SpiderSnapshot, TaskSnapshot
 
 ZERO_ID = "000000000000000000000000"
 NULL_TIME = "0001-01-01T00:00:00Z"
 
 
-def normalize_id(val: Optional[str]) -> Optional[str]:
+def normalize_id(val: str | None) -> str | None:
     if val is None or val == ZERO_ID:
         return None
     return val
 
 
-def normalize_time(val: str) -> Optional[datetime]:
+def normalize_time(val: str) -> datetime | None:
     if not val or val == NULL_TIME:
         return None
     val = val.replace("Z", "+00:00")
@@ -45,7 +44,7 @@ def build_execution_key(spider_id: str, cmd: str, param: str) -> str:
 
 
 def compute_live_runtime(
-    start_at: Optional[datetime], runtime_duration: int, now: Optional[datetime] = None
+    start_at: datetime | None, runtime_duration: int, now: datetime | None = None
 ) -> timedelta:
     if runtime_duration > 0:
         return timedelta(milliseconds=runtime_duration)
@@ -53,17 +52,17 @@ def compute_live_runtime(
     if not start_at:
         return timedelta(0)
 
-    current_time = now or datetime.now(timezone.utc)
+    current_time = now or datetime.now(UTC)
     res = current_time - start_at
     # If the computed time is negative for some reason (clocks sync issue etc), return 0
     return max(res, timedelta(0))
 
 
-def is_manual_run(schedule_id: Optional[str]) -> bool:
+def is_manual_run(schedule_id: str | None) -> bool:
     return schedule_id is None
 
 
-def normalize_task(raw: Dict[str, Any], now: Optional[datetime] = None) -> TaskSnapshot:
+def normalize_task(raw: dict[str, Any], now: datetime | None = None) -> TaskSnapshot:
     task_id = raw.get("_id", "")
     spider_id = raw.get("spider_id", "")
     status = raw.get("status", "unknown")
@@ -101,7 +100,7 @@ def normalize_task(raw: Dict[str, Any], now: Optional[datetime] = None) -> TaskS
     )
 
 
-def normalize_spider(raw: Dict[str, Any]) -> SpiderSnapshot:
+def normalize_spider(raw: dict[str, Any]) -> SpiderSnapshot:
     return SpiderSnapshot(
         id=raw.get("_id", ""),
         name=raw.get("name", ""),
@@ -112,7 +111,7 @@ def normalize_spider(raw: Dict[str, Any]) -> SpiderSnapshot:
     )
 
 
-def normalize_schedule(raw: Dict[str, Any]) -> ScheduleSnapshot:
+def normalize_schedule(raw: dict[str, Any]) -> ScheduleSnapshot:
     return ScheduleSnapshot(
         id=raw.get("_id", ""),
         name=raw.get("name", ""),

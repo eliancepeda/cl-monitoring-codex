@@ -74,14 +74,28 @@ worktree.**
   проходит, SQLite продолжает обновляться, board/incidents/detail остаются
   usable через локальный fallback projection.
 
+Из того локального DX/runtime списка, который выглядел следующим шагом раньше,
+уже закрыто:
+
+- `README.md` больше не пустой и уже описывает реальный operator flow.
+- `src/cl_monitoring/settings.py` и runtime env contract уже доведены до одного
+  truth path.
+- Удобный entrypoint `python -m cl_monitoring.app`, app-owned poller lifecycle и
+  честный local end-to-end startup уже реализованы и live-verified.
+
 Что всё ещё не закрыто:
 
 - Внешний marker blocker из `T11` остаётся отдельной проблемой и не считается
   закрытым только потому, что runtime service wiring уже доведён.
-- Repo-wide `ruff` / `mypy` debt вне непосредственной поверхности `T12`-`T15`
-  всё ещё остаётся в репозитории и не должен смешиваться с фактом, что новый
-  local-service runtime path уже реализован, live-verified и покрыт targeted
-  runtime tests.
+- Repo-wide cleanup threads `T16` и `T17` уже закрыли оставшийся `ruff` /
+  `mypy` debt без product-scope drift, но это не должно смешиваться с тем,
+  что local-service runtime path был реализован и live-verified раньше в
+  `T13`-`T15`.
+- После этих cleanup thread-ов формально остаётся отдельный repo-wide
+  verification gate `T18`: exact `pytest -q`, `ruff check src tests` и
+  `mypy src tests` должны быть подтверждены ещё и отдельным no-edit
+  verification thread, а не считаться автоматически закрытыми только потому,
+  что те же команды уже зелёные внутри build cleanup thread.
 
 ## Что в ветке уже есть, но трогать пока рано
 
@@ -117,6 +131,9 @@ worktree.**
 | 13 | `T13` | Build | Codex `gpt-5.4` | Доводит working local service: settings, app lifespan, background poller, docs/tests | `T12` | Только последовательно |
 | 14 | `T14` | Ops | Manual + agent support | Проверяет live local-service flow end-to-end против локального Crawlab scope | `T13` | Только после локального build gate |
 | 15 | `T15` | Build | OpenCode `gpt-5.4` | Устраняет найденный в `T14` live startup blocker устойчиво: orphan spider metadata не валит startup и остаётся видимой в UI | `T14` | Только последовательно |
+| 16 | `T16` | Build | Codex `gpt-5.4` | Доводит repo-wide `ruff check src tests` до зелёного без product-scope drift | `T15` | Только последовательно |
+| 17 | `T17` | Build | Codex `gpt-5.4` | Доводит repo-wide `mypy src tests` до зелёного без ослабления strict contract | `T16` | Только последовательно |
+| 18 | `T18` | Ops | OpenCode `gpt-5.4` | Проверяет полный quality gate: `pytest -q`, `ruff check src tests`, `mypy src tests` | `T17` | Только последовательно |
 
 ## Единственное допустимое окно параллелизации
 
@@ -989,6 +1006,144 @@ fatal.
 - Readonly boundary осталась неизменной: только `GET`, только через
   `ReadonlyCrawlabClient`, browser-side Crawlab calls не добавлены.
 
+### `T16` — Довести repo-wide `ruff` до зелёного
+
+**Цель:** закрыть repo-wide lint debt после стабилизации local-service path,
+не переоткрывая product/runtime scope.
+
+Что делает:
+
+- правит `src/**` и `tests/**` только настолько, чтобы `ruff check src tests`
+  стал зелёным
+- закрывает import/order, line-length, unused, modernization и другие реальные
+  lint tails без изменения поведения по существу
+- минимально чинит non-trivial правила вроде `B008` и `B905`, если они реально
+  остаются в актуальном коде
+
+Что не делает:
+
+- не ослабляет `ruff` config ради прохождения
+- не открывает marker rollout work и не трогает внешний blocker из `T11`
+- не добавляет новый product scope, UI surface или runtime polish thread
+- не смешивает thread со strict typing cleanup, кроме узких случаев, где lint
+  fix неизбежно делает типы явнее
+
+Готово, когда:
+
+- `./.venv/bin/ruff check src tests` проходит зелёным
+- `./.venv/bin/pytest -q` по-прежнему проходит
+
+Текущий статус:
+
+- `T16` выполнен и gate закрыт.
+- Repo-wide `ruff` tails в `src/**` и `tests/**` доведены до зелёного без
+  ослабления `ruff` config и без product/runtime drift поверх уже закрытого
+  local-service path из `T13`-`T15`.
+- Закрыты реальные lint группы: import/order, unused imports, long lines,
+  modernization tails и небольшой remaining cleanup в parser/tooling/tests.
+- Non-trivial fix был узким и локальным: `B008` в
+  `src/cl_monitoring/web/routes.py` закрыт через module-level dependency
+  singleton вместо inline `Depends(...)` default; runtime behavior и route
+  contract не менялись.
+- String enum tails в shared domain/tooling слоях переведены на `StrEnum` как
+  минимальный корректный modernization fix; marker rollout semantics, runtime
+  service decisions и внешний blocker из `T11` не затрагивались.
+- Проверки пройдены:
+  `./.venv/bin/ruff check src tests` -> `All checks passed!`;
+  `./.venv/bin/pytest -q` -> `201 passed`.
+
+### `T17` — Довести repo-wide `mypy` до зелёного
+
+**Цель:** закрыть strict typing debt после lint cleanup, не ослабляя frozen
+runtime/domain contract.
+
+Что делает:
+
+- правит `src/**` и `tests/**`, чтобы `mypy src tests` стал зелёным
+- добавляет недостающие точные типы, сужает `Any`, чинит enum/model conversion
+  tails и test annotations
+- при необходимости добавляет только недостающие type stubs / typing deps,
+  если это действительно нужно для существующего импортируемого кода
+
+Что не делает:
+
+- не включает глобальный `ignore_missing_imports`
+- не размазывает blanket `# type: ignore` без точного объяснения
+- не ослабляет strict mode ради быстрого прохода
+- не открывает новый runtime/UI/marker scope
+
+Готово, когда:
+
+- `./.venv/bin/mypy src tests` проходит зелёным
+- `./.venv/bin/pytest -q` по-прежнему проходит
+
+Текущий статус:
+
+- `T17` выполнен и gate закрыт.
+- Repo-wide `mypy` tails в `src/**` и `tests/**` доведены до зелёного без
+  ослабления `strict` mode, без глобального `ignore_missing_imports` и без
+  product/runtime drift поверх уже закрытого local-service path из `T13`-`T15`.
+- Закрыты основные strict typing группы: missing stubs для реально
+  используемого `yaml`, remaining `Any` narrowing в tooling/runtime helpers,
+  enum/model conversion tails на границе SQLite/runtime models и строгие test
+  annotations/helpers в `tests/**`.
+- `Poller` был сужен до узкого client protocol для typing-safe test doubles;
+  runtime behavior, readonly boundary и frozen domain/runtime contract не
+  менялись.
+- В `pyproject.toml` добавлен только один нужный typing dependency:
+  `types-PyYAML`, потому что `yaml` реально импортируется в существующем
+  runtime tooling и test code.
+- Проверки пройдены:
+  `./.venv/bin/mypy src tests` -> `Success: no issues found in 46 source files`;
+  `./.venv/bin/ruff check src tests` -> `All checks passed!`;
+  `./.venv/bin/pytest -q` -> `201 passed`.
+- Это был отдельный cleanup thread после `T16`, а не продолжение `T13`
+  runtime work.
+
+### `T18` — Проверить полный repo-wide quality gate
+
+**Цель:** отдельно доказать, что после `T16` и `T17` репозиторий проходит все
+локальные quality gates одной серией, а не только узкие targeted checks.
+
+Что делает:
+
+- запускает exact commands:
+  - `./.venv/bin/pytest -q`
+  - `./.venv/bin/ruff check src tests`
+  - `./.venv/bin/mypy src tests`
+- подтверждает, что docs/README не расходятся с актуальным operator flow
+- если один из gates падает, фиксирует точный blocker и не чинит его в этом же
+  verification thread
+
+Что не делает:
+
+- не вносит новые code edits в том же thread
+- не смешивает repo-local verification с live rollout `T11`
+- не переоткрывает `T12`-`T15`, если не найден явный regression bug
+
+Готово, когда:
+
+- `pytest`, `ruff`, и `mypy` проходят в одном чистом прогоне
+- после этого открытым вне local repo cleanup остаётся только внешний blocker
+  из `T11` или новый отдельно изолированный bug thread
+
+Текущий статус:
+
+- `T18` выполнен и gate закрыт.
+- Repo-wide local quality gate подтверждён одной серией exact commands без
+  code edits в verification thread:
+  `./.venv/bin/pytest -q` -> `201 passed in 23.47s`;
+  `./.venv/bin/ruff check src tests` -> `All checks passed!`;
+  `./.venv/bin/mypy src tests` -> `Success: no issues found in 46 source files`.
+- `README.md` и текущий operator flow сверены с runtime code path:
+  fixed bind `127.0.0.1`, mode contract `live/sqlite_only/partial-env error`,
+  app-owned initial sync + background poller lifecycle, единый
+  `ReadonlyCrawlabClient` и SQLite-only browser data path подтверждены.
+- README verification tail по quality command выровнен на exact repo-wide gate:
+  `./.venv/bin/mypy src tests`.
+- После `T18` вне local repo cleanup surface остаётся только внешний
+  producer-side marker blocker из `T11`, если не появится новый отдельный bug.
+
 ## Чего не делать раньше времени
 
 1. Не начинать с фронта.
@@ -1006,13 +1161,14 @@ fatal.
 
 ## Короткая версия порядка
 
-**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> T3a cleanup tails -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout -> T12 runtime service ADR -> T13 working local service build -> T14 live service smoke -> T15 orphan spider startup hardening`**
+**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> T3a cleanup tails -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout -> T12 runtime service ADR -> T13 working local service build -> T14 live service smoke -> T15 orphan spider startup hardening -> T16 repo-wide ruff cleanup -> T17 repo-wide mypy cleanup -> T18 repo-wide quality verification`**
 
 Если хочется сократить до одного правила: **до завершения `T5` не трогать SQLite/poller/UI как самостоятельные milestones.**
 
 Если говорить только о local-service path, smoke-validated startup blocker из
-`T14` уже закрыт в **`T15`**. Главный remaining blocker вне этой поверхности —
-по-прежнему внешний marker rollout gap из **`T11`**.
+`T14` уже закрыт в **`T15`**. Следующие локальные repo-wide шаги после этого —
+**`T16` -> `T17` -> `T18`**. Отдельно от них по-прежнему живёт внешний marker
+rollout gap из **`T11`**.
 
 ## Готовые Prompt
 

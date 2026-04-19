@@ -18,7 +18,7 @@ import logging
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 logger = logging.getLogger(__name__)
 
@@ -43,10 +43,18 @@ URL_RE = re.compile(r"https?://[^\s\"',}\]]+")
 UNIX_PATH_RE = re.compile(r"/(?:home|Users)/([a-zA-Z0-9_.-]+)")
 
 # ── Fields that contain ObjectId references ─────────────────────────────
-OBJECT_ID_FIELDS = frozenset({
-    "_id", "spider_id", "schedule_id", "node_id", "user_id",
-    "task_id", "parent_id", "project_id",
-})
+OBJECT_ID_FIELDS = frozenset(
+    {
+        "_id",
+        "spider_id",
+        "schedule_id",
+        "node_id",
+        "user_id",
+        "task_id",
+        "parent_id",
+        "project_id",
+    }
+)
 
 # ── Category mapping for field names → placeholder prefix ──────────────
 FIELD_CATEGORY_MAP: dict[str, str] = {
@@ -61,14 +69,19 @@ FIELD_CATEGORY_MAP: dict[str, str] = {
 }
 
 # Well-known non-sensitive hostnames to preserve
-SAFE_HOSTNAMES = frozenset({
-    "localhost", "example.com", "github.com",
-})
+SAFE_HOSTNAMES = frozenset(
+    {
+        "localhost",
+        "example.com",
+        "github.com",
+    }
+)
 
 
 @dataclass
 class RedactionConfig:
     """Configuration for redaction behavior."""
+
     preserve_zero_id: bool = True
     preserve_zero_time: bool = True
     preserve_real_timestamps: bool = True
@@ -87,6 +100,12 @@ class RedactionConfig:
             redact_hosts_in_logs=data.get("redact_hosts_in_logs", True),
             sensitive_strings=data.get("sensitive_strings", []),
         )
+
+
+class RedactionMapping(TypedDict):
+    object_ids: dict[str, dict[str, str]]
+    hosts: dict[str, str]
+    users: dict[str, str]
 
 
 class Redactor:
@@ -163,10 +182,12 @@ class Redactor:
 
         return result
 
-    def get_mapping(self) -> dict[str, dict[str, str]]:
+    def get_mapping(self) -> RedactionMapping:
         """Return the current placeholder mapping (for debugging)."""
         return {
-            "object_ids": dict(self._maps),
+            "object_ids": {
+                category: mapping.copy() for category, mapping in self._maps.items()
+            },
             "hosts": dict(self._host_map),
             "users": dict(self._user_map),
         }
@@ -202,16 +223,12 @@ class Redactor:
 
         self._host_map.update(saved.get("hosts", {}))
         if self._host_map:
-            max_host = max(
-                (_extract_counter(v) or 0) for v in self._host_map.values()
-            )
+            max_host = max((_extract_counter(v) or 0) for v in self._host_map.values())
             self._host_counter = max_host + 1
 
         self._user_map.update(saved.get("users", {}))
         if self._user_map:
-            max_user = max(
-                (_extract_counter(v) or 0) for v in self._user_map.values()
-            )
+            max_user = max((_extract_counter(v) or 0) for v in self._user_map.values())
             self._user_counter = max_user + 1
 
     # ── Internal: JSON walk ─────────────────────────────────────────────

@@ -5,6 +5,7 @@ import sqlite3
 from pathlib import Path
 
 import pytest
+import uvicorn
 from fastapi.testclient import TestClient
 
 import cl_monitoring.app as app_module
@@ -62,7 +63,7 @@ class FailingPoller(FakePoller):
 
 
 def test_load_settings_reads_dotenv_and_process_env_override(
-    tmp_path,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     env_file = tmp_path / ".env"
@@ -94,7 +95,7 @@ def test_load_settings_reads_dotenv_and_process_env_override(
 
 
 def test_main_runs_uvicorn_with_fixed_local_bind(
-    tmp_path,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     captured: dict[str, object] = {}
@@ -108,7 +109,7 @@ def test_main_runs_uvicorn_with_fixed_local_bind(
         db_path=tmp_path / "main.sqlite3",
         app_port=8899,
     )
-    monkeypatch.setattr(app_module.uvicorn, "run", fake_run)
+    monkeypatch.setattr(uvicorn, "run", fake_run)
 
     app_module.main(settings=settings)
 
@@ -116,7 +117,9 @@ def test_main_runs_uvicorn_with_fixed_local_bind(
     assert captured["port"] == 8899
 
 
-def test_create_app_starts_sqlite_only_mode_without_live_resources(tmp_path) -> None:
+def test_create_app_starts_sqlite_only_mode_without_live_resources(
+    tmp_path: Path,
+) -> None:
     db_path = tmp_path / "sqlite-only.sqlite3"
     settings = build_runtime_settings(db_path=db_path)
     app = app_module.create_app(settings=settings)
@@ -137,7 +140,7 @@ def test_create_app_starts_sqlite_only_mode_without_live_resources(tmp_path) -> 
 
 
 def test_create_app_live_mode_runs_initial_sync_and_background_poller(
-    tmp_path,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     FakeReadonlyClient.instances.clear()
@@ -178,7 +181,7 @@ def test_create_app_live_mode_runs_initial_sync_and_background_poller(
     assert app.state.writer_connection is None
 
 
-def test_create_app_rejects_partial_live_configuration(tmp_path) -> None:
+def test_create_app_rejects_partial_live_configuration(tmp_path: Path) -> None:
     db_path = tmp_path / "partial.sqlite3"
     settings = build_runtime_settings(
         crawlab_base_url="https://crawlab.example/api",
@@ -186,17 +189,20 @@ def test_create_app_rejects_partial_live_configuration(tmp_path) -> None:
     )
     app = app_module.create_app(settings=settings)
 
-    with pytest.raises(
-        RuntimeConfigurationError,
-        match="Partial live configuration",
-    ), TestClient(app):
+    with (
+        pytest.raises(
+            RuntimeConfigurationError,
+            match="Partial live configuration",
+        ),
+        TestClient(app),
+    ):
         pass
 
     assert not db_path.exists()
 
 
 def test_create_app_live_startup_failure_closes_client_and_db(
-    tmp_path,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     FakeReadonlyClient.instances.clear()

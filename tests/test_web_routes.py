@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
+from pathlib import Path
 
+from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from cl_monitoring.app import create_app
@@ -79,9 +81,7 @@ def make_task(
     is_manual: bool = False,
 ) -> TaskSnapshot:
     end_ts = (
-        None
-        if status in {"pending", "running"}
-        else (start_ts or create_ts) + runtime
+        None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
     )
     return TaskSnapshot(
         id=task_id,
@@ -120,7 +120,7 @@ def make_summary(
     )
 
 
-def build_web_fixture(db_path) -> None:
+def build_web_fixture(db_path: Path) -> None:
     connection = connect_sqlite(db_path)
     repo = LocalRepository(connection)
 
@@ -364,18 +364,18 @@ def build_web_fixture(db_path) -> None:
     connection.close()
 
 
-def sqlite_only_settings(db_path) -> RuntimeSettings:
+def sqlite_only_settings(db_path: Path) -> RuntimeSettings:
     return build_runtime_settings(db_path=db_path)
 
 
-def build_sqlite_only_app(db_path) -> object:
+def build_sqlite_only_app(db_path: Path) -> FastAPI:
     return create_app(
         settings=sqlite_only_settings(db_path),
         now_provider=lambda: dt(15, 0),
     )
 
 
-def test_project_board_uses_local_sqlite_data(tmp_path) -> None:
+def test_project_board_uses_local_sqlite_data(tmp_path: Path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)
@@ -405,7 +405,9 @@ def test_project_board_uses_local_sqlite_data(tmp_path) -> None:
     assert "<button" not in response.text
 
 
-def test_spider_detail_shows_active_runs_schedules_and_recoveries(tmp_path) -> None:
+def test_spider_detail_shows_active_runs_schedules_and_recoveries(
+    tmp_path: Path,
+) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)
@@ -431,7 +433,9 @@ def test_spider_detail_shows_active_runs_schedules_and_recoveries(tmp_path) -> N
     assert "<button" not in response.text
 
 
-def test_spider_detail_renders_unresolved_spider_from_local_schedule(tmp_path) -> None:
+def test_spider_detail_renders_unresolved_spider_from_local_schedule(
+    tmp_path: Path,
+) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)
@@ -451,7 +455,9 @@ def test_spider_detail_renders_unresolved_spider_from_local_schedule(tmp_path) -
     assert "No recent runs recorded for this spider." in response.text
 
 
-def test_incidents_page_lists_open_and_recently_closed_incidents(tmp_path) -> None:
+def test_incidents_page_lists_open_and_recently_closed_incidents(
+    tmp_path: Path,
+) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)
@@ -473,7 +479,9 @@ def test_incidents_page_lists_open_and_recently_closed_incidents(tmp_path) -> No
     assert "<button" not in response.text
 
 
-def test_incidents_link_to_unresolved_spider_detail_does_not_404(tmp_path) -> None:
+def test_incidents_link_to_unresolved_spider_detail_does_not_404(
+    tmp_path: Path,
+) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)
@@ -483,11 +491,11 @@ def test_incidents_link_to_unresolved_spider_detail_does_not_404(tmp_path) -> No
         detail_response = client.get(f"/spiders/{UNRESOLVED_SPIDER_ID}")
 
     assert incidents_response.status_code == 200
-    assert f'/spiders/{UNRESOLVED_SPIDER_ID}' in incidents_response.text
+    assert f"/spiders/{UNRESOLVED_SPIDER_ID}" in incidents_response.text
     assert detail_response.status_code == 200
 
 
-def test_spider_detail_returns_404_for_missing_spider(tmp_path) -> None:
+def test_spider_detail_returns_404_for_missing_spider(tmp_path: Path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
     app = build_sqlite_only_app(db_path)

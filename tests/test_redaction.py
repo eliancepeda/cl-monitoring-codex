@@ -17,8 +17,6 @@ All tests are offline — no network access.
 
 from __future__ import annotations
 
-import json
-import tempfile
 from pathlib import Path
 
 import pytest
@@ -26,12 +24,12 @@ import pytest
 from tools.redact import (
     ZERO_OBJECT_ID,
     ZERO_TIME,
-    Redactor,
     RedactionConfig,
+    Redactor,
 )
 
-
 # ── Fixtures ───────────────────────────────────────────────────────────
+
 
 @pytest.fixture
 def redactor() -> Redactor:
@@ -40,13 +38,15 @@ def redactor() -> Redactor:
 
 @pytest.fixture
 def redactor_with_sensitive() -> Redactor:
-    return Redactor(RedactionConfig(
-        sensitive_strings=["AcmeCorp", "SecretProject"],
-    ))
+    return Redactor(
+        RedactionConfig(
+            sensitive_strings=["AcmeCorp", "SecretProject"],
+        )
+    )
 
 
 @pytest.fixture
-def sample_task() -> dict:
+def sample_task() -> dict[str, object]:
     return {
         "_id": "64a1b2c3d4e5f60718293a4b",
         "spider_id": "64a1b2c3d4e5f60718293a4c",
@@ -63,7 +63,7 @@ def sample_task() -> dict:
 
 
 @pytest.fixture
-def sample_spider() -> dict:
+def sample_spider() -> dict[str, object]:
     return {
         "_id": "64a1b2c3d4e5f60718293a4c",
         "name": "my_spider",
@@ -127,7 +127,10 @@ class TestStablePlaceholders:
         assert result["_id"] != result["spider_id"]
 
     def test_cross_reference_consistency(
-        self, redactor: Redactor, sample_task: dict, sample_spider: dict,
+        self,
+        redactor: Redactor,
+        sample_task: dict[str, object],
+        sample_spider: dict[str, object],
     ) -> None:
         """Spider_id in task should match _id in spider fixture."""
         task_result = redactor.redact_json(sample_task, context="task")
@@ -260,7 +263,8 @@ class TestSensitiveStrings:
     """Verify explicit sensitive string redaction."""
 
     def test_sensitive_string_in_json(
-        self, redactor_with_sensitive: Redactor,
+        self,
+        redactor_with_sensitive: Redactor,
     ) -> None:
         data = {"name": "AcmeCorp Spider", "description": "For SecretProject"}
         result = redactor_with_sensitive.redact_json(data)
@@ -269,7 +273,8 @@ class TestSensitiveStrings:
         assert "SENSITIVE_" in result["name"]
 
     def test_sensitive_string_in_log(
-        self, redactor_with_sensitive: Redactor,
+        self,
+        redactor_with_sensitive: Redactor,
     ) -> None:
         text = "Running spider for AcmeCorp on SecretProject server"
         result = redactor_with_sensitive.redact_log_text(text)

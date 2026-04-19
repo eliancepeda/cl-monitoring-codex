@@ -1,10 +1,10 @@
 # Agent Prompts
 
-Готовые copy-paste prompt для thread-ов `T0`-`T14` из `MILESTONES.MD`.
+Готовые copy-paste prompt для thread-ов `T0`-`T18` из `MILESTONES.md`.
 
 ## Общие правила запуска
 
-1. Перед стартом любого thread прочитай `AGENTS.md` и актуальный `MILESTONES.MD`.
+1. Перед стартом любого thread прочитай `AGENTS.md` и актуальный `MILESTONES.md`.
 2. Соблюдай зависимости между thread-ами. Не запускай следующий раньше gate предыдущего.
 3. Не делай commit, если тебя об этом явно не попросили.
 4. Любой live access к Crawlab: только `GET`, только через `ReadonlyCrawlabClient`, только в рамках allowlisted endpoints.
@@ -21,6 +21,7 @@
 - `T0`-`T3` запускаются строго последовательно.
 - `T4` и `T5` можно запускать параллельно только после `T3` и только в разных worktree.
 - `T6` и дальше снова строго последовательно.
+- После `T15` локальный repo cleanup тоже идёт только последовательно: `T16` -> `T17` -> `T18`.
 - Файлы single-owner: `AGENTS.md`, `DECISIONS.md`, `docs/domain/status-parser-contract.md`, `src/cl_monitoring/domain/models.py`, `src/cl_monitoring/settings.py`, `src/cl_monitoring/db/*`, `src/cl_monitoring/sync/poller.py`, `src/cl_monitoring/web/*`, `src/cl_monitoring/app.py`, `.env.example`, `README.md`.
 
 ---
@@ -36,7 +37,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0001-readonly-companion.md
 - src/integrations/crawlab/readonly_client.py
@@ -109,7 +110,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0001-readonly-companion.md
 - docs/domain/live-contract.md
@@ -176,7 +177,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/domain/status-parser-contract.md
 - src/tools/collect_fixtures.py
 - src/tools/redact.py
@@ -274,7 +275,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/domain/status-parser-contract.md
 - src/cl_monitoring/domain/models.py
 - src/cl_monitoring/domain/normalizers.py
@@ -333,7 +334,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/domain/status-parser-contract.md
 - docs/domain/live-contract.md
 - docs/domain/normalization-rules.md
@@ -404,7 +405,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/domain/status-parser-contract.md
 - docs/domain/parser-observations.md
 - src/cl_monitoring/domain/models.py
@@ -486,7 +487,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/domain/status-parser-contract.md
 - src/cl_monitoring/status/*
@@ -548,7 +549,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0002-local-history-and-poller.md
 - docs/domain/status-parser-contract.md
@@ -624,7 +625,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0002-local-history-and-poller.md
 - src/cl_monitoring/db/repo.py
@@ -683,7 +684,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0003-minimal-dashboard.md
 - src/cl_monitoring/db/repo.py
@@ -755,7 +756,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/adr/0003-minimal-dashboard.md
 - docs/domain/status-parser-contract.md
 - docs/domain/parser-observations.md
@@ -810,7 +811,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - docs/rollout/shadow-mode.md
 - docs/domain/structured-markers.md
 
@@ -855,7 +856,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0002-local-history-and-poller.md
 - docs/adr/0003-minimal-dashboard.md
@@ -939,7 +940,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - DECISIONS.md
 - docs/adr/0002-local-history-and-poller.md
 - docs/adr/0003-minimal-dashboard.md
@@ -1029,7 +1030,7 @@
 
 Сначала прочитай:
 - AGENTS.md
-- MILESTONES.MD
+- MILESTONES.md
 - README.md
 - docs/adr/0004-runtime-service-mode.md
 - .env.example
@@ -1061,4 +1062,247 @@
 2. создалась/обновилась ли SQLite
 3. отвечал ли dashboard осмысленными данными
 4. есть ли remaining blocker до реально рабочего local service
+```
+
+---
+
+## `T15` — Orphan Spider Startup Hardening
+
+**Agent:** OpenCode `gpt-5.4`  
+**Mode:** Build  
+**Run when:** Только после `T14`, когда blocker уже зафиксирован как narrow live startup bug.
+
+```text
+Работай в thread T15. Это build thread для узкого исправления live startup blocker из T14.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.md
+- DECISIONS.md
+- README.md
+- docs/adr/0004-runtime-service-mode.md
+- src/cl_monitoring/app.py
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/db/repo.py
+- src/cl_monitoring/web/routes.py
+- src/cl_monitoring/web/templates/project_board.html
+- src/cl_monitoring/web/templates/spider_detail.html
+- src/cl_monitoring/web/templates/incidents.html
+- tests/test_poller.py
+- tests/test_web_routes.py
+- tests/test_app_runtime.py
+
+Цель:
+- сделать local service устойчивым к узкому подтверждённому случаю, где
+  `GET /api/spiders/{id}` возвращает `404` для stale/orphan reference,
+  не ломая startup и не скрывая broken state из UI
+
+Жёсткие ограничения:
+- обрабатывай только `httpx.HTTPStatusError` со статусом `404` для individual
+  `GET /api/spiders/{id}`
+- не глотай `401/403/5xx`, timeout, transport errors и другие неожиданные случаи
+- не добавляй второй Crawlab client
+- не ослабляй readonly boundary
+- не делай broad `except Exception`
+- не вводи schema migration без явной необходимости
+
+Что нужно сделать:
+1. Узко обработать spider-detail `404` внутри poller sync path как unresolved metadata miss, а не как startup-fatal truth error.
+2. Сохранить fatal behavior для всех non-404 spider-detail failures.
+3. Перестроить local read-model fallback так, чтобы spider могла оставаться видимой на board/detail/incidents даже без live row в таблице `spiders`.
+4. Явно показать unresolved state в UI вместо silent disappearance.
+5. Добавить regression tests на narrow `404` case и guardrails на non-404 failures.
+6. Если safe live env доступен, повторно проверить exact operator path из T14 после code changes.
+
+Можно менять:
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/db/repo.py
+- src/cl_monitoring/web/routes.py
+- src/cl_monitoring/web/templates/project_board.html
+- src/cl_monitoring/web/templates/spider_detail.html
+- src/cl_monitoring/web/templates/incidents.html
+- tests/test_poller.py
+- tests/test_web_routes.py
+- tests/test_app_runtime.py
+
+Не делай:
+- новый operator path
+- broad fallback для всех `4xx`
+- новый runtime/client scope
+- marker rollout work
+- commits без явной просьбы
+
+Проверка обязательна:
+- ./.venv/bin/pytest -q tests/test_poller.py tests/test_web_routes.py tests/test_app_runtime.py
+- ./.venv/bin/pytest -q
+
+Если safe live env доступен, дополнительно:
+- ./.venv/bin/python -m cl_monitoring.app
+- проверить `GET /`, `GET /incidents` и problematic spider detail route
+
+В финальном отчёте дай:
+1. как узко обработан spider-detail `404`
+2. как unresolved spider остаётся видимой в UI
+3. какие проверки запускались и их результат
+4. остались ли ещё startup blockers после этого thread
+```
+
+---
+
+## `T16` — Repo-Wide Ruff Cleanup
+
+**Agent:** Codex `gpt-5.4`  
+**Mode:** Build  
+**Run when:** Только после `T15`.
+
+```text
+Работай в thread T16. Это repo-wide lint cleanup thread после закрытия local-service gap.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.md
+- DECISIONS.md
+- pyproject.toml
+- README.md
+
+Потом сразу запусти и используй как truth source:
+- ./.venv/bin/ruff check src tests
+
+Цель:
+- довести `./.venv/bin/ruff check src tests` до зелёного
+- не переоткрывать product/runtime scope, который уже закрыт в `T13`-`T15`
+
+Жёсткие ограничения:
+- не ослабляй ruff config только ради прохода
+- не меняй marker rollout contract и не трогай внешний blocker из `T11`
+- не добавляй новые фичи, UI scope или runtime polish поверх уже закрытого local-service path
+- сохраняй поведение кода; предпочитай механические и минимальные исправления
+
+Что нужно сделать:
+1. Разобрать актуальный failing set из `ruff check src tests`, а не опираться на старые числа из диалога.
+2. Починить repo-wide lint tails в `src/**` и `tests/**`.
+3. Для non-trivial правил вроде `B008` и `B905` сделать минимальное корректное исправление в коде, а не глушить правило без причины.
+4. Не трогать уже закрытые runtime/product decisions, если lint не требует узкого локального edit.
+
+Можно менять:
+- src/**
+- tests/**
+
+Не делай:
+- pyproject weakening / broad ignore lists
+- новые docs-only переписывания вне необходимости для lint
+- mypy cleanup сверх того, что неизбежно при lint fix
+- commits без явной просьбы
+
+Проверка обязательна:
+- ./.venv/bin/ruff check src tests
+- ./.venv/bin/pytest -q
+
+В финальном отчёте дай:
+1. какие группы lint проблем были закрыты
+2. были ли non-trivial fixes кроме механического formatting/import cleanup
+3. результаты `ruff` и `pytest`
+4. что осталось специально вне scope T16
+```
+
+---
+
+## `T17` — Repo-Wide Mypy Cleanup
+
+**Agent:** Codex `gpt-5.4`  
+**Mode:** Build  
+**Run when:** Только после зелёного `T16`.
+
+```text
+Работай в thread T17. Это strict typing cleanup thread после repo-wide lint cleanup.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.md
+- DECISIONS.md
+- pyproject.toml
+- README.md
+
+Потом сразу запусти и используй как truth source:
+- ./.venv/bin/mypy src tests
+
+Цель:
+- довести `./.venv/bin/mypy src tests` до зелёного
+- не ослабить frozen runtime/domain contract и не превратить cleanup в scope creep
+
+Жёсткие ограничения:
+- не включай глобальный `ignore_missing_imports`
+- не размазывай blanket `# type: ignore` без точного и узкого объяснения
+- не ослабляй strict mode ради быстрого прохода
+- не открывай новый runtime/UI/marker scope
+
+Что нужно сделать:
+1. Разобрать актуальный failing set из `mypy src tests`.
+2. Починить repo-wide typing tails в `src/**` и `tests/**`.
+3. Добавить недостающие конкретные типы, сужение `Any`, enum/model conversions и test annotations там, где это реально нужно.
+4. Если mypy упирается в отсутствующие stubs для реально используемой зависимости, добавь только нужный typing dependency в `pyproject.toml`.
+5. Сохрани поведение runtime и не подменяй реальные type bugs конфиг-ослаблением.
+
+Можно менять:
+- src/**
+- tests/**
+- pyproject.toml
+
+Не делай:
+- broad config weakening
+- unrelated refactor ради type cosmetics
+- новый product/runtime scope
+- commits без явной просьбы
+
+Проверка обязательна:
+- ./.venv/bin/mypy src tests
+- ./.venv/bin/ruff check src tests
+- ./.venv/bin/pytest -q
+
+В финальном отчёте дай:
+1. какие группы mypy ошибок были закрыты
+2. добавлялись ли typing stubs/deps и зачем
+3. результаты `mypy`, `ruff`, `pytest`
+4. что осталось вне scope T17
+```
+
+---
+
+## `T18` — Repo-Wide Quality Gate Verification
+
+**Agent:** OpenCode `gpt-5.4`  
+**Mode:** Ops  
+**Run when:** Только после зелёных `T16` и `T17`.
+
+```text
+Работай в thread T18. Это verification-only thread для полного local repo quality gate.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.md
+- DECISIONS.md
+- README.md
+- pyproject.toml
+
+Цель:
+- отдельно подтвердить, что после cleanup все локальные quality gates проходят одной серией
+
+Что нужно сделать:
+1. Запустить exact commands:
+   - ./.venv/bin/pytest -q
+   - ./.venv/bin/ruff check src tests
+   - ./.venv/bin/mypy src tests
+2. Сверить, что README и текущий operator flow не расходятся с кодом.
+3. Если один из gates падает, зафиксировать точный blocker и остановиться.
+
+Не делай:
+- никаких code edits в этом же thread
+- никакого live rollout work из `T11`
+- никаких «ну почти зелёный» verdict без exact command output
+
+В финальном отчёте дай:
+1. результат каждой exact команды
+2. есть ли полный repo-wide green gate
+3. если нет — какой следующий узкий build thread нужно открыть
+4. какие remaining open items остаются вне local repo cleanup surface
 ```

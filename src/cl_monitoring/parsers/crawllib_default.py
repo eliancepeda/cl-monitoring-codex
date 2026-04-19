@@ -3,18 +3,17 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable
 from datetime import timedelta
-from typing import Iterable
 
 from cl_monitoring.domain import (
+    RUN_SUMMARY_COUNTER_KEYS,
     Confidence,
     ErrorFamily,
-    RUN_SUMMARY_COUNTER_KEYS,
     RunResult,
     RunSummary,
     TaskSnapshot,
 )
-
 
 ITEM_EVENT_RE = re.compile(
     r'(?:\(Id:\s*\d+.*\):\s*\{.*"price"\s*:|\bЦена\b)',
@@ -26,28 +25,40 @@ RESUME_SUCCESS_RE = re.compile(r"\|\s*Резюме:\s*✅")
 IS_SUCCESS_TRUE_RE = re.compile(r'"isSuccess"\s*:\s*true')
 SKU_NOT_FOUND_RE = re.compile(r"(?:sku_not_found|не наш[её]л SKU)", re.IGNORECASE)
 GONE_404_RE = re.compile(
-    r"(?:got gone status code\s*404|gone status code\s*404|status code\s*404.*\bgone\b)",
+    r"(?:got gone status code\s*404|"
+    r"gone status code\s*404|"
+    r"status code\s*404.*\bgone\b)",
     re.IGNORECASE,
 )
 CANCEL_MARKER_RE = re.compile(
-    r"(?:CancelledError|task was cancelled|cancelled by supervisor|operation cancelled)",
+    r"(?:CancelledError|"
+    r"task was cancelled|"
+    r"cancelled by supervisor|"
+    r"operation cancelled)",
     re.IGNORECASE,
 )
 WRAPPED_PARSE_PHP_CANCEL_RE = re.compile(r"parse\.php error", re.IGNORECASE)
 ERROR_AUTO_STOP_RE = re.compile(r"\berror_auto_stop\b.*\bis reached\b", re.IGNORECASE)
 AUTO_STOP_RE = re.compile(
-    r"(?:\bauto[_ -]?stop\b(?!\s*=).*\bis reached\b|max.?runtime.*exceeded|killed by scheduler)",
+    r"(?:\bauto[_ -]?stop\b(?!\s*=).*\bis reached\b|"
+    r"max.?runtime.*exceeded|"
+    r"killed by scheduler)",
     re.IGNORECASE,
 )
 BAN_429_RE = re.compile(
-    r"(?:too many requests|got ban status code\s*\(?429\)?|ban status code\s*\(?429\)?|status code\s*429)",
+    r"(?:too many requests|"
+    r"got ban status code\s*\(?429\)?|"
+    r"ban status code\s*\(?429\)?|"
+    r"status code\s*429)",
     re.IGNORECASE,
 )
 ERROR_SIGNAL_RE = re.compile(
     r"(?:Traceback \(most recent call last\)|\bexception\b|^ERROR\b|\bKilled\b)",
     re.IGNORECASE,
 )
-FAILED_EVIDENCE_RE = re.compile(r"(?:Traceback \(most recent call last\)|Exception:)", re.IGNORECASE)
+FAILED_EVIDENCE_RE = re.compile(
+    r"(?:Traceback \(most recent call last\)|Exception:)", re.IGNORECASE
+)
 INCOMPLETE_LOG_EVIDENCE = "log may be truncated at collector page limit"
 
 
@@ -299,7 +310,10 @@ def _has_error_signal(lines: list[str]) -> bool:
 
 def _is_wrapped_parse_php_cancel(status: str, lines: list[str]) -> bool:
     # Some crawllib failures are re-raised through CancelledError transport.
-    return status == "error" and _first_matching_line(lines, WRAPPED_PARSE_PHP_CANCEL_RE) is not None
+    return (
+        status == "error"
+        and _first_matching_line(lines, WRAPPED_PARSE_PHP_CANCEL_RE) is not None
+    )
 
 
 def build_synthetic_task(task_id: str, *, status: str) -> TaskSnapshot:

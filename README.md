@@ -144,7 +144,7 @@ APP_PORT=8787
 ```bash
 ./.venv/bin/pytest -q
 ./.venv/bin/ruff check src tests
-./.venv/bin/mypy src
+./.venv/bin/mypy src tests
 ```
 
 Для test suite live Crawlab обычно не нужен: основная часть parser/status/runtime coverage остаётся offline.

@@ -1,17 +1,17 @@
 """Tests for frozen shared domain runtime models."""
 
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 from pydantic import ValidationError
 
 from cl_monitoring.domain.models import (
+    RUN_SUMMARY_COUNTER_KEYS,
+    SCHEDULE_HEALTH_COUNTER_KEYS,
     Confidence,
     ErrorFamily,
-    RUN_SUMMARY_COUNTER_KEYS,
     RunResult,
     RunSummary,
-    SCHEDULE_HEALTH_COUNTER_KEYS,
     ScheduleHealth,
     ScheduleHealthStatus,
     ScheduleSnapshot,
@@ -19,7 +19,7 @@ from cl_monitoring.domain.models import (
 )
 
 
-def test_run_summary_freezes_shared_counter_shape_and_reason_code():
+def test_run_summary_freezes_shared_counter_shape_and_reason_code() -> None:
     summary = RunSummary(
         task_id="ID_745",
         execution_key="SPIDER_ID_201:python board_new.py:",
@@ -51,12 +51,13 @@ def test_run_summary_freezes_shared_counter_shape_and_reason_code():
     assert payload["error_family"] == "anti_bot"
 
 
-def test_run_summary_keeps_legacy_parser_compatibility_by_inferencing_reason_code():
+def test_run_summary_infers_reason_code_for_legacy_parser_shape() -> None:
     summary = RunSummary(
         task_id="ID_745",
         execution_key="test_key",
         run_result=RunResult.FAILED,
         confidence=Confidence.HIGH,
+        reason_code="",
         evidence=[
             "Got ban status code 429, reinit client...",
             "Exception: error_auto_stop (6) is reached",
@@ -72,7 +73,7 @@ def test_run_summary_keeps_legacy_parser_compatibility_by_inferencing_reason_cod
     assert summary.counters["lines_seen"] == 0
 
 
-def test_run_summary_rejects_unknown_reason_code():
+def test_run_summary_rejects_unknown_reason_code() -> None:
     with pytest.raises(ValidationError, match="reason_code"):
         RunSummary(
             task_id="ID_999",
@@ -85,7 +86,7 @@ def test_run_summary_rejects_unknown_reason_code():
         )
 
 
-def test_run_summary_rejects_unknown_counter_key():
+def test_run_summary_rejects_unknown_counter_key() -> None:
     with pytest.raises(ValidationError, match="unsupported counter key"):
         RunSummary(
             task_id="ID_999",
@@ -98,7 +99,7 @@ def test_run_summary_rejects_unknown_counter_key():
         )
 
 
-def test_schedule_health_freezes_shared_shape_and_counter_keys():
+def test_schedule_health_freezes_shared_shape_and_counter_keys() -> None:
     health = ScheduleHealth(
         schedule_id="SCHEDULE_ID_005",
         execution_key="SPIDER_ID_201:python board_new.py:",
@@ -122,7 +123,7 @@ def test_schedule_health_freezes_shared_shape_and_counter_keys():
     assert health.model_dump(mode="json")["health"] == "running_long"
 
 
-def test_schedule_health_rejects_unknown_reason_code():
+def test_schedule_health_rejects_unknown_reason_code() -> None:
     with pytest.raises(ValidationError, match="reason_code"):
         ScheduleHealth(
             schedule_id="SCHEDULE_ID_005",
@@ -135,33 +136,36 @@ def test_schedule_health_rejects_unknown_reason_code():
         )
 
 
-def test_shared_snapshots_forbid_extra_fields():
-    task_kwargs = {
-        "id": "ID_753",
-        "spider_id": "SPIDER_ID_201",
-        "schedule_id": "SCHEDULE_ID_005",
-        "status": "running",
-        "cmd": "python board_new.py",
-        "param": "",
-        "create_ts": datetime(2026, 4, 17, 4, 3, 0, tzinfo=timezone.utc),
-        "start_ts": datetime(2026, 4, 17, 4, 3, 1, tzinfo=timezone.utc),
-        "end_ts": None,
-        "runtime": timedelta(minutes=5),
-        "is_manual": False,
-        "execution_key": "SPIDER_ID_201:python board_new.py:",
-    }
-    schedule_kwargs = {
-        "id": "SCHEDULE_ID_005",
-        "name": "nightly board",
-        "spider_id": "SPIDER_ID_201",
-        "cron": "0 4 * * *",
-        "cmd": "python board_new.py",
-        "param": "",
-        "enabled": True,
-    }
+def test_shared_snapshots_forbid_extra_fields() -> None:
+    with pytest.raises(ValidationError, match="extra_forbidden"):
+        TaskSnapshot.model_validate(
+            {
+                "id": "ID_753",
+                "spider_id": "SPIDER_ID_201",
+                "schedule_id": "SCHEDULE_ID_005",
+                "status": "running",
+                "cmd": "python board_new.py",
+                "param": "",
+                "create_ts": datetime(2026, 4, 17, 4, 3, 0, tzinfo=UTC),
+                "start_ts": datetime(2026, 4, 17, 4, 3, 1, tzinfo=UTC),
+                "end_ts": None,
+                "runtime": timedelta(minutes=5),
+                "is_manual": False,
+                "execution_key": "SPIDER_ID_201:python board_new.py:",
+                "parser_private_state": "no",
+            }
+        )
 
     with pytest.raises(ValidationError, match="extra_forbidden"):
-        TaskSnapshot(**task_kwargs, parser_private_state="no")
-
-    with pytest.raises(ValidationError, match="extra_forbidden"):
-        ScheduleSnapshot(**schedule_kwargs, derived_window_ms=5000)
+        ScheduleSnapshot.model_validate(
+            {
+                "id": "SCHEDULE_ID_005",
+                "name": "nightly board",
+                "spider_id": "SPIDER_ID_201",
+                "cron": "0 4 * * *",
+                "cmd": "python board_new.py",
+                "param": "",
+                "enabled": True,
+                "derived_window_ms": 5000,
+            }
+        )

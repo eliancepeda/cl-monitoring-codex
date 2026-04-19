@@ -5,13 +5,13 @@ decoupled from Crawlab API response shapes.
 """
 
 from datetime import datetime, timedelta
-from enum import Enum
-from typing import Any, Dict, List, Optional
+from enum import Enum, StrEnum
+from typing import Any
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 
-class RunResult(str, Enum):
+class RunResult(StrEnum):
     SUCCESS = "success"
     SUCCESS_PROBABLE = "success_probable"
     PARTIAL_SUCCESS = "partial_success"
@@ -21,13 +21,13 @@ class RunResult(str, Enum):
     UNKNOWN = "unknown"
 
 
-class Confidence(str, Enum):
+class Confidence(StrEnum):
     HIGH = "high"
     MEDIUM = "medium"
     LOW = "low"
 
 
-class ScheduleHealthStatus(str, Enum):
+class ScheduleHealthStatus(StrEnum):
     ON_TIME = "on_time"
     QUEUED_START = "queued_start"
     DELAYED_START = "delayed_start"
@@ -37,7 +37,7 @@ class ScheduleHealthStatus(str, Enum):
     RECOVERED_BY_MANUAL_RERUN = "recovered_by_manual_rerun"
 
 
-class ErrorFamily(str, Enum):
+class ErrorFamily(StrEnum):
     ANTI_BOT = "anti_bot"
     CANCELLED = "cancelled"
     CRASH = "crash"
@@ -112,8 +112,8 @@ def _normalize_counters(
     raw_value: Any,
     *,
     allowed_keys: tuple[str, ...],
-    aliases: Optional[Dict[str, str]] = None,
-) -> Dict[str, int]:
+    aliases: dict[str, str] | None = None,
+) -> dict[str, int]:
     if raw_value is None:
         raw_value = {}
 
@@ -134,7 +134,7 @@ def _normalize_counters(
     return normalized
 
 
-def _infer_legacy_run_reason_code(data: Dict[str, Any]) -> str:
+def _infer_legacy_run_reason_code(data: dict[str, Any]) -> str:
     run_result = _enum_value(data.get("run_result"))
     error_family = _enum_value(data.get("error_family"))
 
@@ -163,9 +163,9 @@ class RunSummary(BaseModel):
     run_result: RunResult
     confidence: Confidence
     reason_code: str
-    evidence: List[str]
-    counters: Dict[str, int]
-    error_family: Optional[ErrorFamily] = None
+    evidence: list[str]
+    counters: dict[str, int]
+    error_family: ErrorFamily | None = None
 
     @model_validator(mode="before")
     @classmethod
@@ -199,8 +199,8 @@ class ScheduleHealth(BaseModel):
     health: ScheduleHealthStatus
     confidence: Confidence
     reason_code: str
-    evidence: List[str]
-    counters: Dict[str, int]
+    evidence: list[str]
+    counters: dict[str, int]
 
     @model_validator(mode="before")
     @classmethod
@@ -228,13 +228,13 @@ class TaskSnapshot(BaseModel):
 
     id: str
     spider_id: str
-    schedule_id: Optional[str]
+    schedule_id: str | None
     status: str
     cmd: str
     param: str
-    create_ts: Optional[datetime]
-    start_ts: Optional[datetime]
-    end_ts: Optional[datetime]
+    create_ts: datetime | None
+    start_ts: datetime | None
+    end_ts: datetime | None
     runtime: timedelta
     is_manual: bool
     execution_key: str

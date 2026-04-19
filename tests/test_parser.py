@@ -1,7 +1,9 @@
-import pytest
 from pathlib import Path
+
+import pytest
+
+from cl_monitoring.domain.models import ErrorFamily, RunResult
 from cl_monitoring.parsers.crawllib import parse_crawllib_logs
-from cl_monitoring.domain.models import RunResult, ErrorFamily
 
 FIXTURES_DIR = Path(__file__).parent.parent / "fixtures" / "logs"
 
@@ -24,15 +26,21 @@ EXPECTED_RESULTS = {
     "ID_757": (RunResult.PARTIAL_SUCCESS, None),
 }
 
+
 @pytest.mark.parametrize("task_id, expected_tuple", EXPECTED_RESULTS.items())
-def test_crawllib_parser_determines_correct_status(task_id, expected_tuple):
+def test_crawllib_parser_determines_correct_status(
+    task_id: str,
+    expected_tuple: tuple[RunResult, ErrorFamily | None],
+) -> None:
     expected_result, expected_error_family = expected_tuple
-    
+
     log_file = FIXTURES_DIR / f"{task_id}.log"
-    with open(log_file, "r", encoding="utf-8") as f:
+    with open(log_file, encoding="utf-8") as f:
         log_lines = f.readlines()
-        
-    summary = parse_crawllib_logs(task_id=task_id, execution_key="test_key", log_lines=log_lines)
-    
+
+    summary = parse_crawllib_logs(
+        task_id=task_id, execution_key="test_key", log_lines=log_lines
+    )
+
     assert summary.run_result == expected_result
     assert summary.error_family == expected_error_family

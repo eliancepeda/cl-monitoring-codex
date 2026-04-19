@@ -15,8 +15,6 @@ from __future__ import annotations
 import json
 from typing import Any
 
-import pytest
-
 from tools.collect_fixtures import (
     _build_conditions,
     build_execution_key,
@@ -27,7 +25,6 @@ from tools.collect_fixtures import (
     find_long_running_schedule,
     sample_candidates,
 )
-
 
 # ── Test data ──────────────────────────────────────────────────────────
 
@@ -223,7 +220,10 @@ class TestLongRunningScheduleSelection:
             {"_id": "sched_fast", "spider_id": "spider_aaa"},
         ]
         sched_id, info = find_long_running_schedule(
-            tasks, schedules, SPIDERS, ["proj_001"],
+            tasks,
+            schedules,
+            SPIDERS,
+            ["proj_001"],
         )
         assert sched_id == "sched_slow"
         assert info["median_runtime_ms"] == 110000.0
@@ -243,7 +243,10 @@ class TestLongRunningScheduleSelection:
             {"_id": "sched_b", "spider_id": "spider_aaa"},
         ]
         sched_id, info = find_long_running_schedule(
-            tasks, schedules, SPIDERS, ["proj_001"],
+            tasks,
+            schedules,
+            SPIDERS,
+            ["proj_001"],
         )
         assert sched_id == "sched_b"
         assert info["has_running"] is True
@@ -252,18 +255,31 @@ class TestLongRunningScheduleSelection:
         """Out-of-scope schedules are excluded."""
         tasks = [
             # In scope (spider_aaa → proj_001)
-            _make_task("t1", "finished", spider_id="spider_aaa",
-                       schedule_id="sched_in", runtime_ms=5000),
+            _make_task(
+                "t1",
+                "finished",
+                spider_id="spider_aaa",
+                schedule_id="sched_in",
+                runtime_ms=5000,
+            ),
             # Out of scope (spider_bbb → proj_002)
-            _make_task("t2", "finished", spider_id="spider_bbb",
-                       schedule_id="sched_out", runtime_ms=500000),
+            _make_task(
+                "t2",
+                "finished",
+                spider_id="spider_bbb",
+                schedule_id="sched_out",
+                runtime_ms=500000,
+            ),
         ]
         schedules = [
             {"_id": "sched_in", "spider_id": "spider_aaa"},
             {"_id": "sched_out", "spider_id": "spider_bbb"},
         ]
         sched_id, info = find_long_running_schedule(
-            tasks, schedules, SPIDERS, ["proj_001"],
+            tasks,
+            schedules,
+            SPIDERS,
+            ["proj_001"],
         )
         assert sched_id == "sched_in"
 

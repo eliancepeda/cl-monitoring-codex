@@ -34,7 +34,7 @@ import logging
 import os
 import statistics
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -45,10 +45,8 @@ from integrations.crawlab.readonly_client import (
     ReadonlyCrawlabClient,
 )
 from tools.classify_logs import (
-    build_expected_log_fixture,
-    CandidateClass,
-    FinalLogClass,
     LogClassification,
+    build_expected_log_fixture,
     classify_candidate,
     classify_final,
     classify_log_text,
@@ -56,7 +54,7 @@ from tools.classify_logs import (
     generate_manifest_entry,
     is_manual_run,
 )
-from tools.redact import Redactor, RedactionConfig
+from tools.redact import RedactionConfig, Redactor
 
 logger = logging.getLogger(__name__)
 
@@ -98,13 +96,15 @@ def _load_dotenv(path: str = ".env") -> None:
 
 # ── Config loader ──────────────────────────────────────────────────────
 
+
 def load_config(path: Path) -> dict[str, Any]:
     """Load and validate user_scope.yml."""
     if not path.exists():
         logger.error("Config file not found: %s", path)
         sys.exit(1)
     with open(path) as f:
-        cfg = yaml.safe_load(f) or {}
+        loaded = yaml.safe_load(f) or {}
+    cfg = loaded if isinstance(loaded, dict) else {}
 
     # Validate security section
     methods = cfg.get("security", {}).get("allowed_methods", [])
@@ -148,6 +148,7 @@ def _get_scope_config(cfg: dict[str, Any]) -> dict[str, Any]:
 
 # ── Condition-based query builder ──────────────────────────────────────
 
+
 def _build_conditions(*conditions: dict[str, str]) -> str:
     """Build Crawlab conditions JSON string.
 
@@ -157,6 +158,7 @@ def _build_conditions(*conditions: dict[str, str]) -> str:
 
 
 # ── Discovery ──────────────────────────────────────────────────────────
+
 
 async def discover_candidates_by_status(
     client: ReadonlyCrawlabClient,
@@ -212,7 +214,10 @@ async def discover_all_candidates(
 
     for status in TASK_STATUS_QUERIES:
         tasks, meta = await discover_candidates_by_status(
-            client, status, page_size, max_pages,
+            client,
+            status,
+            page_size,
+            max_pages,
         )
         candidates[status] = (tasks, meta)
 
@@ -233,14 +238,18 @@ async def discover_schedules(client: ReadonlyCrawlabClient) -> list[dict[str, An
 
 
 async def fetch_spider(
-    client: ReadonlyCrawlabClient, spider_id: str,
+    client: ReadonlyCrawlabClient,
+    spider_id: str,
 ) -> dict[str, Any] | None:
     """Fetch a single spider by ID."""
     if spider_id == ZERO_OBJECT_ID:
         return None
     try:
         data = await client.get_json(f"/api/spiders/{spider_id}")
-        return data.get("data", data) if isinstance(data, dict) else data
+        if not isinstance(data, dict):
+            return None
+        payload = data.get("data", data)
+        return payload if isinstance(payload, dict) else None
     except Exception as e:
         logger.warning("Failed to fetch spider %s: %s", spider_id, e)
         return None
@@ -296,7 +305,13 @@ def _extract_log_line(item: Any) -> str:
     if isinstance(item, str):
         return item
     if isinstance(item, dict):
-        return item.get("msg", item.get("message", str(item)))
+        message = item.get("msg")
+        if isinstance(message, str):
+            return message
+        fallback = item.get("message")
+        if isinstance(fallback, str):
+            return fallback
+        return str(item)
     return str(item)
 
 
@@ -318,12 +333,15 @@ async def fetch_results(
     except Exception as e:
         logger.warning(
             "Failed to fetch results for collection %s, task %s: %s",
-            collection_id, task_id, e,
+            collection_id,
+            task_id,
+            e,
         )
         return []
 
 
 # ── Project scoping ────────────────────────────────────────────────────
+
 
 async def hydrate_spider_project_ids(
     client: ReadonlyCrawlabClient,
@@ -373,10 +391,12 @@ def compute_project_histogram(
 
 # ── Sampling ───────────────────────────────────────────────────────────
 
+
 def build_execution_key(task: dict[str, Any]) -> str:
     """Build execution_key from spider_id + normalized cmd + normalized param.
 
-    AGENTS.md § Domain rules: execution_key = spider_id + normalized cmd + normalized param.
+    AGENTS.md § Domain rules:
+    execution_key = spider_id + normalized cmd + normalized param.
     """
     spider_id = task.get("spider_id", "")
     cmd = (task.get("cmd", "") or "").strip()
@@ -404,7 +424,7 @@ def sample_candidates(
             key=lambda t: t.get("create_ts", t.get("created_at", "")),
             reverse=True,
         )
-        selected = []
+        selected: list[dict[str, Any]] = []
         for task in sorted_tasks:
             if len(selected) >= max_per_class:
                 break
@@ -420,6 +440,7 @@ def sample_candidates(
 
 
 # ── Schedule history sampling ──────────────────────────────────────────
+
 
 def _get_runtime_ms(task: dict[str, Any]) -> int | None:
     """Extract runtime_duration in milliseconds from task stat."""
@@ -507,43 +528,35 @@ def find_long_running_schedule(
         is_candidate = task_count >= min_history_tasks
 
         if is_candidate:
-            if best_id is None:
-                best_id = sid
-                best_median = median_rt
-                best_has_running = has_running
-                best_task_count = task_count
-            elif has_running and not best_has_running:
-                best_id = sid
-                best_median = median_rt
-                best_has_running = has_running
-                best_task_count = task_count
-            elif has_running == best_has_running and median_rt > best_median:
+            if (
+                best_id is None
+                or has_running
+                and not best_has_running
+                or has_running == best_has_running
+                and median_rt > best_median
+            ):
                 best_id = sid
                 best_median = median_rt
                 best_has_running = has_running
                 best_task_count = task_count
         else:
-            if fallback_id is None:
-                fallback_id = sid
-                fallback_median = median_rt
-                fallback_has_running = has_running
-                fallback_task_count = task_count
-            elif has_running and not fallback_has_running:
-                fallback_id = sid
-                fallback_median = median_rt
-                fallback_has_running = has_running
-                fallback_task_count = task_count
-            elif has_running == fallback_has_running and median_rt > fallback_median:
+            if (
+                fallback_id is None
+                or has_running
+                and not fallback_has_running
+                or has_running == fallback_has_running
+                and median_rt > fallback_median
+            ):
                 fallback_id = sid
                 fallback_median = median_rt
                 fallback_has_running = has_running
                 fallback_task_count = task_count
 
     if best_id is not None:
-        reason_parts = [f"median runtime {best_median/1000:.1f}s"]
+        reason_parts = [f"median runtime {best_median / 1000:.1f}s"]
         if best_has_running:
             reason_parts.append("active running chain")
-        
+
         return best_id, {
             "schedule_id": best_id,
             "reason": ", ".join(reason_parts),
@@ -553,11 +566,11 @@ def find_long_running_schedule(
             "is_fallback": False,
         }
     elif fallback_id is not None:
-        reason_parts = [f"median runtime {fallback_median/1000:.1f}s"]
+        reason_parts = [f"median runtime {fallback_median / 1000:.1f}s"]
         if fallback_has_running:
             reason_parts.append("active running chain")
         reason_parts.append("fallback_long_running_candidate")
-        
+
         return fallback_id, {
             "schedule_id": fallback_id,
             "reason": ", ".join(reason_parts),
@@ -571,6 +584,7 @@ def find_long_running_schedule(
 
 
 # ── Writer ─────────────────────────────────────────────────────────────
+
 
 def write_raw_fixture(
     data: Any,
@@ -614,6 +628,7 @@ def write_redacted_fixture(
 
 # ── Manifest generation ────────────────────────────────────────────────
 
+
 def generate_manifest(
     entries: list[dict[str, Any]],
     out_dir: Path,
@@ -626,7 +641,7 @@ def generate_manifest(
     lines = [
         "# Fixtures Manifest",
         "",
-        f"Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}",
+        f"Generated: {datetime.now(UTC).strftime('%Y-%m-%dT%H:%M:%SZ')}",
         "",
         "## Summary",
         "",
@@ -641,9 +656,7 @@ def generate_manifest(
     ]
 
     for entry in entries:
-        files = ", ".join(
-            f"`{k}`: {v}" for k, v in entry.get("files", {}).items()
-        )
+        files = ", ".join(f"`{k}`: {v}" for k, v in entry.get("files", {}).items())
         lines.append(
             f"| {entry.get('task_id', '?')} "
             f"| {entry.get('candidate_class', '?')} "
@@ -654,17 +667,19 @@ def generate_manifest(
             f"| {files} |"
         )
 
-    lines.extend([
-        "",
-        "## Notes",
-        "",
-        "- All IDs are redacted with stable placeholders.",
-        "- Zero ObjectId (`000000000000000000000000`) is preserved.",
-        "- Zero time (`0001-01-01T00:00:00Z`) is preserved.",
-        "- Real timestamps are preserved (v1 decision).",
-        "- Files in `expected/` are draft skeletons — verify before use.",
-        "",
-    ])
+    lines.extend(
+        [
+            "",
+            "## Notes",
+            "",
+            "- All IDs are redacted with stable placeholders.",
+            "- Zero ObjectId (`000000000000000000000000`) is preserved.",
+            "- Zero time (`0001-01-01T00:00:00Z`) is preserved.",
+            "- Real timestamps are preserved (v1 decision).",
+            "- Files in `expected/` are draft skeletons — verify before use.",
+            "",
+        ]
+    )
 
     filepath.write_text("\n".join(lines), encoding="utf-8")
     logger.info("Manifest written to %s", filepath)
@@ -672,6 +687,7 @@ def generate_manifest(
 
 
 # ── Estimation helpers ─────────────────────────────────────────────────
+
 
 def estimate_api_calls(
     sampled_count: int,
@@ -688,7 +704,9 @@ def estimate_api_calls(
         "schedules_query": 1,
         "spider_hydration": spider_count,
         "log_fetches": sampled_count + long_running_extra,
-        "result_fetches": sampled_count if coll.get("collect_results_for_sampled_tasks_only") else 0,
+        "result_fetches": sampled_count
+        if coll.get("collect_results_for_sampled_tasks_only")
+        else 0,
     }
     calls["total"] = sum(calls.values())
     return calls
@@ -720,6 +738,7 @@ def estimate_files(
 
 # ── Dry-run ────────────────────────────────────────────────────────────
 
+
 async def run_dry_run(
     client: ReadonlyCrawlabClient,
     cfg: dict[str, Any],
@@ -735,7 +754,9 @@ async def run_dry_run(
     # 1. Condition-based discovery
     print("─── Condition-based discovery ───")
     candidates_with_meta = await discover_all_candidates(
-        client, coll["task_page_size"], max_pages=1,
+        client,
+        coll["task_page_size"],
+        max_pages=1,
     )
     candidates = {k: v[0] for k, v in candidates_with_meta.items()}
     candidates_meta = {k: v[1] for k, v in candidates_with_meta.items()}
@@ -748,9 +769,7 @@ async def run_dry_run(
     for tasks in candidates.values():
         all_tasks_flat.extend(tasks)
 
-    spider_ids = {
-        t.get("spider_id", "") for t in all_tasks_flat
-    } - {ZERO_OBJECT_ID, ""}
+    spider_ids = {t.get("spider_id", "") for t in all_tasks_flat} - {ZERO_OBJECT_ID, ""}
 
     # 4. Hydrate spiders for project scoping
     print(f"\nHydrating {len(spider_ids)} spider(s) for project scoping...")
@@ -790,27 +809,36 @@ async def run_dry_run(
 
     # 8. Sample candidates
     _sampled, selected_ids = sample_candidates(
-        filtered_candidates, coll["max_examples_per_class"],
+        filtered_candidates,
+        coll["max_examples_per_class"],
     )
 
     # 9. Long-running schedule selection
     long_sched_id, long_sched_info = find_long_running_schedule(
-        all_filtered, schedules, spiders, allowed_project_ids,
+        all_filtered,
+        schedules,
+        spiders,
+        allowed_project_ids,
     )
 
     # 10. Filtered spider count
-    filtered_spider_ids = {
-        t.get("spider_id", "") for t in all_filtered
-    } - {ZERO_OBJECT_ID, ""}
+    filtered_spider_ids = {t.get("spider_id", "") for t in all_filtered} - {
+        ZERO_OBJECT_ID,
+        "",
+    }
 
     # 11. Estimates
     est_calls = estimate_api_calls(
-        len(_sampled), len(filtered_spider_ids), coll,
+        len(_sampled),
+        len(filtered_spider_ids),
+        coll,
         has_long_running=bool(long_sched_id),
         long_running_extra=min(
             long_sched_info.get("task_count", 0),
             coll["max_examples_per_class"],
-        ) if long_sched_id else 0,
+        )
+        if long_sched_id
+        else 0,
     )
     est_files = estimate_files(len(_sampled), len(filtered_spider_ids), coll)
 
@@ -828,16 +856,19 @@ async def run_dry_run(
         filt_count = len(filtered_candidates.get(key, []))
         selected = selected_ids.get(key, [])
         label = f"  {key}:"
-        print(f"{label:<28} {raw_count:>4} found → {filt_count:>4} in scope → {len(selected)} sampled")
+        print(
+            f"{label:<28} {raw_count:>4} found "
+            f"→ {filt_count:>4} in scope → {len(selected)} sampled"
+        )
         if selected:
             for sid in selected:
                 print(f"{'':>30} • {sid}")
 
-    print(f"\n─── Manual vs Scheduled ───")
+    print("\n─── Manual vs Scheduled ───")
     print(f"  manual:    {manual_count}")
     print(f"  scheduled: {scheduled_count}")
 
-    print(f"\n─── Long-running schedule ───")
+    print("\n─── Long-running schedule ───")
     if long_sched_info:
         print(f"  schedule_id: {long_sched_info.get('schedule_id', '?')}")
         print(f"  reason:      {long_sched_info.get('reason', '?')}")
@@ -845,7 +876,7 @@ async def run_dry_run(
     else:
         print("  (none found in scope)")
 
-    print(f"\n─── Estimates ───")
+    print("\n─── Estimates ───")
     print(f"  API calls for collection: {est_calls['total']}")
     for k, v in est_calls.items():
         if k != "total":
@@ -855,7 +886,7 @@ async def run_dry_run(
         if k != "total":
             print(f"    {k}: {v}")
 
-    print(f"\n─── Config ───")
+    print("\n─── Config ───")
     print(f"  max_examples_per_class: {coll['max_examples_per_class']}")
     print(f"  max_task_pages:         {coll['max_task_pages']}")
     print(f"  max_log_pages:          {coll['max_log_pages']}")
@@ -864,7 +895,7 @@ async def run_dry_run(
     # ── Save JSON plan ──────────────────────────────────────────────────
 
     plan = {
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "scope": {
             "allowed_project_ids": allowed_project_ids,
             "project_histogram": project_histogram,
@@ -897,15 +928,18 @@ async def run_dry_run(
     with open(plan_path, "w") as f:
         json.dump(plan, f, indent=2)
 
-    print(f"\n─── Output ───")
+    print("\n─── Output ───")
     print(f"  Dry-run plan saved to: {plan_path}")
-    print(f"\nTo collect, run:  python -m tools.collect_fixtures --collect")
+    print("\nTo collect, run:  python -m tools.collect_fixtures --collect")
 
     if scope_warning:
-        print(f"\n⚠ Review scope warning above. Set allowed_project_ids before collecting.")
+        print(
+            "\n⚠ Review scope warning above. Set allowed_project_ids before collecting."
+        )
 
 
 # ── Full collection ────────────────────────────────────────────────────
+
 
 async def run_collect(
     client: ReadonlyCrawlabClient,
@@ -932,7 +966,9 @@ async def run_collect(
 
     # 1. Condition-based discovery
     candidates_with_meta = await discover_all_candidates(
-        client, coll["task_page_size"], coll["max_task_pages"],
+        client,
+        coll["task_page_size"],
+        coll["max_task_pages"],
     )
     candidates = {k: v[0] for k, v in candidates_with_meta.items()}
 
@@ -944,29 +980,36 @@ async def run_collect(
     for tasks in candidates.values():
         all_tasks_flat.extend(tasks)
 
-    spider_ids = {
-        t.get("spider_id", "") for t in all_tasks_flat
-    } - {ZERO_OBJECT_ID, ""}
+    spider_ids = {t.get("spider_id", "") for t in all_tasks_flat} - {ZERO_OBJECT_ID, ""}
 
     spiders = await hydrate_spider_project_ids(client, spider_ids)
 
     # 4. Filter by project scope
     if not allowed_project_ids:
-        print("ERROR: allowed_project_ids is empty. Run --dry-run first to see project histogram.")
+        print(
+            "ERROR: allowed_project_ids is empty. "
+            "Run --dry-run first to see project histogram."
+        )
         print("Set scope.allowed_project_ids in config before collecting.")
         sys.exit(1)
 
     filtered_candidates: dict[str, list[dict[str, Any]]] = {}
     for key, tasks in candidates.items():
         filtered_candidates[key] = filter_tasks_by_project(
-            tasks, spiders, allowed_project_ids,
+            tasks,
+            spiders,
+            allowed_project_ids,
         )
 
     # 5. Sample candidates
     sampled, _selected_ids = sample_candidates(
-        filtered_candidates, coll["max_examples_per_class"],
+        filtered_candidates,
+        coll["max_examples_per_class"],
     )
-    print(f"Sampled {len(sampled)} tasks from {len(filtered_candidates)} candidate classes")
+    print(
+        f"Sampled {len(sampled)} tasks from "
+        f"{len(filtered_candidates)} candidate classes"
+    )
 
     # 6. Long-running schedule history
     all_filtered: list[dict[str, Any]] = []
@@ -979,17 +1022,21 @@ async def run_collect(
                 all_filtered.append(t)
 
     long_sched_id, long_sched_info = find_long_running_schedule(
-        all_filtered, schedules, spiders, allowed_project_ids,
+        all_filtered,
+        schedules,
+        spiders,
+        allowed_project_ids,
     )
     if long_sched_id:
         sched_tasks = [
-            t for t in all_filtered
-            if t.get("schedule_id") == long_sched_id
-        ][:coll["max_examples_per_class"]]
+            t for t in all_filtered if t.get("schedule_id") == long_sched_id
+        ][: coll["max_examples_per_class"]]
         for t in sched_tasks:
             if t.get("_id") not in {s.get("_id") for s in sampled}:
                 sampled.append(t)
-        print(f"Added {len(sched_tasks)} tasks for long-running schedule {long_sched_id}")
+        print(
+            f"Added {len(sched_tasks)} tasks for long-running schedule {long_sched_id}"
+        )
         print(f"  reason: {long_sched_info.get('reason', '?')}")
 
     # 7. Fetch logs for sampled tasks
@@ -1002,15 +1049,19 @@ async def run_collect(
                 logger.debug("Skipping existing log for %s", task_id)
                 continue
             log_text = await fetch_task_logs(
-                client, task_id, coll["log_page_size"], coll["max_log_pages"],
+                client,
+                task_id,
+                coll["log_page_size"],
+                coll["max_log_pages"],
             )
             log_texts[task_id] = log_text
             print(f"  [{i}/{len(sampled)}] Log for {task_id}: {len(log_text)} chars")
 
     # 8. Fetch unique spiders (only in-scope ones)
-    sampled_spider_ids = {
-        t.get("spider_id", "") for t in sampled
-    } - {ZERO_OBJECT_ID, ""}
+    sampled_spider_ids = {t.get("spider_id", "") for t in sampled} - {
+        ZERO_OBJECT_ID,
+        "",
+    }
     sampled_spiders: dict[str, dict[str, Any]] = {}
     print(f"Fetching {len(sampled_spider_ids)} spiders...")
     for sid in sampled_spider_ids:
@@ -1034,7 +1085,10 @@ async def run_collect(
             collection_id = spider.get("col_id") or spider.get("col_name")
             if collection_id:
                 rows = await fetch_results(
-                    client, collection_id, task_id, coll["results_row_limit"],
+                    client,
+                    collection_id,
+                    task_id,
+                    coll["results_row_limit"],
                 )
                 results_data[task_id] = rows
 
@@ -1057,7 +1111,10 @@ async def run_collect(
             redacted = redactor.redact_json(spider, context="spider")
             redacted_id = redacted.get("_id", sid)
             write_redacted_fixture(
-                redacted, out_dir, "api", f"spider_{redacted_id}.json",
+                redacted,
+                out_dir,
+                "api",
+                f"spider_{redacted_id}.json",
             )
 
     # Write tasks and logs
@@ -1086,14 +1143,20 @@ async def run_collect(
             redacted_task = redactor.redact_json(task, context="task")
             redacted_task_id = redacted_task.get("_id", task_id)
             task_path = write_redacted_fixture(
-                redacted_task, out_dir, "api", f"task_{redacted_task_id}.json",
+                redacted_task,
+                out_dir,
+                "api",
+                f"task_{redacted_task_id}.json",
             )
             fixture_paths["task"] = str(task_path.relative_to(out_dir))
 
             if log_text:
                 redacted_log = redactor.redact_log_text(log_text)
                 log_path = write_redacted_fixture(
-                    redacted_log, out_dir, "logs", f"{redacted_task_id}.log",
+                    redacted_log,
+                    out_dir,
+                    "logs",
+                    f"{redacted_task_id}.log",
                 )
                 fixture_paths["log"] = str(log_path.relative_to(out_dir))
 
@@ -1101,15 +1164,20 @@ async def run_collect(
         if task_id in results_data:
             if coll["collect_raw"]:
                 write_raw_fixture(
-                    results_data[task_id], raw_dir, "api",
+                    results_data[task_id],
+                    raw_dir,
+                    "api",
                     f"results_{task_id}.json",
                 )
             if coll["collect_redacted"]:
                 redacted_results = redactor.redact_json(
-                    results_data[task_id], context="results",
+                    results_data[task_id],
+                    context="results",
                 )
                 results_path = write_redacted_fixture(
-                    redacted_results, out_dir, "api",
+                    redacted_results,
+                    out_dir,
+                    "api",
                     f"results_{redacted_task_id}.json",
                 )
                 fixture_paths["results"] = str(results_path.relative_to(out_dir))
@@ -1122,25 +1190,31 @@ async def run_collect(
                 page_size=coll["log_page_size"],
                 max_pages=coll["max_log_pages"],
             )
-            expected_data["task_id"] = redacted_task_id if coll["collect_redacted"] else task_id
+            expected_data["task_id"] = (
+                redacted_task_id if coll["collect_redacted"] else task_id
+            )
             expected_path = generate_expected_yaml(
-                expected_data, out_dir / "expected",
+                expected_data,
+                out_dir / "expected",
             )
             fixture_paths["expected"] = str(expected_path.relative_to(out_dir))
 
         # Manifest entry
-        manifest_entries.append(generate_manifest_entry(
-            task_id=redacted_task_id if coll["collect_redacted"] else task_id,
-            final_class=final_class,
-            candidate_class=cand_class,
-            log_classification=log_classification,
-            fixture_paths=fixture_paths,
-            is_manual=is_manual_run(task),
-        ))
+        manifest_entries.append(
+            generate_manifest_entry(
+                task_id=redacted_task_id if coll["collect_redacted"] else task_id,
+                final_class=final_class,
+                candidate_class=cand_class,
+                log_classification=log_classification,
+                fixture_paths=fixture_paths,
+                is_manual=is_manual_run(task),
+            )
+        )
 
     # 11. Generate manifest
     generate_manifest(
-        manifest_entries, out_dir,
+        manifest_entries,
+        out_dir,
         schedules_count=len(schedules),
         spiders_count=len(sampled_spiders),
     )
@@ -1148,7 +1222,7 @@ async def run_collect(
     # 12. Save redaction mapping (to gitignored dir)
     redactor.save_mapping(mapping_path)
 
-    print(f"\n✓ Collection complete!")
+    print("\n✓ Collection complete!")
     print(f"  Raw fixtures:      {raw_dir}/")
     print(f"  Redacted fixtures: {out_dir}/")
     print(f"  Manifest:          {out_dir}/manifest.md")
@@ -1162,6 +1236,7 @@ def _fixture_exists(out_dir: Path, category: str, filename: str) -> bool:
 
 # ── Refresh mode ───────────────────────────────────────────────────────
 
+
 async def run_refresh(
     client: ReadonlyCrawlabClient,
     cfg: dict[str, Any],
@@ -1171,17 +1246,25 @@ async def run_refresh(
     """Refresh mode: re-collect only tasks not yet in fixtures."""
     # Refresh is just collect with skip_existing=True
     await run_collect(
-        client, cfg, raw_dir, out_dir, skip_existing=True,
+        client,
+        cfg,
+        raw_dir,
+        out_dir,
+        skip_existing=True,
     )
 
 
 # ── CLI ────────────────────────────────────────────────────────────────
 
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the CLI argument parser."""
     parser = argparse.ArgumentParser(
         prog="collect_fixtures",
-        description="Fixture collector for Crawlab companion app (read-only, GET-only).",
+        description=(
+            "Fixture collector for Crawlab companion app "
+            "(read-only, GET-only)."
+        ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""\
 Examples:
@@ -1273,12 +1356,14 @@ Environment:
         help="Delay between API requests in seconds",
     )
     parser.add_argument(
-        "-v", "--verbose",
+        "-v",
+        "--verbose",
         action="store_true",
         help="Verbose logging",
     )
     parser.add_argument(
-        "-q", "--quiet",
+        "-q",
+        "--quiet",
         action="store_true",
         help="Suppress progress output",
     )
@@ -1292,7 +1377,11 @@ async def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
 
     # Logging setup
-    level = logging.DEBUG if args.verbose else (logging.WARNING if args.quiet else logging.INFO)
+    level = (
+        logging.DEBUG
+        if args.verbose
+        else (logging.WARNING if args.quiet else logging.INFO)
+    )
     logging.basicConfig(
         level=level,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
@@ -1307,7 +1396,9 @@ async def main(argv: list[str] | None = None) -> None:
     if args.max_log_pages is not None:
         cfg.setdefault("collection", {})["max_log_pages"] = args.max_log_pages
     if args.max_examples_per_class is not None:
-        cfg.setdefault("collection", {})["max_examples_per_class"] = args.max_examples_per_class
+        cfg.setdefault("collection", {})["max_examples_per_class"] = (
+            args.max_examples_per_class
+        )
 
     # Load .env file if it exists (simple key=value parsing)
     _load_dotenv()
@@ -1320,7 +1411,9 @@ async def main(argv: list[str] | None = None) -> None:
     token = os.environ.get(token_env, "")
 
     if not base_url:
-        print(f"Error: {base_url_env} environment variable is required", file=sys.stderr)
+        print(
+            f"Error: {base_url_env} environment variable is required", file=sys.stderr
+        )
         sys.exit(1)
     if not token:
         print(f"Error: {token_env} environment variable is required", file=sys.stderr)
@@ -1347,7 +1440,10 @@ async def main(argv: list[str] | None = None) -> None:
             await run_dry_run(client, cfg, args.raw_dir)
         elif args.collect:
             await run_collect(
-                client, cfg, args.raw_dir, args.out_dir,
+                client,
+                cfg,
+                args.raw_dir,
+                args.out_dir,
                 skip_existing=args.skip_existing,
                 skip_logs=args.skip_logs,
                 skip_results=args.skip_results,

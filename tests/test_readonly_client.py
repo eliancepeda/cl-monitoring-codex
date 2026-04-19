@@ -14,23 +14,24 @@ All tests use mock transport — NO network access.
 from __future__ import annotations
 
 import os
-import pytest
+from typing import Any
+
 import httpx
+import pytest
 
 from integrations.crawlab.readonly_client import (
+    DEFAULT_ALLOWED_PATHS,
+    PathNotAllowedError,
     ReadonlyCrawlabClient,
     ReadonlyViolationError,
-    PathNotAllowedError,
     _path_matches_allowlist,
-    DEFAULT_ALLOWED_PATHS,
 )
-
 
 # ── Mock transport ─────────────────────────────────────────────────────
 
 
 def _make_mock_transport(
-    responses: dict[str, dict] | None = None,
+    responses: dict[str, dict[str, Any]] | None = None,
 ) -> httpx.MockTransport:
     """Create a mock transport returning canned responses."""
     default_responses = responses or {}

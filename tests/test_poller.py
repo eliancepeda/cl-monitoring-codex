@@ -20,7 +20,6 @@ from cl_monitoring.domain import (
 from cl_monitoring.domain.normalizers import build_execution_key
 from cl_monitoring.sync.poller import Poller, PollerConfig
 
-
 SPIDER_ID = "SPIDER_ID_100"
 MISSING_SPIDER_ID = "SPIDER_ID_404"
 ERROR_SPIDER_ID = "SPIDER_ID_500"
@@ -86,8 +85,8 @@ class FakeReadonlyClient:
         self,
         path: str,
         *,
-        page_size: int,
-        max_pages: int,
+        page_size: int = 100,
+        max_pages: int = 5,
         **extra_params: Any,
     ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         del page_size, max_pages
@@ -186,9 +185,7 @@ def make_task_snapshot(
     is_manual: bool = False,
 ) -> TaskSnapshot:
     end_ts = (
-        None
-        if status in {"pending", "running"}
-        else (start_ts or create_ts) + runtime
+        None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
     )
     return TaskSnapshot(
         id=task_id,
@@ -230,8 +227,9 @@ def make_success_summary(task_id: str) -> RunSummary:
     )
 
 
-async def test_poller_resumes_from_cursor_with_one_page_overlap_and_final_sync(
-) -> None:
+async def test_poller_resumes_from_cursor_with_one_page_overlap_and_final_sync() -> (
+    None
+):
     repo = LocalRepository(connect_sqlite(":memory:"))
     config = PollerConfig(
         task_page_size=10,

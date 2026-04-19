@@ -1,17 +1,29 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime, timedelta
+from pathlib import Path
 
-from cl_monitoring.crawlab.client import ReadonlyCrawlabClient as RuntimeReadonlyCrawlabClient
+from cl_monitoring.crawlab.client import (
+    ReadonlyCrawlabClient as RuntimeReadonlyCrawlabClient,
+)
 from cl_monitoring.db.engine import connect_sqlite
 from cl_monitoring.db.repo import (
     IncidentProjection,
     LocalRepository,
     TaskLogCursor,
 )
-from cl_monitoring.domain import Confidence, RunResult, RunSummary, ScheduleSnapshot, SpiderSnapshot, TaskSnapshot
+from cl_monitoring.domain import (
+    Confidence,
+    RunResult,
+    RunSummary,
+    ScheduleSnapshot,
+    SpiderSnapshot,
+    TaskSnapshot,
+)
 from cl_monitoring.domain.normalizers import build_execution_key
-from integrations.crawlab.readonly_client import ReadonlyCrawlabClient as SourceReadonlyCrawlabClient
+from integrations.crawlab.readonly_client import (
+    ReadonlyCrawlabClient as SourceReadonlyCrawlabClient,
+)
 
 
 def dt(hour: int, minute: int = 0) -> datetime:
@@ -34,7 +46,9 @@ def make_task(
     if create_ts is None:
         create_ts = dt(12)
     execution_key = build_execution_key(spider_id, cmd, param)
-    end_ts = None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
+    end_ts = (
+        None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
+    )
     return TaskSnapshot(
         id=task_id,
         spider_id=spider_id,
@@ -63,7 +77,7 @@ def make_summary(task_id: str, execution_key: str) -> RunSummary:
     )
 
 
-def test_connect_sqlite_enables_wal_for_file_database(tmp_path) -> None:
+def test_connect_sqlite_enables_wal_for_file_database(tmp_path: Path) -> None:
     connection = connect_sqlite(tmp_path / "history.sqlite3")
     try:
         journal_mode = connection.execute("PRAGMA journal_mode").fetchone()[0]
@@ -132,7 +146,9 @@ def test_repo_persists_core_state_and_log_queue() -> None:
     assert stored.last_seen_at == dt(12, 12)
     assert stored.terminal_seen_at == dt(12, 12)
 
-    pending_before_cursor = {task.snapshot.id for task in repo.list_tasks_requiring_log_sync()}
+    pending_before_cursor = {
+        task.snapshot.id for task in repo.list_tasks_requiring_log_sync()
+    }
     assert pending_before_cursor == {"TASK_ID_001", "TASK_ID_002"}
 
     cursor = TaskLogCursor(
@@ -159,19 +175,26 @@ def test_repo_persists_core_state_and_log_queue() -> None:
     )
 
     loaded_cursor = repo.get_log_cursor("TASK_ID_001")
+    profile = repo.get_spider_profile(finished.execution_key)
     assert loaded_cursor == cursor
     assert repo.get_run_summary("TASK_ID_001") == summary
-    assert repo.get_spider_profile(finished.execution_key).profile == {
+    assert profile is not None
+    assert profile.profile == {
         "owner_note": "keep an eye on runtime"
     }
     assert repo.list_spiders() == [spider]
     assert repo.list_schedules() == [schedule]
-    assert [task.id for task in repo.list_tasks_for_schedule(schedule.id)] == ["TASK_ID_001"]
-    assert [task.id for task in repo.list_manual_tasks_for_execution_key(manual.execution_key)] == [
-        "TASK_ID_002"
+    assert [task.id for task in repo.list_tasks_for_schedule(schedule.id)] == [
+        "TASK_ID_001"
     ]
+    assert [
+        task.id
+        for task in repo.list_manual_tasks_for_execution_key(manual.execution_key)
+    ] == ["TASK_ID_002"]
 
-    pending_after_cursor = {task.snapshot.id for task in repo.list_tasks_requiring_log_sync()}
+    pending_after_cursor = {
+        task.snapshot.id for task in repo.list_tasks_requiring_log_sync()
+    }
     assert pending_after_cursor == {"TASK_ID_002"}
 
 

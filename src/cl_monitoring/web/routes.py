@@ -20,7 +20,9 @@ from cl_monitoring.db.repo import LocalRepository
 from cl_monitoring.domain.normalizers import build_execution_key
 
 router = APIRouter()
-templates = Jinja2Templates(directory=str(Path(__file__).resolve().parent / "templates"))
+templates = Jinja2Templates(
+    directory=str(Path(__file__).resolve().parent / "templates")
+)
 
 _USEFUL_RUN_RESULTS = ("success", "success_probable", "partial_success")
 _BOARD_RECOVERY_WINDOW = timedelta(hours=24)
@@ -230,8 +232,12 @@ class DashboardStore:
                 """
                 SELECT spider_id,
                        COUNT(*) AS active_task_count,
-                       MIN(COALESCE(start_ts, create_ts, last_seen_at)) AS oldest_active_ts,
-                       MAX(COALESCE(start_ts, create_ts, last_seen_at)) AS newest_active_ts
+                       MIN(
+                           COALESCE(start_ts, create_ts, last_seen_at)
+                       ) AS oldest_active_ts,
+                       MAX(
+                           COALESCE(start_ts, create_ts, last_seen_at)
+                       ) AS newest_active_ts
                 FROM task_snapshots
                 WHERE status IN ('pending', 'running')
                 GROUP BY spider_id
@@ -249,12 +255,18 @@ class DashboardStore:
                        latest_incident_seen_at
                 FROM (
                     SELECT spider_id,
-                           SUM(CASE WHEN entity_type = 'task' THEN 1 ELSE 0 END) AS open_task_issues,
+                           SUM(
+                               CASE WHEN entity_type = 'task' THEN 1 ELSE 0 END
+                           ) AS open_task_issues,
                            SUM(CASE WHEN entity_type = 'schedule' THEN 1 ELSE 0 END)
                                AS open_schedule_issues,
                            MAX(
-                               CASE severity WHEN 'critical' THEN 2 WHEN 'warning' THEN 1 ELSE 0 END
-                           ) AS worst_open_severity_rank,
+                                CASE severity
+                                    WHEN 'critical' THEN 2
+                                    WHEN 'warning' THEN 1
+                                    ELSE 0
+                                END
+                            ) AS worst_open_severity_rank,
                            MAX(last_seen_at) AS latest_incident_seen_at
                     FROM (
                         SELECT i.entity_type, i.severity, i.last_seen_at, t.spider_id
@@ -286,10 +298,20 @@ class DashboardStore:
                            rs.run_result,
                            rs.confidence,
                            rs.reason_code,
-                           COALESCE(t.end_ts, t.start_ts, t.create_ts, t.last_seen_at) AS sort_ts,
+                           COALESCE(
+                               t.end_ts,
+                               t.start_ts,
+                               t.create_ts,
+                               t.last_seen_at
+                           ) AS sort_ts,
                            ROW_NUMBER() OVER (
                                PARTITION BY t.spider_id
-                               ORDER BY COALESCE(t.end_ts, t.start_ts, t.create_ts, t.last_seen_at) DESC,
+                               ORDER BY COALESCE(
+                                   t.end_ts,
+                                   t.start_ts,
+                                   t.create_ts,
+                                   t.last_seen_at
+                               ) DESC,
                                         t.task_id DESC
                            ) AS rn
                     FROM task_snapshots AS t
@@ -368,7 +390,13 @@ class DashboardStore:
                   ON i.entity_type = 'schedule' AND i.entity_id = s.schedule_id
                 WHERE i.closed_at IS NOT NULL AND i.closed_at >= ?
             )
-            SELECT spider_id, incident_id, execution_key, reason_code, evidence_json, opened_at, closed_at
+            SELECT spider_id,
+                   incident_id,
+                   execution_key,
+                   reason_code,
+                   evidence_json,
+                   opened_at,
+                   closed_at
             FROM ranked
             WHERE rn = 1
             """,
@@ -419,41 +447,63 @@ class DashboardStore:
             )
             recovery_support = self._manual_recovery_support(
                 execution_key=execution_key,
-                opened_at=_dt_from_db(recovery_row["opened_at"]) if recovery_row is not None else None,
-                closed_at=_dt_from_db(recovery_row["closed_at"]) if recovery_row is not None else None,
+                opened_at=_dt_from_db(recovery_row["opened_at"])
+                if recovery_row is not None
+                else None,
+                closed_at=_dt_from_db(recovery_row["closed_at"])
+                if recovery_row is not None
+                else None,
             )
-            worst_open_severity = self._severity_from_rank(
-                int(incident_row["worst_open_severity_rank"])
-            ) if incident_row is not None else None
+            worst_open_severity = (
+                self._severity_from_rank(int(incident_row["worst_open_severity_rank"]))
+                if incident_row is not None
+                else None
+            )
             board_row = ProjectBoardRowView(
                 project_id=project_id,
                 spider_id=spider_id,
                 spider_name=projection.name,
                 is_unresolved=projection.is_unresolved,
                 metadata_note=projection.metadata_note,
-                active_task_count=int(active_row["active_task_count"]) if active_row is not None else 0,
-                open_task_issues=int(incident_row["open_task_issues"]) if incident_row is not None else 0,
+                active_task_count=int(active_row["active_task_count"])
+                if active_row is not None
+                else 0,
+                open_task_issues=int(incident_row["open_task_issues"])
+                if incident_row is not None
+                else 0,
                 open_schedule_issues=(
-                    int(incident_row["open_schedule_issues"]) if incident_row is not None else 0
+                    int(incident_row["open_schedule_issues"])
+                    if incident_row is not None
+                    else 0
                 ),
                 worst_open_severity=worst_open_severity,
                 latest_terminal_task_id=(
                     str(latest_row["task_id"]) if latest_row is not None else None
                 ),
                 latest_terminal_run_result=(
-                    _nullable_text(latest_row["run_result"]) if latest_row is not None else None
+                    _nullable_text(latest_row["run_result"])
+                    if latest_row is not None
+                    else None
                 ),
                 latest_terminal_reason_code=(
-                    _nullable_text(latest_row["reason_code"]) if latest_row is not None else None
+                    _nullable_text(latest_row["reason_code"])
+                    if latest_row is not None
+                    else None
                 ),
                 latest_terminal_at=(
-                    _dt_from_db(latest_row["sort_ts"]) if latest_row is not None else None
+                    _dt_from_db(latest_row["sort_ts"])
+                    if latest_row is not None
+                    else None
                 ),
                 oldest_active_at=(
-                    _dt_from_db(active_row["oldest_active_ts"]) if active_row is not None else None
+                    _dt_from_db(active_row["oldest_active_ts"])
+                    if active_row is not None
+                    else None
                 ),
                 newest_active_at=(
-                    _dt_from_db(active_row["newest_active_ts"]) if active_row is not None else None
+                    _dt_from_db(active_row["newest_active_ts"])
+                    if active_row is not None
+                    else None
                 ),
                 recent_recovery_count=(
                     int(recovery_counts["recent_recovery_count"])
@@ -466,7 +516,9 @@ class DashboardStore:
                     else None
                 ),
                 open_issue_reason_code=(
-                    _nullable_text(open_preview["reason_code"]) if open_preview is not None else None
+                    _nullable_text(open_preview["reason_code"])
+                    if open_preview is not None
+                    else None
                 ),
                 open_issue_evidence=(
                     _preview_list(_json_list(open_preview["evidence_json"]))
@@ -474,10 +526,14 @@ class DashboardStore:
                     else []
                 ),
                 latest_run_evidence=self._latest_run_evidence(
-                    _nullable_text(latest_row["task_id"]) if latest_row is not None else None
+                    _nullable_text(latest_row["task_id"])
+                    if latest_row is not None
+                    else None
                 ),
                 recent_recovery_reason_code=(
-                    _nullable_text(recovery_row["reason_code"]) if recovery_row is not None else None
+                    _nullable_text(recovery_row["reason_code"])
+                    if recovery_row is not None
+                    else None
                 ),
                 recent_recovery_evidence=(
                     _preview_list(_json_list(recovery_row["evidence_json"]))
@@ -486,11 +542,15 @@ class DashboardStore:
                 ),
                 recovered_manually=recovery_support is not None,
                 recovery_support_evidence=(
-                    _preview_list(recovery_support["evidence"]) if recovery_support is not None else []
+                    _preview_list(recovery_support["evidence"])
+                    if recovery_support is not None
+                    else []
                 ),
                 baseline=baselines_by_execution_key.get(execution_key),
                 badges=self._project_board_badges(
-                    active_task_count=int(active_row["active_task_count"]) if active_row is not None else 0,
+                    active_task_count=int(active_row["active_task_count"])
+                    if active_row is not None
+                    else 0,
                     worst_open_severity=worst_open_severity,
                     open_schedule_issues=(
                         int(incident_row["open_schedule_issues"])
@@ -514,11 +574,16 @@ class DashboardStore:
                 ProjectGroupView(
                     project_id=project_id,
                     rows=ordered_rows,
-                    active_spider_count=sum(1 for row in ordered_rows if row.active_task_count > 0),
-                    open_issue_count=sum(
-                        row.open_task_issues + row.open_schedule_issues for row in ordered_rows
+                    active_spider_count=sum(
+                        1 for row in ordered_rows if row.active_task_count > 0
                     ),
-                    recent_recovery_count=sum(row.recent_recovery_count for row in ordered_rows),
+                    open_issue_count=sum(
+                        row.open_task_issues + row.open_schedule_issues
+                        for row in ordered_rows
+                    ),
+                    recent_recovery_count=sum(
+                        row.recent_recovery_count for row in ordered_rows
+                    ),
                 )
             )
         return sorted(project_groups, key=lambda group: group.project_id)
@@ -556,7 +621,12 @@ class DashboardStore:
             FROM task_snapshots AS t
             LEFT JOIN run_summaries AS rs ON rs.task_id = t.task_id
             WHERE t.spider_id = ? AND t.status IN ('pending', 'running')
-            ORDER BY COALESCE(t.start_ts, t.create_ts, t.last_seen_at) DESC, t.task_id DESC
+            ORDER BY COALESCE(
+                t.start_ts,
+                t.create_ts,
+                t.last_seen_at
+            ) DESC,
+                     t.task_id DESC
             """,
             (spider_id,),
         ).fetchall()
@@ -599,7 +669,9 @@ class DashboardStore:
             ) AS closed_i ON closed_i.entity_id = s.schedule_id
             LEFT JOIN (
                 SELECT schedule_id,
-                       MAX(COALESCE(end_ts, start_ts, create_ts, last_seen_at)) AS last_scheduled_ts
+                       MAX(
+                           COALESCE(end_ts, start_ts, create_ts, last_seen_at)
+                       ) AS last_scheduled_ts
                 FROM task_snapshots
                 WHERE spider_id = ? AND is_manual = 0
                 GROUP BY schedule_id
@@ -628,7 +700,13 @@ class DashboardStore:
             FROM task_snapshots AS t
             LEFT JOIN run_summaries AS rs ON rs.task_id = t.task_id
             WHERE t.spider_id = ?
-            ORDER BY COALESCE(t.end_ts, t.start_ts, t.create_ts, t.last_seen_at) DESC, t.task_id DESC
+            ORDER BY COALESCE(
+                t.end_ts,
+                t.start_ts,
+                t.create_ts,
+                t.last_seen_at
+            ) DESC,
+                     t.task_id DESC
             LIMIT 20
             """,
             (spider_id,),
@@ -654,9 +732,15 @@ class DashboardStore:
             (spider_id,),
         ).fetchall()
 
-        execution_baseline_keys = [build_execution_key(header.spider_id, header.cmd, header.param)]
-        execution_baseline_keys.extend(str(active_row["execution_key"]) for active_row in active_rows)
-        execution_baseline_keys.extend(str(run_row["execution_key"]) for run_row in recent_run_rows)
+        execution_baseline_keys = [
+            build_execution_key(header.spider_id, header.cmd, header.param)
+        ]
+        execution_baseline_keys.extend(
+            str(active_row["execution_key"]) for active_row in active_rows
+        )
+        execution_baseline_keys.extend(
+            str(run_row["execution_key"]) for run_row in recent_run_rows
+        )
         execution_baseline_keys.extend(
             build_execution_key(
                 header.spider_id,
@@ -665,7 +749,9 @@ class DashboardStore:
             )
             for schedule_row in schedule_rows
         )
-        execution_baselines = self._runtime_baselines_by_execution_key(execution_baseline_keys)
+        execution_baselines = self._runtime_baselines_by_execution_key(
+            execution_baseline_keys
+        )
 
         schedule_baselines = self._runtime_baselines_by_schedule_id(
             [str(schedule_row["schedule_id"]) for schedule_row in schedule_rows]
@@ -750,7 +836,9 @@ class DashboardStore:
                     enabled=bool(schedule_row["enabled"]),
                     open_severity=open_severity,
                     open_reason_code=_nullable_text(schedule_row["open_reason_code"]),
-                    open_evidence=_preview_list(_json_list(schedule_row["open_evidence_json"])),
+                    open_evidence=_preview_list(
+                        _json_list(schedule_row["open_evidence_json"])
+                    ),
                     open_last_seen_at=_dt_from_db(schedule_row["open_last_seen_at"]),
                     latest_closed_at=_dt_from_db(schedule_row["latest_closed_at"]),
                     latest_closed_reason_code=_nullable_text(
@@ -760,7 +848,9 @@ class DashboardStore:
                     baseline=schedule_baselines.get(str(schedule_row["schedule_id"])),
                     recovered_manually=recovery_support is not None,
                     recovery_support_evidence=(
-                        _preview_list(recovery_support["evidence"]) if recovery_support is not None else []
+                        _preview_list(recovery_support["evidence"])
+                        if recovery_support is not None
+                        else []
                     ),
                     badges=self._schedule_badges(
                         open_severity=open_severity,
@@ -794,7 +884,9 @@ class DashboardStore:
                         else None
                     ),
                     support_evidence=(
-                        _preview_list(recovery_support["evidence"]) if recovery_support is not None else []
+                        _preview_list(recovery_support["evidence"])
+                        if recovery_support is not None
+                        else []
                     ),
                     badges=self._recovery_badges(recovery_support is not None),
                 )
@@ -881,11 +973,7 @@ class DashboardStore:
             ]
         )
         task_context_map = self._task_summary_evidence_map(
-            [
-                str(row["entity_id"])
-                for row in rows
-                if str(row["entity_type"]) == "task"
-            ]
+            [str(row["entity_id"]) for row in rows if str(row["entity_type"]) == "task"]
         )
         incident_rows: list[IncidentFeedRowView] = []
         for row in rows:
@@ -925,7 +1013,9 @@ class DashboardStore:
                     ),
                     recovered_manually=recovery_support is not None,
                     recovery_support_evidence=(
-                        _preview_list(recovery_support["evidence"]) if recovery_support is not None else []
+                        _preview_list(recovery_support["evidence"])
+                        if recovery_support is not None
+                        else []
                     ),
                     badges=self._incident_badges(
                         severity=str(row["severity"]),
@@ -937,7 +1027,9 @@ class DashboardStore:
             )
         return incident_rows
 
-    def _get_local_spider_projection(self, spider_id: str) -> LocalSpiderProjection | None:
+    def _get_local_spider_projection(
+        self, spider_id: str
+    ) -> LocalSpiderProjection | None:
         for projection in self._list_local_spider_projections():
             if projection.spider_id == spider_id:
                 return projection
@@ -978,7 +1070,12 @@ class DashboardStore:
                        param,
                        ROW_NUMBER() OVER (
                            PARTITION BY spider_id
-                           ORDER BY COALESCE(end_ts, start_ts, create_ts, last_seen_at) DESC,
+                           ORDER BY COALESCE(
+                               end_ts,
+                               start_ts,
+                               create_ts,
+                               last_seen_at
+                           ) DESC,
                                     task_id DESC
                        ) AS rn
                 FROM task_snapshots
@@ -1071,7 +1168,9 @@ class DashboardStore:
     def _runtime_baselines_by_schedule_id(
         self, schedule_ids: list[str]
     ) -> dict[str, RuntimeBaseline]:
-        unique_ids = sorted({schedule_id for schedule_id in schedule_ids if schedule_id})
+        unique_ids = sorted(
+            {schedule_id for schedule_id in schedule_ids if schedule_id}
+        )
         if not unique_ids:
             return {}
         result_placeholders = ", ".join("?" for _ in _USEFUL_RUN_RESULTS)
@@ -1149,7 +1248,8 @@ class DashboardStore:
             return {}
         placeholders = ", ".join("?" for _ in unique_ids)
         rows = self._connection.execute(
-            f"SELECT task_id, evidence_json FROM run_summaries WHERE task_id IN ({placeholders})",
+            "SELECT task_id, evidence_json FROM run_summaries "
+            f"WHERE task_id IN ({placeholders})",
             tuple(unique_ids),
         ).fetchall()
         return {
@@ -1157,15 +1257,21 @@ class DashboardStore:
             for row in rows
         }
 
-    def _schedule_last_scheduled_map(self, schedule_ids: list[str]) -> dict[str, datetime]:
-        unique_ids = sorted({schedule_id for schedule_id in schedule_ids if schedule_id})
+    def _schedule_last_scheduled_map(
+        self, schedule_ids: list[str]
+    ) -> dict[str, datetime]:
+        unique_ids = sorted(
+            {schedule_id for schedule_id in schedule_ids if schedule_id}
+        )
         if not unique_ids:
             return {}
         placeholders = ", ".join("?" for _ in unique_ids)
         rows = self._connection.execute(
             f"""
             SELECT schedule_id,
-                   MAX(COALESCE(end_ts, start_ts, create_ts, last_seen_at)) AS last_scheduled_ts
+                   MAX(
+                       COALESCE(end_ts, start_ts, create_ts, last_seen_at)
+                   ) AS last_scheduled_ts
             FROM task_snapshots
             WHERE is_manual = 0 AND schedule_id IN ({placeholders})
             GROUP BY schedule_id
@@ -1225,7 +1331,9 @@ class DashboardStore:
     ) -> list[StatusBadge]:
         badges: list[StatusBadge] = []
         if worst_open_severity is not None:
-            badges.append(StatusBadge(tone=worst_open_severity, label=worst_open_severity))
+            badges.append(
+                StatusBadge(tone=worst_open_severity, label=worst_open_severity)
+            )
         if active_task_count > 0:
             badges.append(StatusBadge(tone="active", label="running"))
         if open_schedule_issues > 0:
@@ -1237,10 +1345,19 @@ class DashboardStore:
         return badges
 
     @staticmethod
-    def _run_badges(*, status: str, run_result: str | None, is_manual: bool) -> list[StatusBadge]:
-        badges = [StatusBadge(tone="active" if status in {"pending", "running"} else "muted", label=status)]
+    def _run_badges(
+        *, status: str, run_result: str | None, is_manual: bool
+    ) -> list[StatusBadge]:
+        badges = [
+            StatusBadge(
+                tone="active" if status in {"pending", "running"} else "muted",
+                label=status,
+            )
+        ]
         if run_result is not None:
-            badges.append(StatusBadge(tone=_run_result_tone(run_result), label=run_result))
+            badges.append(
+                StatusBadge(tone=_run_result_tone(run_result), label=run_result)
+            )
         if is_manual:
             badges.append(StatusBadge(tone="muted", label="manual"))
         return badges
@@ -1272,7 +1389,10 @@ class DashboardStore:
         closed_at: datetime | None,
         recovered_manually: bool,
     ) -> list[StatusBadge]:
-        badges = [StatusBadge(tone=severity, label=severity), StatusBadge(tone="muted", label=entity_type)]
+        badges = [
+            StatusBadge(tone=severity, label=severity),
+            StatusBadge(tone="muted", label=entity_type),
+        ]
         if closed_at is not None:
             badges.append(StatusBadge(tone="muted", label="closed"))
         if recovered_manually:
@@ -1287,10 +1407,15 @@ def _get_dashboard_store(request: Request) -> Iterator[DashboardStore]:
         yield DashboardStore(connection)
 
 
+_dashboard_store_dependency = Depends(_get_dashboard_store)
+
+
 def _now(request: Request) -> datetime:
     now_provider = getattr(request.app.state, "now_provider", None)
     if callable(now_provider):
         current_time = now_provider()
+        if not isinstance(current_time, datetime):
+            raise TypeError("app.state.now_provider must return datetime")
         if current_time.tzinfo is None:
             return current_time.replace(tzinfo=UTC)
         return current_time.astimezone(UTC)
@@ -1300,7 +1425,7 @@ def _now(request: Request) -> datetime:
 @router.get("/", response_class=HTMLResponse)
 def project_board(
     request: Request,
-    store: DashboardStore = Depends(_get_dashboard_store),
+    store: DashboardStore = _dashboard_store_dependency,
 ) -> HTMLResponse:
     groups = store.list_project_groups(now=_now(request))
     return templates.TemplateResponse(
@@ -1317,7 +1442,7 @@ def project_board(
 def spider_detail(
     spider_id: str,
     request: Request,
-    store: DashboardStore = Depends(_get_dashboard_store),
+    store: DashboardStore = _dashboard_store_dependency,
 ) -> HTMLResponse:
     page = store.get_spider_page(spider_id)
     if page is None:
@@ -1335,7 +1460,7 @@ def spider_detail(
 @router.get("/incidents", response_class=HTMLResponse)
 def incidents(
     request: Request,
-    store: DashboardStore = Depends(_get_dashboard_store),
+    store: DashboardStore = _dashboard_store_dependency,
 ) -> HTMLResponse:
     page = store.get_incidents_page(now=_now(request))
     return templates.TemplateResponse(
@@ -1393,8 +1518,7 @@ def _unresolved_spider_note(source_labels: list[str]) -> str:
     else:
         source_text = f"{source_labels[0]} and {source_labels[1]}"
     return (
-        "Upstream spider metadata is missing; this view is built from "
-        f"{source_text}."
+        f"Upstream spider metadata is missing; this view is built from {source_text}."
     )
 
 

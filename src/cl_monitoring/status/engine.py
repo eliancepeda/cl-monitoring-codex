@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from datetime import UTC, datetime, timedelta
 from statistics import median_high
 
@@ -487,8 +487,7 @@ def _find_manual_recovery(
     recoveries = [
         task
         for task in manual_tasks
-        if _task_event_time(task)
-        and _task_event_time(task) > after
+        if (event_time := _task_event_time(task)) is not None and event_time > after
         and _is_recovery_task(task, summaries)
     ]
     if not recoveries:
@@ -541,13 +540,7 @@ def _on_time_confidence(fire_baseline: ObservedFireBaseline | None) -> Confidenc
     return Confidence.MEDIUM
 
 
-def _sorted_tasks(
-    tasks: Sequence[TaskSnapshot]
-    | Mapping[int, TaskSnapshot]
-    | tuple[TaskSnapshot, ...]
-    | list[TaskSnapshot]
-    | object,
-) -> list[TaskSnapshot]:
+def _sorted_tasks(tasks: Iterable[TaskSnapshot]) -> list[TaskSnapshot]:
     return sorted(tasks, key=_task_sort_key)
 
 
