@@ -31,8 +31,14 @@
                     <div>
                         <h3><a href="{{ url_for('spider_detail', spider_id=row.spider_id) }}">{{ row.spider_name }}</a></h3>
                         <p class="meta">{{ row.spider_id }}</p>
+                        {% if row.metadata_note %}
+                        <p class="meta">{{ row.metadata_note }}</p>
+                        {% endif %}
                     </div>
                     <div class="badge-list">
+                        {% if row.is_unresolved %}
+                        <span class="badge badge-warning">unresolved</span>
+                        {% endif %}
                         {% for badge in row.badges %}
                         <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
                         {% endfor %}

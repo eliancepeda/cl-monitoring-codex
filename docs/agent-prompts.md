@@ -1,6 +1,6 @@
 # Agent Prompts
 
-Готовые copy-paste prompt для thread-ов `T0`-`T11` из `MILESTONES.MD`.
+Готовые copy-paste prompt для thread-ов `T0`-`T14` из `MILESTONES.MD`.
 
 ## Общие правила запуска
 
@@ -14,13 +14,14 @@
 8. Не тащи `/nodes` в v1.
 9. Если prompt помечен как `Plan`, не меняй runtime-код.
 10. Если prompt помечен как `Build`, делай минимальное корректное изменение и обязательно запускай проверку.
+11. Если prompt помечен как `Ops`, не придумывай новый run path “на глаз”; проверяй ровно тот operator flow, который уже зафиксирован в коде и docs, или отчитай точный blocker.
 
 ## Thread Ownership
 
 - `T0`-`T3` запускаются строго последовательно.
 - `T4` и `T5` можно запускать параллельно только после `T3` и только в разных worktree.
 - `T6` и дальше снова строго последовательно.
-- Файлы single-owner: `AGENTS.md`, `DECISIONS.md`, `docs/domain/status-parser-contract.md`, `src/cl_monitoring/domain/models.py`, `src/cl_monitoring/db/*`, `src/cl_monitoring/sync/poller.py`, `src/cl_monitoring/web/*`, `src/cl_monitoring/app.py`.
+- Файлы single-owner: `AGENTS.md`, `DECISIONS.md`, `docs/domain/status-parser-contract.md`, `src/cl_monitoring/domain/models.py`, `src/cl_monitoring/settings.py`, `src/cl_monitoring/db/*`, `src/cl_monitoring/sync/poller.py`, `src/cl_monitoring/web/*`, `src/cl_monitoring/app.py`, `.env.example`, `README.md`.
 
 ---
 
@@ -839,4 +840,225 @@
 2. сколько terminal runs было сравнено
 3. какие расхождения обнаружены
 4. можно ли расширять coverage или ещё рано
+```
+
+---
+
+## `T12` — Runtime Service Mode And Operator Flow
+
+**Agent:** OpenCode  
+**Mode:** Plan  
+**Run when:** После текущего состояния `T11`; это новый plan thread для закрытия remaining operator gap.
+
+```text
+Работай в thread T12. Это plan-only thread для runtime service mode и operator flow.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.MD
+- DECISIONS.md
+- docs/adr/0002-local-history-and-poller.md
+- docs/adr/0003-minimal-dashboard.md
+- README.md
+- .env.example
+- src/cl_monitoring/app.py
+- src/cl_monitoring/settings.py
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/crawlab/client.py
+- src/integrations/crawlab/readonly_client.py
+- tests/test_poller.py
+- tests/test_web_routes.py
+
+Цель:
+- зафиксировать, как именно v1 должен запускаться как реальный локальный сервис для owner workflow
+
+Контекст из MILESTONES/диалога, который нужно считать истинным:
+- сейчас `python -m cl_monitoring.app` поднимает только web server
+- poller core уже есть, но app lifecycle его не стартует
+- UI должен читать только SQLite
+- live Crawlab access должен оставаться только через `ReadonlyCrawlabClient`
+- marker rollout blocker из T11 — отдельная тема и не закрывает current operator gap
+
+Ограничения:
+- не меняй runtime-код
+- не меняй parser/status semantics
+- не меняй marker rollout contract
+- не придумывай новый scope вне local service/operator flow
+- не проектируй второй Crawlab client
+
+Сделай:
+1. Создай docs/adr/0004-runtime-service-mode.md.
+2. Добавь короткую decision entry в DECISIONS.md, если это нужно для явного runtime choice.
+3. Зафиксируй default operator flow для `python -m cl_monitoring.app`.
+4. Явно реши:
+   - должен ли app сам владеть background poller lifecycle
+   - что происходит при наличии полного live env
+   - что происходит при отсутствии live env
+   - нужен ли SQLite-only fallback mode
+   - как грузятся env/.env/runtime settings
+   - как нормализуется `CRAWLAB_BASE_URL` с хвостом `/api`
+   - какой env key считается runtime truth для токена
+5. Зафиксируй startup/shutdown lifecycle:
+   - settings load
+   - SQLite connect
+   - readonly client lifecycle
+   - background poller task
+   - initial sync / steady-state policy
+   - clean shutdown
+6. Явно зафиксируй, что browser по-прежнему не ходит в Crawlab напрямую.
+7. Явно опиши, какие файлы T13 должен будет менять.
+
+Не делай:
+- новые UI экраны
+- action buttons
+- marker/build threads
+- live rollout work
+
+Самопроверка перед финалом:
+- в ADR нет TODO/TBD
+- есть однозначный ответ на вопрос: “почему запуск сервера раньше не стартовал poller и как теперь должен работать сервис”
+- нет противоречия с AGENTS.md safety rules
+
+В финальном отчёте дай:
+1. путь к ADR
+2. короткий список runtime decisions
+3. какой exact operator flow должен считаться целевым для T13
+4. какие файлы станут single-owner в T13
+```
+
+---
+
+## `T13` — Working Local Service Runtime
+
+**Agent:** Codex `gpt-5.4`  
+**Mode:** Build  
+**Run when:** Только после `T12`.
+
+```text
+Работай в thread T13. Это build thread для доведения проекта до working local service.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.MD
+- DECISIONS.md
+- docs/adr/0002-local-history-and-poller.md
+- docs/adr/0003-minimal-dashboard.md
+- docs/adr/0004-runtime-service-mode.md
+- README.md
+- .env.example
+- src/cl_monitoring/app.py
+- src/cl_monitoring/settings.py
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/crawlab/client.py
+- src/integrations/crawlab/readonly_client.py
+- src/cl_monitoring/db/engine.py
+- src/cl_monitoring/db/repo.py
+- tests/test_poller.py
+- tests/test_web_routes.py
+
+Цель:
+- сделать так, чтобы `python -m cl_monitoring.app` был реальным локальным service entrypoint, а не только web viewer для уже готовой SQLite
+
+Жёсткие ограничения:
+- all Crawlab access only through `ReadonlyCrawlabClient`
+- no write operations against Crawlab
+- browser/UI still never calls Crawlab directly
+- no second Crawlab client
+- не менять parser/status/marker semantics без отдельного bug report
+- не добавлять новые UI экраны и action buttons
+
+Что нужно сделать:
+1. Реализовать единый runtime settings layer в `src/cl_monitoring/settings.py` на уже существующих project dependencies.
+2. Выравнять `.env.example` под реальный runtime contract.
+3. Довести `src/cl_monitoring/app.py` до app-managed service lifecycle по решению T12:
+   - settings load
+   - db path resolution
+   - readonly client lifecycle
+   - background poller startup/shutdown
+   - clean resource cleanup
+4. Обеспечить, что при валидном live env запуск app поднимает и web server, и poller.
+5. Обеспечить поведение, зафиксированное в T12, для SQLite-only fallback mode или явного startup failure mode.
+6. Нормализовать `CRAWLAB_BASE_URL` runtime-safe способом, если в env пришёл хвост `/api`.
+7. Выравнять token wiring под один понятный runtime path без ad hoc manual shell hacks в обычном operator flow.
+8. Создать `tests/test_app_runtime.py` и при необходимости расширить `tests/test_poller.py` / `tests/test_web_routes.py` для service wiring coverage.
+9. Обновить `README.md` под новый реальный operator flow.
+
+Можно менять:
+- src/cl_monitoring/settings.py
+- src/cl_monitoring/app.py
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/crawlab/client.py
+- src/integrations/crawlab/readonly_client.py
+- .env.example
+- README.md
+- tests/test_poller.py
+- tests/test_web_routes.py
+- tests/test_app_runtime.py
+
+Не делай:
+- direct browser-side Crawlab calls
+- новый UI scope
+- marker rollout changes
+- /nodes logic
+- commits без явной просьбы
+
+Проверка обязательна:
+- ./.venv/bin/pytest -q tests/test_poller.py tests/test_web_routes.py tests/test_app_runtime.py
+- ./.venv/bin/pytest -q
+- ./.venv/bin/ruff check src tests
+- ./.venv/bin/mypy src
+
+В финальном отчёте дай:
+1. как теперь работает local service lifecycle
+2. какой exact operator start path теперь считается штатным
+3. как решён env/settings contract
+4. какие проверки запускались и их результат
+5. какие ограничения остались после T13
+```
+
+---
+
+## `T14` — Live Local-Service Smoke
+
+**Agent:** Manual + agent support  
+**Mode:** Ops  
+**Run when:** Только после `T13` и только при наличии safe live env для локального readonly scope.
+
+```text
+Работай в thread T14. Это live local-service smoke thread, а не feature-build thread.
+
+Сначала прочитай:
+- AGENTS.md
+- MILESTONES.MD
+- README.md
+- docs/adr/0004-runtime-service-mode.md
+- .env.example
+- src/cl_monitoring/app.py
+- src/cl_monitoring/settings.py
+
+Цель:
+- подтвердить, что итоговый local service runtime реально работает end-to-end на живом readonly scope
+
+Что нужно сделать:
+1. Поднять сервис по exact operator flow из T13, без ad hoc альтернативных команд.
+2. Проверить, что локальная SQLite создаётся или обновляется автоматически.
+3. Проверить, что после старта сервиса dashboard routes отвечают данными из SQLite.
+4. Проверить, что live path остаётся readonly:
+   - только GET
+   - только through `ReadonlyCrawlabClient`
+   - browser по-прежнему не ходит в Crawlab напрямую
+5. Зафиксировать итог:
+   - smoke validated
+   - или точный blocker с тем местом, где flow ломается
+
+Не делай:
+- новые code edits посреди smoke без отдельного thread
+- marker rollout выводы вместо service smoke вывода
+- “примерно рабочий” verdict без проверяемого operator path
+
+В финальном отчёте дай:
+1. какой exact run path проверялся
+2. создалась/обновилась ли SQLite
+3. отвечал ли dashboard осмысленными данными
+4. есть ли remaining blocker до реально рабочего local service
 ```

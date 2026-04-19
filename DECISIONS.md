@@ -861,3 +861,122 @@ Related files:
 - docs/domain/structured-markers.md
 - docs/rollout/shadow-mode.md
 - MILESTONES.MD
+
+---
+
+## 2026-04-19 — `cl_monitoring.app` owns the v1 local service lifecycle
+
+Status: Accepted
+
+Context:
+After `T7` and `T9`, the repo already had poller core, SQLite local truth, and a
+local dashboard, but `python -m cl_monitoring.app` still started only the web
+server. The runtime env contract was also split between `CRAWLAB_TOKEN` and
+`CRAWLAB_API_TOKEN`.
+
+Decision:
+Treat `python -m cl_monitoring.app` as the single v1 operator entrypoint. With
+full live env (`CRAWLAB_BASE_URL` + `CRAWLAB_TOKEN`), app lifespan opens
+SQLite, runs initial sync, and owns the background poller. With both live
+settings absent, start SQLite-only mode instead. Partial live env is a startup
+error.
+
+Why:
+One explicit service entrypoint closes the operator gap without adding a second
+runtime daemon and keeps browser access safely local to SQLite.
+
+Consequences:
+- Poller lifecycle moves under app lifespan.
+- `CRAWLAB_TOKEN` becomes the runtime token truth key.
+- Runtime base URL normalization must strip a trailing `/api` before client use.
+- Browser routes still never call Crawlab directly.
+
+Related files:
+- docs/adr/0004-runtime-service-mode.md
+- src/cl_monitoring/app.py
+- src/cl_monitoring/settings.py
+- src/integrations/crawlab/readonly_client.py
+- .env.example
+- README.md
+
+---
+
+## 2026-04-19 — Runtime app injects normalized Crawlab settings into the single readonly client
+
+Status: Accepted
+
+Context:
+T12/T13 required one runtime config path for `.env`, app startup, and the single
+live Crawlab client. Before that, the client still depended on env lookup for the
+token, which kept the runtime contract split and encouraged ad hoc token remapping.
+
+Decision:
+Load and normalize `CRAWLAB_BASE_URL` and `CRAWLAB_TOKEN` in
+`src/cl_monitoring/settings.py`, then pass them explicitly from app lifespan into
+`ReadonlyCrawlabClient`. Keep `CRAWLAB_API_TOKEN` only as a legacy compatibility
+fallback, not as the normal runtime contract.
+
+Why:
+This keeps one settings truth source for the local service, removes manual shell
+token wiring from the normal operator flow, and preserves the single-client
+boundary to Crawlab.
+
+Consequences:
+- Normal runtime config uses `CRAWLAB_BASE_URL` + `CRAWLAB_TOKEN`.
+- Base URL normalization happens before client creation, not inside browser/UI code.
+- App/test startup can use explicit resolved settings without depending on ambient env.
+- No second Crawlab client or alternate live config path is introduced.
+
+Related files:
+- src/cl_monitoring/settings.py
+- src/cl_monitoring/app.py
+- src/integrations/crawlab/readonly_client.py
+- .env.example
+- README.md
+
+---
+
+## 2026-04-19 — Missing `/api/spiders/{id}` metadata is unresolved enrichment, not fatal truth
+
+Status: Accepted
+
+Context:
+Live startup smoke found a real upstream stale reference: a schedule detail still
+returned `spider_id`, but `GET /api/spiders/{id}` for that same id returned
+`404 Not Found`. Before `T15`, initial startup sync treated that missing spider
+detail as fatal and crashed `python -m cl_monitoring.app`.
+
+Decision:
+Treat individual spider-detail `404` responses as unresolved metadata misses, not
+as startup-fatal truth errors. Continue sync for other spiders, log the missing
+reference explicitly, drop any stale cached spider row for that id, and let the
+UI build a fallback spider projection from local `spiders`, `schedules`, and
+`task_snapshots`. Keep all non-404 failures fatal.
+
+Why:
+`schedules`, `tasks`, `logs`, and local SQLite remain the startup-critical truth
+layer. Spider detail is useful metadata enrichment, but one upstream orphan
+reference should not take down the whole local service. At the same time, hiding
+the bad reference would mislead the operator, so the unresolved state must stay
+visible in the local UI.
+
+Consequences:
+- Startup survives only the narrow confirmed case: `httpx.HTTPStatusError` with
+  status `404` for one spider detail request.
+- `401/403/5xx`, transport errors, timeouts, payload problems, and other spider
+  detail failures still fail startup.
+- Board/detail/incidents routes must tolerate spider ids that exist only through
+  local schedules or task history.
+- Unresolved spiders are shown explicitly in UI instead of silently disappearing
+  or pretending to be healthy resolved metadata.
+
+Related files:
+- src/cl_monitoring/sync/poller.py
+- src/cl_monitoring/db/repo.py
+- src/cl_monitoring/web/routes.py
+- src/cl_monitoring/web/templates/project_board.html
+- src/cl_monitoring/web/templates/spider_detail.html
+- src/cl_monitoring/web/templates/incidents.html
+- tests/test_poller.py
+- tests/test_web_routes.py
+- MILESTONES.MD

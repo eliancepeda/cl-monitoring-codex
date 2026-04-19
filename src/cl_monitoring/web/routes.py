@@ -25,6 +25,19 @@ templates = Jinja2Templates(directory=str(Path(__file__).resolve().parent / "tem
 _USEFUL_RUN_RESULTS = ("success", "success_probable", "partial_success")
 _BOARD_RECOVERY_WINDOW = timedelta(hours=24)
 _INCIDENTS_CLOSED_WINDOW = timedelta(days=7)
+_UNRESOLVED_PROJECT_LABEL = "Unresolved upstream"
+
+
+@dataclass(frozen=True)
+class LocalSpiderProjection:
+    spider_id: str
+    name: str
+    project_id: str
+    col_id: str
+    cmd: str
+    param: str
+    is_unresolved: bool
+    metadata_note: str | None
 
 
 @dataclass(frozen=True)
@@ -44,6 +57,8 @@ class ProjectBoardRowView:
     project_id: str
     spider_id: str
     spider_name: str
+    is_unresolved: bool
+    metadata_note: str | None
     active_task_count: int
     open_task_issues: int
     open_schedule_issues: int
@@ -84,6 +99,8 @@ class SpiderHeaderView:
     col_id: str
     cmd: str
     param: str
+    is_unresolved: bool
+    metadata_note: str | None
 
 
 @dataclass(frozen=True)
@@ -207,13 +224,7 @@ class DashboardStore:
 
     def list_project_groups(self, *, now: datetime) -> list[ProjectGroupView]:
         recovered_since = now - _BOARD_RECOVERY_WINDOW
-        spider_rows = self._connection.execute(
-            """
-            SELECT spider_id, name, project_id, cmd, param
-            FROM spiders
-            ORDER BY project_id, name, spider_id
-            """
-        ).fetchall()
+        spider_projections = self._list_local_spider_projections()
         active_by_spider = self._map_rows(
             self._connection.execute(
                 """
@@ -383,18 +394,18 @@ class DashboardStore:
         baselines_by_execution_key = self._runtime_baselines_by_execution_key(
             [
                 build_execution_key(
-                    str(row["spider_id"]),
-                    str(row["cmd"]),
-                    str(row["param"]),
+                    projection.spider_id,
+                    projection.cmd,
+                    projection.param,
                 )
-                for row in spider_rows
+                for projection in spider_projections
             ]
         )
 
         groups: dict[str, list[ProjectBoardRowView]] = defaultdict(list)
-        for row in spider_rows:
-            spider_id = str(row["spider_id"])
-            project_id = str(row["project_id"])
+        for projection in spider_projections:
+            spider_id = projection.spider_id
+            project_id = projection.project_id
             active_row = active_by_spider.get(spider_id)
             incident_row = incident_by_spider.get(spider_id)
             latest_row = latest_terminal_by_spider.get(spider_id)
@@ -403,8 +414,8 @@ class DashboardStore:
             recovery_counts = recovery_counts_by_spider.get(spider_id)
             execution_key = build_execution_key(
                 spider_id,
-                str(row["cmd"]),
-                str(row["param"]),
+                projection.cmd,
+                projection.param,
             )
             recovery_support = self._manual_recovery_support(
                 execution_key=execution_key,
@@ -417,7 +428,9 @@ class DashboardStore:
             board_row = ProjectBoardRowView(
                 project_id=project_id,
                 spider_id=spider_id,
-                spider_name=str(row["name"]),
+                spider_name=projection.name,
+                is_unresolved=projection.is_unresolved,
+                metadata_note=projection.metadata_note,
                 active_task_count=int(active_row["active_task_count"]) if active_row is not None else 0,
                 open_task_issues=int(incident_row["open_task_issues"]) if incident_row is not None else 0,
                 open_schedule_issues=(
@@ -511,24 +524,19 @@ class DashboardStore:
         return sorted(project_groups, key=lambda group: group.project_id)
 
     def get_spider_page(self, spider_id: str) -> SpiderPageView | None:
-        row = self._connection.execute(
-            """
-            SELECT spider_id, name, project_id, col_id, cmd, param
-            FROM spiders
-            WHERE spider_id = ?
-            """,
-            (spider_id,),
-        ).fetchone()
-        if row is None:
+        projection = self._get_local_spider_projection(spider_id)
+        if projection is None:
             return None
 
         header = SpiderHeaderView(
-            spider_id=str(row["spider_id"]),
-            name=str(row["name"]),
-            project_id=str(row["project_id"]),
-            col_id=str(row["col_id"]),
-            cmd=str(row["cmd"]),
-            param=str(row["param"]),
+            spider_id=projection.spider_id,
+            name=projection.name,
+            project_id=projection.project_id,
+            col_id=projection.col_id,
+            cmd=projection.cmd,
+            param=projection.param,
+            is_unresolved=projection.is_unresolved,
+            metadata_note=projection.metadata_note,
         )
         active_rows = self._connection.execute(
             """
@@ -929,6 +937,105 @@ class DashboardStore:
             )
         return incident_rows
 
+    def _get_local_spider_projection(self, spider_id: str) -> LocalSpiderProjection | None:
+        for projection in self._list_local_spider_projections():
+            if projection.spider_id == spider_id:
+                return projection
+        return None
+
+    def _list_local_spider_projections(self) -> list[LocalSpiderProjection]:
+        spider_rows = self._connection.execute(
+            """
+            SELECT spider_id, name, project_id, col_id, cmd, param
+            FROM spiders
+            ORDER BY project_id, name, spider_id
+            """
+        ).fetchall()
+        schedule_rows = self._connection.execute(
+            """
+            SELECT spider_id, name AS schedule_name, cmd, param
+            FROM (
+                SELECT spider_id,
+                       name,
+                       cmd,
+                       param,
+                       ROW_NUMBER() OVER (
+                           PARTITION BY spider_id
+                           ORDER BY last_seen_at DESC, schedule_id DESC
+                       ) AS rn
+                FROM schedules
+                WHERE spider_id <> ''
+            ) AS ranked_schedules
+            WHERE rn = 1
+            """
+        ).fetchall()
+        task_rows = self._connection.execute(
+            """
+            SELECT spider_id, cmd, param
+            FROM (
+                SELECT spider_id,
+                       cmd,
+                       param,
+                       ROW_NUMBER() OVER (
+                           PARTITION BY spider_id
+                           ORDER BY COALESCE(end_ts, start_ts, create_ts, last_seen_at) DESC,
+                                    task_id DESC
+                       ) AS rn
+                FROM task_snapshots
+                WHERE spider_id <> ''
+            ) AS ranked_tasks
+            WHERE rn = 1
+            """
+        ).fetchall()
+
+        spider_map = self._map_rows(spider_rows, "spider_id")
+        schedule_map = self._map_rows(schedule_rows, "spider_id")
+        task_map = self._map_rows(task_rows, "spider_id")
+        spider_ids = sorted(set(spider_map) | set(schedule_map) | set(task_map))
+
+        projections: list[LocalSpiderProjection] = []
+        for spider_id in spider_ids:
+            spider_row = spider_map.get(spider_id)
+            if spider_row is not None:
+                projections.append(
+                    LocalSpiderProjection(
+                        spider_id=spider_id,
+                        name=str(spider_row["name"]),
+                        project_id=str(spider_row["project_id"]),
+                        col_id=str(spider_row["col_id"]),
+                        cmd=str(spider_row["cmd"]),
+                        param=str(spider_row["param"]),
+                        is_unresolved=False,
+                        metadata_note=None,
+                    )
+                )
+                continue
+
+            schedule_row = schedule_map.get(spider_id)
+            task_row = task_map.get(spider_id)
+            source_labels: list[str] = []
+            if schedule_row is not None:
+                source_labels.append("local schedules")
+            if task_row is not None:
+                source_labels.append("local task history")
+
+            fallback_row = schedule_row if schedule_row is not None else task_row
+            assert fallback_row is not None
+            projections.append(
+                LocalSpiderProjection(
+                    spider_id=spider_id,
+                    name=_unresolved_spider_name(spider_id),
+                    project_id=_UNRESOLVED_PROJECT_LABEL,
+                    col_id="n/a",
+                    cmd=str(fallback_row["cmd"]),
+                    param=str(fallback_row["param"]),
+                    is_unresolved=True,
+                    metadata_note=_unresolved_spider_note(source_labels),
+                )
+            )
+
+        return projections
+
     def _runtime_baselines_by_execution_key(
         self, execution_keys: list[str]
     ) -> dict[str, RuntimeBaseline]:
@@ -1272,6 +1379,23 @@ def _json_dict(value: Any) -> dict[str, int]:
 
 def _preview_list(items: list[str], *, limit: int = 3) -> list[str]:
     return [item for item in items if item][:limit]
+
+
+def _unresolved_spider_name(spider_id: str) -> str:
+    return f"Unresolved spider {spider_id}"
+
+
+def _unresolved_spider_note(source_labels: list[str]) -> str:
+    if not source_labels:
+        source_text = "local SQLite state"
+    elif len(source_labels) == 1:
+        source_text = source_labels[0]
+    else:
+        source_text = f"{source_labels[0]} and {source_labels[1]}"
+    return (
+        "Upstream spider metadata is missing; this view is built from "
+        f"{source_text}."
+    )
 
 
 def _dt_from_db(value: Any) -> datetime | None:

@@ -59,6 +59,30 @@ worktree.**
 - После этого закрыты оставшиеся tails `T0` и `T2`, а foundation stage
   действительно готов к распараллеливанию `T4`/`T5`.
 
+## Что ещё не закрыто после `T15`
+
+После `T14` research smoke и `T15` build thread local-service gap уже закрыт:
+
+- `python -m cl_monitoring.app` больше не является только web viewer поверх
+  готовой SQLite; теперь это реальный runtime entrypoint с app-owned lifecycle.
+- Runtime env/settings contract выровнен вокруг одного operator path:
+  defaults -> `.env` -> process env, с единым token key `CRAWLAB_TOKEN`.
+- Live mode и SQLite-only fallback mode теперь определены явно, а partial live
+  env приводит к startup error вместо тихого downgrade.
+- Exact live operator path больше не падает на stale/orphan
+  `schedule -> spider_id -> missing /api/spiders/{id}` reference: startup
+  проходит, SQLite продолжает обновляться, board/incidents/detail остаются
+  usable через локальный fallback projection.
+
+Что всё ещё не закрыто:
+
+- Внешний marker blocker из `T11` остаётся отдельной проблемой и не считается
+  закрытым только потому, что runtime service wiring уже доведён.
+- Repo-wide `ruff` / `mypy` debt вне непосредственной поверхности `T12`-`T15`
+  всё ещё остаётся в репозитории и не должен смешиваться с фактом, что новый
+  local-service runtime path уже реализован, live-verified и покрыт targeted
+  runtime tests.
+
 ## Что в ветке уже есть, но трогать пока рано
 
 Эти части уже появились в репозитории, но это не значит, что ими нужно заниматься прямо сейчас:
@@ -89,6 +113,10 @@ worktree.**
 | 9 | `T9` | Build | Codex `gpt-5.4-mini` | Делает минимальный server-rendered UI | `T8` | Только последовательно |
 | 10 | `T10` | Plan | OpenCode | Планирует structured spider markers и rollout contract | `T9` | Только последовательно |
 | 11 | `T11` | Ops | Manual + agent support | Пилотный shadow rollout на 2-3 `execution_key` | `T10` | Только после локальной стабилизации |
+| 12 | `T12` | Plan | OpenCode | Фиксирует runtime service mode и operator flow для одного локального запуска | `T11` | Только последовательно |
+| 13 | `T13` | Build | Codex `gpt-5.4` | Доводит working local service: settings, app lifespan, background poller, docs/tests | `T12` | Только последовательно |
+| 14 | `T14` | Ops | Manual + agent support | Проверяет live local-service flow end-to-end против локального Crawlab scope | `T13` | Только после локального build gate |
+| 15 | `T15` | Build | OpenCode `gpt-5.4` | Устраняет найденный в `T14` live startup blocker устойчиво: orphan spider metadata не валит startup и остаётся видимой в UI | `T14` | Только последовательно |
 
 ## Единственное допустимое окно параллелизации
 
@@ -115,10 +143,13 @@ worktree.**
 - `DECISIONS.md`
 - `docs/domain/status-parser-contract.md`
 - `src/cl_monitoring/domain/models.py`
+- `src/cl_monitoring/settings.py`
 - `src/cl_monitoring/db/*`
 - `src/cl_monitoring/sync/poller.py`
 - `src/cl_monitoring/web/*`
 - `src/cl_monitoring/app.py`
+- `.env.example`
+- `README.md`
 
 Если thread упирается в один из этих файлов, остальные ждут.
 
@@ -614,6 +645,8 @@ contract из `T3`.
 Текущий статус:
 
 - `T9` выполнен и gate закрыт.
+- `T9` закрыл именно UI scope поверх локальной SQLite, а не полный operator
+  runtime flow.
 - Реализованы server-rendered routes в `src/cl_monitoring/web/routes.py`:
   `GET /`, `GET /spiders/{spider_id}`, `GET /incidents`.
 - Реализованы шаблоны `project_board.html`, `spider_detail.html`,
@@ -629,6 +662,9 @@ contract из `T3`.
 - Dashboard показывает `running`, `warning`, `critical`, `stale/missed`,
   `recovered manually`, `parsed summary`, `baseline runtime`, `evidence`.
 - Добавлен `tests/test_web_routes.py` с проверкой трёх экранов и 404 case.
+- Старт `python -m cl_monitoring.app` сейчас поднимает web server, но не
+  стартует poller и не формирует единый local service flow; этот remaining
+  product gap вынесен в `T12`-`T14`.
 - Проверки пройдены:
   `./.venv/bin/pytest -q tests/test_web_routes.py` -> `4 passed`;
   `./.venv/bin/pytest -q` -> `189 passed`.
@@ -728,6 +764,230 @@ contract из `T3`.
 - Новый build thread в этом repo до этого шага не открывать: сначала нужен
   внешний producer/runtime change, затем новые terminal runs с raw marker lines
   и только после этого повторный `T11` replay на том же pilot scope.
+- Этот внешний marker blocker не должен смешиваться с local service gap:
+  runtime service wiring и operator flow по-прежнему нужно закрыть отдельно в
+  `T12`-`T14`.
+
+### `T12` — ADR по runtime service mode и operator flow
+
+**Цель:** после появления SQLite/poller/UI закрыть главный product gap: как
+владелец проекта запускает один локальный сервис и получает auto-updating
+dashboard без ad hoc shell wiring.
+
+Что делает:
+
+- создаёт `docs/adr/0004-runtime-service-mode.md`
+- фиксирует, что именно означает “запустить сервис” для v1
+- определяет default runtime mode для `python -m cl_monitoring.app`
+- определяет, владеет ли web app background poller lifecycle или нужен другой
+  первичный operator entrypoint
+- фиксирует единый runtime env/settings contract
+- фиксирует поведение при наличии и отсутствии live credentials
+- описывает startup/shutdown lifecycle, initial sync policy и failure mode
+
+Что не делает:
+
+- не меняет parser/status semantics
+- не меняет marker rollout contract
+- не добавляет новые UI экраны или action buttons
+
+Готово, когда:
+
+- `T13` можно реализовать без спора о том, должен ли старт сервера сам
+  поднимать poller
+- нет двусмысленности между `CRAWLAB_TOKEN` и `CRAWLAB_API_TOKEN` на уровне
+  runtime operator flow
+- ясно, что происходит в live mode и в SQLite-only fallback mode
+
+Текущий статус:
+
+- `T12` выполнен и gate закрыт.
+- Добавлен `docs/adr/0004-runtime-service-mode.md`.
+- Зафиксировано, что `python -m cl_monitoring.app` является единственным v1
+  operator entrypoint для обычного owner workflow.
+- Зафиксировано, что lifecycle background poller принадлежит app lifespan, а не
+  отдельному daemon command и не browser-side flow.
+- Зафиксирован единый runtime settings contract: `CRAWLAB_BASE_URL`,
+  `CRAWLAB_TOKEN`, `CL_MONITORING_DB_PATH`, `APP_PORT`, с fixed bind на
+  `127.0.0.1`.
+- Зафиксированы runtime mode rules: full live env -> live local-service mode,
+  обе live settings absent -> SQLite-only fallback mode, partial live env ->
+  explicit startup error.
+- Отдельно зафиксированы initial forced sync на startup, clean shutdown order и
+  runtime-safe normalization для `CRAWLAB_BASE_URL` с хвостом `/api`.
+- После `T12` для `T13` больше не осталось архитектурной двусмысленности по
+  operator flow, env contract и ownership poller lifecycle.
+
+### `T13` — Реализовать working local service runtime
+
+**Цель:** довести проект до состояния, где `python -m cl_monitoring.app` может
+быть реальным локальным сервисом, а не только web viewer поверх уже готовой
+SQLite.
+
+Что делает:
+
+- наполняет `src/cl_monitoring/settings.py`
+- доводит runtime env loading и единый settings contract
+- выравнивает `.env.example` под реальный runtime
+- дорабатывает `src/cl_monitoring/app.py` с lifespan/startup/shutdown wiring
+- интегрирует background poller по решению `T12`
+- обеспечивает clean resource lifecycle для SQLite и readonly client
+- документирует новый operator flow в `README.md`
+- добавляет/расширяет runtime tests для app/service wiring
+
+Жёсткие ограничения:
+
+- никакого второго Crawlab client
+- никаких write-операций против Crawlab
+- браузер по-прежнему не ходит в Crawlab напрямую
+- без новых UI экранов и без action buttons
+- marker rollout semantics не трогать
+
+Готово, когда:
+
+- есть один понятный local start path для owner workflow
+- при валидном live env web app поднимает poller и обновляет локальную SQLite
+- dashboard продолжает читать только из SQLite
+- поведение без live env тоже явно определено и покрыто тестами
+
+Текущий статус:
+
+- `T13` реализован по runtime/product surface.
+- `src/cl_monitoring/settings.py` доведён до единого runtime settings layer на
+  существующих project dependencies: defaults + `.env` + process env,
+  normalized `db_path`, normalized `CRAWLAB_BASE_URL`, mode selection и явный
+  runtime contract.
+- `.env.example` и `README.md` выровнены под один штатный operator flow без ad
+  hoc shell remapping токена.
+- `src/cl_monitoring/app.py` доведён до app-managed lifespan: startup создаёт
+  writer SQLite connection и `LocalRepository`, в live mode создаёт единственный
+  `ReadonlyCrawlabClient`, выполняет `poller.sync_once(force=True)` до ready
+  state и запускает один background poller task; shutdown делает clean resource
+  cleanup в обратном порядке.
+- `src/integrations/crawlab/readonly_client.py` теперь принимает явный token из
+  runtime settings path; legacy `CRAWLAB_API_TOKEN` оставлен только как
+  compatibility fallback, а не как нормальный operator contract.
+- Добавлен `tests/test_app_runtime.py`; `tests/test_web_routes.py` выровнен под
+  явный SQLite-only app startup. Runtime wiring покрыт тестами для live mode,
+  SQLite-only mode, partial env failure и startup failure cleanup.
+- Проверки пройдены:
+  `./.venv/bin/pytest -q tests/test_poller.py tests/test_web_routes.py tests/test_app_runtime.py`
+  -> `12 passed`; `./.venv/bin/pytest -q` -> `197 passed`.
+- Обязательные `./.venv/bin/ruff check src tests` и `./.venv/bin/mypy src`
+  запускались, но repo-wide остаются красными из-за pre-existing debt вне
+  непосредственной поверхности `T13`; при этом targeted `ruff` / `mypy` checks
+  для новых runtime files из `T13` проходят.
+- Product-wise главный результат `T13`: теперь существует один понятный local
+  start path для owner workflow, а remaining runtime verification вынесен в
+  `T14`.
+
+### `T14` — Live local-service smoke
+
+**Цель:** не объявлять проект “рабочим сервисом” только по unit/integration
+tests; отдельно подтвердить живой operator flow против локального Crawlab scope.
+
+Что делает:
+
+- запускает итоговый local service runtime по пути из `T13`
+- проверяет, что SQLite создаётся или обновляется без ручного ad hoc wiring
+- проверяет, что dashboard routes отвечают данными из локальной SQLite
+- подтверждает, что live доступ остаётся readonly и идёт только через
+  `ReadonlyCrawlabClient`
+- фиксирует точный operator flow или точный blocker, если smoke не проходит
+
+Что не делает:
+
+- не открывает новые build changes посреди smoke без отдельного thread
+- не смешивает runtime service smoke с marker rollout `T11`
+
+Готово, когда:
+
+- один локальный запуск smoke-validated на реальном scope
+- или зафиксирован конкретный remaining blocker, который мешает этому
+
+Текущий статус:
+
+- `T14` выполнен как live operator-path smoke/research thread.
+- Exact path `./.venv/bin/python -m cl_monitoring.app` был запущен против
+  локального Crawlab scope.
+- Smoke нашёл один конкретный startup blocker в initial
+  `await poller.sync_once(force=True)`: `sync_spiders()` падал на upstream stale
+  reference, где `GET /api/schedules/{id}` возвращал `spider_id`, а
+  `GET /api/spiders/{spider_id}` возвращал `404 Not Found`.
+- По тому же exact code path другие spider detail запросы отвечали `200`, а
+  `GET /api/tasks` по problematic `schedule_id` / `spider_id` возвращал `0`
+  records; это зафиксировало проблему как реальный upstream orphan reference, а
+  не как local path/id wiring bug.
+- Blocker был вынесен в отдельный build thread `T15`, а не замаскирован broad
+  exception handling внутри smoke.
+
+### `T15` — Устранить live startup blocker из `T14`
+
+**Цель:** сделать local service устойчивым к upstream stale
+`schedule -> spider_id` reference так, чтобы startup не падал, broken reference
+не исчезал из UI и при этом реальные runtime ошибки по-прежнему оставались
+fatal.
+
+Что делает:
+
+- обрабатывает только `httpx.HTTPStatusError` со статусом `404` для individual
+  `GET /api/spiders/{id}` внутри `Poller.sync_spiders()`
+- не глотает `401/403/5xx`, timeout, transport errors и другие неожиданные
+  случаи
+- переводит missing spider detail в явное локальное unresolved representation,
+  а не в silent disappearance
+- перестраивает read-model fallback в `routes.py` из union локальных `spiders`,
+  `schedules`, `task_snapshots` без тяжёлой DB migration
+- показывает unresolved spider на board/detail/incidents с явным badge/state
+
+Что не делает:
+
+- не меняет operator path из `T13`
+- не добавляет новый Crawlab client
+- не ослабляет readonly boundary
+- не делает broad `except Exception`
+- не глотает все `4xx`
+- не вводит schema migration без необходимости
+
+Готово, когда:
+
+- exact command `./.venv/bin/python -m cl_monitoring.app` проходит live startup
+- `GET /` и `GET /incidents` отвечают `200`
+- unresolved spider не ломает service-level UX и detail page может рендериться
+- non-404 spider detail failures по-прежнему валят startup
+
+Текущий статус:
+
+- `T15` выполнен и gate закрыт.
+- В `src/cl_monitoring/sync/poller.py` `404` по spider detail теперь трактуется
+  как unresolved metadata miss, а не как startup-fatal truth error; остальные
+  ошибки по-прежнему пробрасываются вверх.
+- Локальный spider read-model больше не зависит только от таблицы `spiders`:
+  `src/cl_monitoring/web/routes.py` строит fallback projection из `spiders` +
+  `schedules` + `task_snapshots`, поэтому unresolved spider остаётся видимой на
+  board/incidents/detail даже без live spider row.
+- `src/cl_monitoring/web/templates/project_board.html`,
+  `src/cl_monitoring/web/templates/spider_detail.html` и
+  `src/cl_monitoring/web/templates/incidents.html` теперь явно показывают
+  unresolved state вместо того, чтобы выдавать missing upstream metadata за
+  normal healthy spider.
+- Добавлены/обновлены regression tests в `tests/test_poller.py` и
+  `tests/test_web_routes.py`: `404` по одному spider detail больше не валит
+  sync/startup, unresolved spider остаётся видимой в dashboard surface,
+  detail route рендерится с `200`, incidents links не ведут в `404`, а non-404
+  failures всё ещё surface-ятся.
+- Related runtime verification через `tests/test_app_runtime.py` повторно
+  подтверждён.
+- Проверки пройдены:
+  `./.venv/bin/pytest -q tests/test_poller.py tests/test_web_routes.py tests/test_app_runtime.py`
+  -> `16 passed`.
+- Live verification пройден тем же operator path:
+  `./.venv/bin/python -m cl_monitoring.app` дошёл до
+  `Application startup complete`; `GET /` -> `200`; `GET /incidents` -> `200`;
+  `GET /spiders/66a25558116add6c8f235740` -> `200` с explicit unresolved detail
+  page, построенной из локальной SQLite.
+- Readonly boundary осталась неизменной: только `GET`, только через
+  `ReadonlyCrawlabClient`, browser-side Crawlab calls не добавлены.
 
 ## Чего не делать раньше времени
 
@@ -741,12 +1001,18 @@ contract из `T3`.
 8. Не использовать LLM как runtime classifier.
 9. Не переписывать все spider logs сразу.
 10. Не тащить `/nodes` в v1 раньше parser/status stability.
+11. Не маскировать отсутствие runtime service wiring ad hoc shell one-liners как
+    “готовый” operator flow.
 
 ## Короткая версия порядка
 
-**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> T3a cleanup tails -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout`**
+**`T0 verify foundation -> T1 contract -> T2 fixtures -> T3 shared runtime types -> T3a cleanup tails -> (T4 schedule engine || T5 runtime parser) -> T6 poller ADR -> T7 SQLite/poller -> T8 UI ADR -> T9 dashboard -> T10 markers plan -> T11 shadow rollout -> T12 runtime service ADR -> T13 working local service build -> T14 live service smoke -> T15 orphan spider startup hardening`**
 
 Если хочется сократить до одного правила: **до завершения `T5` не трогать SQLite/poller/UI как самостоятельные milestones.**
+
+Если говорить только о local-service path, smoke-validated startup blocker из
+`T14` уже закрыт в **`T15`**. Главный remaining blocker вне этой поверхности —
+по-прежнему внешний marker rollout gap из **`T11`**.
 
 ## Готовые Prompt
 

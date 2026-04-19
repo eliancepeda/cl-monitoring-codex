@@ -19,7 +19,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 import httpx
-import yaml
+import yaml  # type: ignore[import-untyped]
 
 logger = logging.getLogger(__name__)
 
@@ -77,7 +77,11 @@ def _path_matches_allowlist(path: str, allowed: list[str]) -> bool:
 
         if all(
             pattern_part == "*" or clean_part == pattern_part
-            for clean_part, pattern_part in zip(clean_parts, pattern_parts)
+            for clean_part, pattern_part in zip(
+                clean_parts,
+                pattern_parts,
+                strict=False,
+            )
         ):
             return True
 
@@ -87,7 +91,7 @@ def _path_matches_allowlist(path: str, allowed: list[str]) -> bool:
 def _normalize_data(data: Any) -> Any:
     """Normalize '0001-01-01T00:00:00Z' to None, and results.data to empty list."""
     if isinstance(data, dict):
-        result = {}
+        result: dict[str, Any] = {}
         for k, v in data.items():
             if k == "data" and v is None:
                 result[k] = []
@@ -117,14 +121,20 @@ class ReadonlyCrawlabClient:
         self,
         base_url: str,
         *,
+        token: str | None = None,
         allowed_paths: list[str] | None = None,
         timeout: float = 30.0,
     ) -> None:
         self._base_url = base_url.rstrip("/")
-        # token только из env
-        self._token = os.environ.get("CRAWLAB_API_TOKEN", "")
+        self._token = token or os.environ.get("CRAWLAB_TOKEN", "") or os.environ.get(
+            "CRAWLAB_API_TOKEN",
+            "",
+        )
         if not self._token:
-            raise ValueError("CRAWLAB_API_TOKEN env var is required")
+            raise ValueError(
+                "ReadonlyCrawlabClient requires an explicit token, CRAWLAB_TOKEN, "
+                "or legacy CRAWLAB_API_TOKEN"
+            )
         self._allowed_paths = allowed_paths or list(DEFAULT_ALLOWED_PATHS)
         self._client = httpx.AsyncClient(
             base_url=self._base_url,

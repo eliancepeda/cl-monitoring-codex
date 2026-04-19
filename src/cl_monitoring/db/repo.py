@@ -8,7 +8,12 @@ from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from cl_monitoring.domain import RunSummary, ScheduleSnapshot, SpiderSnapshot, TaskSnapshot
+from cl_monitoring.domain import (
+    RunSummary,
+    ScheduleSnapshot,
+    SpiderSnapshot,
+    TaskSnapshot,
+)
 
 from .tables import ensure_schema
 
@@ -132,6 +137,21 @@ class LocalRepository:
             "SELECT * FROM spiders ORDER BY spider_id"
         ).fetchall()
         return [_spider_from_row(row) for row in rows]
+
+    def delete_spiders(
+        self,
+        spider_ids: set[str] | list[str] | tuple[str, ...],
+    ) -> None:
+        unique_ids = sorted({spider_id for spider_id in spider_ids if spider_id})
+        if not unique_ids:
+            return
+
+        placeholders = ", ".join("?" for _ in unique_ids)
+        with self._connection:
+            self._connection.execute(
+                f"DELETE FROM spiders WHERE spider_id IN ({placeholders})",
+                tuple(unique_ids),
+            )
 
     def save_schedules(
         self,

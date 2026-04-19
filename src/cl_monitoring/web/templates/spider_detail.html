@@ -9,8 +9,16 @@
             <p class="eyebrow">Spider detail</p>
             <h1>{{ page.header.name }}</h1>
             <p class="meta">{{ page.header.spider_id }}</p>
+            {% if page.header.metadata_note %}
+            <p class="meta">{{ page.header.metadata_note }}</p>
+            {% endif %}
         </div>
-        <a class="text-link" href="{{ url_for('project_board') }}">Back to project board</a>
+        <div class="badge-list">
+            {% if page.header.is_unresolved %}
+            <span class="badge badge-warning">unresolved</span>
+            {% endif %}
+            <a class="text-link" href="{{ url_for('project_board') }}">Back to project board</a>
+        </div>
     </div>
 
     <dl class="metric-grid">

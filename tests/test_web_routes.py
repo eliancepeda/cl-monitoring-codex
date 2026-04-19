@@ -7,8 +7,19 @@ from fastapi.testclient import TestClient
 from cl_monitoring.app import create_app
 from cl_monitoring.db.engine import connect_sqlite
 from cl_monitoring.db.repo import IncidentProjection, LocalRepository
-from cl_monitoring.domain import Confidence, RunResult, RunSummary, ScheduleSnapshot, SpiderSnapshot, TaskSnapshot
+from cl_monitoring.domain import (
+    Confidence,
+    RunResult,
+    RunSummary,
+    ScheduleSnapshot,
+    SpiderSnapshot,
+    TaskSnapshot,
+)
 from cl_monitoring.domain.normalizers import build_execution_key
+from cl_monitoring.settings import RuntimeSettings, build_runtime_settings
+
+UNRESOLVED_SPIDER_ID = "SPIDER_ID_404"
+UNRESOLVED_SCHEDULE_ID = "SCHEDULE_ID_404"
 
 
 def dt(hour: int, minute: int = 0) -> datetime:
@@ -67,7 +78,11 @@ def make_task(
     param: str = "--region eu",
     is_manual: bool = False,
 ) -> TaskSnapshot:
-    end_ts = None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
+    end_ts = (
+        None
+        if status in {"pending", "running"}
+        else (start_ts or create_ts) + runtime
+    )
     return TaskSnapshot(
         id=task_id,
         spider_id=spider_id,
@@ -110,11 +125,24 @@ def build_web_fixture(db_path) -> None:
     repo = LocalRepository(connection)
 
     spider_one = make_spider("SPIDER_ID_001", name="shop spider")
-    spider_two = make_spider("SPIDER_ID_002", name="catalog spider", col_id="COL_ID_002")
-    schedule_one = make_schedule("SCHEDULE_ID_001", spider_id=spider_one.id, name="shop hourly")
+    spider_two = make_spider(
+        "SPIDER_ID_002",
+        name="catalog spider",
+        col_id="COL_ID_002",
+    )
+    schedule_one = make_schedule(
+        "SCHEDULE_ID_001",
+        spider_id=spider_one.id,
+        name="shop hourly",
+    )
+    unresolved_schedule = make_schedule(
+        UNRESOLVED_SCHEDULE_ID,
+        spider_id=UNRESOLVED_SPIDER_ID,
+        name="orphan hourly",
+    )
 
     repo.save_spiders([spider_one, spider_two], seen_at=dt(9, 0))
-    repo.save_schedules([schedule_one], seen_at=dt(9, 0))
+    repo.save_schedules([schedule_one, unresolved_schedule], seen_at=dt(9, 0))
 
     baseline_tasks = [
         make_task(
@@ -294,7 +322,10 @@ def build_web_fixture(db_path) -> None:
             execution_key=execution_key_one,
             severity="critical",
             reason_code="missed_expected_fire_window",
-            evidence=["Expected hourly fire missing", "Still no scheduled task after deadline"],
+            evidence=[
+                "Expected hourly fire missing",
+                "Still no scheduled task after deadline",
+            ],
         ),
         observed_at=dt(14, 45),
     )
@@ -310,14 +341,44 @@ def build_web_fixture(db_path) -> None:
         ),
         observed_at=dt(14, 22),
     )
+    repo.record_incident(
+        IncidentProjection(
+            incident_key=f"schedule:{unresolved_schedule.id}",
+            entity_type="schedule",
+            entity_id=unresolved_schedule.id,
+            execution_key=build_execution_key(
+                unresolved_schedule.spider_id,
+                unresolved_schedule.cmd,
+                unresolved_schedule.param,
+            ),
+            severity="warning",
+            reason_code="delayed_start_waiting_for_first_task",
+            evidence=[
+                "Schedule still exists upstream",
+                "Spider metadata is unresolved upstream",
+            ],
+        ),
+        observed_at=dt(14, 48),
+    )
 
     connection.close()
+
+
+def sqlite_only_settings(db_path) -> RuntimeSettings:
+    return build_runtime_settings(db_path=db_path)
+
+
+def build_sqlite_only_app(db_path) -> object:
+    return create_app(
+        settings=sqlite_only_settings(db_path),
+        now_provider=lambda: dt(15, 0),
+    )
 
 
 def test_project_board_uses_local_sqlite_data(tmp_path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
-    app = create_app(db_path=db_path, now_provider=lambda: dt(15, 0))
+    app = build_sqlite_only_app(db_path)
 
     with TestClient(app) as client:
         response = client.get("/")
@@ -326,6 +387,12 @@ def test_project_board_uses_local_sqlite_data(tmp_path) -> None:
     assert "Project board" in response.text
     assert "shop spider" in response.text
     assert "catalog spider" in response.text
+    assert f"Unresolved spider {UNRESOLVED_SPIDER_ID}" in response.text
+    assert (
+        "Upstream spider metadata is missing; this view is built from local schedules."
+        in response.text
+    )
+    assert "unresolved" in response.text
     assert "critical" in response.text
     assert "running" in response.text
     assert "stale/missed" in response.text
@@ -341,7 +408,7 @@ def test_project_board_uses_local_sqlite_data(tmp_path) -> None:
 def test_spider_detail_shows_active_runs_schedules_and_recoveries(tmp_path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
-    app = create_app(db_path=db_path, now_provider=lambda: dt(15, 0))
+    app = build_sqlite_only_app(db_path)
 
     with TestClient(app) as client:
         response = client.get("/spiders/SPIDER_ID_001")
@@ -364,10 +431,30 @@ def test_spider_detail_shows_active_runs_schedules_and_recoveries(tmp_path) -> N
     assert "<button" not in response.text
 
 
+def test_spider_detail_renders_unresolved_spider_from_local_schedule(tmp_path) -> None:
+    db_path = tmp_path / "web.sqlite3"
+    build_web_fixture(db_path)
+    app = build_sqlite_only_app(db_path)
+
+    with TestClient(app) as client:
+        response = client.get(f"/spiders/{UNRESOLVED_SPIDER_ID}")
+
+    assert response.status_code == 200
+    assert f"Unresolved spider {UNRESOLVED_SPIDER_ID}" in response.text
+    assert (
+        "Upstream spider metadata is missing; this view is built from local schedules."
+        in response.text
+    )
+    assert "unresolved" in response.text
+    assert "orphan hourly" in response.text
+    assert "No running or pending tasks for this spider." in response.text
+    assert "No recent runs recorded for this spider." in response.text
+
+
 def test_incidents_page_lists_open_and_recently_closed_incidents(tmp_path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
-    app = create_app(db_path=db_path, now_provider=lambda: dt(15, 0))
+    app = build_sqlite_only_app(db_path)
 
     with TestClient(app) as client:
         response = client.get("/incidents")
@@ -377,6 +464,8 @@ def test_incidents_page_lists_open_and_recently_closed_incidents(tmp_path) -> No
     assert "Recovered in last 7 days" in response.text
     assert "failed_error_without_positive_signal" in response.text
     assert "missed_expected_fire_window" in response.text
+    assert f"Unresolved spider {UNRESOLVED_SPIDER_ID}" in response.text
+    assert "incident link stays on the local unresolved detail page" in response.text
     assert "Traceback line 1" in response.text
     assert "Latest scheduled run" in response.text
     assert "Recovered manually support" in response.text
@@ -384,10 +473,24 @@ def test_incidents_page_lists_open_and_recently_closed_incidents(tmp_path) -> No
     assert "<button" not in response.text
 
 
+def test_incidents_link_to_unresolved_spider_detail_does_not_404(tmp_path) -> None:
+    db_path = tmp_path / "web.sqlite3"
+    build_web_fixture(db_path)
+    app = build_sqlite_only_app(db_path)
+
+    with TestClient(app) as client:
+        incidents_response = client.get("/incidents")
+        detail_response = client.get(f"/spiders/{UNRESOLVED_SPIDER_ID}")
+
+    assert incidents_response.status_code == 200
+    assert f'/spiders/{UNRESOLVED_SPIDER_ID}' in incidents_response.text
+    assert detail_response.status_code == 200
+
+
 def test_spider_detail_returns_404_for_missing_spider(tmp_path) -> None:
     db_path = tmp_path / "web.sqlite3"
     build_web_fixture(db_path)
-    app = create_app(db_path=db_path, now_provider=lambda: dt(15, 0))
+    app = build_sqlite_only_app(db_path)
 
     with TestClient(app) as client:
         response = client.get("/spiders/SPIDER_ID_999")

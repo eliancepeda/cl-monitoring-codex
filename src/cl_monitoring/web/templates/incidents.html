@@ -22,14 +22,20 @@
                     <div>
                         <h3>
                             {% if incident.spider_id %}
-                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or incident.spider_id }}</a>
+                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or ('Unresolved spider ' ~ incident.spider_id) }}</a>
                             {% else %}
                             {{ incident.entity_id }}
                             {% endif %}
                         </h3>
                         <p class="meta">{{ incident.reason_code }}</p>
+                        {% if incident.spider_id and not incident.spider_name %}
+                        <p class="meta">Upstream spider metadata is missing; incident link stays on the local unresolved detail page.</p>
+                        {% endif %}
                     </div>
                     <div class="badge-list">
+                        {% if incident.spider_id and not incident.spider_name %}
+                        <span class="badge badge-warning">unresolved</span>
+                        {% endif %}
                         {% for badge in incident.badges %}
                         <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
                         {% endfor %}
@@ -105,14 +111,20 @@
                     <div>
                         <h3>
                             {% if incident.spider_id %}
-                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or incident.spider_id }}</a>
+                            <a href="{{ url_for('spider_detail', spider_id=incident.spider_id) }}">{{ incident.spider_name or ('Unresolved spider ' ~ incident.spider_id) }}</a>
                             {% else %}
                             {{ incident.entity_id }}
                             {% endif %}
                         </h3>
                         <p class="meta">{{ incident.reason_code }}</p>
+                        {% if incident.spider_id and not incident.spider_name %}
+                        <p class="meta">Upstream spider metadata is missing; incident link stays on the local unresolved detail page.</p>
+                        {% endif %}
                     </div>
                     <div class="badge-list">
+                        {% if incident.spider_id and not incident.spider_name %}
+                        <span class="badge badge-warning">unresolved</span>
+                        {% endif %}
                         {% for badge in incident.badges %}
                         <span class="badge badge-{{ badge.tone }}">{{ badge.label }}</span>
                         {% endfor %}

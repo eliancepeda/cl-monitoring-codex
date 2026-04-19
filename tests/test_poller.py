@@ -4,15 +4,29 @@ import json
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
+import httpx
+import pytest
+
 from cl_monitoring.db.engine import connect_sqlite
 from cl_monitoring.db.repo import LocalRepository
-from cl_monitoring.domain import Confidence, RunResult, RunSummary, ScheduleSnapshot, TaskSnapshot
+from cl_monitoring.domain import (
+    Confidence,
+    RunResult,
+    RunSummary,
+    ScheduleSnapshot,
+    SpiderSnapshot,
+    TaskSnapshot,
+)
 from cl_monitoring.domain.normalizers import build_execution_key
 from cl_monitoring.sync.poller import Poller, PollerConfig
 
 
 SPIDER_ID = "SPIDER_ID_100"
+MISSING_SPIDER_ID = "SPIDER_ID_404"
+ERROR_SPIDER_ID = "SPIDER_ID_500"
 SCHEDULE_ID = "SCHEDULE_ID_100"
+MISSING_SCHEDULE_ID = "SCHEDULE_ID_404"
+ERROR_SCHEDULE_ID = "SCHEDULE_ID_500"
 CMD = "python spider.py"
 PARAM = "--region eu"
 EXECUTION_KEY = build_execution_key(SPIDER_ID, CMD, PARAM)
@@ -28,11 +42,13 @@ class FakeReadonlyClient:
         *,
         schedules: list[dict[str, Any]] | None = None,
         spiders: dict[str, dict[str, Any]] | None = None,
+        spider_status_codes: dict[str, int] | None = None,
         tasks_by_status: dict[str, list[dict[str, Any]]] | None = None,
         log_pages: dict[str, dict[int, list[str]]] | None = None,
     ) -> None:
         self.schedules = schedules or []
         self.spiders = spiders or {}
+        self.spider_status_codes = spider_status_codes or {}
         self.tasks_by_status = tasks_by_status or {}
         self.log_pages = log_pages or {}
         self.calls: list[tuple[str, str, dict[str, Any]]] = []
@@ -43,6 +59,17 @@ class FakeReadonlyClient:
             return {"data": self.schedules}
         if path.startswith("/api/spiders/"):
             spider_id = path.rsplit("/", 1)[-1]
+            if spider_id in self.spider_status_codes:
+                request = httpx.Request("GET", f"https://crawlab.example{path}")
+                response = httpx.Response(
+                    self.spider_status_codes[spider_id],
+                    request=request,
+                )
+                raise httpx.HTTPStatusError(
+                    f"{response.status_code} response",
+                    request=request,
+                    response=response,
+                )
             return {"data": self.spiders[spider_id]}
         if path.endswith("/logs"):
             task_id = path.split("/")[-2]
@@ -88,6 +115,18 @@ def make_schedule_raw() -> dict[str, Any]:
     }
 
 
+def make_schedule_raw_for(spider_id: str, schedule_id: str) -> dict[str, Any]:
+    return {
+        "_id": schedule_id,
+        "name": f"schedule for {spider_id}",
+        "spider_id": spider_id,
+        "cron": "0 * * * *",
+        "cmd": CMD,
+        "param": PARAM,
+        "enabled": True,
+    }
+
+
 def make_spider_raw() -> dict[str, Any]:
     return {
         "_id": SPIDER_ID,
@@ -97,6 +136,17 @@ def make_spider_raw() -> dict[str, Any]:
         "cmd": CMD,
         "param": PARAM,
     }
+
+
+def make_spider_snapshot(spider_id: str) -> SpiderSnapshot:
+    return SpiderSnapshot(
+        id=spider_id,
+        name=f"cached spider {spider_id}",
+        col_id="COL_ID_OLD",
+        project_id="PROJECT_ID_OLD",
+        cmd=CMD,
+        param=PARAM,
+    )
 
 
 def make_task_raw(
@@ -135,7 +185,11 @@ def make_task_snapshot(
     schedule_id: str | None = SCHEDULE_ID,
     is_manual: bool = False,
 ) -> TaskSnapshot:
-    end_ts = None if status in {"pending", "running"} else (start_ts or create_ts) + runtime
+    end_ts = (
+        None
+        if status in {"pending", "running"}
+        else (start_ts or create_ts) + runtime
+    )
     return TaskSnapshot(
         id=task_id,
         spider_id=SPIDER_ID,
@@ -176,7 +230,8 @@ def make_success_summary(task_id: str) -> RunSummary:
     )
 
 
-async def test_poller_resumes_from_cursor_with_one_page_overlap_and_final_sync() -> None:
+async def test_poller_resumes_from_cursor_with_one_page_overlap_and_final_sync(
+) -> None:
     repo = LocalRepository(connect_sqlite(":memory:"))
     config = PollerConfig(
         task_page_size=10,
@@ -264,6 +319,42 @@ async def test_poller_resumes_from_cursor_with_one_page_overlap_and_final_sync()
         if kind == "get_json" and path.endswith("/logs")
     ]
     assert pages_queried == [2, 3]
+
+
+async def test_poller_skips_spider_detail_404_and_keeps_other_spiders() -> None:
+    repo = LocalRepository(connect_sqlite(":memory:"))
+    repo.save_spiders([make_spider_snapshot(MISSING_SPIDER_ID)], seen_at=dt(8, 0))
+
+    client = FakeReadonlyClient(
+        schedules=[
+            make_schedule_raw(),
+            make_schedule_raw_for(MISSING_SPIDER_ID, MISSING_SCHEDULE_ID),
+        ],
+        spiders={SPIDER_ID: make_spider_raw()},
+        spider_status_codes={MISSING_SPIDER_ID: 404},
+    )
+
+    poller = Poller(client, repo)
+    await poller.sync_once(now=dt(9, 0), force=True)
+
+    assert sorted(schedule.id for schedule in repo.list_schedules()) == [
+        SCHEDULE_ID,
+        MISSING_SCHEDULE_ID,
+    ]
+    assert [spider.id for spider in repo.list_spiders()] == [SPIDER_ID]
+
+
+async def test_poller_reraises_non_404_spider_detail_failure() -> None:
+    repo = LocalRepository(connect_sqlite(":memory:"))
+    client = FakeReadonlyClient(
+        schedules=[make_schedule_raw_for(ERROR_SPIDER_ID, ERROR_SCHEDULE_ID)],
+        spider_status_codes={ERROR_SPIDER_ID: 500},
+    )
+
+    poller = Poller(client, repo)
+
+    with pytest.raises(httpx.HTTPStatusError):
+        await poller.sync_once(now=dt(9, 0), force=True)
 
 
 def test_poller_projects_and_closes_schedule_incidents() -> None:

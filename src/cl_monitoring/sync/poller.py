@@ -4,9 +4,12 @@ from __future__ import annotations
 
 import asyncio
 import json
+import logging
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
+
+import httpx
 
 from cl_monitoring.db.repo import (
     IncidentProjection,
@@ -14,7 +17,12 @@ from cl_monitoring.db.repo import (
     StoredTaskSnapshot,
     TaskLogCursor,
 )
-from cl_monitoring.domain import RunResult, RunSummary, ScheduleHealth, ScheduleHealthStatus
+from cl_monitoring.domain import (
+    RunResult,
+    RunSummary,
+    ScheduleHealth,
+    ScheduleHealthStatus,
+)
 from cl_monitoring.domain.normalizers import (
     build_execution_key,
     normalize_schedule,
@@ -27,6 +35,7 @@ from integrations.crawlab.readonly_client import ReadonlyCrawlabClient
 
 
 TASK_STATUS_QUERIES = ("running", "pending", "finished", "error", "cancelled")
+logger = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
@@ -163,13 +172,29 @@ class Poller:
         if extra_spider_ids:
             spider_ids.update(extra_spider_ids)
 
+        missing_spider_ids: set[str] = set()
         spiders = []
         for spider_id in sorted(spider_id for spider_id in spider_ids if spider_id):
-            payload = await self._client.get_json(f"/api/spiders/{spider_id}")
+            try:
+                payload = await self._client.get_json(f"/api/spiders/{spider_id}")
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code != 404:
+                    raise
+                missing_spider_ids.add(spider_id)
+                logger.warning(
+                    "Spider metadata is unresolved for %s because "
+                    "/api/spiders/%s returned 404; keeping local schedules/tasks "
+                    "and continuing sync",
+                    spider_id,
+                    spider_id,
+                )
+                continue
             spider_payload = _unwrap_dict_payload(payload)
             if spider_payload is not None:
                 spiders.append(normalize_spider(spider_payload))
 
+        if missing_spider_ids:
+            self._repo.delete_spiders(missing_spider_ids)
         self._repo.save_spiders(spiders, seen_at=current_time)
         return spiders
 
