@@ -86,3 +86,30 @@ def test_summary_success_marker_is_counted_separately_from_summary_block() -> No
         == 1
     )
     assert summary.reason_code == "success_summary_marker"
+
+
+def test_wrapped_parse_php_cancelled_error_falls_through_to_partial_success() -> None:
+    expected = _load_expected(EXPECTED_DIR / "task_ID_823_log.yaml")
+    task = _load_task("ID_823")
+    log_lines = (LOG_DIR / "ID_823.log").read_text(encoding="utf-8").splitlines()
+
+    summary = parse_crawllib_default(task, log_lines, is_complete=True)
+
+    assert summary.run_result.value == expected["run_result"] == "partial_success"
+    assert summary.reason_code == expected["reason_code"]
+    assert summary.evidence == expected["evidence"]
+    assert summary.counters == expected["counters"]
+    assert summary.counters["cancel_markers"] == 2
+
+
+def test_plain_cancelled_error_marker_stays_cancelled() -> None:
+    expected = _load_expected(EXPECTED_DIR / "task_ID_821_log.yaml")
+    task = _load_task("ID_821")
+    log_lines = (LOG_DIR / "ID_821.log").read_text(encoding="utf-8").splitlines()
+
+    summary = parse_crawllib_default(task, log_lines, is_complete=True)
+
+    assert summary.run_result.value == expected["run_result"] == "cancelled"
+    assert summary.reason_code == expected["reason_code"] == "cancelled_marker_with_terminal_context"
+    assert summary.evidence == expected["evidence"]
+    assert summary.counters == expected["counters"]

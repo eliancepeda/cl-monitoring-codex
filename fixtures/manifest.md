@@ -4,7 +4,7 @@ Generated: 2026-04-18T21:11:37Z
 
 ## Summary
 
-- **Total sampled tasks**: 54
+- **Total sampled tasks**: 55
 - **Schedules collected**: 736
 - **Spiders collected**: 10
 
@@ -66,6 +66,7 @@ Generated: 2026-04-18T21:11:37Z
 | ID_818 | error_candidate | partial_success | manual | 124 | 9 | `task`: api/task_ID_818.json, `log`: logs/ID_818.log, `expected`: expected/task_ID_818_log.yaml, `results`: api/results_ID_818.json |
 | ID_819 | error_candidate | partial_success | manual | 670 | 11 | `task`: api/task_ID_819.json, `log`: logs/ID_819.log, `expected`: expected/task_ID_819_log.yaml, `results`: api/results_ID_819.json |
 | ID_820 | error_candidate | auto_stop | scheduled | 102 | 3 | `task`: api/task_ID_820.json, `log`: logs/ID_820.log, `expected`: expected/task_ID_820_log.yaml |
+| ID_823 | error_candidate | partial_success | scheduled | 40 | 4 | `task`: api/task_ID_823.json, `log`: logs/ID_823.log, `expected`: expected/task_ID_823_log.yaml |
 
 ## Notes
 

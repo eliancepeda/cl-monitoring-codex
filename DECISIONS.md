@@ -785,3 +785,40 @@ Related files:
 - docs/rollout/shadow-mode.md
 - docs/domain/structured-markers.md
 - MILESTONES.MD
+
+---
+
+## 2026-04-19 — Wrapped parse.php CancelledError is not a cancellation outcome
+
+Status: Accepted
+
+Context:
+`T11` shadow replay found two raw-evidence mismatches where terminal logs ended
+with `CancelledError`, but the task metadata was `status=error` and the same log
+already showed positive progress plus a wrapped `parse.php` crash.
+
+Decision:
+Treat plain API `status=cancelled` and plain terminal cancel markers as
+`cancelled`, but do not classify `task.status=error` + wrapped
+`CancelledError: parse.php error ...` as `cancelled`. Ignore that wrapper marker
+and continue existing deterministic terminal evaluation.
+
+Why:
+In the confirmed live cases, `CancelledError` was only the transport wrapper for
+an internal crash, not operator-driven cancellation. Keeping the short-circuit
+would mislabel degraded runs as cancellations.
+
+Consequences:
+- Existing true-cancelled paths stay unchanged.
+- Wrapped `parse.php` crash logs can still resolve to `partial_success` or
+  another existing terminal result based on the remaining evidence.
+- The change is intentionally narrow and does not widen marker rollout or parser
+  coverage beyond the confirmed subtype.
+
+Related files:
+- src/cl_monitoring/parsers/crawllib_default.py
+- tests/test_crawllib_parser.py
+- fixtures/api/task_ID_823.json
+- fixtures/logs/ID_823.log
+- fixtures/expected/task_ID_823_log.yaml
+- MILESTONES.MD

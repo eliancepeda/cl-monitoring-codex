@@ -698,12 +698,22 @@ contract из `T3`.
 - Во всех `15/15` сравнениях marker lines отсутствовали
   (`RUN_START = 0`, `HEARTBEAT = 0`, `RUN_END = 0`), поэтому pilot уже не
   проходит pass criteria из `docs/rollout/shadow-mode.md`.
-- Найдены `2` mismatch-а категории `parser bug`: `69c63900a2fc400a16fad74c`
-  и `69c62af0a2fc400a16fad73e`, где manual outcome = `partial_success`, а
-  текущий parser дал `cancelled` из-за слишком широкой трактовки
-  `CancelledError`.
-- Coverage расширять нельзя; следующий шаг — отдельный bugfix thread на
-  `CancelledError` semantics и replay тех же `15` runs без widening rollout.
+- В `T11a-research` raw evidence подтверждён `parser bug`: для
+  `69c63900a2fc400a16fad74c` и `69c62af0a2fc400a16fad73e` terminal
+  `CancelledError` оказался transport wrapper над `parse.php` crash after
+  positive progress, а не operator cancellation.
+- В `T11b-build` parser сужен минимально: `task.status=cancelled` и plain
+  cancel markers по-прежнему дают `cancelled`, но `task.status=error` +
+  wrapped `CancelledError: parse.php error ...` больше не short-circuit-ится
+  в `cancelled` и падает дальше в существующую deterministic logic.
+- Для regression coverage добавлен anonymized fixture `ID_823`
+  (`partial_success` with wrapped `CancelledError`) и сохранён guardrail на
+  true cancelled через existing fixture `ID_821`.
+- После `T11b` replay тех же `15` pilot runs снова совпадает с blind manual
+  baseline (`15/15 match`), parser bug на frozen pilot set закрыт.
+- Coverage не расширялся и rollout gate автоматически не открылся: marker
+  lines по-прежнему отсутствуют, поэтому pass criteria `docs/rollout/shadow-mode.md`
+  всё ещё не выполнены.
 
 ## Чего не делать раньше времени
 

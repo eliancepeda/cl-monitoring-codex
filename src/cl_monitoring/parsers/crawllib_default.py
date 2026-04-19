@@ -33,6 +33,7 @@ CANCEL_MARKER_RE = re.compile(
     r"(?:CancelledError|task was cancelled|cancelled by supervisor|operation cancelled)",
     re.IGNORECASE,
 )
+WRAPPED_PARSE_PHP_CANCEL_RE = re.compile(r"parse\.php error", re.IGNORECASE)
 ERROR_AUTO_STOP_RE = re.compile(r"\berror_auto_stop\b.*\bis reached\b", re.IGNORECASE)
 AUTO_STOP_RE = re.compile(
     r"(?:\bauto[_ -]?stop\b(?!\s*=).*\bis reached\b|max.?runtime.*exceeded|killed by scheduler)",
@@ -93,6 +94,8 @@ def parse_crawllib_default(
         )
 
     cancel_line = _first_matching_line(lines, CANCEL_MARKER_RE)
+    if cancel_line and _is_wrapped_parse_php_cancel(status, lines):
+        cancel_line = None
     if cancel_line:
         return _build_summary(
             task,
@@ -292,6 +295,11 @@ def _has_positive_progress(counters: dict[str, int]) -> bool:
 
 def _has_error_signal(lines: list[str]) -> bool:
     return _first_matching_line(lines, ERROR_SIGNAL_RE) is not None
+
+
+def _is_wrapped_parse_php_cancel(status: str, lines: list[str]) -> bool:
+    # Some crawllib failures are re-raised through CancelledError transport.
+    return status == "error" and _first_matching_line(lines, WRAPPED_PARSE_PHP_CANCEL_RE) is not None
 
 
 def build_synthetic_task(task_id: str, *, status: str) -> TaskSnapshot:
