@@ -1,0 +1,459 @@
+[
+  {
+    "_id": "66a25de9116add6c8f235762",
+    "cmd": "python superpharm.py",
+    "col_id": "66a25de9116add6c8f235761",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "superpharm.pl",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9"
+    ],
+    "param": "-as 80",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "66a2650c116add6c8f235779",
+    "cmd": "python otvertka_kz.py",
+    "col_id": "66a2650c116add6c8f235778",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "otvertka.kz",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9"
+    ],
+    "param": "-as 20",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "66a38772116add6c8f235807",
+    "cmd": "python answear_it.py",
+    "col_id": "66a38772116add6c8f235806",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "answear.it",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "66a38854116add6c8f235809",
+    "cmd": "python decathlon_es.com.py",
+    "col_id": "66a38854116add6c8f235808",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "decathlon.es",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "66a388c7116add6c8f23580b",
+    "cmd": "python dec.py",
+    "col_id": "66a388c7116add6c8f23580a",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "decathlon.de",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "66a38b24116add6c8f235817",
+    "cmd": "python vangraaf.com.de.py",
+    "col_id": "66a38b24116add6c8f235816",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "vangraaf.com/de",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "66aca75d116add6c8f4e45fd",
+    "cmd": "python rei_com.py",
+    "col_id": "66aca75d116add6c8f4e45fc",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "rei.com",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "66acaabb116add6c8f4e5ded",
+    "cmd": "python prettylittlething.com.py",
+    "col_id": "66acaaba116add6c8f4e5dec",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "prettylittlething.com",
+    "node_ids": [
+      "676fa4090ace66232b8b7fb5"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "67231069116add6c8f55c033",
+    "cmd": "python store.linkinpark.com.py",
+    "col_id": "67231069116add6c8f55c032",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u0442\u043e\u043b\u044c\u043a\u043e \u0434\u043b\u044f CR. \u043f\u043e\u0434\u0434\u0435\u0440\u0434\u0438\u0432\u0430\u0435\u0442 \u043f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044e \u0438 \u0430\u0432\u0442\u043e\u0441\u0442\u043e\u043f",
+    "incremental_sync": false,
+    "mode": "random",
+    "name": "store.linkinpark.com",
+    "node_ids": null,
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "679cdacb99197fd1a1707d76",
+    "cmd": "python board_new.py",
+    "col_id": "679cdacb99197fd1a1707d75",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "board-game.co.uk",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "67ae022b99197fd1a1bf0136",
+    "cmd": "python gts-shop.eu.py",
+    "col_id": "67ae022b99197fd1a1bf0135",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u041f\u0430\u0442\u043d\u0435\u0440\u0441\u043a\u043e\u0435 \u0410\u041f\u0418. \u0415\u0441\u0442\u044c \u043f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044f \u0438 \u0430\u0432\u0442\u043e\u0441\u0442\u043e\u043f \u0447\u0435\u0440\u0435\u0437 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b",
+    "incremental_sync": false,
+    "mode": "random",
+    "name": "gts-shop.eu",
+    "node_ids": null,
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "67ee445ce944d42ba023b249",
+    "cmd": "python kickscrew.com.py",
+    "col_id": "67ee445ce944d42ba023b248",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u0422\u043e\u043b\u044c\u043a\u043e \u0434\u043b\u044f \u043a\u0440\u043e\u0443\u043b\u0430\u0431, \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u0442 \u043f\u0430\u0433\u0438\u043d\u0430\u0446\u0438\u044e \u0432 \u0430\u0440\u0433\u0443\u043c\u0435\u043d\u0442\u0430\u0445",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "kickscrew.com",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "67ee5005e944d42ba023b26b",
+    "cmd": "python decathlon.vn.py",
+    "col_id": "67ee5005e944d42ba023b26a",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "decathlon.vn",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "67eec4afe944d42ba023b2a4",
+    "cmd": "python next.pl.py",
+    "col_id": "67eec4aee944d42ba023b2a3",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u041d\u0435 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0435 1 \u0442\u0430\u0441\u043a\u0438 \u043d\u0430 \u043d\u043e\u0434\u0443! \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043d\u043e\u0434\u044b TWEB Neth 1 \u0438 TWEB Neth 2. \u0422\u043e\u043b\u044c\u043a\u043e \u0434\u043b\u044f CrawLab. \u041f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u0442 \u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u044b\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b.",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "next.pl.pl",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "67eec560e944d42ba023b2a6",
+    "cmd": "python tous2.py",
+    "col_id": "67eec560e944d42ba023b2a5",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "tous.com",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "67eec5a5e944d42ba023b2aa",
+    "cmd": "python tower.com.py",
+    "col_id": "67eec5a5e944d42ba023b2a9",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "towerrecords.com",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "68074197e944d42ba023c282",
+    "cmd": "python parfumdreams.de.py",
+    "col_id": "68074197e944d42ba023c281",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "parfumdreams.de",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "6822fde4e944d42ba023d617",
+    "cmd": "python messika.py",
+    "col_id": "6822fde4e944d42ba023d616",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "messika.com",
+    "node_ids": [
+      "676fa4090ace66232b8b7fb5",
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "68347818e944d42ba023e337",
+    "cmd": "python balenciaga_it.py",
+    "col_id": "6978cca0e45d2ecbe8d62363",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u041f\u0430\u0443\u043a \u0434\u043b\u044f balenciaga.com/en-fr \u0438 balenciaga.com/en-it. \u0414\u0432\u0430 \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u044f",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "balenciaga.com",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "6839a6f2e944d42ba023e75c",
+    "cmd": "python fahrrad.xxl.de.py",
+    "col_id": "6839a6f2e944d42ba023e75b",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "fahrrad-xxl.de",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "683df04de944d42ba023eaa2",
+    "cmd": "python fahrad.de.py",
+    "col_id": "683df04de944d42ba023eaa1",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "fahrad.de",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "684158b4e944d42ba023ed45",
+    "cmd": "python endclothing_com_us.py",
+    "col_id": "66a2657d116add6c8f23577b",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u041f\u0430\u0440\u0441\u0438\u043d\u0433 \u043d\u0435\u0442\u0438\u043f\u0438\u0447\u043d\u044b\u0445 sku \u0438 \u0437\u0430\u043f\u0443\u0441\u043a \u0441 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u0430\u043c\u0438 -sp -fp",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "endclothing.com/us",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "68c2a017bb59f66adb6bcc74",
+    "cmd": "python amazon_keepa.py",
+    "col_id": "68c2a017bb59f66adb6bcc73",
+    "data_source_id": "000000000000000000000000",
+    "description": "2 \u0440\u0430\u0441\u043f\u0438\u0441\u0430\u043d\u0438\u044f: \u0435\u0436\u0435\u0434\u043d\u0435\u0432\u043d\u043e\u0435 \u0438 \u0440\u0430\u0437 \u0432 3 \u0434\u043d\u044f.\n\u0420\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0442\u043e\u043b\u044c\u043a\u043e \u043d\u0430 \u043d\u043e\u0434\u0430\u0445 Selectel",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "amazon.com",
+    "node_ids": [
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "-as 500",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "691d6d6840cedf1e5eb0d845",
+    "cmd": "python amazon.jp.py",
+    "col_id": "691d6d6840cedf1e5eb0d844",
+    "data_source_id": "000000000000000000000000",
+    "description": "\u0420\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0442\u043e\u043b\u044c\u043a\u043e \u043d\u0430 \u043d\u043e\u0434\u0430\u0445 Selectel",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "amazon.co.jp",
+    "node_ids": [
+      "6927302984c7b6645efdca48",
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  },
+  {
+    "_id": "697c8eade45d2ecbe8d627aa",
+    "cmd": "python kickz.py",
+    "col_id": "697c8eade45d2ecbe8d627a9",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "kickz.com/de",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "6981a405e45d2ecbe8d62cf2",
+    "cmd": "python stockx.py",
+    "col_id": "6981a405e45d2ecbe8d62cf1",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "stockx",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a25c4d116add6c8f235756",
+    "type": ""
+  },
+  {
+    "_id": "69ca3a20a2fc400a16fadbbf",
+    "cmd": "python sweetwater.py",
+    "col_id": "69ca3a20a2fc400a16fadbbe",
+    "data_source_id": "000000000000000000000000",
+    "description": "",
+    "incremental_sync": false,
+    "mode": "selected-nodes",
+    "name": "sweetwater.com",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "project_id": "66a384f5116add6c8f235803",
+    "type": ""
+  }
+]

@@ -1,0 +1,208 @@
+{
+  "data": [
+    {
+      "_id": "69c01584a2fc400a16facf58",
+      "cmd": "python syrn.py",
+      "create_ts": "2026-03-22T16:15:00.002Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "67515b15116add6c8fddced7",
+      "node_ids": [
+        "67515b15116add6c8fddced7"
+      ],
+      "param": "",
+      "parent_id": "000000000000000000000000",
+      "pid": 2014096,
+      "priority": 5,
+      "schedule_id": "6985aa8ee45d2ecbe8d6318d",
+      "spider_id": "698598eee45d2ecbe8d63170",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c01dc4a2fc400a16facf59",
+      "cmd": "python amazon_keepa.py",
+      "create_ts": "2026-03-22T16:50:12.507Z",
+      "error": "exit status 1",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "6927395d84c7b6645efdca7a",
+      "node_ids": [
+        "6927395d84c7b6645efdca7a"
+      ],
+      "param": "-as 500 -sp 1643",
+      "parent_id": "000000000000000000000000",
+      "pid": 10805,
+      "priority": 5,
+      "schedule_id": "000000000000000000000000",
+      "spider_id": "68c2a017bb59f66adb6bcc74",
+      "status": "error",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf5c",
+      "cmd": "python stockfirmati.it.py",
+      "create_ts": "2026-03-22T17:00:00.004Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "66a2550c116add6c8f23573e",
+      "node_ids": [
+        "66a2550c116add6c8f23573e"
+      ],
+      "param": "",
+      "parent_id": "000000000000000000000000",
+      "pid": 87494,
+      "priority": 5,
+      "schedule_id": "684fd789e944d42ba023f979",
+      "spider_id": "684c7259e944d42ba023f686",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf5a",
+      "cmd": "python elcorteingles_new.py",
+      "create_ts": "2026-03-22T17:00:00.004Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "66fadd39116add6c8f0cdaaa",
+      "node_ids": [
+        "66fadd39116add6c8f0cdaaa"
+      ],
+      "param": "-sp 143 -ds 1.5",
+      "parent_id": "000000000000000000000000",
+      "pid": 151074,
+      "priority": 5,
+      "schedule_id": "68adcacfbb59f66adb6bbaf3",
+      "spider_id": "66bf2954116add6c8f975d41",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf5b",
+      "cmd": "python miumiu_it.py",
+      "create_ts": "2026-03-22T17:00:00.004Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "67515b15116add6c8fddced7",
+      "node_ids": [
+        "67515b15116add6c8fddced7"
+      ],
+      "param": "",
+      "parent_id": "000000000000000000000000",
+      "pid": 2014147,
+      "priority": 5,
+      "schedule_id": "69b79ddca2fc400a16fac5c1",
+      "spider_id": "69b1249fa2fc400a16fabdde",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf5d",
+      "cmd": "python specksports.py",
+      "create_ts": "2026-03-22T17:00:00.004Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "6927395d84c7b6645efdca7a",
+      "node_ids": [
+        "6927395d84c7b6645efdca7a"
+      ],
+      "param": "",
+      "parent_id": "000000000000000000000000",
+      "pid": 10828,
+      "priority": 5,
+      "schedule_id": "68ecfcccbb59f66adb6bf38d",
+      "spider_id": "68ea905bbb59f66adb6bf16d",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf5e",
+      "cmd": "python massimodutti_de_it.py",
+      "create_ts": "2026-03-22T17:00:00.005Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "6927395d84c7b6645efdca7a",
+      "node_ids": [
+        "6927395d84c7b6645efdca7a"
+      ],
+      "param": "-tags de,it -as 550",
+      "parent_id": "000000000000000000000000",
+      "pid": 10830,
+      "priority": 5,
+      "schedule_id": "698f22f3f186d32df354edeb",
+      "spider_id": "698f03bdf186d32df354edc8",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf60",
+      "cmd": "python kaufland.de.py",
+      "create_ts": "2026-03-22T17:00:00.005Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "67515b15116add6c8fddced7",
+      "node_ids": [
+        "67515b15116add6c8fddced7"
+      ],
+      "param": "-sp 1 -fp 180",
+      "parent_id": "000000000000000000000000",
+      "pid": 2014149,
+      "priority": 5,
+      "schedule_id": "6867974ebb59f66adb6b7fd4",
+      "spider_id": "66a252f9116add6c8f23573a",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf63",
+      "cmd": "python brandavenue.py",
+      "create_ts": "2026-03-22T17:00:00.005Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "672b7043116add6c8fbf5549",
+      "node_ids": [
+        "672b7043116add6c8fbf5549"
+      ],
+      "param": "-sp 1101",
+      "parent_id": "000000000000000000000000",
+      "pid": 580025,
+      "priority": 5,
+      "schedule_id": "69b79e38a2fc400a16fac5c4",
+      "spider_id": "69abf1d5a2fc400a16fab80d",
+      "status": "finished",
+      "type": ""
+    },
+    {
+      "_id": "69c02010a2fc400a16facf61",
+      "cmd": "python levelninesports.py",
+      "create_ts": "2026-03-22T17:00:00.005Z",
+      "error": "",
+      "has_sub": false,
+      "mode": "selected-nodes",
+      "node_id": "67515b15116add6c8fddced7",
+      "node_ids": [
+        "67515b15116add6c8fddced7"
+      ],
+      "param": "-sp 1 -fp 10",
+      "parent_id": "000000000000000000000000",
+      "pid": 2014162,
+      "priority": 5,
+      "schedule_id": "6972277ae45d2ecbe8d61cbf",
+      "spider_id": "6970a6bde45d2ecbe8d61afb",
+      "status": "finished",
+      "type": ""
+    }
+  ],
+  "error": "",
+  "message": "success",
+  "status": "ok",
+  "total": 12568
+}

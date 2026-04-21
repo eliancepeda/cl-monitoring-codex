@@ -1,0 +1,53 @@
+{
+  "data": {
+    "_id": "69c02268a2fc400a16facf79",
+    "cmd": "python next.pl.py",
+    "create_ts": "2026-03-22T17:10:00.004Z",
+    "error": "",
+    "has_sub": false,
+    "mode": "selected-nodes",
+    "node_id": "67515b15116add6c8fddced7",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "",
+    "parent_id": "000000000000000000000000",
+    "pid": 2017602,
+    "priority": 5,
+    "schedule_id": "67eed766e944d42ba023b2c5",
+    "spider": {
+      "_id": "67eec4afe944d42ba023b2a4",
+      "cmd": "python next.pl.py",
+      "col_id": "67eec4aee944d42ba023b2a3",
+      "data_source_id": "000000000000000000000000",
+      "description": "\u041d\u0435 \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0435 1 \u0442\u0430\u0441\u043a\u0438 \u043d\u0430 \u043d\u043e\u0434\u0443! \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043d\u043e\u0434\u044b TWEB Neth 1 \u0438 TWEB Neth 2. \u0422\u043e\u043b\u044c\u043a\u043e \u0434\u043b\u044f CrawLab. \u041f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u0442 \u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u044b\u0435 \u043f\u0430\u0440\u0430\u043c\u0435\u0442\u0440\u044b.",
+      "incremental_sync": false,
+      "mode": "selected-nodes",
+      "name": "next.pl.pl",
+      "node_ids": [
+        "672b7043116add6c8fbf5549"
+      ],
+      "param": "",
+      "priority": 5,
+      "project_id": "66a384f5116add6c8f235803",
+      "type": ""
+    },
+    "spider_id": "67eec4afe944d42ba023b2a4",
+    "stat": {
+      "_id": "69c02268a2fc400a16facf79",
+      "create_ts": "2026-03-22T17:10:00.007Z",
+      "end_ts": "2026-03-22T20:32:31.942Z",
+      "error_log_count": 0,
+      "result_count": 0,
+      "runtime_duration": 12147415,
+      "start_ts": "2026-03-22T17:10:04.527Z",
+      "total_duration": 12151935,
+      "wait_duration": 4520
+    },
+    "status": "finished",
+    "type": ""
+  },
+  "error": "",
+  "message": "success",
+  "status": "ok"
+}

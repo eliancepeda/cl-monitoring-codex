@@ -1,0 +1,164 @@
+[
+  {
+    "node_id": "6927395d84c7b6645efdca7a",
+    "observation": {
+      "normalized_params": {
+        "parameters": [
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "as",
+            "raw_token": "-as",
+            "role": "execution modifier",
+            "value": "500"
+          },
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "sp",
+            "raw_token": "-sp",
+            "role": "identity candidate",
+            "value": "1643"
+          }
+        ],
+        "positionals": [],
+        "raw_args": "-as 500 -sp 1643",
+        "tokens": [
+          "-as",
+          "500",
+          "-sp",
+          "1643"
+        ]
+      },
+      "observation_key": "amazon.com|unscheduled|as=500|sp=1643",
+      "schedule_id": "unscheduled",
+      "spider_id": "68c2a017bb59f66adb6bcc74",
+      "spider_name": "amazon.com",
+      "task_id": "69c01dc4a2fc400a16facf59"
+    },
+    "project_id": "66a384f5116add6c8f235803",
+    "spider_id": "68c2a017bb59f66adb6bcc74",
+    "status": "error",
+    "task_id": "69c01dc4a2fc400a16facf59",
+    "trigger_kind": {
+      "kind": "manual-or-unknown",
+      "status": "unknown"
+    }
+  },
+  {
+    "node_id": "6927395d84c7b6645efdca7a",
+    "observation": {
+      "normalized_params": {
+        "parameters": [
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "as",
+            "raw_token": "-as",
+            "role": "execution modifier",
+            "value": "500"
+          },
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "sp",
+            "raw_token": "-sp",
+            "role": "identity candidate",
+            "value": "1644"
+          }
+        ],
+        "positionals": [],
+        "raw_args": "-as 500 -sp 1644",
+        "tokens": [
+          "-as",
+          "500",
+          "-sp",
+          "1644"
+        ]
+      },
+      "observation_key": "amazon.com|unscheduled|as=500|sp=1644",
+      "schedule_id": "unscheduled",
+      "spider_id": "68c2a017bb59f66adb6bcc74",
+      "spider_name": "amazon.com",
+      "task_id": "69c0250ea2fc400a16facf8c"
+    },
+    "project_id": "66a384f5116add6c8f235803",
+    "spider_id": "68c2a017bb59f66adb6bcc74",
+    "status": "error",
+    "task_id": "69c0250ea2fc400a16facf8c",
+    "trigger_kind": {
+      "kind": "manual-or-unknown",
+      "status": "unknown"
+    }
+  },
+  {
+    "node_id": "67515b15116add6c8fddced7",
+    "observation": {
+      "normalized_params": {
+        "parameters": [],
+        "positionals": [
+          "python",
+          "next.pl.py"
+        ],
+        "raw_args": "python next.pl.py",
+        "tokens": [
+          "python",
+          "next.pl.py"
+        ]
+      },
+      "observation_key": "next.pl.pl|67eed766e944d42ba023b2c5|no-params",
+      "schedule_id": "67eed766e944d42ba023b2c5",
+      "spider_id": "67eec4afe944d42ba023b2a4",
+      "spider_name": "next.pl.pl",
+      "task_id": "69c02268a2fc400a16facf79"
+    },
+    "project_id": "66a384f5116add6c8f235803",
+    "spider_id": "67eec4afe944d42ba023b2a4",
+    "status": "finished",
+    "task_id": "69c02268a2fc400a16facf79",
+    "trigger_kind": {
+      "kind": "schedule",
+      "status": "fact"
+    }
+  },
+  {
+    "node_id": "66a2550c116add6c8f23573e",
+    "observation": {
+      "normalized_params": {
+        "parameters": [
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "sp",
+            "raw_token": "-sp",
+            "role": "identity candidate",
+            "value": "1"
+          },
+          {
+            "classification_status": "hypothesis",
+            "normalized_key": "fp",
+            "raw_token": "-fp",
+            "role": "identity candidate",
+            "value": "99"
+          }
+        ],
+        "positionals": [],
+        "raw_args": "-sp 1 -fp 99",
+        "tokens": [
+          "-sp",
+          "1",
+          "-fp",
+          "99"
+        ]
+      },
+      "observation_key": "towerrecords.com|67eed755e944d42ba023b2c4|fp=99|sp=1",
+      "schedule_id": "67eed755e944d42ba023b2c4",
+      "spider_id": "67eec5a5e944d42ba023b2aa",
+      "spider_name": "towerrecords.com",
+      "task_id": "69c024c0a2fc400a16facf85"
+    },
+    "project_id": "66a384f5116add6c8f235803",
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "status": "finished",
+    "task_id": "69c024c0a2fc400a16facf85",
+    "trigger_kind": {
+      "kind": "schedule",
+      "status": "fact"
+    }
+  }
+]

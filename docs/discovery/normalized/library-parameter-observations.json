@@ -1,0 +1,16 @@
+[
+  {
+    "internal_path": "crawllib/crawlab.py",
+    "matched_flags": [],
+    "snippets": [],
+    "status": "unknown",
+    "wheel_path": "crawlib/crawllib-2.12.3-py3-none-any.whl"
+  },
+  {
+    "internal_path": "cdek_crawlab_module/spider_manager.py",
+    "matched_flags": [],
+    "snippets": [],
+    "status": "unknown",
+    "wheel_path": "crawlib/cdek_crawlab_module-2.2.1-py3-none-any.whl"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "data": {
+    "_id": "66a2550c116add6c8f23573e",
+    "active": true,
+    "active_ts": "2026-04-21T16:11:11.224Z",
+    "available_runners": 98,
+    "description": "\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442\u043d\u0435\u0435, \u0431\u043e\u043b\u044c\u0448\u0435 \u043f\u0430\u043c\u044f\u0442\u0438",
+    "enabled": true,
+    "hostname": "",
+    "ip": "",
+    "is_master": false,
+    "key": "[REDACTED]",
+    "mac": "",
+    "max_runners": 100,
+    "name": "VDsina russia 2",
+    "port": "",
+    "status": "on"
+  },
+  "error": "",
+  "message": "success",
+  "status": "ok"
+}

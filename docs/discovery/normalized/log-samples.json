@@ -1,0 +1,102 @@
+[
+  {
+    "case_type": "http error spike",
+    "signals": {
+      "empty_log": false,
+      "found_or_written": true,
+      "has_progress": true,
+      "has_summary": false,
+      "http_403_404_5xx": true,
+      "timeout": false,
+      "traceback_or_fatal": true
+    },
+    "stable_fragments": [
+      "INFO:crawllib.managers:get_products.php page: 1643, per page: 500",
+      "Traceback (most recent call last):",
+      "WARNING:crawllib.managers:get_products.php \u0442\u0430\u0439\u043c \u0430\u0443\u0442 (\u0442\u043e\u0432\u0430\u0440\u044b \u0432\u0441\u0435 \u0435\u0449\u0435 \u0438\u043d\u0434\u0435\u043a\u0441\u0438\u0440\u0443\u044e\u0442\u0441\u044f). \u041f\u043e\u0432\u0442\u043e\u0440\u043d\u044b\u0439 \u0437\u0430\u043f\u0440\u043e\u0441 \u0447\u0435\u0440\u0435\u0437 120 \u0441\u0435\u043a\u0443\u043d\u0434"
+    ],
+    "tail": [
+      "",
+      "During handling of the above exception, another exception occurred:",
+      "",
+      "Traceback (most recent call last):",
+      "  File \"/root/crawlab_workspace/68c2a017bb59f66adb6bcc74/69c01dc4a2fc400a16facf59/amazon_keepa.py\", line 59, in <module>",
+      "    loop.run_until_complete(main())",
+      "  File \"/usr/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete",
+      "    return future.result()",
+      "           ^^^^^^^^^^^^^^^",
+      "  File \"/root/crawlab_workspace/68c2a017bb59f66adb6bcc74/69c01dc4a2fc400a16facf59/amazon_keepa.py\", line 54, in main",
+      "    await prof.process()",
+      "  File \"/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py\", line 177, in process",
+      "    await self.__process_source(source)",
+      "  File \"/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py\", line 416, in __process_source",
+      "    async for product_source_pairs in streamer:",
+      "  File \"/usr/local/lib/python3.11/dist-packages/aiostream/stream/transform.py\", line 122, in chunks",
+      "    async for first in streamer:",
+      "  File \"/usr/local/lib/python3.11/dist-packages/crawllib/managers.py\", line 241, in get_products_php",
+      "    raise CancelledError(f'parse.php error {e}')",
+      "asyncio.exceptions.CancelledError: parse.php error HTTP Error 504: "
+    ],
+    "task_id": "69c01dc4a2fc400a16facf59",
+    "unstable_fragments": [
+      "INFO:crawllib.profiles:Arguments(source_id=None, source_name=None, source_tags=['com'], product_ids=[], auto_stop=500, delay_step=1.0, start_page=1643, finish_page=0, nprice_d=30, user_agent_parameters=0, proxy_country='us', debug=False, start_product_id=0, test=False, custom_arg='')",
+      "INFO:crawllib.profiles:Is inside crawlab: True",
+      "INFO:crawllib.crawlab:CrawlabClient started. Task pointer: 59b1fd06d31c426c8f2c862df150e7f8",
+      "INFO:crawllib.crawlab:Task is found",
+      "INFO:crawllib.profiles:Start profile (amazon.com) [/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py]",
+      "/usr/local/lib/python3.11/dist-packages/pymongo/common.py:844: UserWarning: Wire protocol compression with zstandard is not available. You must install the zstandard module for zstandard support.",
+      "value = validator(option, value)",
+      "File \"/usr/local/lib/python3.11/dist-packages/crawllib/managers.py\", line 202, in get_products_php",
+      "response.raise_for_status()",
+      "File \"/usr/local/lib/python3.11/dist-packages/curl_cffi/requests/models.py\", line 167, in raise_for_status"
+    ]
+  },
+  {
+    "case_type": "successful",
+    "signals": {
+      "empty_log": false,
+      "found_or_written": true,
+      "has_progress": true,
+      "has_summary": false,
+      "http_403_404_5xx": false,
+      "timeout": false,
+      "traceback_or_fatal": false
+    },
+    "stable_fragments": [],
+    "tail": [
+      "INFO:crawllib.profiles:(Id: 3499616, SourceUrlId: 4238723, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499621, SourceUrlId: 4238728, Page: 1): {\"price\": 110.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"S Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"4XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"5XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL/wysoki\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"4XL dla wysokich\", \"price\": 110.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499624, SourceUrlId: 4238731, Page: 1): {\"price\": 120.0, \"old_price\": 240.0, \"variations\": [{\"variation\": \"XS\", \"price\": 120.0, \"old_price\": 240.0}, {\"variation\": \"S\", \"price\": 120.0, \"old_price\": 240.0}, {\"variation\": \"M\", \"price\": 120.0, \"old_price\": 240.0}, {\"variation\": \"XL\", \"price\": 120.0, \"old_price\": 240.0}, {\"variation\": \"4XL\", \"price\": 120.0, \"old_price\": 240.0}, {\"variation\": \"5XL\", \"price\": 120.0, \"old_price\": 240.0}]}",
+      "INFO:crawllib.profiles:(Id: 3499638, SourceUrlId: 4238745, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499652, SourceUrlId: 4238759, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499658, SourceUrlId: 4238765, Page: 1): {\"price\": 110.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"S Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"4XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"5XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL/wysoki\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL dla wysokich\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL dla wysokich\", \"price\": 110.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499671, SourceUrlId: 4238779, Page: 1): {\"price\": 505.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 38.5 (UK 5)\", \"price\": 505.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 9)\", \"price\": 505.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499680, SourceUrlId: 4238787, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499724, SourceUrlId: 4238832, Page: 1): {\"price\": 110.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"S Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"5XL regularny\", \"price\": 110.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499733, SourceUrlId: 4238840, Page: 1): {\"price\": 285.0, \"old_price\": 0, \"variations\": [{\"variation\": \"One Size\", \"price\": 285.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499742, SourceUrlId: 4238849, Page: 1): {\"price\": 110.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"S Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"M Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"L Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"XL Reg\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"2XL regularny\", \"price\": 110.0, \"old_price\": 0}, {\"variation\": \"3XL regularny\", \"price\": 110.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499745, SourceUrlId: 4238852, Page: 1): {\"price\": 85.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"S\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"M\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"L\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"XL\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"XXL\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"3XL\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"4XL\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"5XL\", \"price\": 85.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499751, SourceUrlId: 4238857, Page: 1): {\"price\": 85.0, \"old_price\": 0, \"variations\": [{\"variation\": \"XS regularny\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"S Reg\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"M Reg\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"L Reg\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"XL Reg\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"2XL regularny\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"3XL regularny\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"4XL regularny\", \"price\": 85.0, \"old_price\": 0}, {\"variation\": \"5XL regularny\", \"price\": 85.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499764, SourceUrlId: 4238871, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499792, SourceUrlId: 4238899, Page: 1): {\"price\": 60.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 40 (UK 12)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 16)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 46 (UK 18)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 50 (UK 22)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 52 (UK 24)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 54 (UK 26)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 38 dla wysokich (UK 10 T)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 42 dla wysokich (UK 14 T)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 44 dla wysokich (UK 14 T)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 60.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499794, SourceUrlId: 4238900, Page: 1): {\"price\": 172.0, \"old_price\": 345.0, \"variations\": [{\"variation\": \"M\", \"price\": 172.0, \"old_price\": 345.0}, {\"variation\": \"L\", \"price\": 172.0, \"old_price\": 345.0}]}",
+      "INFO:crawllib.profiles:(Id: 3499796, SourceUrlId: 4238903, Page: 1): {\"price\": 60.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 46 (UK 18)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 50 (UK 22)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 52 (UK 24)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 60.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 60.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499830, SourceUrlId: 4238937, Page: 1): {\"price\": 0.0, \"old_price\": 0.0, \"variations\": null}",
+      "INFO:crawllib.profiles:(Id: 3499835, SourceUrlId: 4238942, Page: 1): {\"price\": 105.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 40 (UK 12)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 16)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 46 (UK 18)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 50 (UK 22)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 52 (UK 24)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 54 (UK 26)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 36 dla wysokich (UK 8 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 38 dla wysokich (UK 10 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 40 dla wysokich (UK 12 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 42 dla wysokich (UK 14 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 44 dla wysokich (UK 14 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 105.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3499836, SourceUrlId: 4238943, Page: 1): {\"price\": 105.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 40 (UK 12)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 16)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 36 dla wysokich (UK 8 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 42 dla wysokich (UK 14 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 105.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 105.0, \"old_price\": 0}]}"
+    ],
+    "task_id": "69c02268a2fc400a16facf79",
+    "unstable_fragments": [
+      "INFO:crawllib.profiles:Arguments(source_id=None, source_name=None, source_tags=['default'], product_ids=[], auto_stop=200, delay_step=1.0, start_page=1, finish_page=0, nprice_d=30, user_agent_parameters=0, proxy_country=None, debug=False, start_product_id=0, test=False, custom_arg='')",
+      "INFO:crawllib.profiles:Is inside crawlab: True",
+      "INFO:crawllib.crawlab:CrawlabClient started. Task pointer: 6a1e5c7e7ea745b8b9f1fcd4b85bc715",
+      "INFO:crawllib.crawlab:Task is found",
+      "INFO:crawllib.profiles:Start profile (www.next.pl) [/usr/local/lib/python3.11/dist-packages/crawllib/profiles.py]",
+      "INFO:crawllib.managers:get_products.php page: 1, per page: 500",
+      "INFO:crawllib.profiles:(Id: 3497899, SourceUrlId: 4236984, Page: 1): {\"price\": 40.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 40 (UK 12)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 16)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 46 (UK 18)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 50 (UK 22)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 52 (UK 24)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 54 (UK 26)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 38 dla wysokich (UK 10 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 40 dla wysokich (UK 12 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 42 dla wysokich (UK 14 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 44 dla wysokich (UK 14 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 40.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3497900, SourceUrlId: 4236985, Page: 1): {\"price\": 40.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 (UK 6)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 36 (UK 8)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 38 (UK 10)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 40 (UK 12)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 42 (UK 14)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 44 (UK 16)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 46 (UK 18)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 48 (UK 20)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 50 (UK 22)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 52 (UK 24)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 54 (UK 26)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 36 dla wysokich (UK 8 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 42 dla wysokich (UK 14 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 44 dla wysokich (UK 14 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 46 dla wysokich (UK 18 T)\", \"price\": 40.0, \"old_price\": 0}, {\"variation\": \"EU 48 dla wysokich (UK 20 T)\", \"price\": 40.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3497911, SourceUrlId: 4236996, Page: 1): {\"price\": 42.0, \"old_price\": 0, \"variations\": [{\"variation\": \"One Size\", \"price\": 42.0, \"old_price\": 0}]}",
+      "INFO:crawllib.profiles:(Id: 3497921, SourceUrlId: 4237006, Page: 1): {\"price\": 57.0, \"old_price\": 0, \"variations\": [{\"variation\": \"EU 34 regularny (UK 6 R)\", \"price\": 57.0, \"old_price\": 0}]}"
+    ]
+  }
+]

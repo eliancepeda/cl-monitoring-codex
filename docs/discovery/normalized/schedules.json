@@ -1,0 +1,915 @@
+[
+  {
+    "_id": "66a811c5116add6c8f266e8e",
+    "cmd": "python superpharm.py",
+    "cron": "20 13 * * *",
+    "description": "08:20 \u041c\u0421\u041a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "66a25de9116add6c8f235762",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66a8186c116add6c8f26ba89",
+    "cmd": "python otvertka_kz.py",
+    "cron": "15 15 * * *",
+    "description": "10:15 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 11,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-as 20",
+    "priority": 5,
+    "spider_id": "66a2650c116add6c8f235779",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66a8eb67116add6c8f2b7d18",
+    "cmd": "python vangraaf.com.de.py",
+    "cron": "0 2 * * *",
+    "description": "21:00 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 615,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "66a38b24116add6c8f235817",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66acfc20116add6c8f500235",
+    "cmd": "python decathlon_de.py",
+    "cron": "3 2 * * *",
+    "description": "21:04 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "1 - 52",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "-sp 1 -fp 52",
+    "priority": 5,
+    "spider_id": "66a388c7116add6c8f23580b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66acfc48116add6c8f500293",
+    "cmd": "python decathlon_de.py",
+    "cron": "7 2 * * *",
+    "description": "21:07 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "52 - 95",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "-sp 52 -fp 95",
+    "priority": 5,
+    "spider_id": "66a388c7116add6c8f23580b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66acfcd9116add6c8f5003dc",
+    "cmd": "python decathlon_es.com.py",
+    "cron": "3 2 * * *",
+    "description": "21:03 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 617,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-as 300",
+    "priority": 5,
+    "spider_id": "66a38854116add6c8f235809",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66ad0154116add6c8f500d80",
+    "cmd": "python prettylittlething.com.py",
+    "cron": "13 12 * * *",
+    "description": "07:13 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 319,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-as 85",
+    "priority": 5,
+    "spider_id": "66acaabb116add6c8f4e5ded",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "66b339a3116add6c8fa7ac49",
+    "cmd": "python decathlon_es.com.py",
+    "cron": "5 4 * * *",
+    "description": "23:05 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "9 - ...",
+    "node_ids": [
+      "66a2550c116add6c8f23573e"
+    ],
+    "param": "-as 100 -ds 1 -sp 9 -fp 0 -npd 30",
+    "priority": 5,
+    "spider_id": "66a38854116add6c8f235809",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67249f11116add6c8f6a38f7",
+    "cmd": "python store.linkinpark.com.py",
+    "cron": "0 12 * * *",
+    "description": "07:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 50,
+    "mode": "selected-nodes",
+    "name": "store.linkinpark.com",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-as 20",
+    "priority": 5,
+    "spider_id": "67231069116add6c8f55c033",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "679e508399197fd1a174eea6",
+    "cmd": "python board_new.py",
+    "cron": "3 12 * * *",
+    "description": "07:03 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 628,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "679cdacb99197fd1a1707d76",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67bed0a18e278805411a3caa",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "0 13 * * *",
+    "description": "8:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 75,
+    "mode": "selected-nodes",
+    "name": "1 - \u2026 2/6",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67e63c3ee944d42ba02307d1",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "45 18 * * *",
+    "description": "13:45 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 89,
+    "mode": "selected-nodes",
+    "name": "1 - \u2026 3/6",
+    "node_ids": [
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67ee490be944d42ba023b255",
+    "cmd": "python kickscrew.com.py",
+    "cron": "22 6 * * *",
+    "description": "01:22 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 716,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "--auto_stop 250",
+    "priority": 5,
+    "spider_id": "67ee445ce944d42ba023b249",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67ee492de944d42ba023b256",
+    "cmd": "python kickscrew.com.py",
+    "cron": "12 9 * * *",
+    "description": "04:12 \u041c\u0421\u041a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "201 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "--auto_stop 450 -sp 201",
+    "priority": 5,
+    "spider_id": "67ee445ce944d42ba023b249",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67ee52fee944d42ba023b26e",
+    "cmd": "python decathlon.vn.py",
+    "cron": "10 10 * * *",
+    "description": "5:10 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 619,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ee5005e944d42ba023b26b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed6bee944d42ba023b2bb",
+    "cmd": "python tower.com.py",
+    "cron": "10 1 * * *",
+    "description": "20:10 \u043f\u043e \u043c\u0441\u043a [node usa]",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "1 - 55",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "-sp 1 -fp 55",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed6c9e944d42ba023b2bc",
+    "cmd": "python tower.com.py",
+    "cron": "15 1 * * * ",
+    "description": "20:15 \u043f\u043e \u043c\u0441\u043a [node usa]",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "56 - 110",
+    "node_ids": [
+      "68f8b4ddbb59f66adb6bfd91"
+    ],
+    "param": "-sp 56 -fp 110",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed6d3e944d42ba023b2bd",
+    "cmd": "python tower.com.py",
+    "cron": "20 1 * * *",
+    "description": "20:20 \u043f\u043e \u043c\u0441\u043a [node usa]",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "111 - ...",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "-sp 111",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed6e1e944d42ba023b2be",
+    "cmd": "python tower.com.py",
+    "cron": "16 9 * * *",
+    "description": "04:16 \u043f\u043e \u043c\u0441\u043a [node usa]",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "61 - 80",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "-sp 61 -fp 80",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed6f5e944d42ba023b2bf",
+    "cmd": "python tower.com.py",
+    "cron": "40 2 * * * ",
+    "description": "21:40 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "231 - ...",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "-sp 231",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed733e944d42ba023b2c1",
+    "cmd": "python tower.com.py",
+    "cron": "25 2 * * * ",
+    "description": "21:25 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "181 - 230",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 181 -fp 230 ",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed741e944d42ba023b2c2",
+    "cmd": "python tower.com.py",
+    "cron": "50 3 * * * ",
+    "description": "22:50 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "200 - ...",
+    "node_ids": [
+      "68f8b4ddbb59f66adb6bfd91"
+    ],
+    "param": "-sp 200",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed74ae944d42ba023b2c3",
+    "cmd": "python tower.com.py",
+    "cron": "35 3 * * * ",
+    "description": "22:35 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "100 - 199",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 100 -fp 199",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed755e944d42ba023b2c4",
+    "cmd": "python tower.com.py",
+    "cron": "20 3 * * * ",
+    "description": "22:20 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": true,
+    "entry_id": 781,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "68f8b4ddbb59f66adb6bfd91"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67eec5a5e944d42ba023b2aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed766e944d42ba023b2c5",
+    "cmd": "python next.pl.py",
+    "cron": "40 4 * * *",
+    "description": "23:40 \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 713,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66a0ac786c24824c9fbc97ed",
+      "66ab6da2116add6c8f40c886",
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67eec4afe944d42ba023b2a4",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed773e944d42ba023b2c6",
+    "cmd": "python next.pl.py",
+    "cron": "20 1 * * *",
+    "description": "20:20 \u043c\u0441\u043a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "46 - ...",
+    "node_ids": [
+      "67515b15116add6c8fddced7"
+    ],
+    "param": "-sp 46 -fp 0",
+    "priority": 5,
+    "spider_id": "67eec4afe944d42ba023b2a4",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67eed788e944d42ba023b2c7",
+    "cmd": "python tous2.py",
+    "cron": "0 12 * * * ",
+    "description": "07:00 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 688,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67eec560e944d42ba023b2a6",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "67f7eb00e944d42ba023b881",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "0 21 * * *",
+    "description": "16:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 105,
+    "mode": "selected-nodes",
+    "name": "1 - \u2026 4/6",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68078234e944d42ba023c2b5",
+    "cmd": "python parfumdreams.de.py",
+    "cron": "0 6 * * *",
+    "description": "6:00 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 709,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66a0ac786c24824c9fbc97ed",
+      "66ab6da2116add6c8f40c886",
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "68074197e944d42ba023c282",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68161df2e944d42ba023ccb1",
+    "cmd": "python answear_it.py",
+    "cron": "0 6 * * *",
+    "description": "01:00 \u043f\u043e \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 666,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 1",
+    "priority": 5,
+    "spider_id": "66a38772116add6c8f235807",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68161e4be944d42ba023ccb2",
+    "cmd": "python answear_it.py",
+    "cron": "1 7 * * *",
+    "description": "02:01 \u043f\u043e \u041c\u0421\u041a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "83 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 83 -fp 0",
+    "priority": 5,
+    "spider_id": "66a38772116add6c8f235807",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "681b556ce944d42ba023d055",
+    "cmd": "python boardgame.py",
+    "cron": "7 7 * * *",
+    "description": "02:07 \u041c\u0421\u041a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "17 - ...",
+    "node_ids": [
+      "676fa4090ace66232b8b7fb5",
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 17",
+    "priority": 5,
+    "spider_id": "679cdacb99197fd1a1707d76",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "682303f6e944d42ba023d62a",
+    "cmd": "python messika.py",
+    "cron": "5 14 * * * ",
+    "description": "10:05 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9",
+      "676fa4090ace66232b8b7fb5",
+      "66ab6da2116add6c8f40c886",
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "6822fde4e944d42ba023d617",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68381146e944d42ba023e63c",
+    "cmd": "python balenciaga_it.py",
+    "cron": "15 14 * * *",
+    "description": "09:15 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 117,
+    "mode": "selected-nodes",
+    "name": "balenciaga_it",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "68347818e944d42ba023e337",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "683c94fae944d42ba023e97a",
+    "cmd": "python fahrrad.xxl.de.py",
+    "cron": "1 11 * * *",
+    "description": "6:01 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 692,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "6839a6f2e944d42ba023e75c",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "683f132ae944d42ba023eb5d",
+    "cmd": "python fahrad.de.py",
+    "cron": "1 10 * * *",
+    "description": "5:01 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 711,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66a0ac786c24824c9fbc97ed",
+      "66ab6da2116add6c8f40c886",
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "683df04de944d42ba023eaa2",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6842ddcee944d42ba023ee89",
+    "cmd": "python endclothing_com_us.py",
+    "cron": "20 9 * * *",
+    "description": "04:20 MCK",
+    "enabled": true,
+    "entry_id": 309,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "684158b4e944d42ba023ed45",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6842e09ae944d42ba023ee8c",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "0 9 * * *",
+    "description": "4:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 121,
+    "mode": "selected-nodes",
+    "name": "1 - ... 1/6",
+    "node_ids": [
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6842e16fe944d42ba023ee8d",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "0 5 * * *",
+    "description": "00:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 122,
+    "mode": "selected-nodes",
+    "name": "1 - ... 6/6",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6842e425e944d42ba023ee8f",
+    "cmd": "python gts-shop.eu.py",
+    "cron": "0 1 * * *",
+    "description": "20:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 123,
+    "mode": "selected-nodes",
+    "name": "1 - ... 5/6",
+    "node_ids": [
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ae022b99197fd1a1bf0136",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "685b9c56bb59f66adb6b75be",
+    "cmd": "python messika.py",
+    "cron": "5 14 * * * ",
+    "description": "10:05 \u043f\u043e \u043c\u0441\u043a ",
+    "enabled": true,
+    "entry_id": 139,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "676fa4090ace66232b8b7fb5",
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "6822fde4e944d42ba023d617",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68b1466fbb59f66adb6bbdd6",
+    "cmd": "python decathlon.vn.py",
+    "cron": "0 23 * * *",
+    "description": "18:00 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 621,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "67ee5005e944d42ba023b26b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "68efba1fbb59f66adb6bf5e4",
+    "cmd": "python amazon_keepa.py",
+    "cron": "28 1 */3 * *",
+    "description": "20:28 \u043f\u043e \u043c\u0441\u043a \u043a\u0430\u0436\u0434\u044b\u0435 \u0442\u0440\u0438 \u0434\u043d\u044f (\u0447\u0435\u0440\u0435\u0437 2 \u0434\u043d\u044f)\n28 1 */2 * *",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "1 - ...(\u0438\u0441\u043a\u043b\u044e\u0447\u0430\u044f \u0442\u043e\u043f \u043f\u0440\u043e\u0434\u0430\u0436)",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "-as 500",
+    "priority": 5,
+    "spider_id": "68c2a017bb59f66adb6bcc74",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "690f936abb59f66adb6c13ee",
+    "cmd": "python decathlon_de.py",
+    "cron": "11 2 * * *",
+    "description": "21:11 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "96 - 141",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "-sp 96 -fp 141",
+    "priority": 5,
+    "spider_id": "66a388c7116add6c8f23580b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "691d937b40cedf1e5eb0d886",
+    "cmd": "python amazon.jp.py",
+    "cron": "30 1 * * *",
+    "description": "20:30 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 393,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "-as 500",
+    "priority": 5,
+    "spider_id": "691d6d6840cedf1e5eb0d845",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "69294c8084c7b6645efdcc7d",
+    "cmd": "python decathlon_de.py",
+    "cron": "19 2 * * *",
+    "description": "21:19 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": false,
+    "entry_id": -1,
+    "mode": "selected-nodes",
+    "name": "142 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-sp 142 ",
+    "priority": 5,
+    "spider_id": "66a388c7116add6c8f23580b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "69294c8d84c7b6645efdcc7e",
+    "cmd": "python dec.py ",
+    "cron": "10 3 * * *",
+    "description": "22:10 \u043f\u043e \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 661,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-as 2000",
+    "priority": 5,
+    "spider_id": "66a388c7116add6c8f23580b",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6953c3a263a8b8c79b2b6742",
+    "cmd": "python amazon_keepa.py",
+    "cron": "25 2/12 * * *",
+    "description": "21-25 \u043c\u0441\u043a, \u043f\u043e\u0432\u0442\u043e\u0440 \u043a\u0430\u0436\u0434\u044b\u0435 12 \u0447\u0430\u0441\u043e\u0432",
+    "enabled": true,
+    "entry_id": 219,
+    "mode": "selected-nodes",
+    "name": "\u0422\u043e\u043f \u043f\u0440\u043e\u0434\u0430\u0436",
+    "node_ids": [
+      "6927395d84c7b6645efdca7a"
+    ],
+    "param": "-as 500 --custom_arg only_included_ids",
+    "priority": 5,
+    "spider_id": "68c2a017bb59f66adb6bcc74",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6968fac71602bf3039d5aa0f",
+    "cmd": "python rei_com.py",
+    "cron": "33 9 * * *",
+    "description": "04:33 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 308,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66ab652f116add6c8f4081f9",
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "66aca75d116add6c8f4e45fd",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6979c8f6e45d2ecbe8d624a2",
+    "cmd": "python balenciaga_fr.py",
+    "cron": "15 14 * * *",
+    "description": "09:15 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 245,
+    "mode": "selected-nodes",
+    "name": "balenciaga_fr",
+    "node_ids": [
+      "6927302984c7b6645efdca48"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "68347818e944d42ba023e337",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "697ca0e4e45d2ecbe8d627b7",
+    "cmd": "python kickz.py",
+    "cron": "25 14 * * *",
+    "description": "09:25 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 717,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "697c8eade45d2ecbe8d627aa",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "6981a64de45d2ecbe8d62cf9",
+    "cmd": "python stockx.py",
+    "cron": "30 15 * * *",
+    "description": "10:30 \u041c\u0421\u041a",
+    "enabled": true,
+    "entry_id": 718,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "672b7043116add6c8fbf5549"
+    ],
+    "param": "-npd 0",
+    "priority": 5,
+    "spider_id": "6981a405e45d2ecbe8d62cf2",
+    "user_id": "000000000000000000000000"
+  },
+  {
+    "_id": "69ca5a67a2fc400a16fadbd6",
+    "cmd": "python sweetwater.py",
+    "cron": "0 13 * * *",
+    "description": "8:00 \u043c\u0441\u043a",
+    "enabled": true,
+    "entry_id": 721,
+    "mode": "selected-nodes",
+    "name": "1 - ...",
+    "node_ids": [
+      "66fadd39116add6c8f0cdaaa"
+    ],
+    "param": "",
+    "priority": 5,
+    "spider_id": "69ca3a20a2fc400a16fadbbf",
+    "user_id": "000000000000000000000000"
+  }
+]
