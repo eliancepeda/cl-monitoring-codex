@@ -1,3 +1,0 @@
-INFO:HOST_002:Is inside crawlab: True
-INFO:HOST_003:Task is found
-asyncio.exceptions.CancelledError
